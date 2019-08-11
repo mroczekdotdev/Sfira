@@ -1,0 +1,34 @@
+button {
+  padding: $padding-base;
+  border-radius: $radius-base;
+  border: none;
+  font-size: $font-size-sm;
+  color: $color-white;
+  background-color: $color-primary;
+}
+
+form,
+label {
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  font-size: $font-size-sm;
+}
+
+.form-group {
+  margin: $margin-base 0;
+
+  button {
+    margin: $margin-base 0;
+  }
+}
+
+input, textarea {
+  width: 100%;
+  font-size: $font-size-sm;
+  border: $border-size-sm solid $color-gray;
+  border-radius: $radius-sm;
+  padding: $padding-base;
+}

@@ -1,0 +1,74 @@
+﻿.single-post {
+  .header {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 5rem+$padding-base;
+
+    span {
+      display: inline-block;
+      overflow: hidden;
+    }
+  }
+
+  .name {
+    margin-right: $padding-base;
+  }
+
+  .username {
+    color: color-variant("light", $color-primary);
+  }
+
+  .timestamp {
+  }
+
+  .body {
+    border: $border-size-base solid $color-primary;
+    border-radius: $radius-base;
+    background-color: color-variant("superlight", $color-primary);
+  }
+
+  .top {
+    position: relative;
+    background-color: $color-primary;
+  }
+
+  .avatar {
+    width: 4rem;
+    height: 4rem;
+    position: absolute;
+    left: $padding-base;
+    bottom: $padding-base;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-lg;
+    padding: ($padding-base)-($border-size-base) $padding-base $padding-base;
+    margin-left: 5rem-$border-size-base;
+    color: $color-white;
+
+    .action {
+      padding-right: $padding-base;
+      color: $color-white;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .content {
+    overflow-wrap: break-word;
+    padding: $padding-base;
+  }
+}

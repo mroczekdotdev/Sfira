@@ -1,0 +1,45 @@
+.profile {
+  width: 100%;
+
+  .profile-header {
+    position: relative;
+    padding-bottom: 33.33%; //fallback
+    padding-bottom: calc(100% / 3);
+  }
+
+  .profile-title {
+    position: absolute;
+    bottom: 6%;
+    left: 26%;
+    color: $color-white;
+    text-shadow: 0 0 5px $color-black, 0 0 1px $color-black;
+
+    .name {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .avatar {
+    position: absolute;
+    bottom: -24%;
+    left: 4%;
+    width: 20%;
+    height: 60%;
+    border-width: $border-size-lg;
+  }
+
+  .cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .description {
+  }
+}
+
+
+.media {
+  width: 100%;
+}

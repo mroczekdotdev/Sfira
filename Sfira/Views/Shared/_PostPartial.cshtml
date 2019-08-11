@@ -1,0 +1,68 @@
+﻿@model PostViewModel
+
+<article class="single-post">
+    <header class="header">
+        <a asp-controller="User" asp-action="GetUserByUserName" asp-route-userName="@Model.Author.UserName">
+            <span class="name">@Model.Author.Name</span><span class="username">@Model.Author.UserName</span>
+        </a>
+        <a href="#">
+            <span class="timestamp">@Model.PostTime.Relative()</span>
+        </a>
+    </header>
+    <div class="body">
+        <div class="top">
+            <div class="avatar" sfira-id="@Model.Author.Id" sfira-media="avatar"></div>
+            <section class="actions">
+                <span class="main-actions">
+
+                    @*<a href="javascript:void(0)">*@
+
+                    @{
+                        <a class="action">
+                            <i class="far fa-comment-alt fa-sm fa-fw"></i><span>12</span>
+                        </a>
+
+                        if (!User.Identity.IsAuthenticated)
+                        {
+                            <i class="far fa-heart fa-sm fa-fw"></i><span>@Model.LikesCount</span>
+                        }
+                        else if ((@Model.CurrentUserRelation & RelationType.Like) != RelationType.Like)
+                        {
+                            <a class="action like" data-id="@Model.Id" href="javascript:void(0)">
+                                <i class="far fa-heart fa-sm fa-fw"></i><span>@Model.LikesCount</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="action unlike" data-id="@Model.Id" href="javascript:void(0)">
+                                <i class="fas fa-heart fa-sm fa-fw"></i><span>@Model.LikesCount</span>
+                            </a>
+                        }
+
+                        if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="action" asp-controller="Post" asp-action="Mark" asp-route-postId="@Model.Id" asp-route-interaction="favorite">
+                                <i class="far fa-star fa-sm fa-fw"></i><span>@Model.FavoritesCount</span>
+                            </a>
+                        }
+                        else if ((@Model.CurrentUserRelation & RelationType.Favorite) != RelationType.Favorite)
+                        {
+                            <a class="action favorite" data-id="@Model.Id" href="javascript:void(0)">
+                                <i class="far fa-star fa-sm fa-fw"></i><span>@Model.FavoritesCount</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="action unfavorite" data-id="@Model.Id" href="javascript:void(0)">
+                                <i class="fas fa-star fa-sm fa-fw"></i><span>@Model.FavoritesCount</span>
+                            </a>
+                        }
+                    }
+                </span>
+            </section>
+        </div>
+        <p class="content">
+            @Html.Raw(Model.Message.FormatAsMessage())
+        </p>
+    </div>
+</article>

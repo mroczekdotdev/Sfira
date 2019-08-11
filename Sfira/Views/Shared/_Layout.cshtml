@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=4, initial-scale=1">
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true">
+    <script defer src="~/lib/font-awesome/js/all.min.js"></script>
+    <script defer src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script defer src="~/js/site.min.js"></script>
+    <title>@ViewBag.Title</title>
+    @await Html.PartialAsync("_Favicons")
+</head>
+
+<body>
+    <div class="site-container">
+        <header class="site-header">
+            <a href="#"><img class="logo" src="~/media/site/sfira-logo-primary.png" alt=""></a>
+            <nav class="site-menu">
+                <div class="item"><a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a></div>
+                <div class="item"><a asp-controller="Explore" asp-action="Index"><i class="fas fa-globe-americas"></i> Explore</a></div>
+                <div class="item"><a asp-controller="Messages" asp-action="Index"><i class="fas fa-envelope-square"></i> Messages</a></div>
+            </nav>
+            <form class="search-form">
+                <input type="search" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <section class="user">
+                @await Html.PartialAsync("_LoginPartial")
+            </section>
+        </header>
+
+        <div class="main-container">
+
+            <main class="main-column">
+                @RenderBody()
+            </main>
+
+            <div class="side-column">
+                <div class="side-content">
+                    <div class="main-aside">
+                        @RenderSection("MainAside", required: false)
+                    </div>
+
+                    <aside class="site-aside">
+                        @RenderSection("Aside", required: false)
+                    </aside>
+                </div>
+
+                <footer class="site-footer">
+                    Terms Privacy policy Cookies<br>
+                    @@ @DateTime.Now.Year Sfira
+                </footer>
+            </div>
+        </div>
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,87 @@
+.site-container {
+  width: 100%;
+  max-width: 900px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 0 $padding-base*2;
+  background-color: $color-white;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: $padding-base*2 0;
+  border-bottom: $border-size-base solid $color-primary;
+  background-color: $color-white;
+  z-index: 2;
+
+  .logo {
+    flex: 0;
+    height: 36px;
+    display: inline-block;
+  }
+
+  .site-menu {
+    flex: 2;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 $padding-base;
+
+    .item {
+      padding: 0 $padding-base/2;
+    }
+  }
+
+  .search-form {
+    margin-right: $margin-base;
+  }
+
+  .user {
+  }
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  .main-column {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    min-width: 0;
+    margin-right: $margin-base;
+  }
+
+  .side-column {
+    display: flex;
+    flex: 1;
+    flex-shrink: 0;
+    flex-direction: column;
+    min-width: 0;
+
+    .side-content {
+      padding: $padding-base;
+      background-color: color-variant("superlight", $color-primary);
+    }
+
+    @media #{$screen-sm} {
+      display: none;
+    }
+  }
+
+  .single-post {
+    margin-top: ($margin-base)+($padding-base)-($border-size-base);
+  }
+}
+
+.site-footer {
+  padding: $padding-base;
+  font-size: $font-size-sm;
+  color: $color-gray;
+  background-color: $color-white;
+}

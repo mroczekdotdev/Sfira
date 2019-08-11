@@ -1,0 +1,24 @@
+﻿.search-form {
+  display: flex;
+  padding: 0 $padding-base;
+
+  input {
+    width: 100%;
+    padding: $padding-base/2 $padding-base;
+    border: $border-size-base solid $color-primary;
+    border-radius: $radius-base 0 0 $radius-base;
+    background-color: color-variant("superlight", $color-primary);
+
+    &:focus {
+      background-color: $color-white;
+    }
+  }
+
+  button {
+    border-radius: 0 $radius-base $radius-base 0
+  }
+}
+
+.create-post {
+  padding: $padding-base;
+}

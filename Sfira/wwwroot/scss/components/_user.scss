@@ -1,0 +1,8 @@
+﻿[class$="username"]::before {
+  content: "@";
+}
+
+.avatar {
+  border: $border-size-base solid $color-white;
+  border-radius: $radius-base;
+}

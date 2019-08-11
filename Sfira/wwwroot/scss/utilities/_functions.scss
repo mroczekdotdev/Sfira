@@ -1,0 +1,14 @@
+@function color-variant($mode, $value) {
+  @if ($mode == "light") {
+    @return adjust-color($value, $saturation: $color-adjust-light-saturation, $lightness: $color-adjust-light-lightness);
+  }
+  @elseif ($mode == "superlight") {
+    @return adjust-color($value, $saturation: $color-adjust-superlight-saturation, $lightness: $color-adjust-superlight-lightness);
+  }
+  @elseif ($mode == "dark") {
+    @return adjust-color($value, $saturation: $color-adjust-dark-saturation, $lightness: $color-adjust-dark-lightness);
+  }
+  @elseif ($mode == "superdark") {
+    @return adjust-color($value, $saturation: $color-adjust-superdark-saturation, $lightness: $color-adjust-superdark-lightness);
+  }
+}
