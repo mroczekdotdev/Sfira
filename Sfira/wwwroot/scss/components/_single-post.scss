@@ -4,7 +4,7 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    margin-left: 5rem+$padding-base;
+    margin-left: 5rem + $padding-base;
 
     span {
       display: inline-block;
@@ -50,7 +50,7 @@
     font-weight: $font-weight-bold;
     font-size: $font-size-lg;
     padding: ($padding-base)-($border-size-base) $padding-base $padding-base;
-    margin-left: 5rem-$border-size-base;
+    margin-left: 5rem - $border-size-base;
     color: $color-white;
 
     .action {
@@ -70,5 +70,9 @@
   .content {
     overflow-wrap: break-word;
     padding: $padding-base;
+  }
+
+  .comments {
+    background-color: $color-white;
   }
 }

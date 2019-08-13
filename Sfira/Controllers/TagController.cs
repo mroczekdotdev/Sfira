@@ -12,7 +12,7 @@ namespace MarcinMroczek.Sfira.Controllers
             this.dataStorage = dataStorage;
         }
 
-        public IActionResult Index(string id)
+        public IActionResult GetPostsByTag(string id)
         {
             return View("Tag", dataStorage.GetPostsByTag(id));
         }

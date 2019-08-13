@@ -422,9 +422,6 @@ input, textarea {
   .search-form button {
     border-radius: 0 0.4rem 0.4rem 0; }
 
-.create-post {
-  padding: 0.5rem; }
-
 .single-post .header {
   display: flex;
   flex-wrap: nowrap;
@@ -478,6 +475,63 @@ input, textarea {
 .single-post .content {
   overflow-wrap: break-word;
   padding: 0.5rem; }
+
+.single-post .comments {
+  background-color: #fff; }
+
+.single-comment {
+  font-size: 12.8px;
+  border-top: 0.08rem solid #7452FF;
+  background-color: transparent;
+  padding: 0.5rem; }
+  .single-comment .header {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0; }
+    .single-comment .header span {
+      display: inline-block;
+      overflow: hidden; }
+  .single-comment .name {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem; }
+  .single-comment .username {
+    color: #cabff8; }
+  .single-comment .timestamp {
+    flex-grow: 1;
+    text-align: right; }
+  .single-comment .body {
+    border: none;
+    background-color: transparent; }
+  .single-comment .avatar {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    position: static; }
+  .single-comment .content {
+    overflow-wrap: break-word;
+    padding: 0; }
+
+.create-post {
+  padding: 0.5rem; }
+  .create-post .form-group {
+    margin: 1rem 0; }
+    .create-post .form-group button {
+      margin: 1rem 0; }
+
+.create-comment {
+  display: none;
+  border-top: 0.08rem solid #7452FF;
+  background-color: transparent;
+  padding: 0.5rem; }
+  .create-comment .form-group {
+    margin: 0.5rem 0; }
+    .create-comment .form-group textarea {
+      height: 4rem;
+      min-height: 4rem; }
+    .create-comment .form-group button {
+      margin: 0; }
 
 [class$="username"]::before {
   content: "@"; }

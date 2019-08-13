@@ -9,12 +9,12 @@ namespace MarcinMroczek.Sfira.Models
         public DateTime RegisterTime { get; set; }
 
         public string Name { get; set; }
-        public string Description { get; set; } //Summary, Headline
+        public string Description { get; set; }
         public string Location { get; set; }
         public string Website { get; set; }
 
         public bool ProfileImage { get; set; }
-        public bool HeaderImage { get; set; } //CoverImage
+        public bool HeaderImage { get; set; }
 
         public string CountryRegion { get; set; }
         public string Language { get; set; }

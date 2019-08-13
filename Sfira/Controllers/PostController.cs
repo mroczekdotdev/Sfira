@@ -19,8 +19,6 @@ namespace MarcinMroczek.Sfira.Controllers
             this.userManager = userManager;
         }
 
-        public string ReturnUrl { get; set; }
-
         [Authorize]
         [HttpPost]
         public async Task<RedirectResult> Create(PostViewModel post, string returnUrl = null)
@@ -29,7 +27,6 @@ namespace MarcinMroczek.Sfira.Controllers
             {
                 post.Author = await userManager.FindByNameAsync(User.Identity.Name);
                 dataStorage.AddPost(post);
-                return Redirect(returnUrl);
             }
 
             return Redirect(returnUrl);
@@ -44,7 +41,7 @@ namespace MarcinMroczek.Sfira.Controllers
             var result = new
             {
                 likescount = post.LikesCount,
-                favoritescount = post.FavoritesCount
+                favoritescount = post.FavoritesCount,
             };
 
             return Json(result);

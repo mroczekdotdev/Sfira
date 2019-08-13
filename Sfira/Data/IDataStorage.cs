@@ -17,6 +17,7 @@ namespace MarcinMroczek.Sfira.Data
         IEnumerable<PostViewModel> GetPostsByUserName(string userName);
 
         UserViewModel GetUserByUserName(string userName);
-
+        IEnumerable<CommentViewModel> GetCommentsByPostId(int postId);
+        void AddComment(CommentViewModel post);
     }
 }

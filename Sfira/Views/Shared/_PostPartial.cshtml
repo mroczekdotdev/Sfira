@@ -1,12 +1,12 @@
 ﻿@model PostViewModel
 
-<article class="single-post">
+<article class="single-post" data-id="@Model.Id">
     <header class="header">
         <a asp-controller="User" asp-action="GetUserByUserName" asp-route-userName="@Model.Author.UserName">
             <span class="name">@Model.Author.Name</span><span class="username">@Model.Author.UserName</span>
         </a>
         <a href="#">
-            <span class="timestamp">@Model.PostTime.Relative()</span>
+            <span class="timestamp">@Model.PublicationTime.Relative()</span>
         </a>
     </header>
     <div class="body">
@@ -14,13 +14,24 @@
             <div class="avatar" sfira-id="@Model.Author.Id" sfira-media="avatar"></div>
             <section class="actions">
                 <span class="main-actions">
-
-                    @*<a href="javascript:void(0)">*@
-
                     @{
-                        <a class="action">
-                            <i class="far fa-comment-alt fa-sm fa-fw"></i><span>12</span>
-                        </a>
+                        if (!User.Identity.IsAuthenticated)
+                        { <a class="action comment" href="javascript:void(0)">
+                                <i class="far fa-comment-alt fa-sm fa-fw"></i><span>@Model.CommentsCount</span>
+                            </a>
+                        }
+                        else if ((@Model.CurrentUserRelation & RelationType.Comment) != RelationType.Comment)
+                        {
+                            <a class="action comment" href="javascript:void(0)">
+                                <i class="far fa-comment-alt fa-sm fa-fw"></i><span>@Model.CommentsCount</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="action comment" href="javascript:void(0)">
+                                <i class="fas fa-comment-alt fa-sm fa-fw"></i><span>@Model.CommentsCount</span>
+                            </a>
+                        }
 
                         if (!User.Identity.IsAuthenticated)
                         {
@@ -28,13 +39,13 @@
                         }
                         else if ((@Model.CurrentUserRelation & RelationType.Like) != RelationType.Like)
                         {
-                            <a class="action like" data-id="@Model.Id" href="javascript:void(0)">
+                            <a class="action like" href="javascript:void(0)">
                                 <i class="far fa-heart fa-sm fa-fw"></i><span>@Model.LikesCount</span>
                             </a>
                         }
                         else
                         {
-                            <a class="action unlike" data-id="@Model.Id" href="javascript:void(0)">
+                            <a class="action unlike" href="javascript:void(0)">
                                 <i class="fas fa-heart fa-sm fa-fw"></i><span>@Model.LikesCount</span>
                             </a>
                         }
@@ -47,13 +58,13 @@
                         }
                         else if ((@Model.CurrentUserRelation & RelationType.Favorite) != RelationType.Favorite)
                         {
-                            <a class="action favorite" data-id="@Model.Id" href="javascript:void(0)">
+                            <a class="action favorite" href="javascript:void(0)">
                                 <i class="far fa-star fa-sm fa-fw"></i><span>@Model.FavoritesCount</span>
                             </a>
                         }
                         else
                         {
-                            <a class="action unfavorite" data-id="@Model.Id" href="javascript:void(0)">
+                            <a class="action unfavorite" href="javascript:void(0)">
                                 <i class="fas fa-star fa-sm fa-fw"></i><span>@Model.FavoritesCount</span>
                             </a>
                         }
@@ -64,5 +75,7 @@
         <p class="content">
             @Html.Raw(Model.Message.FormatAsMessage())
         </p>
+        <section class="comments"></section>
+        @{await Html.RenderPartialAsync("~/Views/Shared/_CreateCommentPartial.cshtml", new CommentViewModel()); }
     </div>
 </article>

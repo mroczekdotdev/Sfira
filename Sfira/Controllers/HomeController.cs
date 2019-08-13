@@ -18,7 +18,7 @@ namespace MarcinMroczek.Sfira.Controllers
 
         [Route("")]
         [Route("Home")]
-        public IActionResult Index()
+        public ViewResult Index()
         {
             return View("Home");
         }

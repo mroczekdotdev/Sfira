@@ -7,7 +7,8 @@ namespace MarcinMroczek.Sfira.Models
     {
         None = 0,
         Like = 1,
-        Favorite = 2
+        Favorite = 2,
+        Comment = 4,
     }
 
     public class UserPost

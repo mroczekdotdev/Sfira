@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CommentViewModel>
+
+@{
+    if (Model.Any() == false)
+    {
+        <article class="single-comment">
+            <span>Be first to comment!</span>
+        </article>
+    }
+}
+
+@foreach (var c in Model)
+{
+    <article class="single-comment">
+        <header class="header">
+            <div class="avatar" sfira-id="@c.Author.Id" sfira-media="avatar"></div>
+            <a asp-controller="User" asp-action="GetUserByUserName" asp-route-userName="@c.Author.UserName">
+                <span class="name">@c.Author.Name</span><span class="username">@c.Author.UserName</span>
+            </a>
+            <span class="timestamp">@c.PublicationTime.Relative()</span>
+        </header>
+        <div class="body">
+            <p class="content">
+                @Html.Raw(c.Message.FormatAsMessage())
+            </p>
+        </div>
+    </article>
+}

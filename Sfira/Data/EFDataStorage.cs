@@ -8,11 +8,11 @@ using System.Text.RegularExpressions;
 
 namespace MarcinMroczek.Sfira.Data
 {
-    public class EFDataStorage : IDataStorage
+    public class EfDataStorage : IDataStorage
     {
         private readonly SfiraDbContext context;
 
-        public EFDataStorage(SfiraDbContext context)
+        public EfDataStorage(SfiraDbContext context)
         {
             this.context = context;
         }
@@ -31,7 +31,7 @@ namespace MarcinMroczek.Sfira.Data
                     Location = s.Location,
                     Website = s.Website,
                     ProfileImage = s.ProfileImage,
-                    HeaderImage = s.HeaderImage
+                    HeaderImage = s.HeaderImage,
                 }).SingleOrDefault();
         }
 
@@ -45,12 +45,12 @@ namespace MarcinMroczek.Sfira.Data
                 sb.Append(match.Groups[1]).Append(' ');
             }
 
-            var postToAdd = new Post
+            Post postToAdd = new Post
             {
                 Author = post.Author,
-                PostTime = DateTime.Now,
+                PublicationTime = DateTime.Now,
                 Message = post.Message,
-                Tags = sb.ToString()
+                Tags = sb.ToString(),
             };
 
             context.Posts.Add(postToAdd);
@@ -60,15 +60,16 @@ namespace MarcinMroczek.Sfira.Data
         public IEnumerable<PostViewModel> GetAllPosts()
         {
             return context.Posts
-                .OrderBy(p => p.PostTime)
+                .OrderBy(p => p.PublicationTime)
                 .Select(s => new PostViewModel
                 {
                     Id = s.Id,
                     Author = s.Author,
-                    PostTime = s.PostTime,
+                    PublicationTime = s.PublicationTime,
                     Message = s.Message,
                     LikesCount = s.LikesCount,
-                    FavoritesCount = s.FavoritesCount
+                    FavoritesCount = s.FavoritesCount,
+                    CommentsCount = s.CommentsCount,
                 }).ToArray();
         }
 
@@ -76,16 +77,51 @@ namespace MarcinMroczek.Sfira.Data
         {
             return context.Posts
                 .Where(p => p.Tags.Contains(tag))
-                .OrderBy(p => p.PostTime)
+                .OrderBy(p => p.PublicationTime)
                 .Select(s => new PostViewModel
                 {
                     Id = s.Id,
                     Author = s.Author,
-                    PostTime = s.PostTime,
+                    PublicationTime = s.PublicationTime,
                     Message = s.Message,
                     LikesCount = s.LikesCount,
-                    FavoritesCount = s.FavoritesCount
+                    FavoritesCount = s.FavoritesCount,
+                    CommentsCount = s.CommentsCount,
                 }).ToArray();
+        }
+
+        public IEnumerable<PostViewModel> GetPostsByUserName(string userName)
+        {
+            return context.Users
+                .Where(u => u.UserName == userName)
+                .SelectMany(p => p.Posts)
+                .OrderBy(p => p.PublicationTime)
+                .Select(s => new PostViewModel
+                {
+                    Id = s.Id,
+                    Author = s.Author,
+                    PublicationTime = s.PublicationTime,
+                    Message = s.Message,
+                    LikesCount = s.LikesCount,
+                    FavoritesCount = s.FavoritesCount,
+                    CommentsCount = s.CommentsCount,
+                }).ToArray();
+        }
+
+        public PostViewModel GetPostById(int postId)
+        {
+            return context.Posts
+                .Where(p => p.Id == postId)
+                .Select(s => new PostViewModel
+                {
+                    Id = s.Id,
+                    Author = s.Author,
+                    PublicationTime = s.PublicationTime,
+                    Message = s.Message,
+                    LikesCount = s.LikesCount,
+                    FavoritesCount = s.FavoritesCount,
+                    CommentsCount = s.CommentsCount,
+                }).SingleOrDefault();
         }
 
         public IEnumerable<PostViewModel> AddCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId)
@@ -101,38 +137,6 @@ namespace MarcinMroczek.Sfira.Data
             }
 
             return posts;
-        }
-
-        public IEnumerable<PostViewModel> GetPostsByUserName(string userName)
-        {
-            return context.Users
-                .Where(u => u.UserName == userName)
-                .SelectMany(p => p.Posts)
-                .OrderBy(p => p.PostTime)
-                .Select(s => new PostViewModel
-                {
-                    Id = s.Id,
-                    Author = s.Author,
-                    PostTime = s.PostTime,
-                    Message = s.Message,
-                    LikesCount = s.LikesCount,
-                    FavoritesCount = s.FavoritesCount
-                }).ToArray();
-        }
-
-        public PostViewModel GetPostById(int postId)
-        {
-            return context.Posts
-                .Where(p => p.Id == postId)
-                .Select(s => new PostViewModel
-                {
-                    Id = s.Id,
-                    Author = s.Author,
-                    PostTime = s.PostTime,
-                    Message = s.Message,
-                    LikesCount = s.LikesCount,
-                    FavoritesCount = s.FavoritesCount
-                }).SingleOrDefault();
         }
 
         public void MarkPost(string userId, int postId, string interaction)
@@ -178,6 +182,22 @@ namespace MarcinMroczek.Sfira.Data
                         break;
                     }
                     return;
+
+                case "comment":
+                    if ((relation & RelationType.Comment) != RelationType.Comment)
+                    {
+                        relation |= RelationType.Comment;
+                        break;
+                    }
+                    return;
+
+                case "uncomment":
+                    if ((relation & RelationType.Comment) == RelationType.Comment)
+                    {
+                        relation ^= RelationType.Comment;
+                        break;
+                    }
+                    return;
             }
 
             if (existingUserPost == null)
@@ -186,7 +206,7 @@ namespace MarcinMroczek.Sfira.Data
                 {
                     UserId = userId,
                     PostId = postId,
-                    Relation = relation
+                    Relation = relation,
                 };
 
                 context.Add(userPost);
@@ -201,6 +221,46 @@ namespace MarcinMroczek.Sfira.Data
             }
 
             context.SaveChanges();
+        }
+
+        public void AddComment(CommentViewModel comment)
+        {
+            Post parent = context.Posts
+                .Where(p => p.Id == comment.ParentId)
+                .SingleOrDefault();
+
+            Comment commentToAdd = new Comment
+            {
+                Author = comment.Author,
+                PublicationTime = DateTime.Now,
+                Message = comment.Message,
+                Parent = parent,
+            };
+
+            if (!(parent.Comments?.Any(c => c.Author == comment.Author) ?? false))
+            {
+                MarkPost(comment.Author.Id, parent.Id, "comment");
+            }
+
+            parent.CommentsCount++;
+            context.Comments.Add(commentToAdd);
+            context.SaveChanges();
+        }
+
+        public IEnumerable<CommentViewModel> GetCommentsByPostId(int postId)
+        {
+            return context.Posts
+                .Where(p => p.Id == postId)
+                .SelectMany(c => c.Comments)
+                .OrderBy(c => c.PublicationTime)
+                .Select(s => new CommentViewModel
+                {
+                    Id = s.Id,
+                    Author = s.Author,
+                    PublicationTime = s.PublicationTime,
+                    Message = s.Message,
+                    ParentId = s.Parent.Id,
+                }).ToArray();
         }
     }
 }

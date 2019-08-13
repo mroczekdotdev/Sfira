@@ -9,6 +9,8 @@ Graphic Design/
 ScaffoldingReadme.txt
 todo-*
 **/media/users/
+Migrations/
+appsettings*.json
 
 # User-specific files
 *.rsuser

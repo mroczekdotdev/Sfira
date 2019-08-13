@@ -2,11 +2,11 @@
 
 <section class="create-post">
     <form asp-controller="Post" asp-action="Create" asp-route-returnUrl="@(Context.Request.Path)" method="post">
-        <h1>Create a new post</h1>
+        <h1>Create post</h1>
         <div class="form-group">
-            <textarea asp-for="@Model.Message" class="form-control"></textarea>
+            <textarea asp-for="@Model.Message" placeholder="Write your post."></textarea>
             <span asp-validation-for="@Model.Message" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-light">publish</button>
+        <button type="submit">Publish</button>
     </form>
 </section>

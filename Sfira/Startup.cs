@@ -25,7 +25,7 @@ namespace MarcinMroczek.Sfira
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IDataStorage, EFDataStorage>();
+            services.AddTransient<IDataStorage, EfDataStorage>();
 
             services.AddDbContext<SfiraDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
@@ -60,16 +60,22 @@ namespace MarcinMroczek.Sfira
                 );
 
                 routes.MapRoute(
+                    "Comments",
+                    "comments/{postId}",
+                    new { controller = "Comment", action = "GetCommentsByPostId" }
+                );
+
+                routes.MapRoute(
                     "Tag",
                     "tag/{id}",
-                    new { controller = "Tag", action = "Index" }
+                    new { controller = "Tag", action = "GetPostsByTag" }
                 );
 
                 routes.MapRoute(
                     "Default",
                     "{controller}/{action}/{id?}",
                     new { controller = "Home", action = "Index" },
-                    new { controller = "(explore|home|identity|messages|post|search)" }
+                    new { controller = "(comment|explore|home|identity|messages|post|search)" }
                 );
 
                 routes.MapRoute(
