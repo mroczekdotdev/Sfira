@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <RootNamespace>MarcinMroczek.Sfira</RootNamespace>
+    <UserSecretsId>f41339d4-e28c-4e49-870e-155b32af4afd</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

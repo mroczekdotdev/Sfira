@@ -388,6 +388,10 @@ input, textarea {
   color: #888;
   background-color: #fff; }
 
+.javascript-disabled {
+  padding: 0.5rem;
+  background-color: #fff; }
+
 .dropdown {
   position: relative;
   display: inline-block; }
@@ -515,23 +519,26 @@ input, textarea {
 
 .create-post {
   padding: 0.5rem; }
-  .create-post .form-group {
+  .create-post textarea {
+    height: 4rem;
+    min-height: 4rem; }
+  .create-post .actions {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between; }
+  .create-post button {
     margin: 1rem 0; }
-    .create-post .form-group button {
-      margin: 1rem 0; }
 
 .create-comment {
   display: none;
   border-top: 0.08rem solid #7452FF;
   background-color: transparent;
   padding: 0.5rem; }
-  .create-comment .form-group {
-    margin: 0.5rem 0; }
-    .create-comment .form-group textarea {
-      height: 4rem;
-      min-height: 4rem; }
-    .create-comment .form-group button {
-      margin: 0; }
+  .create-comment textarea {
+    height: 4rem;
+    min-height: 4rem; }
+  .create-comment button {
+    margin: 0; }
 
 [class$="username"]::before {
   content: "@"; }
