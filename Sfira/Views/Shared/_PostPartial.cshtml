@@ -75,7 +75,15 @@
         <p class="content">
             @Html.Raw(Model.Message.FormatAsMessage())
         </p>
+        @{
+            if (Model.Attachment != null)
+            {
+                <section class="attachment">
+                        @(await Component.InvokeAsync<AttachmentViewComponent>(Model.Attachment))
+                </section>
+            }
+        }
         <section class="comments"></section>
-        @{await Html.RenderPartialAsync("~/Views/Shared/_CreateCommentPartial.cshtml", new CommentViewModel()); }
+        @{await Html.RenderPartialAsync("~/Views/Shared/_CreateCommentPartial.cshtml", new CommentViewModel());}
     </div>
 </article>

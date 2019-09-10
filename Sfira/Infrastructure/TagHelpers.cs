@@ -13,18 +13,18 @@ namespace MarcinMroczek.Sfira.Infrastructure.TagHelpers
         [HtmlAttributeName("sfira-media")]
         public string Media { get; set; }
 
-        public IHostingEnvironment env { get; }
+        private readonly IHostingEnvironment environment;
 
-        public UserMediaTagHelper(IHostingEnvironment env)
+        public UserMediaTagHelper(IHostingEnvironment environment)
         {
-            this.env = env;
+            this.environment = environment;
         }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             string filePath = @"\media\users\" + UserId + @"\" + Media + ".jpg";
 
-            if (!File.Exists(env.WebRootPath + filePath))
+            if (!File.Exists(environment.WebRootPath + filePath))
             {
                 filePath = "/media/site/default-" + Media + ".png";
             }

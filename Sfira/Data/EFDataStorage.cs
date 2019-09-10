@@ -54,13 +54,79 @@ namespace MarcinMroczek.Sfira.Data
             };
 
             context.Posts.Add(postToAdd);
+
+            if (post.Attachment != null)
+            {
+                AddAttachment(post.Attachment, postToAdd);
+            }
+            else
+            {
+                context.SaveChanges();
+            }
+        }
+
+        public void AddAttachment(AttachmentViewModel attachment, Post parent)
+        {
+            Attachment attachmentToAdd;
+
+            switch (Enum.Parse<AttachmentType>(attachment.Type))
+            {
+                case AttachmentType.image:
+                    attachmentToAdd = new ImageAttachment
+                    {
+                        Parent = parent,
+                        Owner = attachment.Owner,
+                        Name = Guid.ParseExact(attachment.Name, "D"),
+                        Extension = Enum.Parse<FilenameExtension>(attachment.Extension),
+                    };
+                    break;
+                default:
+                    return;
+            }
+
+            context.Attachments.Add(attachmentToAdd);
             context.SaveChanges();
+        }
+
+        public AttachmentViewModel GetAttachmentVmByPostId(int postId)
+        {
+            Attachment attachment = context.Attachments
+                .SingleOrDefault(a => a.PostId == postId);
+
+            AttachmentViewModel result;
+
+            if (attachment == null)
+            {
+                result = null;
+            }
+            else
+            {
+                result = new AttachmentViewModel
+                {
+                    ParentId = attachment.PostId,
+                    Owner = attachment.Owner,
+                    Name = attachment.Name.ToString(),
+                };
+
+                switch (attachment)
+                {
+                    case ImageAttachment image:
+                        result.Type = attachment.ToString();
+                        result.Extension = image.Extension.ToString();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            return result;
         }
 
         public IEnumerable<PostViewModel> GetAllPosts()
         {
             return context.Posts
-                .OrderBy(p => p.PublicationTime)
+                .OrderByDescending(p => p.PublicationTime)
                 .Select(s => new PostViewModel
                 {
                     Id = s.Id,
@@ -77,7 +143,7 @@ namespace MarcinMroczek.Sfira.Data
         {
             return context.Posts
                 .Where(p => p.Tags.Contains(tag))
-                .OrderBy(p => p.PublicationTime)
+                .OrderByDescending(p => p.PublicationTime)
                 .Select(s => new PostViewModel
                 {
                     Id = s.Id,
@@ -95,7 +161,7 @@ namespace MarcinMroczek.Sfira.Data
             return context.Users
                 .Where(u => u.UserName == userName)
                 .SelectMany(p => p.Posts)
-                .OrderBy(p => p.PublicationTime)
+                .OrderByDescending(p => p.PublicationTime)
                 .Select(s => new PostViewModel
                 {
                     Id = s.Id,
@@ -108,7 +174,7 @@ namespace MarcinMroczek.Sfira.Data
                 }).ToArray();
         }
 
-        public PostViewModel GetPostById(int postId)
+        public PostViewModel GetPostVmById(int postId)
         {
             return context.Posts
                 .Where(p => p.Id == postId)
@@ -122,6 +188,12 @@ namespace MarcinMroczek.Sfira.Data
                     FavoritesCount = s.FavoritesCount,
                     CommentsCount = s.CommentsCount,
                 }).SingleOrDefault();
+        }
+
+        public Post GetPostById(int postId)
+        {
+            return context.Posts
+                .SingleOrDefault(p => p.Id == postId);
         }
 
         public IEnumerable<PostViewModel> AddCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId)
@@ -225,9 +297,7 @@ namespace MarcinMroczek.Sfira.Data
 
         public void AddComment(CommentViewModel comment)
         {
-            Post parent = context.Posts
-                .Where(p => p.Id == comment.ParentId)
-                .SingleOrDefault();
+            Post parent = GetPostById(comment.ParentId);
 
             Comment commentToAdd = new Comment
             {
@@ -252,7 +322,7 @@ namespace MarcinMroczek.Sfira.Data
             return context.Posts
                 .Where(p => p.Id == postId)
                 .SelectMany(c => c.Comments)
-                .OrderBy(c => c.PublicationTime)
+                .OrderByDescending(c => c.PublicationTime)
                 .Select(s => new CommentViewModel
                 {
                     Id = s.Id,

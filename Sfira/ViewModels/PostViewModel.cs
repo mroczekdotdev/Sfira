@@ -16,11 +16,14 @@ namespace MarcinMroczek.Sfira.ViewModels
         public string Message { get; set; }
 
         public string Tags { get; set; }
+
         public int LikesCount { get; set; }
         public int FavoritesCount { get; set; }
         public RelationType CurrentUserRelation { get; set; }
 
         public int CommentsCount { get; set; }
         public ICollection<CommentViewModel> Comments { get; set; }
+
+        public AttachmentViewModel Attachment { get; set; }
     }
 }

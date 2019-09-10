@@ -22,5 +22,8 @@ namespace MarcinMroczek.Sfira.Models
 
         public ICollection<Post> Posts { get; set; }
         public ICollection<UserPost> UserPosts { get; set; }
+
+        public ICollection<Attachment> Attachments { get; set; }
+
     }
 }

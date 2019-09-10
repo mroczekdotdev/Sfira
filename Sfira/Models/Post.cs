@@ -12,5 +12,7 @@ namespace MarcinMroczek.Sfira.Models
 
         public int CommentsCount { get; set; }
         public ICollection<Comment> Comments { get; set; }
+
+        public Attachment Attachment { get; set; }
     }
 }

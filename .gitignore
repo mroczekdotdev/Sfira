@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-#Marcin
+# mroczekdotdev
 desktop.ini
 Graphic Design/
 ScaffoldingReadme.txt
@@ -11,6 +11,7 @@ todo-*
 **/media/users/
 Migrations/
 appsettings*.json
+Rubbish/
 
 # User-specific files
 *.rsuser

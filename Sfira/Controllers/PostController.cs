@@ -19,17 +19,42 @@ namespace MarcinMroczek.Sfira.Controllers
             this.userManager = userManager;
         }
 
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<RedirectResult> Create(PostViewModel post, string returnUrl = null)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        post.Author = await userManager.FindByNameAsync(User.Identity.Name);
+        //        dataStorage.AddPost(post);
+        //    }
+
+        //    return Redirect(returnUrl);
+        //}
+
         [Authorize]
         [HttpPost]
-        public async Task<RedirectResult> Create(PostViewModel post, string returnUrl = null)
+        public async Task<IActionResult> Create([FromBody] PostViewModel post)
         {
+            ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+
             if (ModelState.IsValid)
             {
-                post.Author = await userManager.FindByNameAsync(User.Identity.Name);
+                post.Author = currentUser;
+
+                if (post.Attachment != null)
+                {
+                    post.Attachment.Owner = currentUser;
+                }
+
                 dataStorage.AddPost(post);
             }
+            else
+            {
+                return Json("error");
+            }
 
-            return Redirect(returnUrl);
+            return Json("success");
         }
 
         [Authorize]
@@ -37,7 +62,7 @@ namespace MarcinMroczek.Sfira.Controllers
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
             dataStorage.MarkPost(currentUser.Id, postId, interaction);
-            PostViewModel post = dataStorage.GetPostById(postId);
+            PostViewModel post = dataStorage.GetPostVmById(postId);
             var result = new
             {
                 likescount = post.LikesCount,

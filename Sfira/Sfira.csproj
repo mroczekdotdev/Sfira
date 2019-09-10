@@ -26,6 +26,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,8 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Filters\" />
-    <Folder Include="ViewComponents\" />
-    <Folder Include="Views\Shared\Components\" />
     <Folder Include="wwwroot\media\users\" />
   </ItemGroup>
 

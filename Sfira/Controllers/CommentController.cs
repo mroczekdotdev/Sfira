@@ -33,7 +33,7 @@ namespace MarcinMroczek.Sfira.Controllers
             }
             else
             {
-                return Json("invalid");
+                return Json("error");
             }
             return Json("success");
         }

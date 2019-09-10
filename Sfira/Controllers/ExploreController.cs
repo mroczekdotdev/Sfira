@@ -23,6 +23,11 @@ namespace MarcinMroczek.Sfira.Controllers
         {
             IEnumerable<PostViewModel> result = dataStorage.GetAllPosts();
 
+            foreach (var post in result)
+            {
+                post.Attachment = dataStorage.GetAttachmentVmByPostId(post.Id);
+            }
+
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);

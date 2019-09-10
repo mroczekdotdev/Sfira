@@ -1,15 +1,23 @@
 ﻿@model PostViewModel
 
 <section class="create-post">
-    <form asp-controller="Post" asp-action="Create" asp-route-returnUrl="@(Context.Request.Path)" method="post">
+    <form class="postForm">
         <h1>Create a post</h1>
-        <textarea asp-for="@Model.Message" placeholder="Write your post."></textarea>
-        <span asp-validation-for="@Model.Message" class="text-danger"></span>
-        <section class="actions">
-            <span class="decorate">
-                <button type="button"><i class="fas fa-image fa-lg fa-fw"></i></button>
-            </span>
-            <button type="submit">Publish</button>
-        </section>
+        <div class="postContent">
+            <textarea asp-for="@Model.Message" id="postMessage" placeholder="Write your post."></textarea>
+            <section class="attachmentPreview" style="display: none;">
+                <div class="cover" id="imagePreview">
+                </div>
+            </section>
+        </div>
     </form>
+
+    <form class="attachmentForm">
+        <input class="attachmentInput" id="imageAttachment" type="file" accept="image/jpeg, image/png" style="display: none;">
+    </form>
+
+    <section class="actions">
+        <button class="attachImage" type="button" onclick="document.getElementById('imageAttachment').click();"><i class="fas fa-image fa-lg fa-fw"></i></button>
+        <button class="sendPost" type="button">Submit</button>
+    </section>
 </section>

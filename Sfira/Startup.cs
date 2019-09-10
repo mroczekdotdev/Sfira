@@ -75,7 +75,7 @@ namespace MarcinMroczek.Sfira
                     "Default",
                     "{controller}/{action}/{id?}",
                     new { controller = "Home", action = "Index" },
-                    new { controller = "(comment|explore|home|identity|messages|post|search)" }
+                    new { controller = "(attachment|comment|explore|home|identity|messages|post|search)" }
                 );
 
                 routes.MapRoute(
