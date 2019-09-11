@@ -1,6 +1,6 @@
-﻿using MarcinMroczek.Sfira.Models;
+﻿using MroczekDotDev.Sfira.Models;
 
-namespace MarcinMroczek.Sfira.ViewModels
+namespace MroczekDotDev.Sfira.ViewModels
 {
     public class AttachmentViewModel
     {

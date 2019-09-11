@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using MarcinMroczek.Sfira.Models;
+using MroczekDotDev.Sfira.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MarcinMroczek.Sfira.Areas.Identity.Pages.Account.Manage
+namespace MroczekDotDev.Sfira.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {

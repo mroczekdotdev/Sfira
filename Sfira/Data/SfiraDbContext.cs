@@ -1,10 +1,10 @@
-﻿using MarcinMroczek.Sfira.Models;
+﻿using MroczekDotDev.Sfira.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 
-namespace MarcinMroczek.Sfira.Data
+namespace MroczekDotDev.Sfira.Data
 {
     public class SfiraDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -23,9 +23,13 @@ namespace MarcinMroczek.Sfira.Data
 
             var extensionEnumToStringConverter = new EnumToStringConverter<FilenameExtension>();
 
-            builder.Entity<ApplicationUser>()
-                .HasIndex(u => u.NormalizedEmail)
-                .IsUnique();
+            builder.HasPostgresExtension("citext"); //PostgreSQL only
+
+            builder.Entity<ApplicationUser>(e =>
+            {
+                e.HasIndex(u => u.NormalizedEmail).IsUnique();
+                e.Property(u => u.UserName).HasColumnType("citext"); //PostgreSQL only //Should be fixed in 3.0
+            });
 
             builder.Entity<UserPost>()
                 .HasKey(up => new { up.UserId, up.PostId });

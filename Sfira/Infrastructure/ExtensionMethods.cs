@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace MarcinMroczek.Sfira.Infrastructure
+namespace MroczekDotDev.Sfira.Infrastructure
 {
     public static class ExtensionMethods
     {

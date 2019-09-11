@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace MarcinMroczek.Sfira.Areas.Identity.Pages.Account.Manage
+namespace MroczekDotDev.Sfira.Areas.Identity.Pages.Account.Manage
 {
     public static class ManageNavPages
     {

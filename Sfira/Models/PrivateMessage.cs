@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarcinMroczek.Sfira.Models
+namespace MroczekDotDev.Sfira.Models
 {
     public class PrivateMessage : Entry
     {

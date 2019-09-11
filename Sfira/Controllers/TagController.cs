@@ -1,7 +1,7 @@
-﻿using MarcinMroczek.Sfira.Data;
+﻿using MroczekDotDev.Sfira.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MarcinMroczek.Sfira.Controllers
+namespace MroczekDotDev.Sfira.Controllers
 {
     public class TagController : Controller
     {

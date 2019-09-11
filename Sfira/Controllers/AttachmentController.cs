@@ -1,5 +1,5 @@
-﻿using MarcinMroczek.Sfira.Data;
-using MarcinMroczek.Sfira.Models;
+﻿using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarcinMroczek.Sfira.Controllers
+namespace MroczekDotDev.Sfira.Controllers
 {
     public class AttachmentController : Controller
     {

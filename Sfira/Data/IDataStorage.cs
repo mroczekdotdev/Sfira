@@ -1,9 +1,9 @@
-﻿using MarcinMroczek.Sfira.Models;
-using MarcinMroczek.Sfira.ViewModels;
+﻿using MroczekDotDev.Sfira.Models;
+using MroczekDotDev.Sfira.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MarcinMroczek.Sfira.Data
+namespace MroczekDotDev.Sfira.Data
 {
     public interface IDataStorage
     {

@@ -1,8 +1,8 @@
-﻿using MarcinMroczek.Sfira.Models;
+﻿using MroczekDotDev.Sfira.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MarcinMroczek.Sfira.ViewModels
+namespace MroczekDotDev.Sfira.ViewModels
 {
     public class CommentViewModel
     {

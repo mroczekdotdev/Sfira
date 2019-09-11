@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MarcinMroczek.Sfira.ViewModels
+namespace MroczekDotDev.Sfira.ViewModels
 {
     public class UserViewModel
     {

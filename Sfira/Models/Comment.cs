@@ -1,4 +1,4 @@
-﻿namespace MarcinMroczek.Sfira.Models
+﻿namespace MroczekDotDev.Sfira.Models
 {
     public class Comment : Entry
     {

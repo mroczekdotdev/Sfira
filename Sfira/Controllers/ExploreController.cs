@@ -1,12 +1,12 @@
-﻿using MarcinMroczek.Sfira.Data;
-using MarcinMroczek.Sfira.Models;
-using MarcinMroczek.Sfira.ViewModels;
+﻿using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Models;
+using MroczekDotDev.Sfira.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MarcinMroczek.Sfira.Controllers
+namespace MroczekDotDev.Sfira.Controllers
 {
     public class ExploreController : Controller
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MarcinMroczek.Sfira.Models
+namespace MroczekDotDev.Sfira.Models
 {
     public class Post : Entry
     {

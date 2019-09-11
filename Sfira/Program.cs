@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace MarcinMroczek.Sfira
+namespace MroczekDotDev.Sfira
 {
     public static class Program
     {

@@ -6,13 +6,13 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Linq;
 using System.Threading.Tasks;
-using MarcinMroczek.Sfira.Models;
+using MroczekDotDev.Sfira.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace MarcinMroczek.Sfira.Areas.Identity.Pages.Account.Manage
+namespace MroczekDotDev.Sfira.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {
@@ -149,7 +149,7 @@ namespace MarcinMroczek.Sfira.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("MarcinMroczek.Sfira"),
+                _urlEncoder.Encode("MroczekDotDev.Sfira"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

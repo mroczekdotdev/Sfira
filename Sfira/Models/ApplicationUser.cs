@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MarcinMroczek.Sfira.Models
+namespace MroczekDotDev.Sfira.Models
 {
     public class ApplicationUser : IdentityUser
     {

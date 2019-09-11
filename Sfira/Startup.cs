@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MarcinMroczek.Sfira.Data;
+using MroczekDotDev.Sfira.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MarcinMroczek.Sfira
+namespace MroczekDotDev.Sfira
 {
     public class Startup
     {
@@ -27,8 +27,11 @@ namespace MarcinMroczek.Sfira
         {
             services.AddTransient<IDataStorage, EfDataStorage>();
 
+            //services.AddDbContext<SfiraDbContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
+
             services.AddDbContext<SfiraDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Default")));
+                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
 
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 

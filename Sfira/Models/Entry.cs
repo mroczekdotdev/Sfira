@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MarcinMroczek.Sfira.Models
+namespace MroczekDotDev.Sfira.Models
 {
     public abstract class Entry
     {

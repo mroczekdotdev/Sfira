@@ -1,6 +1,6 @@
-﻿using MarcinMroczek.Sfira.Data;
-using MarcinMroczek.Sfira.Models;
-using MarcinMroczek.Sfira.ViewModels;
+﻿using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Models;
+using MroczekDotDev.Sfira.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarcinMroczek.Sfira.ViewComponents
+namespace MroczekDotDev.Sfira.ViewComponents
 {
     public class AttachmentViewComponent : ViewComponent
     {
