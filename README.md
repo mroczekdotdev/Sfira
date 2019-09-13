@@ -1,5 +1,4 @@
 ![Sfira - logo](.readme/sfira-logo-medium.png?raw=true "logo")
---------------------------------------------------------------
 
 ## Description
 **Sfira** is a social media web application created using ASP.NET Core MVC.

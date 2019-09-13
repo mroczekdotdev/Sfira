@@ -1,7 +1,7 @@
 ﻿[
   {
     "outputFile": "wwwroot/css/main.css",
-    "inputFile": "wwwroot/scss/main.scss",
+    "inputFile": "scss/main.scss",
     "options": {
       "linefeed": "crlf"
     }

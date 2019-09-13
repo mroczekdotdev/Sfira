@@ -40,7 +40,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public PartialViewResult GetCommentsByPostId(int postId)
         {
-            IEnumerable<CommentViewModel> result = dataStorage.GetCommentsByPostId(postId);
+            IEnumerable<CommentViewModel> result = dataStorage.GetCommentsVmByPostId(postId);
             return PartialView("_CommentsPartial", result);
         }
     }

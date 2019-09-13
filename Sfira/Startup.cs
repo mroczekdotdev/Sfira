@@ -36,7 +36,7 @@ namespace MroczekDotDev.Sfira
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2); //remove in 3.0
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

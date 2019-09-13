@@ -14,7 +14,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public IActionResult GetPostsByTag(string id)
         {
-            return View("Tag", dataStorage.GetPostsByTag(id));
+            return View("Tag", dataStorage.GetPostsVmByTag(id));
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿@model AttachmentViewModel
 
-<div class="cover" style="background: url(@("/media/users/f3ba7de4-5d58-433f-9cba-c9609326f6dd/" + Model.Name + "-thumb." + Model.Extension)) center / cover no-repeat">
+<div class="cover thumbnail"
+     style="background: url(@("/media/users/" + Model.Owner.Id + "/" + Model.Name + "-thumb." + Model.Extension)) center / cover no-repeat"
+     data-fullresolutionimage="@("/media/users/" + Model.Owner.Id + "/" + Model.Name + "." + Model.Extension)">
 </div>

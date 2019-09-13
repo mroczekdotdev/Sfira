@@ -17,7 +17,7 @@ namespace MroczekDotDev.Sfira.Data
             this.context = context;
         }
 
-        public UserViewModel GetUserByUserName(string userName)
+        public UserViewModel GetUserVmByUserName(string userName)
         {
             return context.Users
                 .Where(u => u.UserName == userName)
@@ -123,7 +123,7 @@ namespace MroczekDotDev.Sfira.Data
             return result;
         }
 
-        public IEnumerable<PostViewModel> GetAllPosts()
+        public IEnumerable<PostViewModel> GetPostsVm()
         {
             return context.Posts
                 .OrderByDescending(p => p.PublicationTime)
@@ -139,7 +139,7 @@ namespace MroczekDotDev.Sfira.Data
                 }).ToArray();
         }
 
-        public IEnumerable<PostViewModel> GetPostsByTag(string tag)
+        public IEnumerable<PostViewModel> GetPostsVmByTag(string tag)
         {
             return context.Posts
                 .Where(p => p.Tags.Contains(tag))
@@ -156,7 +156,7 @@ namespace MroczekDotDev.Sfira.Data
                 }).ToArray();
         }
 
-        public IEnumerable<PostViewModel> GetPostsByUserName(string userName)
+        public IEnumerable<PostViewModel> GetPostsVmByUserName(string userName)
         {
             return context.Users
                 .Where(u => u.UserName == userName)
@@ -317,7 +317,7 @@ namespace MroczekDotDev.Sfira.Data
             context.SaveChanges();
         }
 
-        public IEnumerable<CommentViewModel> GetCommentsByPostId(int postId)
+        public IEnumerable<CommentViewModel> GetCommentsVmByPostId(int postId)
         {
             return context.Posts
                 .Where(p => p.Id == postId)

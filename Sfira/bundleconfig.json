@@ -2,9 +2,10 @@
   {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
-      "wwwroot/js/comment.js",
-      "wwwroot/js/createPost.js",
-      "wwwroot/js/markPost.js"
+      "js/comment.js",
+      "js/createPost.js",
+      "js/modal.js",
+      "js/markPost.js"
     ],
     "minify": {
       "enabled": true,

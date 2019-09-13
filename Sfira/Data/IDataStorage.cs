@@ -12,14 +12,14 @@ namespace MroczekDotDev.Sfira.Data
         void MarkPost(string userId, int postId, string interaction);
         IEnumerable<PostViewModel> AddCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId);
 
-        IEnumerable<PostViewModel> GetAllPosts();
-        IEnumerable<PostViewModel> GetPostsByTag(string tag);
-        IEnumerable<PostViewModel> GetPostsByUserName(string userName);
+        IEnumerable<PostViewModel> GetPostsVm();
+        IEnumerable<PostViewModel> GetPostsVmByTag(string tag);
+        IEnumerable<PostViewModel> GetPostsVmByUserName(string userName);
 
         AttachmentViewModel GetAttachmentVmByPostId(int postId);
 
-        UserViewModel GetUserByUserName(string userName);
-        IEnumerable<CommentViewModel> GetCommentsByPostId(int postId);
+        UserViewModel GetUserVmByUserName(string userName);
+        IEnumerable<CommentViewModel> GetCommentsVmByPostId(int postId);
         void AddComment(CommentViewModel post);
     }
 }

@@ -20,8 +20,8 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public async Task<IActionResult> GetUserByUserName(string userName)
         {
-            UserViewModel result = dataStorage.GetUserByUserName(userName);
-            result.Posts = dataStorage.GetPostsByUserName(userName);
+            UserViewModel result = dataStorage.GetUserVmByUserName(userName);
+            result.Posts = dataStorage.GetPostsVmByUserName(userName);
 
             if (User.Identity.IsAuthenticated)
             {

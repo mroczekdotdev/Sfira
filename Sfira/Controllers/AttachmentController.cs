@@ -66,6 +66,7 @@ namespace MroczekDotDev.Sfira.Controllers
             {
                 case "image/jpeg":
                 case "image/png":
+                    Directory.CreateDirectory(directory);
                     await AttachmentToImage();
                     break;
 
@@ -81,8 +82,6 @@ namespace MroczekDotDev.Sfira.Controllers
         {
             const int maxWidth = 1920;
             const int maxHeight = 1080;
-
-            var images = new List<(Image, string fileName)>();
 
             Image thumb = GenerateThumbnail(image);
 
@@ -105,6 +104,7 @@ namespace MroczekDotDev.Sfira.Controllers
                 image = newImage;
             }
 
+            var images = new List<(Image, string fileName)>();
             images.Add((image, name + "." + extension));
             images.Add((thumb, name + "-thumb." + extension));
 

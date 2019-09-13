@@ -21,7 +21,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public async Task<ViewResult> Index()
         {
-            IEnumerable<PostViewModel> result = dataStorage.GetAllPosts();
+            IEnumerable<PostViewModel> result = dataStorage.GetPostsVm();
 
             foreach (var post in result)
             {
