@@ -1,0 +1,63 @@
+version: '2'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+    storage:
+      image: storage
+      build:
+        context: .
+        dockerfile: docker/storage/Dockerfile
+      restart: always
+      volumes:
+        - /var/www
+
+    database:
+      image: database
+      build:
+        context: .
+        dockerfile: docker/database/Dockerfile
+      restart: always
+      environment:
+        ACCEPT_EULA: Y
+        SA_PASSWORD: pass
+        MSSQL_PID: Developer
+      networks:
+        default:
+          aliases:
+            - database
+
+    frontend:
+      image: frontend
+      build:
+        context: .
+        dockerfile: docker/frontend/Dockerfile
+      restart: always
+      networks:
+        - default
+      volumes_from:   
+        - storage
+
+    backend:
+      image: backend
+      build:
+        context: .
+        dockerfile: docker/backend/Dockerfile
+      restart: always
+      networks:
+        default:
+          aliases:
+            - backend   
+      volumes_from:   
+        - storage            
+
+    proxy:
+      image: proxy
+      build:
+        context: .
+        dockerfile: docker/proxy/Dockerfile
+      restart: always
+      networks:
+        - default      
