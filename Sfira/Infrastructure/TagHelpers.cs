@@ -22,15 +22,15 @@ namespace MroczekDotDev.Sfira.Infrastructure.TagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            string filePath = @"\media\users\" + UserId + @"\" + Media + ".jpg";
+            string filePath = Path.Combine(new[] { "media", "user", UserId, Media + ".jpg" });
 
-            if (!File.Exists(environment.WebRootPath + filePath))
+            if (!File.Exists(Path.Combine(environment.WebRootPath, filePath)))
             {
                 filePath = "/media/site/default-" + Media + ".png";
             }
             else
             {
-                filePath = "/media/users/" + UserId + "/" + Media + ".jpg";
+                filePath = "/media/user/" + UserId + "/" + Media + ".jpg";
             }
 
             output.Attributes.SetAttribute("style", "background: url(" + filePath + ") center / cover no-repeat");

@@ -1,0 +1,20 @@
+**/.ignore/
+**/obj/
+**/bin/
+**/Migrations/
+**/Rubbish/
+**/node_modules/
+**/.git/
+**/.readme/
+**/media/user/
+
+**/.gitattributes
+**/.gitignore
+**/desktop.ini
+**/*.md
+**/*.Development.json
+**/package.json
+**/package-lock.json
+
+.vs/
+Graphic Design/

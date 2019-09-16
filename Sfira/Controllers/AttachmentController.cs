@@ -1,10 +1,10 @@
-﻿using MroczekDotDev.Sfira.Data;
-using MroczekDotDev.Sfira.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,9 +22,10 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly IDataStorage dataStorage;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public AttachmentController(IHostingEnvironment env, IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public AttachmentController(IHostingEnvironment environment, IDataStorage dataStorage,
+            UserManager<ApplicationUser> userManager)
         {
-            this.environment = env;
+            this.environment = environment;
             this.dataStorage = dataStorage;
             this.userManager = userManager;
         }
@@ -42,7 +43,8 @@ namespace MroczekDotDev.Sfira.Controllers
 
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
             string type;
-            string directory = environment.WebRootPath + @"\media\users\" + currentUser.Id + @"\";
+            string directory = Path.Combine(new[] {
+                environment.WebRootPath, "media", "user", currentUser.Id + Path.DirectorySeparatorChar });
             string name = Guid.NewGuid().ToString();
             string extension;
 

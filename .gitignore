@@ -3,18 +3,18 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# mroczekdotdev
+# MroczekDotDev
 desktop.ini
 Graphic Design/
-**/media/users/
+**/media/user/
 Migrations/
-appsettings*.json
-Rubbish/
 **/.ignore/
-**/wwwroot/css/
-**/wwwroot/js/
+**/wwwroot/*.css
+**/wwwroot/*.js
 **/wwwroot/lib/
-
+launchSettings.json
+*.Development.json
+package-lock.json
 
 # User-specific files
 *.rsuser

@@ -1,63 +1,48 @@
-version: '2'
+version: "2"
 
 networks:
-  default:
+  sfira-network:
     driver: bridge
 
 services:
-    storage:
-      image: storage
-      build:
-        context: .
-        dockerfile: docker/storage/Dockerfile
-      restart: always
-      volumes:
-        - /var/www
+  database:
+    image: sfira-database
+    build:
+      context: .
+      dockerfile: .docker/database.Dockerfile
+    restart: always
+    environment:
+    # must be same as in "appsettings.json"
+      - POSTGRES_USER=sfira
+      - POSTGRES_PASSWORD=sfira
+      - POSTGRES_DB=sfiradb
+    networks:
+      sfira-network:
+        aliases:
+          - database
+    # ports:
+    #   - "5433:5432"
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
 
-    database:
-      image: database
-      build:
-        context: .
-        dockerfile: docker/database/Dockerfile
-      restart: always
-      environment:
-        ACCEPT_EULA: Y
-        SA_PASSWORD: pass
-        MSSQL_PID: Developer
-      networks:
-        default:
-          aliases:
-            - database
 
-    frontend:
-      image: frontend
-      build:
-        context: .
-        dockerfile: docker/frontend/Dockerfile
-      restart: always
-      networks:
-        - default
-      volumes_from:   
-        - storage
+  application:
+    image: sfira-application
+    build:
+      context: .
+      dockerfile: .docker/application.Dockerfile
+    restart: always
+    networks:
+      sfira-network:
+        aliases:
+          - application
+    depends_on:
+      - "database"
+    ports:
+      - "8000:80"
+    volumes:
+      - userfiles:/app/wwwroot/media/user
 
-    backend:
-      image: backend
-      build:
-        context: .
-        dockerfile: docker/backend/Dockerfile
-      restart: always
-      networks:
-        default:
-          aliases:
-            - backend   
-      volumes_from:   
-        - storage            
-
-    proxy:
-      image: proxy
-      build:
-        context: .
-        dockerfile: docker/proxy/Dockerfile
-      restart: always
-      networks:
-        - default      
+volumes:
+  userfiles:
+  postgresdata:

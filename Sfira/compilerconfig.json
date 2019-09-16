@@ -1,9 +1,0 @@
-﻿[
-  {
-    "outputFile": "wwwroot/css/main.css",
-    "inputFile": "scss/main.scss",
-    "options": {
-      "linefeed": "crlf"
-    }
-  }
-]

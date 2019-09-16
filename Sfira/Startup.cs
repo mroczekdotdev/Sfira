@@ -27,9 +27,6 @@ namespace MroczekDotDev.Sfira
         {
             services.AddTransient<IDataStorage, EfDataStorage>();
 
-            //services.AddDbContext<SfiraDbContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("MSSQL")));
-
             services.AddDbContext<SfiraDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
 

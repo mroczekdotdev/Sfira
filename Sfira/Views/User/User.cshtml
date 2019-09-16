@@ -31,7 +31,11 @@
             <h4>Summary</h4>
         </header>
         <p class="description">
-            @Html.Raw(Model.Description.FormatAsMessage())
+            @{if (Model.Description != null)
+                {
+                    @Html.Raw(Model.Description.FormatAsMessage())
+                }
+            }
         </p>
         <div>@Model.RegisterTime</div>
         <div>@Model.Location</div>
