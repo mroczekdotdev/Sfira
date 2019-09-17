@@ -9,9 +9,6 @@ Graphic Design/
 **/media/user/
 Migrations/
 **/.ignore/
-**/wwwroot/*.css
-**/wwwroot/*.js
-**/wwwroot/lib/
 launchSettings.json
 *.Development.json
 package-lock.json
