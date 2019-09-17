@@ -1,6 +1,7 @@
 ![Sfira - logo](.readme/sfira-logo-medium.png?raw=true "logo")
 
 ## Description
+
 **Sfira** is a social media web application created using ASP.NET Core MVC.
 
 ## Technologies and dependencies
@@ -28,3 +29,31 @@
 * **webpack** is a bundler for modules. It is also capable of transforming, bundling, or packaging just about any resource or asset.
 
 * **Docker** is a platform for developers and sysadmins to develop, deploy, and run applications with containers.
+
+## Installation
+
+### Setup
+
+Make sure that **Docker** is installed:
+```console
+docker --version
+```
+
+Download the repository:
+
+| https://github.com/mroczekdotdev/Sfira/archive/master.zip |
+| --- |
+
+<!-- ### Configuration -->
+
+### Build and run
+
+From the root of the repository open `run.sh` or execute following command:
+```console
+docker-compose up --detach
+```
+
+The application should be reachable at:
+
+| http://localhost:8000/ |
+| --- |
