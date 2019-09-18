@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MroczekDotDev.Sfira.Data;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MroczekDotDev.Sfira.Data;
+using System.Net;
 
 namespace MroczekDotDev.Sfira
 {
@@ -25,12 +22,15 @@ namespace MroczekDotDev.Sfira
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IDataStorage, EfDataStorage>();
+            services.Configure<ForwardedHeadersOptions>(options =>
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto);
+
+            services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
             services.AddDbContext<SfiraDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
 
-            services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+            services.AddTransient<IDataStorage, EfDataStorage>();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2); //remove in 3.0
@@ -48,6 +48,7 @@ namespace MroczekDotDev.Sfira
             }
 
             app.UseStatusCodePages();
+            app.UseForwardedHeaders();
             app.UseStaticFiles();
             app.UseAuthentication();
 

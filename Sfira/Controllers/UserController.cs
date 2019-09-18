@@ -23,6 +23,11 @@ namespace MroczekDotDev.Sfira.Controllers
             UserViewModel result = dataStorage.GetUserVmByUserName(userName);
             result.Posts = dataStorage.GetPostsVmByUserName(userName);
 
+            foreach (var post in result.Posts)
+            {
+                post.Attachment = dataStorage.GetAttachmentVmByPostId(post.Id);
+            }
+
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);

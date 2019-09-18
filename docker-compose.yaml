@@ -1,7 +1,7 @@
 version: "2"
 
 networks:
-  sfira-network:
+  network:
     driver: bridge
 
 services:
@@ -12,19 +12,17 @@ services:
       dockerfile: .docker/database.Dockerfile
     restart: always
     environment:
-    # must be same as in "appsettings.json"
-      - POSTGRES_USER=sfira
-      - POSTGRES_PASSWORD=sfira
-      - POSTGRES_DB=sfiradb
+      - POSTGRES_USER=${Database_User}
+      - POSTGRES_PASSWORD=${Database_Password}
+      - POSTGRES_DB=${Database_Name}
     networks:
-      sfira-network:
+      network:
         aliases:
           - database
-    # ports:
-    #   - "5433:5432"
+    ports:
+      - ${Database_Port}:5432
     volumes:
       - postgresdata:/var/lib/postgresql/data
-
 
   application:
     image: sfira-application
@@ -32,16 +30,32 @@ services:
       context: .
       dockerfile: .docker/application.Dockerfile
     restart: always
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+      - ConnectionStrings__PostgreSQL=Host=database; Port=5432; Database=${Database_Name}; Username=${Database_User}; Password=${Database_Password}; Pooling=true
     networks:
-      sfira-network:
+      network:
         aliases:
           - application
-    depends_on:
-      - "database"
-    ports:
-      - "8000:80"
     volumes:
       - userfiles:/app/wwwroot/media/user
+    depends_on:
+      - database
+
+  proxy:
+    image: sfira-proxy
+    build:
+      context: .
+      dockerfile: .docker/proxy.Dockerfile
+    restart: always
+    networks:
+      network:
+        aliases:
+          - proxy
+    ports:
+      - ${Application_Port}:80
+    depends_on:
+      - application
 
 volumes:
   userfiles:

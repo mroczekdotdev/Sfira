@@ -5,6 +5,12 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <RootNamespace>MroczekDotDev.Sfira</RootNamespace>
     <UserSecretsId>f41339d4-e28c-4e49-870e-155b32af4afd</UserSecretsId>
+    <Company>mroczek.dev</Company>
+    <Authors>Marcin Mroczek</Authors>
+    <Description>Sfira is a social media web application created using ASP.NET Core MVC.</Description>
+    <PackageProjectUrl>https://github.com/mroczekdotdev/Sfira</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mroczekdotdev/Sfira.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
