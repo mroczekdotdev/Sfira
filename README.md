@@ -16,17 +16,19 @@
 
 - **Npgsql** is an open-source ADO.NET Data Provider for PostgreSQL.
 
+- **Sass** is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more. It's translated to well-formatted, standard CSS.
+
 - **JavaScript** is a prototype-based, multi-paradigm scripting language that is dynamic, and supports object-oriented, imperative, and functional programming styles.
 
 - **jQuery** is a fast, small, and feature-rich JavaScript library.
-
-- **Sass** is an extension of CSS, adding nested rules, variables, mixins, selector inheritance, and more. It's translated to well-formatted, standard CSS.
 
 - **Font Awesome** is the iconic SVG, font, and CSS toolkit.
 
 - **npm** is a package manager for JavaScript.
 
 - **webpack** is a bundler for modules. It is also capable of transforming, bundling, or packaging just about any resource or asset.
+
+- **NGINX Open Source** is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server.
 
 - **Docker** is a platform for developers and sysadmins to develop, deploy, and run applications with containers.
 
