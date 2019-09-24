@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MroczekDotDev.Sfira.ViewModels;
+using System;
 
 namespace MroczekDotDev.Sfira.Models
 {
@@ -12,7 +13,7 @@ namespace MroczekDotDev.Sfira.Models
         jpg = 1,
     }
 
-    public abstract class Attachment
+    public abstract class Attachment : IHaveViewModel<AttachmentViewModel>
     {
         public int PostId { get; set; }
         public Post Parent { get; set; }
@@ -24,5 +25,7 @@ namespace MroczekDotDev.Sfira.Models
             string typeName = GetType().Name.ToLower();
             return typeName.Remove(typeName.Length - 10);
         }
+
+        public abstract AttachmentViewModel ToViewModel();
     }
 }

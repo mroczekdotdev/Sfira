@@ -1,8 +1,7 @@
-﻿using MroczekDotDev.Sfira.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
+using MroczekDotDev.Sfira.Models;
 
 namespace MroczekDotDev.Sfira.Data
 {

@@ -1,5 +1,8 @@
 ﻿using MroczekDotDev.Sfira.Data;
 using Microsoft.AspNetCore.Mvc;
+using MroczekDotDev.Sfira.Infrastructure;
+using MroczekDotDev.Sfira.Models;
+using MroczekDotDev.Sfira.ViewModels;
 
 namespace MroczekDotDev.Sfira.Controllers
 {
@@ -14,7 +17,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public IActionResult GetPostsByTag(string id)
         {
-            return View("Tag", dataStorage.GetPostsVmByTag(id));
+            return View("Tag", dataStorage.GetPostsByTag(id).ToViewModels());
         }
     }
 }

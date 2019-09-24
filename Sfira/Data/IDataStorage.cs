@@ -1,25 +1,25 @@
 ﻿using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MroczekDotDev.Sfira.Data
 {
     public interface IDataStorage
     {
+        ApplicationUser GetUserByUserName(string userName);
+
+        Post GetPostById(int postId);
+        IEnumerable<Post> GetPosts();
+        IEnumerable<Post> GetPostsByTag(string tag);
+        IEnumerable<Post> GetPostsByUserName(string userName);
+
         void AddPost(PostViewModel post);
-        PostViewModel GetPostVmById(int postId);
+        Attachment GetAttachmentByPostId(int postId);
+
         void MarkPost(string userId, int postId, string interaction);
-        IEnumerable<PostViewModel> AddCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId);
+        IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId);
 
-        IEnumerable<PostViewModel> GetPostsVm();
-        IEnumerable<PostViewModel> GetPostsVmByTag(string tag);
-        IEnumerable<PostViewModel> GetPostsVmByUserName(string userName);
-
-        AttachmentViewModel GetAttachmentVmByPostId(int postId);
-
-        UserViewModel GetUserVmByUserName(string userName);
-        IEnumerable<CommentViewModel> GetCommentsVmByPostId(int postId);
         void AddComment(CommentViewModel post);
+        IEnumerable<Comment> GetCommentsByPostId(int postId);
     }
 }

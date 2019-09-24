@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using MroczekDotDev.Sfira.ViewModels;
 using System;
 using System.Collections.Generic;
 
 namespace MroczekDotDev.Sfira.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser, IHaveViewModel<UserViewModel>
     {
         public DateTime RegisterTime { get; set; }
 
@@ -25,5 +26,20 @@ namespace MroczekDotDev.Sfira.Models
 
         public ICollection<Attachment> Attachments { get; set; }
 
+        public UserViewModel ToViewModel()
+        {
+            return new UserViewModel
+            {
+                Id = Id,
+                RegisterTime = RegisterTime,
+                UserName = UserName,
+                Name = Name,
+                Description = Description,
+                Location = Location,
+                Website = Website,
+                ProfileImage = ProfileImage,
+                HeaderImage = HeaderImage,
+            };
+        }
     }
 }

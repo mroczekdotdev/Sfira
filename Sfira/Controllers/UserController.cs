@@ -1,8 +1,9 @@
-﻿using MroczekDotDev.Sfira.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Infrastructure;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Controllers
@@ -20,18 +21,18 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public async Task<IActionResult> GetUserByUserName(string userName)
         {
-            UserViewModel result = dataStorage.GetUserVmByUserName(userName);
-            result.Posts = dataStorage.GetPostsVmByUserName(userName);
+            UserViewModel result = dataStorage.GetUserByUserName(userName).ToViewModel();
+            result.Posts = dataStorage.GetPostsByUserName(userName).ToViewModels();
 
             foreach (var post in result.Posts)
             {
-                post.Attachment = dataStorage.GetAttachmentVmByPostId(post.Id);
+                post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
             }
 
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                result.Posts = dataStorage.AddCurrentUserRelations(result.Posts, currentUser.Id);
+                result.Posts = dataStorage.LoadCurrentUserRelations(result.Posts, currentUser.Id);
             }
 
             return View("User", result);

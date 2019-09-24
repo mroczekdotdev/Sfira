@@ -1,4 +1,5 @@
-﻿using MroczekDotDev.Sfira.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,22 +18,43 @@ namespace MroczekDotDev.Sfira.Data
             this.context = context;
         }
 
-        public UserViewModel GetUserVmByUserName(string userName)
+        public ApplicationUser GetUserByUserName(string userName)
         {
             return context.Users
-                .Where(u => u.UserName == userName)
-                .Select(s => new UserViewModel
-                {
-                    Id = s.Id,
-                    RegisterTime = s.RegisterTime,
-                    UserName = s.UserName,
-                    Name = s.Name,
-                    Description = s.Description,
-                    Location = s.Location,
-                    Website = s.Website,
-                    ProfileImage = s.ProfileImage,
-                    HeaderImage = s.HeaderImage,
-                }).SingleOrDefault();
+                .SingleOrDefault(u => u.UserName == userName);
+        }
+
+        public Post GetPostById(int postId)
+        {
+            return context.Posts
+                .Where(p => p.Id == postId)
+                .SingleOrDefault();
+        }
+
+        public IEnumerable<Post> GetPosts()
+        {
+            return context.Posts
+                .OrderByDescending(p => p.PublicationTime)
+                .Include(p => p.Author)
+                .ToArray();
+        }
+
+        public IEnumerable<Post> GetPostsByTag(string tag)
+        {
+            return context.Posts
+                .Where(p => p.Tags.Contains(tag))
+                .OrderByDescending(p => p.PublicationTime)
+                .Include(p => p.Author)
+                .ToArray();
+        }
+
+        public IEnumerable<Post> GetPostsByUserName(string userName)
+        {
+            return context.Posts
+                .Where(p => p.Author.UserName == userName)
+                .OrderByDescending(p => p.PublicationTime)
+                .Include(p => p.Author)
+                .ToArray();
         }
 
         public void AddPost(PostViewModel post)
@@ -65,138 +87,14 @@ namespace MroczekDotDev.Sfira.Data
             }
         }
 
-        public void AddAttachment(AttachmentViewModel attachment, Post parent)
+        public Attachment GetAttachmentByPostId(int postId)
         {
-            Attachment attachmentToAdd;
-
-            switch (Enum.Parse<AttachmentType>(attachment.Type))
-            {
-                case AttachmentType.image:
-                    attachmentToAdd = new ImageAttachment
-                    {
-                        Parent = parent,
-                        Owner = attachment.Owner,
-                        Name = Guid.ParseExact(attachment.Name, "D"),
-                        Extension = Enum.Parse<FilenameExtension>(attachment.Extension),
-                    };
-                    break;
-                default:
-                    return;
-            }
-
-            context.Attachments.Add(attachmentToAdd);
-            context.SaveChanges();
-        }
-
-        public AttachmentViewModel GetAttachmentVmByPostId(int postId)
-        {
-            Attachment attachment = context.Attachments
+            return context.Attachments
+                .Include(a => a.Owner)
                 .SingleOrDefault(a => a.PostId == postId);
-
-            AttachmentViewModel result;
-
-            if (attachment == null)
-            {
-                result = null;
-            }
-            else
-            {
-                result = new AttachmentViewModel
-                {
-                    ParentId = attachment.PostId,
-                    Owner = attachment.Owner,
-                    Name = attachment.Name.ToString(),
-                };
-
-                switch (attachment)
-                {
-                    case ImageAttachment image:
-                        result.Type = attachment.ToString();
-                        result.Extension = image.Extension.ToString();
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-            return result;
         }
 
-        public IEnumerable<PostViewModel> GetPostsVm()
-        {
-            return context.Posts
-                .OrderByDescending(p => p.PublicationTime)
-                .Select(s => new PostViewModel
-                {
-                    Id = s.Id,
-                    Author = s.Author,
-                    PublicationTime = s.PublicationTime,
-                    Message = s.Message,
-                    LikesCount = s.LikesCount,
-                    FavoritesCount = s.FavoritesCount,
-                    CommentsCount = s.CommentsCount,
-                }).ToArray();
-        }
-
-        public IEnumerable<PostViewModel> GetPostsVmByTag(string tag)
-        {
-            return context.Posts
-                .Where(p => p.Tags.Contains(tag))
-                .OrderByDescending(p => p.PublicationTime)
-                .Select(s => new PostViewModel
-                {
-                    Id = s.Id,
-                    Author = s.Author,
-                    PublicationTime = s.PublicationTime,
-                    Message = s.Message,
-                    LikesCount = s.LikesCount,
-                    FavoritesCount = s.FavoritesCount,
-                    CommentsCount = s.CommentsCount,
-                }).ToArray();
-        }
-
-        public IEnumerable<PostViewModel> GetPostsVmByUserName(string userName)
-        {
-            return context.Users
-                .Where(u => u.UserName == userName)
-                .SelectMany(p => p.Posts)
-                .OrderByDescending(p => p.PublicationTime)
-                .Select(s => new PostViewModel
-                {
-                    Id = s.Id,
-                    Author = s.Author,
-                    PublicationTime = s.PublicationTime,
-                    Message = s.Message,
-                    LikesCount = s.LikesCount,
-                    FavoritesCount = s.FavoritesCount,
-                    CommentsCount = s.CommentsCount,
-                }).ToArray();
-        }
-
-        public PostViewModel GetPostVmById(int postId)
-        {
-            return context.Posts
-                .Where(p => p.Id == postId)
-                .Select(s => new PostViewModel
-                {
-                    Id = s.Id,
-                    Author = s.Author,
-                    PublicationTime = s.PublicationTime,
-                    Message = s.Message,
-                    LikesCount = s.LikesCount,
-                    FavoritesCount = s.FavoritesCount,
-                    CommentsCount = s.CommentsCount,
-                }).SingleOrDefault();
-        }
-
-        public Post GetPostById(int postId)
-        {
-            return context.Posts
-                .SingleOrDefault(p => p.Id == postId);
-        }
-
-        public IEnumerable<PostViewModel> AddCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId)
+        public IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId)
         {
             Dictionary<int, RelationType> currentUserRelations = context.Users
                 .Where(u => u.Id == currentUserId)
@@ -317,20 +215,38 @@ namespace MroczekDotDev.Sfira.Data
             context.SaveChanges();
         }
 
-        public IEnumerable<CommentViewModel> GetCommentsVmByPostId(int postId)
+        public IEnumerable<Comment> GetCommentsByPostId(int postId)
         {
-            return context.Posts
-                .Where(p => p.Id == postId)
-                .SelectMany(c => c.Comments)
+            return context.Comments
+                .Where(c => c.Parent.Id == postId)
                 .OrderByDescending(c => c.PublicationTime)
-                .Select(s => new CommentViewModel
-                {
-                    Id = s.Id,
-                    Author = s.Author,
-                    PublicationTime = s.PublicationTime,
-                    Message = s.Message,
-                    ParentId = s.Parent.Id,
-                }).ToArray();
+                .Include(c => c.Author)
+                .Include(c => c.Parent)
+                .ToArray();
+        }
+
+        private void AddAttachment(AttachmentViewModel attachment, Post parent)
+        {
+            Attachment attachmentToAdd;
+
+            switch (Enum.Parse<AttachmentType>(attachment.Type))
+            {
+                case AttachmentType.image:
+                    attachmentToAdd = new ImageAttachment
+                    {
+                        Parent = parent,
+                        Owner = attachment.Owner,
+                        Name = Guid.ParseExact(attachment.Name, "D"),
+                        Extension = Enum.Parse<FilenameExtension>(attachment.Extension),
+                    };
+                    break;
+
+                default:
+                    return;
+            }
+
+            context.Attachments.Add(attachmentToAdd);
+            context.SaveChanges();
         }
     }
 }

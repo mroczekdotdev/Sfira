@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MroczekDotDev.Sfira.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace MroczekDotDev.Sfira.Infrastructure
@@ -47,6 +50,11 @@ namespace MroczekDotDev.Sfira.Infrastructure
             message = Regex.Replace(message, @"#(\w+)", @"<a href=""/tag/$1"">#$1</a>");
             message = message.Replace(Environment.NewLine, "<br>");
             return message;
+        }
+
+        public static IEnumerable<T> ToViewModels<T>(this IEnumerable<IHaveViewModel<T>> models)
+        {
+            return models.Select(m => m.ToViewModel()).ToArray();
         }
     }
 }

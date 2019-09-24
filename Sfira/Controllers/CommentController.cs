@@ -1,10 +1,10 @@
-﻿using MroczekDotDev.Sfira.Data;
-using MroczekDotDev.Sfira.Models;
-using MroczekDotDev.Sfira.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Infrastructure;
+using MroczekDotDev.Sfira.Models;
+using MroczekDotDev.Sfira.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -40,7 +40,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public PartialViewResult GetCommentsByPostId(int postId)
         {
-            IEnumerable<CommentViewModel> result = dataStorage.GetCommentsVmByPostId(postId);
+            IEnumerable<CommentViewModel> result = dataStorage.GetCommentsByPostId(postId).ToViewModels();
             return PartialView("_CommentsPartial", result);
         }
     }

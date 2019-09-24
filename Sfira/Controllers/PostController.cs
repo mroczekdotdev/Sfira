@@ -1,9 +1,9 @@
-﻿using MroczekDotDev.Sfira.Data;
-using MroczekDotDev.Sfira.Models;
-using MroczekDotDev.Sfira.ViewModels;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Models;
+using MroczekDotDev.Sfira.ViewModels;
 using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Controllers
@@ -62,7 +62,7 @@ namespace MroczekDotDev.Sfira.Controllers
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
             dataStorage.MarkPost(currentUser.Id, postId, interaction);
-            PostViewModel post = dataStorage.GetPostVmById(postId);
+            PostViewModel post = dataStorage.GetPostById(postId).ToViewModel();
             var result = new
             {
                 likescount = post.LikesCount,

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MroczekDotDev.Sfira.ViewModels;
+using System.Collections.Generic;
 
 namespace MroczekDotDev.Sfira.Models
 {
-    public class Post : Entry
+    public class Post : Entry, IHaveViewModel<PostViewModel>
     {
         public string Tags { get; set; }
 
@@ -14,5 +15,20 @@ namespace MroczekDotDev.Sfira.Models
         public ICollection<Comment> Comments { get; set; }
 
         public Attachment Attachment { get; set; }
+
+        public PostViewModel ToViewModel()
+
+        {
+            return new PostViewModel
+            {
+                Id = Id,
+                Author = Author,
+                PublicationTime = PublicationTime,
+                Message = Message,
+                LikesCount = LikesCount,
+                FavoritesCount = FavoritesCount,
+                CommentsCount = CommentsCount,
+            };
+        }
     }
 }

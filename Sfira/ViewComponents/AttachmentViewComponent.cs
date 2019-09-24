@@ -1,13 +1,9 @@
-﻿using MroczekDotDev.Sfira.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.ViewComponents
 {
@@ -31,6 +27,7 @@ namespace MroczekDotDev.Sfira.ViewComponents
                 case AttachmentType.image:
                     view = "ImageAttachment";
                     break;
+
                 default:
                     return Content(string.Empty);
             }
