@@ -54,6 +54,18 @@ namespace MroczekDotDev.Sfira
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    "Follow",
+                    "{userName}/follow",
+                    new { controller = "User", action = "Follow" }
+                );
+
+                routes.MapRoute(
+                    "Unfollow",
+                    "{userName}/unfollow",
+                    new { controller = "User", action = "Unfollow" }
+                );
+
+                routes.MapRoute(
                     "Mark",
                     "{postId}/{interaction}",
                     new { controller = "Post", action = "Mark" }

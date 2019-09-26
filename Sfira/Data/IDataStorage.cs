@@ -6,6 +6,7 @@ namespace MroczekDotDev.Sfira.Data
 {
     public interface IDataStorage
     {
+        ApplicationUser GetUserById(string userId);
         ApplicationUser GetUserByUserName(string userName);
 
         Post GetPostById(int postId);
@@ -21,5 +22,9 @@ namespace MroczekDotDev.Sfira.Data
 
         void AddComment(CommentViewModel post);
         IEnumerable<Comment> GetCommentsByPostId(int postId);
+
+        UserFollow GetUserFollow(string followingUserId, string followedUserId);
+        UserFollow AddUserFollow(string followingUserId, string followedUserUsername);
+        UserFollow RemoveUserFollow(string followingUserId, string followedUserUsername);
     }
 }

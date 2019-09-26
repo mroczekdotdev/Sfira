@@ -16,5 +16,12 @@ namespace MroczekDotDev.Sfira.ViewModels
         public bool HeaderImage { get; set; }
 
         public IEnumerable<PostViewModel> Posts { get; set; }
+
+        public int FollowingCount { get; set; }
+        public int FollowersCount { get; set; }
+
+        public bool IsCurrentUser { get; set; }
+        public bool IsFollowedByCurrentUser { get; set; }
+        public bool IsBlockedByCurrentUser { get; set; }
     }
 }

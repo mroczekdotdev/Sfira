@@ -26,6 +26,14 @@ namespace MroczekDotDev.Sfira.Models
 
         public ICollection<Attachment> Attachments { get; set; }
 
+        public ICollection<UserFollow> Following { get; set; }
+        public int FollowingCount { get; set; }
+
+        public ICollection<UserFollow> Followers { get; set; }
+        public int FollowersCount { get; set; }
+
+        public ICollection<UserBlock> Blocking { get; set; }
+
         public UserViewModel ToViewModel()
         {
             return new UserViewModel
@@ -39,6 +47,8 @@ namespace MroczekDotDev.Sfira.Models
                 Website = Website,
                 ProfileImage = ProfileImage,
                 HeaderImage = HeaderImage,
+                FollowingCount = FollowingCount,
+                FollowersCount = FollowersCount,
             };
         }
     }

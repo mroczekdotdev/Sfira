@@ -18,6 +18,13 @@ namespace MroczekDotDev.Sfira.Data
             this.context = context;
         }
 
+        public ApplicationUser GetUserById(string userId)
+        {
+            var TEMP = context.Users
+                .SingleOrDefault(u => u.Id == userId);
+            return TEMP;
+        }
+
         public ApplicationUser GetUserByUserName(string userName)
         {
             return context.Users
@@ -67,7 +74,7 @@ namespace MroczekDotDev.Sfira.Data
                 sb.Append(match.Groups[1]).Append(' ');
             }
 
-            Post postToAdd = new Post
+            var postToAdd = new Post
             {
                 Author = post.Author,
                 PublicationTime = DateTime.Now,
@@ -172,7 +179,7 @@ namespace MroczekDotDev.Sfira.Data
 
             if (existingUserPost == null)
             {
-                UserPost userPost = new UserPost
+                var userPost = new UserPost
                 {
                     UserId = userId,
                     PostId = postId,
@@ -197,7 +204,7 @@ namespace MroczekDotDev.Sfira.Data
         {
             Post parent = GetPostById(comment.ParentId);
 
-            Comment commentToAdd = new Comment
+            var commentToAdd = new Comment
             {
                 Author = comment.Author,
                 PublicationTime = DateTime.Now,
@@ -223,6 +230,63 @@ namespace MroczekDotDev.Sfira.Data
                 .Include(c => c.Author)
                 .Include(c => c.Parent)
                 .ToArray();
+        }
+
+        public UserFollow GetUserFollow(string followingUserId, string followedUserId)
+        {
+            return context.UserFollow.Find(followingUserId, followedUserId);
+        }
+
+        public UserFollow AddUserFollow(string followingUserId, string followedUserUsername)
+        {
+            ApplicationUser followingUser;
+            ApplicationUser followedUser;
+            UserFollow existingUserFollow;
+
+            if ((followedUser = GetUserByUserName(followedUserUsername)) != null
+                && followingUserId != followedUser.Id
+                && (followingUser = GetUserById(followingUserId)) != null
+                && (existingUserFollow = context.UserFollow.Find(followingUserId, followedUser.Id)) == null)
+            {
+                var userFollow = new UserFollow
+                {
+                    FollowingUserId = followingUser.Id,
+                    FollowedUserId = followedUser.Id,
+                };
+
+                followingUser.FollowingCount++;
+                followedUser.FollowersCount++;
+                context.Add(userFollow);
+                context.SaveChanges();
+                return userFollow;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public UserFollow RemoveUserFollow(string followingUserId, string followedUserUsername)
+        {
+            ApplicationUser followingUser;
+            ApplicationUser followedUser;
+            UserFollow userFollow;
+
+            if ((followedUser = GetUserByUserName(followedUserUsername)) != null
+                && followingUserId != followedUser.Id
+                && (followingUser = GetUserById(followingUserId)) != null
+                && (userFollow = context.UserFollow.Find(followingUserId, followedUser.Id)) != null)
+            {
+                followingUser.FollowingCount--;
+                followedUser.FollowersCount--;
+                context.Remove(userFollow);
+                context.SaveChanges();
+                return userFollow;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private void AddAttachment(AttachmentViewModel attachment, Post parent)

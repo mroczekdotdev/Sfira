@@ -15,6 +15,8 @@ namespace MroczekDotDev.Sfira.Data
         public DbSet<UserPost> UserPosts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<UserFollow> UserFollow { get; set; }
+        public DbSet<UserBlock> UserBlock { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -58,6 +60,27 @@ namespace MroczekDotDev.Sfira.Data
             builder.Entity<Attachment>()
                 .Property(a => a.Name)
                 .ValueGeneratedNever();
+
+            builder.Entity<UserFollow>()
+                .HasKey(uf => new { uf.FollowingUserId, uf.FollowedUserId });
+
+            builder.Entity<UserFollow>()
+                .HasOne(uf => uf.FollowingUser)
+                .WithMany(u => u.Following)
+                .HasForeignKey(uf => uf.FollowingUserId);
+
+            builder.Entity<UserFollow>()
+                .HasOne(uf => uf.FollowedUser)
+                .WithMany(u => u.Followers)
+                .HasForeignKey(uf => uf.FollowedUserId);
+
+            builder.Entity<UserBlock>()
+                .HasKey(ub => new { ub.BlockingUserId, ub.BlockedUserId });
+
+            builder.Entity<UserBlock>()
+                .HasOne(ub => ub.BlockingUser)
+                .WithMany(u => u.Blocking)
+                .HasForeignKey(ub => ub.BlockingUserId);
         }
     }
 }

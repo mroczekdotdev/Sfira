@@ -17,12 +17,12 @@ namespace MroczekDotDev.Sfira.ViewModels
 
         public string Tags { get; set; }
 
+        public RelationType CurrentUserRelation { get; set; }
         public int LikesCount { get; set; }
         public int FavoritesCount { get; set; }
-        public RelationType CurrentUserRelation { get; set; }
 
-        public int CommentsCount { get; set; }
         public ICollection<CommentViewModel> Comments { get; set; }
+        public int CommentsCount { get; set; }
 
         public AttachmentViewModel Attachment { get; set; }
     }

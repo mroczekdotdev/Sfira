@@ -1,33 +1,54 @@
 ﻿@model UserViewModel
 
-<div class="profile">
-    <header class="profile-header">
+<section class="profile" data-username="@Model.UserName">
+    <header class="profileHeader">
         <div class="cover" sfira-id="@Model.Id" sfira-media="cover">
-            <div class="profile-title">
+            <div class="profileTitle">
                 <div class="name">@Model.Name</div>
                 <div class="username">@Model.UserName</div>
             </div>
         </div>
         <div class="avatar" sfira-id="@Model.Id" sfira-media="avatar"></div>
+        <section class="profileActions">
+
+            @{if (Model.IsFollowedByCurrentUser)
+                {
+                    <button class="unfollow">Unfollow</button>
+                }
+                else if (!Model.IsCurrentUser)
+                {
+                    <button class="follow">Follow</button>
+                }
+            }
+
+            <button class="more">&bull;&bull;&bull;</button>
+        </section>
+        <nav class="profileMenu">
+            <a id="showPosts" href="javascript:void(0)">Posts</a>
+            <a id="showMedia" href="javascript:void(0)">Media</a>
+            <a id="showFollowers" href="javascript:void(0)">Followers (<span id="followersCount">@Model.FollowersCount</span>)</a>
+        </nav>
     </header>
-</div>
-<div class="actions TEMP">
-    <br />
-    <br />
-</div>
+</section>
 
-@foreach (var p in Model.Posts)
-{
-    await Html.RenderPartialAsync("~/Views/Shared/_PostPartial.cshtml", p);
-}
+<section class="feed active" id="postsFeed">
+    @foreach (var p in Model.Posts)
+    {
+        await Html.RenderPartialAsync("~/Views/Shared/_PostPartial.cshtml", p);
+    }
+</section>
 
-@* PINNED POST *@
+<section class="feed inactive" id="mediaFeed">
 
-@* ALL POSTS, NEWEST FIRST *@
+</section>
+
+<section class="feed inactive" id="followersFeed">
+
+</section>
 
 @section MainAside{
     <section class="aside">
-        <header class="aside-header">
+        <header class="asideHeader">
             <h4>Summary</h4>
         </header>
         <p class="description">
@@ -41,16 +62,9 @@
         <div>@Model.Location</div>
         @*<TODO-CustomTagHelper shref="@Model.Website">@Model.Website</TODO>*@
     </section>
-
     <section class="aside">
-        <header class="aside-header">
-            <h4>Media</h4>
-        </header>
-        @*placeholder image below*@
-        <img class="media" src="~/media/site/default-image.png">
+        @*EMPTY*@
     </section>
 }
-
 @section Aside{
-
 }

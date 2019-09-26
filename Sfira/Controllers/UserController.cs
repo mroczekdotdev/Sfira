@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Infrastructure;
@@ -33,9 +34,52 @@ namespace MroczekDotDev.Sfira.Controllers
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
                 result.Posts = dataStorage.LoadCurrentUserRelations(result.Posts, currentUser.Id);
+
+                if (currentUser.Id == result.Id)
+                {
+                    result.IsCurrentUser = true;
+                }
+                else
+                {
+                    result.IsFollowedByCurrentUser = dataStorage.GetUserFollow(currentUser.Id, result.Id) != null;
+                }
             }
 
             return View("User", result);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Follow(string userName)
+        {
+            ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+            UserFollow userFollow = dataStorage.AddUserFollow(currentUser.Id, userName);
+
+            if (userFollow != null)
+            {
+                string followersCount = dataStorage.GetUserByUserName(userName).FollowersCount.ToString();
+                return Ok(followersCount);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Unfollow(string userName)
+        {
+            ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+            UserFollow userFollow = dataStorage.RemoveUserFollow(currentUser.Id, userName);
+
+            if (userFollow != null)
+            {
+                string followersCount = dataStorage.GetUserByUserName(userName).FollowersCount.ToString();
+                return Ok(followersCount);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
