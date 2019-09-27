@@ -14,7 +14,7 @@
     <article class="single-comment">
         <header class="header">
             <div class="avatar" sfira-id="@c.Author.Id" sfira-media="avatar"></div>
-            <a asp-controller="User" asp-action="GetUserByUserName" asp-route-userName="@c.Author.UserName">
+            <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@c.Author.UserName">
                 <span class="name">@c.Author.Name</span><span class="username">@c.Author.UserName</span>
             </a>
             <span class="timestamp">@c.PublicationTime.Relative()</span>

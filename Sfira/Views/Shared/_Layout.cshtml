@@ -17,9 +17,9 @@
         <header class="site-header">
             <a href="#"><img class="logo" src="~/media/site/sfira-logo-primary.png" alt=""></a>
             <nav class="site-menu">
-                <div class="item"><a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a></div>
-                <div class="item"><a asp-controller="Explore" asp-action="Index"><i class="fas fa-globe-americas"></i> Explore</a></div>
-                <div class="item"><a asp-controller="Messages" asp-action="Index"><i class="fas fa-envelope-square"></i> Messages</a></div>
+                <div class="item"><a asp-controller="Home" asp-action="@nameof(HomeController.Index)"><i class="fas fa-home"></i> Home</a></div>
+                <div class="item"><a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)"><i class="fas fa-globe-americas"></i> Explore</a></div>
+                <div class="item"><a asp-controller="Messages" asp-action="@nameof(MessagesController.Index)"><i class="fas fa-envelope-square"></i> Messages</a></div>
             </nav>
             @*UNIMPLEMENTED
             <form class="search-form">
