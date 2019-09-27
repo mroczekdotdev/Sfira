@@ -20,32 +20,40 @@ namespace MroczekDotDev.Sfira.Controllers
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> GetUserByUserName(string userName)
+        public async Task<IActionResult> Index(string userName)
         {
-            UserViewModel result = dataStorage.GetUserByUserName(userName).ToViewModel();
-            result.Posts = dataStorage.GetPostsByUserName(userName).ToViewModels();
+            UserViewModel result = dataStorage.GetUserByUserName(userName)?.ToViewModel();
 
-            foreach (var post in result.Posts)
+            if (result == null)
             {
-                post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
+                return BadRequest();
             }
-
-            if (User.Identity.IsAuthenticated)
+            else
             {
-                ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                result.Posts = dataStorage.LoadCurrentUserRelations(result.Posts, currentUser.Id);
+                result.Posts = dataStorage.GetPostsByUserName(userName)?.ToViewModels();
 
-                if (currentUser.Id == result.Id)
+                foreach (var post in result.Posts)
                 {
-                    result.IsCurrentUser = true;
+                    post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
                 }
-                else
+
+                if (User.Identity.IsAuthenticated)
                 {
-                    result.IsFollowedByCurrentUser = dataStorage.GetUserFollow(currentUser.Id, result.Id) != null;
+                    ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+                    result.Posts = dataStorage.LoadCurrentUserRelations(result.Posts, currentUser.Id);
+
+                    if (currentUser.Id == result.Id)
+                    {
+                        result.IsCurrentUser = true;
+                    }
+                    else
+                    {
+                        result.IsFollowedByCurrentUser = dataStorage.GetUserFollow(currentUser.Id, result.Id) != null;
+                    }
                 }
+
+                return View("User", result);
             }
-
-            return View("User", result);
         }
 
         [Authorize]

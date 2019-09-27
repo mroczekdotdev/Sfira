@@ -93,7 +93,7 @@ namespace MroczekDotDev.Sfira
                 routes.MapRoute(
                     "User",
                     "{userName}",
-                    new { controller = "User", action = "GetUserByUserName" }
+                    new { controller = "User", action = "Index" }
                 );
             });
         }

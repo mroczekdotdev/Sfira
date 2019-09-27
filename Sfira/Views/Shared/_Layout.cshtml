@@ -21,10 +21,11 @@
                 <div class="item"><a asp-controller="Explore" asp-action="Index"><i class="fas fa-globe-americas"></i> Explore</a></div>
                 <div class="item"><a asp-controller="Messages" asp-action="Index"><i class="fas fa-envelope-square"></i> Messages</a></div>
             </nav>
+            @*UNIMPLEMENTED
             <form class="search-form">
                 <input type="search" placeholder="Search...">
                 <button type="submit">Search</button>
-            </form>
+            </form>*@
             <section class="user">
                 @await Html.PartialAsync("_LoginPartial")
             </section>
