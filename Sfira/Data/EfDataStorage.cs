@@ -20,9 +20,8 @@ namespace MroczekDotDev.Sfira.Data
 
         public ApplicationUser GetUserById(string userId)
         {
-            var TEMP = context.Users
+            return context.Users
                 .SingleOrDefault(u => u.Id == userId);
-            return TEMP;
         }
 
         public ApplicationUser GetUserByUserName(string userName)
@@ -61,6 +60,16 @@ namespace MroczekDotDev.Sfira.Data
                 .Where(p => p.Author.UserName == userName)
                 .OrderByDescending(p => p.PublicationTime)
                 .Include(p => p.Author)
+                .ToArray();
+        }
+
+        public IEnumerable<Post> GetPostsByFollowerId(string userId)
+        {
+            return context.UserFollow
+                .Where(u => u.FollowingUserId == userId)
+                .SelectMany(u => u.FollowedUser.Posts)
+                .Include(p => p.Author)
+                .OrderByDescending(p => p.PublicationTime)
                 .ToArray();
         }
 

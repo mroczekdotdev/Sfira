@@ -13,6 +13,7 @@ namespace MroczekDotDev.Sfira.Data
         IEnumerable<Post> GetPosts();
         IEnumerable<Post> GetPostsByTag(string tag);
         IEnumerable<Post> GetPostsByUserName(string userName);
+        IEnumerable<Post> GetPostsByFollowerId(string userId);
 
         void AddPost(PostViewModel post);
         Attachment GetAttachmentByPostId(int postId);

@@ -5,7 +5,7 @@
     var link = "/comments/" + postid;
     var comments = parent.find(".comments");
     var createComment = parent.find(".create-comment");
-    if ($.trim(comments.html()) == '') {
+    if ($.trim(comments.html()) == "") {
       $.ajax({
         type: "GET",
         url: link,
