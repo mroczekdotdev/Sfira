@@ -6,20 +6,23 @@
 
 @{await Html.RenderPartialAsync("~/Views/Shared/_CreatePostPartial.cshtml", new PostViewModel()); }
 
-@{if (Model == null)
+@{if (User.Identity.IsAuthenticated)
     {
-        <section class="welcomeUser">
-            <header><h1>Welcome to Sfira!</h1></header>
-            <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
-                <p>Find some users to follow.</p>
-            </a>
-        </section>
-    }
-    else
-    {
-        @foreach (var p in Model)
+        if (Model == null)
         {
-            await Html.RenderPartialAsync("~/Views/Shared/_PostPartial.cshtml", p);
+            <section class="app-message">
+                <header><h1>Welcome to Sfira!</h1></header>
+                <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
+                    <p>Find some users to follow</p>
+                </a>
+            </section>
+        }
+        else
+        {
+            @foreach (var p in Model)
+            {
+                await Html.RenderPartialAsync("~/Views/Shared/_PostPartial.cshtml", p);
+            }
         }
     }
 }

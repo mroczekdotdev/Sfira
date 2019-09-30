@@ -10,18 +10,19 @@
         </div>
         <div class="avatar" sfira-id="@Model.Id" sfira-media="avatar"></div>
         <section class="profileActions">
-
-            @{if (Model.IsFollowedByCurrentUser)
+            @{if (User.Identity.IsAuthenticated && !Model.IsCurrentUser)
                 {
-                    <button class="unfollow">Unfollow</button>
-                }
-                else if (!Model.IsCurrentUser)
-                {
-                    <button class="follow">Follow</button>
+                    if (Model.IsFollowedByCurrentUser)
+                    {
+                        <button class="unfollow">Unfollow</button>
+                    }
+                    else
+                    {
+                        <button class="follow">Follow</button>
+                    }
+                    <button class="more">&bull;&bull;&bull;</button>
                 }
             }
-
-            <button class="more">&bull;&bull;&bull;</button>
         </section>
         <nav class="profileMenu">
             <a id="showPosts" href="javascript:void(0)">Posts</a>
@@ -38,13 +39,9 @@
     }
 </section>
 
-<section class="feed inactive" id="mediaFeed">
+<section class="feed inactive" id="mediaFeed"></section>
 
-</section>
-
-<section class="feed inactive" id="followersFeed">
-
-</section>
+<section class="feed inactive" id="followersFeed"></section>
 
 @section MainAside{
     <section class="aside">
