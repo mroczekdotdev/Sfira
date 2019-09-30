@@ -94,7 +94,7 @@ CREATE TABLE "Posts" (
     "AuthorId" text NULL,
     "PublicationTime" timestamp without time zone NOT NULL,
     "Message" text NULL,
-    "Tags" text NULL,
+    "Tags" citext NULL,
     "LikesCount" integer NOT NULL,
     "FavoritesCount" integer NOT NULL,
     "CommentsCount" integer NOT NULL,
@@ -180,5 +180,5 @@ CREATE INDEX "IX_UserFollow_FollowedUserId" ON "UserFollow" ("FollowedUserId");
 CREATE INDEX "IX_UserPosts_PostId" ON "UserPosts" ("PostId");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20190925235308_Initial', '2.2.6-servicing-10079');
+VALUES ('20190930021501_Initial', '2.2.6-servicing-10079');
 

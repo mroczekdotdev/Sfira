@@ -29,8 +29,11 @@ namespace MroczekDotDev.Sfira.Data
             builder.Entity<ApplicationUser>(e =>
             {
                 e.HasIndex(u => u.NormalizedEmail).IsUnique();
-                e.Property(u => u.UserName).HasColumnType("citext"); //PostgreSQL only //Should be fixed in 3.0
+                e.Property(u => u.UserName).HasColumnType("citext"); //PostgreSQL only
             });
+
+            builder.Entity<Post>()
+                .Property(p => p.Tags).HasColumnType("citext"); //PostgreSQL only
 
             builder.Entity<UserPost>()
                 .HasKey(up => new { up.UserId, up.PostId });
