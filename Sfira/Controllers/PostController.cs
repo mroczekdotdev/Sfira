@@ -19,27 +19,13 @@ namespace MroczekDotDev.Sfira.Controllers
             this.userManager = userManager;
         }
 
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<RedirectResult> Create(PostViewModel post, string returnUrl = null)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        post.Author = await userManager.FindByNameAsync(User.Identity.Name);
-        //        dataStorage.AddPost(post);
-        //    }
-
-        //    return Redirect(returnUrl);
-        //}
-
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PostViewModel post)
         {
-            ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-
             if (ModelState.IsValid)
             {
+                ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
                 post.Author = currentUser;
 
                 if (post.Attachment != null)
@@ -48,28 +34,35 @@ namespace MroczekDotDev.Sfira.Controllers
                 }
 
                 dataStorage.AddPost(post);
+                return Ok();
             }
             else
             {
-                return Json("error");
+                return BadRequest();
             }
-
-            return Json("success");
         }
 
         [Authorize]
-        public async Task<JsonResult> Mark(int postId, string interaction)
+        public async Task<IActionResult> Mark(int postId, string interaction)
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            dataStorage.MarkPost(currentUser.Id, postId, interaction);
-            PostViewModel post = dataStorage.GetPostById(postId).ToViewModel();
-            var result = new
-            {
-                likescount = post.LikesCount,
-                favoritescount = post.FavoritesCount,
-            };
+            UserPost userPost = dataStorage.MarkPost(currentUser.Id, postId, interaction);
 
-            return Json(result);
+            if (userPost != null)
+            {
+                PostViewModel post = dataStorage.GetPostById(postId).ToViewModel();
+
+                var result = new
+                {
+                    likescount = post.LikesCount,
+                    favoritescount = post.FavoritesCount,
+                };
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

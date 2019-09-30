@@ -18,7 +18,7 @@ namespace MroczekDotDev.Sfira.Data
         void AddPost(PostViewModel post);
         Attachment GetAttachmentByPostId(int postId);
 
-        void MarkPost(string userId, int postId, string interaction);
+        UserPost MarkPost(string userId, int postId, string interaction);
         IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId);
 
         void AddComment(CommentViewModel post);

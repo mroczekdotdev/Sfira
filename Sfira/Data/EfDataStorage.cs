@@ -34,6 +34,7 @@ namespace MroczekDotDev.Sfira.Data
         {
             return context.Posts
                 .Where(p => p.Id == postId)
+                .Include(p => p.Author)
                 .SingleOrDefault();
         }
 
@@ -125,88 +126,101 @@ namespace MroczekDotDev.Sfira.Data
             return posts;
         }
 
-        public void MarkPost(string userId, int postId, string interaction)
+        public UserPost MarkPost(string userId, int postId, string interaction)
         {
-            Post post = context.Posts.Find(postId);
-            UserPost existingUserPost = context.UserPosts.Find(userId, postId);
-            RelationType relation = existingUserPost?.Relation ?? RelationType.None;
+            Post post = GetPostById(postId);
 
-            switch (interaction)
+            if (userId != post.Author.Id)
             {
-                case "like":
-                    if ((relation & RelationType.Like) != RelationType.Like)
-                    {
-                        relation |= RelationType.Like;
-                        post.LikesCount++;
-                        break;
-                    }
-                    return;
+                UserPost result;
+                UserPost existingUserPost = context.UserPosts.Find(userId, postId);
+                RelationType relation = existingUserPost?.Relation ?? RelationType.None;
 
-                case "unlike":
-                    if ((relation & RelationType.Like) == RelationType.Like)
-                    {
-                        relation ^= RelationType.Like;
-                        post.LikesCount--;
-                        break;
-                    }
-                    return;
-
-                case "favorite":
-                    if ((relation & RelationType.Favorite) != RelationType.Favorite)
-                    {
-                        relation |= RelationType.Favorite;
-                        post.FavoritesCount++;
-                        break;
-                    }
-                    return;
-
-                case "unfavorite":
-                    if ((relation & RelationType.Favorite) == RelationType.Favorite)
-                    {
-                        relation ^= RelationType.Favorite;
-                        post.FavoritesCount--;
-                        break;
-                    }
-                    return;
-
-                case "comment":
-                    if ((relation & RelationType.Comment) != RelationType.Comment)
-                    {
-                        relation |= RelationType.Comment;
-                        break;
-                    }
-                    return;
-
-                case "uncomment":
-                    if ((relation & RelationType.Comment) == RelationType.Comment)
-                    {
-                        relation ^= RelationType.Comment;
-                        break;
-                    }
-                    return;
-            }
-
-            if (existingUserPost == null)
-            {
-                var userPost = new UserPost
+                switch (interaction)
                 {
-                    UserId = userId,
-                    PostId = postId,
-                    Relation = relation,
-                };
+                    case "like":
+                        if ((relation & RelationType.Like) != RelationType.Like)
+                        {
+                            relation |= RelationType.Like;
+                            post.LikesCount++;
+                            break;
+                        }
+                        return null;
 
-                context.Add(userPost);
-            }
-            else if (relation == RelationType.None)
-            {
-                context.Remove(existingUserPost);
+                    case "unlike":
+                        if ((relation & RelationType.Like) == RelationType.Like)
+                        {
+                            relation ^= RelationType.Like;
+                            post.LikesCount--;
+                            break;
+                        }
+                        return null;
+
+                    case "favorite":
+                        if ((relation & RelationType.Favorite) != RelationType.Favorite)
+                        {
+                            relation |= RelationType.Favorite;
+                            post.FavoritesCount++;
+                            break;
+                        }
+                        return null;
+
+                    case "unfavorite":
+                        if ((relation & RelationType.Favorite) == RelationType.Favorite)
+                        {
+                            relation ^= RelationType.Favorite;
+                            post.FavoritesCount--;
+                            break;
+                        }
+                        return null;
+
+                    case "comment":
+                        if ((relation & RelationType.Comment) != RelationType.Comment)
+                        {
+                            relation |= RelationType.Comment;
+                            break;
+                        }
+                        return null;
+
+                    case "uncomment":
+                        if ((relation & RelationType.Comment) == RelationType.Comment)
+                        {
+                            relation ^= RelationType.Comment;
+                            break;
+                        }
+                        return null;
+                }
+
+                if (existingUserPost == null)
+                {
+                    var userPost = new UserPost
+                    {
+                        UserId = userId,
+                        PostId = postId,
+                        Relation = relation,
+                    };
+
+                    context.Add(userPost);
+                    result = userPost;
+                }
+                else if (relation == RelationType.None)
+                {
+                    context.Remove(existingUserPost);
+                    result = existingUserPost;
+                }
+                else
+                {
+                    existingUserPost.Relation = relation;
+                    result = existingUserPost;
+                }
+
+                context.SaveChanges();
+                return result;
             }
             else
             {
-                existingUserPost.Relation = relation;
+                return null;
             }
-
-            context.SaveChanges();
         }
 
         public void AddComment(CommentViewModel comment)
