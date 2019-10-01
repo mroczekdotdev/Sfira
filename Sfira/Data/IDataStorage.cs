@@ -8,6 +8,7 @@ namespace MroczekDotDev.Sfira.Data
     {
         ApplicationUser GetUserById(string userId);
         ApplicationUser GetUserByUserName(string userName);
+        IEnumerable<ApplicationUser> GetFollowersByUserName(string userName);
 
         Post GetPostById(int postId);
         IEnumerable<Post> GetPosts();
@@ -17,6 +18,7 @@ namespace MroczekDotDev.Sfira.Data
 
         void AddPost(PostViewModel post);
         Attachment GetAttachmentByPostId(int postId);
+        IEnumerable<Attachment> GetAttachmentsByUserName(string userName);
 
         UserPost MarkPost(string userId, int postId, string interaction);
         IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId);

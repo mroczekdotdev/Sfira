@@ -1,5 +1,11 @@
 ﻿.app-message {
   padding: $padding-xl;
+  margin-bottom: $padding-base;
   text-align: center;
   background-color: color-variant("superlight", $color-primary);
+
+  header {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+  }
 }

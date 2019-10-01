@@ -5,6 +5,7 @@ using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Infrastructure;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Controllers
@@ -88,6 +89,18 @@ namespace MroczekDotDev.Sfira.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        public PartialViewResult GetFollowers(string userName)
+        {
+            IEnumerable<UserViewModel> result = dataStorage.GetFollowersByUserName(userName).ToViewModels();
+            return PartialView("_FollowersFeedPartial", result);
+        }
+
+        public PartialViewResult GetMedia(string userName)
+        {
+            IEnumerable<AttachmentViewModel> result = dataStorage.GetAttachmentsByUserName(userName).ToViewModels();
+            return PartialView("_MediaFeedPartial", result);
         }
     }
 }

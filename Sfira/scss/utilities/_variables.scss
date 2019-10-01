@@ -1,7 +1,7 @@
 $margin-base: 1rem;
 $margin-sm: 0.5rem;
 $margin-lg: 2rem;
-$margin-xl: 3rem;
+$margin-xl: 4rem;
 
 $padding-base: 0.5rem;
 $padding-sm: 0.25rem;
@@ -57,8 +57,9 @@ $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mon
 $font-family-base: $font-family-sans-serif;
 
 $font-size-base: 16px;
-$font-size-lg: $font-size-base * 1.2;
 $font-size-sm: $font-size-base * .8;
+$font-size-lg: $font-size-base * 1.2;
+$font-size-xl: $font-size-base * 1.6;
 
 $font-weight-light: 300;
 $font-weight-normal: 400;

@@ -2,13 +2,12 @@
   $(document).on("click", "a.comment", function () {
     var parent = $(this).parents(".single-post");
     var postid = parent.data("id");
-    var link = "/comments/" + postid;
     var comments = parent.find(".comments");
     var createComment = parent.find(".create-comment");
     if ($.trim(comments.html()) == "") {
       $.ajax({
         type: "GET",
-        url: link,
+        url: "/comments/" + postid,
         success: function (result) {
           createComment.slideDown();
           comments.html(result).hide().slideDown();
@@ -24,7 +23,6 @@
   $(document).on("click", ".create-comment button", function () {
     var parent = $(this).parents(".single-post");
     var postId = parent.data("id");
-    var link = "/comment/create?postId=" + postId;
     var message = parent.find(".message");
 
     var model = {
@@ -33,7 +31,7 @@
 
     $.ajax({
       type: "POST",
-      url: link,
+      url: "/comment/create?postId=" + postId,
       data: JSON.stringify(model),
       contentType: "application/json",
       success: function (result) {

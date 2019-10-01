@@ -1,17 +1,30 @@
 ﻿@{
     @model IEnumerable<PostViewModel>;
-    ViewBag.Title = "#" + ViewContext.RouteData.Values["tagName"] + " \u00B7 Sfira";
+    var tagNameWithSymbol = "#" + ViewContext.RouteData.Values["tagName"];
+    ViewBag.Title = tagNameWithSymbol + " \u00B7 Sfira";
 }
 
-@{await Html.RenderPartialAsync("~/Views/Shared/_CreatePostPartial.cshtml", new PostViewModel()); }
-@foreach (var p in Model)
-{
-    await Html.RenderPartialAsync("~/Views/Shared/_PostPartial.cshtml", p);
+@{await Html.RenderPartialAsync("_CreatePostPartial", new PostViewModel()); }
+
+@{
+    if (Model.Any() == false)
+    {
+        <section class="app-message">
+            <header>@tagNameWithSymbol doesn’t have any posts</header>
+        </section>
+    }
+    else
+    {
+        <section class="feed posts-feed">
+            @{await Html.RenderPartialAsync("_PostsFeedPartial", Model); }
+        </section>
+    }
 }
+
 @section MainAside{
 }
+
 @section Aside{
-    copied from Explore
     <section class="aside">
         <header>
             Top Posts

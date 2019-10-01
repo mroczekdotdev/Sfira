@@ -20,7 +20,7 @@ namespace MroczekDotDev.Sfira.Controllers
             this.userManager = userManager;
         }
 
-        public async Task<ViewResult> Index()
+        public async Task<IActionResult> Index()
         {
             IEnumerable<PostViewModel> result = dataStorage.GetPosts().ToViewModels();
 

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+    if (Model.Any() == false)
+    {
+        <section class="app-message">
+            <header>User doesn’t have any followers</header>
+        </section>
+    }
+
+    foreach (var user in Model)
+    {
+        <article class="single-user">
+            <div class="avatar" sfira-id="@user.Id" sfira-media="avatar"></div>
+            <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@user.UserName">
+                <span class="name">@user.Name</span><span class="username">@user.UserName</span>
+            </a>
+        </article>
+    }
+}

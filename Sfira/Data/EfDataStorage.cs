@@ -30,12 +30,19 @@ namespace MroczekDotDev.Sfira.Data
                 .SingleOrDefault(u => u.UserName == userName);
         }
 
+        public IEnumerable<ApplicationUser> GetFollowersByUserName(string userName)
+        {
+            return context.UserFollow
+                .Where(uf => uf.FollowedUser.Name == userName)
+                .Select(uf => uf.FollowingUser)
+                .ToArray();
+        }
+
         public Post GetPostById(int postId)
         {
             return context.Posts
-                .Where(p => p.Id == postId)
                 .Include(p => p.Author)
-                .SingleOrDefault();
+                .SingleOrDefault(p => p.Id == postId);
         }
 
         public IEnumerable<Post> GetPosts()
@@ -67,8 +74,8 @@ namespace MroczekDotDev.Sfira.Data
         public IEnumerable<Post> GetPostsByFollowerId(string userId)
         {
             return context.UserFollow
-                .Where(u => u.FollowingUserId == userId)
-                .SelectMany(u => u.FollowedUser.Posts)
+                .Where(uf => uf.FollowingUserId == userId)
+                .SelectMany(uf => uf.FollowedUser.Posts)
                 .Include(p => p.Author)
                 .OrderByDescending(p => p.PublicationTime)
                 .ToArray();
@@ -109,6 +116,14 @@ namespace MroczekDotDev.Sfira.Data
             return context.Attachments
                 .Include(a => a.Owner)
                 .SingleOrDefault(a => a.PostId == postId);
+        }
+
+        public IEnumerable<Attachment> GetAttachmentsByUserName(string userName)
+        {
+            return context.Attachments
+                .Where(a => a.Owner.UserName == userName)
+                .Include(a => a.Owner)
+                .ToArray();
         }
 
         public IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId)

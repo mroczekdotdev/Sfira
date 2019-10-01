@@ -28,23 +28,33 @@
             }
         </section>
         <nav class="profileMenu">
-            <a id="showPosts" href="javascript:void(0)">Posts</a>
-            <a id="showMedia" href="javascript:void(0)">Media</a>
-            <a id="showFollowers" href="javascript:void(0)">Followers (<span id="followersCount">@Model.FollowersCount</span>)</a>
+            <a class="menuItem showPosts active" href="javascript:void(0)">Posts</a>
+            <a class="menuItem showMedia" href="javascript:void(0)">Media</a>
+            <a class="menuItem showFollowers" href="javascript:void(0)">Followers (<span id="followersCount">@Model.FollowersCount</span>)</a>
         </nav>
     </header>
 </section>
 
-<section class="feed active" id="postsFeed">
-    @foreach (var p in Model.Posts)
-    {
-        await Html.RenderPartialAsync("~/Views/Shared/_PostPartial.cshtml", p);
+<section class="feed posts-feed active">
+    @{
+        if (Model.Posts.Any() == false)
+        {
+            <section class="app-message">
+                <header>User doesn’t have any posts</header>
+            </section>
+        }
+        else
+        {
+            <section class="feed posts-feed">
+                @{await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts); }
+            </section>
+        }
     }
 </section>
 
-<section class="feed inactive" id="mediaFeed"></section>
+<section class="feed media-feed" style="display: none;"></section>
 
-<section class="feed inactive" id="followersFeed"></section>
+<section class="feed followers-feed" style="display: none;"></section>
 
 @section MainAside {
     @if (Model.Description != null)

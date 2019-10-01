@@ -13,7 +13,7 @@ namespace MroczekDotDev.Sfira.Controllers
             this.dataStorage = dataStorage;
         }
 
-        public IActionResult GetPostsByTag(string tagName)
+        public IActionResult Index(string tagName)
         {
             return View("Tag", dataStorage.GetPostsByTag(tagName).ToViewModels());
         }

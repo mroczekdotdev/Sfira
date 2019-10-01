@@ -63,5 +63,9 @@
     width: 76%;
     bottom: -18%;
     right: 0%;
+
+    a.active {
+      font-weight: $font-weight-bold;
+    }
   }
 }

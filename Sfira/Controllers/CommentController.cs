@@ -23,22 +23,22 @@ namespace MroczekDotDev.Sfira.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<JsonResult> Create([FromBody] CommentViewModel comment, int postId)
+        public async Task<IActionResult> Create([FromBody] CommentViewModel comment, int postId)
         {
             if (ModelState.IsValid)
             {
                 comment.Author = await userManager.FindByNameAsync(User.Identity.Name);
                 comment.ParentId = postId;
                 dataStorage.AddComment(comment);
+                return Ok();
             }
             else
             {
-                return Json("error");
+                return BadRequest();
             }
-            return Json("success");
         }
 
-        public PartialViewResult GetCommentsByPostId(int postId)
+        public PartialViewResult GetComments(int postId)
         {
             IEnumerable<CommentViewModel> result = dataStorage.GetCommentsByPostId(postId).ToViewModels();
             return PartialView("_CommentsPartial", result);

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<PostViewModel>
+
+@{
+    foreach (var post in Model)
+    {
+        await Html.RenderPartialAsync("_PostPartial", post);
+    }
+}

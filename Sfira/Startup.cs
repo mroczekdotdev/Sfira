@@ -66,6 +66,18 @@ namespace MroczekDotDev.Sfira
                 );
 
                 routes.MapRoute(
+                    "Followers",
+                    "{userName}/followers",
+                    new { controller = "User", action = "GetFollowers" }
+                );
+
+                routes.MapRoute(
+                    "Media",
+                    "{userName}/media",
+                    new { controller = "User", action = "GetMedia" }
+                );
+
+                routes.MapRoute(
                     "Mark",
                     "{postId}/{interaction}",
                     new { controller = "Post", action = "Mark" }
@@ -74,13 +86,13 @@ namespace MroczekDotDev.Sfira
                 routes.MapRoute(
                     "Comments",
                     "comments/{postId}",
-                    new { controller = "Comment", action = "GetCommentsByPostId" }
+                    new { controller = "Comment", action = "GetComments" }
                 );
 
                 routes.MapRoute(
                     "Tag",
                     "tag/{tagName}",
-                    new { controller = "Tag", action = "GetPostsByTag" }
+                    new { controller = "Tag", action = "Index" }
                 );
 
                 routes.MapRoute(

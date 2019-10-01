@@ -1,0 +1,19 @@
+﻿.media-feed {
+  .item {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+
+    &:nth-of-type(n+2) {
+      margin-top: $margin-base;
+    }
+
+    .cover {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: $border-size-base solid $color-primary;
+      border-radius: $radius-base;
+    }
+  }
+}

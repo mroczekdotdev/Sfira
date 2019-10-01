@@ -22,7 +22,7 @@ namespace MroczekDotDev.Sfira.Controllers
         }
 
         [Route("")]
-        public async Task<ViewResult> Index()
+        public async Task<IActionResult> Index()
         {
             IEnumerable<PostViewModel> result;
 

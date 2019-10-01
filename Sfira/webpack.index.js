@@ -1,5 +1,6 @@
 ﻿import "./js/comment.js";
 import "./js/createPost.js";
+import "./js/feed.js";
 import "./js/markPost.js";
 import "./js/markUser.js";
 import "./js/modal.js";

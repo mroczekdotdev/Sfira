@@ -1,0 +1,42 @@
+﻿.followers-feed {
+
+  .single-user {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: $padding-base;
+    font-size: $font-size-sm;
+    background-color: transparent;
+
+    &:first-of-type {
+      border-top: $border-size-base solid $color-primary;
+    }
+
+    &:last-of-type {
+      border-bottom: $border-size-base solid $color-primary;
+    }
+
+    &:nth-of-type(n+2) {
+      border-top: $border-size-sm solid $color-primary;
+    }
+
+    .avatar {
+      display: inline-block;
+      position: static;
+      width: 3rem;
+      height: 3rem;
+      margin-right: $margin-sm;
+    }
+
+    span {
+      display: block;
+    }
+
+    .name {
+      font-size: $font-size-base;
+    }
+
+    .username {
+      color: color-variant("light", $color-primary);
+    }
+  }
+}

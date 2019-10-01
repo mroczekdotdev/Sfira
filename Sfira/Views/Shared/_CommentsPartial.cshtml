@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<CommentViewModel>
-
 @{
     if (Model.Any() == false)
     {
@@ -7,22 +6,22 @@
             <span>Be first to comment!</span>
         </article>
     }
-}
 
-@foreach (var c in Model)
-{
-    <article class="single-comment">
-        <header class="header">
-            <div class="avatar" sfira-id="@c.Author.Id" sfira-media="avatar"></div>
-            <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@c.Author.UserName">
-                <span class="name">@c.Author.Name</span><span class="username">@c.Author.UserName</span>
-            </a>
-            <span class="timestamp">@c.PublicationTime.Relative()</span>
-        </header>
-        <div class="body">
-            <p class="content">
-                @Html.Raw(c.Message.FormatAsMessage())
-            </p>
-        </div>
-    </article>
+    foreach (var comment in Model)
+    {
+        <article class="single-comment">
+            <header class="header">
+                <div class="avatar" sfira-id="@comment.Author.Id" sfira-media="avatar"></div>
+                <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@comment.Author.UserName">
+                    <span class="name">@comment.Author.Name</span><span class="username">@comment.Author.UserName</span>
+                </a>
+                <span class="timestamp">@comment.PublicationTime.Relative()</span>
+            </header>
+            <div class="body">
+                <p class="content">
+                    @Html.Raw(comment.Message.FormatAsMessage())
+                </p>
+            </div>
+        </article>
+    }
 }
