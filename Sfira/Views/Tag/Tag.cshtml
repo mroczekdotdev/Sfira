@@ -1,34 +1,28 @@
-﻿@model IEnumerable<PostViewModel>
-@{
-    ViewBag.Title = "Tag \u00B7 Sfira";
-    CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+﻿@{
+    @model IEnumerable<PostViewModel>;
+    ViewBag.Title = "#" + ViewContext.RouteData.Values["tagName"] + " \u00B7 Sfira";
 }
 
 @{await Html.RenderPartialAsync("~/Views/Shared/_CreatePostPartial.cshtml", new PostViewModel()); }
-
 @foreach (var p in Model)
 {
     await Html.RenderPartialAsync("~/Views/Shared/_PostPartial.cshtml", p);
 }
-
 @section MainAside{
-
 }
-
 @section Aside{
     copied from Explore
     <section class="aside">
-        <header class="aside-header">
-            <h4>Top Posts</h4>
+        <header>
+            Top Posts
         </header>
         <p>
             Top Posts content here.
         </p>
     </section>
-
     <section class="aside">
-        <header class="aside-header">
-            <h4>Trending</h4>
+        <header>
+            Trending
         </header>
         <p>
             Trending content here.

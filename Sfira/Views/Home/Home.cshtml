@@ -1,7 +1,6 @@
-﻿@model IEnumerable<PostViewModel>
-@{
+﻿@{
+    @model IEnumerable<PostViewModel>;
     ViewBag.Title = "Home \u00B7 Sfira";
-    CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
 }
 
 @{await Html.RenderPartialAsync("~/Views/Shared/_CreatePostPartial.cshtml", new PostViewModel()); }
@@ -25,4 +24,18 @@
             }
         }
     }
+}
+
+@section MainAside{
+}
+
+@section Aside{
+    <section class="aside">
+        <header>
+            You may like
+        </header>
+        <p>
+            Related content here.
+        </p>
+    </section>
 }

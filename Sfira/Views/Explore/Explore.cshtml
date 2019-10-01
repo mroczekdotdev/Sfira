@@ -1,7 +1,6 @@
-﻿@model IEnumerable<PostViewModel>
-@{
+﻿@{
+    @model IEnumerable<PostViewModel>;
     ViewBag.Title = "Explore \u00B7 Sfira";
-    CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
 }
 
 @{await Html.RenderPartialAsync("~/Views/Shared/_CreatePostPartial.cshtml", new PostViewModel()); }
@@ -12,22 +11,20 @@
 }
 
 @section MainAside{
-
 }
 
 @section Aside{
     <section class="aside">
-        <header class="aside-header">
-            <h4>Top Posts</h4>
+        <header>
+            Trending tags
         </header>
         <p>
-            Top Posts content here.
+            Trending content here.
         </p>
     </section>
-
     <section class="aside">
-        <header class="aside-header">
-            <h4>Trending</h4>
+        <header>
+            Trending users
         </header>
         <p>
             Trending content here.

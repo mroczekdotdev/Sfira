@@ -42,7 +42,7 @@
     bottom: $padding-base;
   }
 
-  .actions {
+  .postActions {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -64,6 +64,16 @@
       &:focus {
         outline: none;
       }
+    }
+
+    .counter {
+      padding-left: $padding-sm;
+    }
+
+    .more {
+      font-size: $font-size-base;
+      font-weight: $font-weight-normal;
+      padding-right: $padding-sm;
     }
   }
 

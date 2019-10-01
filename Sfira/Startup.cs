@@ -79,7 +79,7 @@ namespace MroczekDotDev.Sfira
 
                 routes.MapRoute(
                     "Tag",
-                    "tag/{id}",
+                    "tag/{tagName}",
                     new { controller = "Tag", action = "GetPostsByTag" }
                 );
 

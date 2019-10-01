@@ -11,7 +11,7 @@ namespace MroczekDotDev.Sfira.Data
 
         Post GetPostById(int postId);
         IEnumerable<Post> GetPosts();
-        IEnumerable<Post> GetPostsByTag(string tag);
+        IEnumerable<Post> GetPostsByTag(string tagName);
         IEnumerable<Post> GetPostsByUserName(string userName);
         IEnumerable<Post> GetPostsByFollowerId(string userId);
 

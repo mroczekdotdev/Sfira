@@ -1,6 +1,12 @@
 $margin-base: 1rem;
+$margin-sm: 0.5rem;
+$margin-lg: 2rem;
+$margin-xl: 3rem;
 
 $padding-base: 0.5rem;
+$padding-sm: 0.25rem;
+$padding-lg: 1rem;
+$padding-xl: 2rem;
 
 $radius-base: 0.4rem;
 $radius-sm: 0.2rem;
@@ -18,9 +24,10 @@ $screen-xs: "only screen and (max-width: 599px)";
 $screen-sm: "only screen and (max-width: 899px)";
 $screen-md: "only screen and (max-width: 1199px)";
 $screen-lg: "only screen and (max-width: 1799px)";
-//$screen-xl;
+
 
 // Colors
+
 $color-adjust-light-saturation: -20;
 $color-adjust-light-lightness: 20;
 $color-adjust-superlight-saturation: -30;
@@ -41,6 +48,7 @@ $color-success: null;
 $color-info: null;
 $color-warning: null;
 $color-error: null;
+
 
 // Typography
 
@@ -72,6 +80,7 @@ $heading-font-weight: 500;
 $heading-line-height: 1.2;
 $heading-color: $color-primary;
 
+
 // Link
 
 $link-color: $color-primary;
@@ -86,10 +95,12 @@ $link-hover-decoration: $link-active-decoration;
 $link-visited: desaturate($color-secondary, 60%);
 $link-visited-decoration: $link-decoration;
 
+
 // Body
 
 $body-color: $color-black;
 $body-bg: color-variant("superdark", $color-primary);
+
 
 // List
 

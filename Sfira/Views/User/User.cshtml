@@ -1,4 +1,7 @@
-﻿@model UserViewModel
+﻿@{
+    @model UserViewModel;
+    ViewBag.Title = "@" + Model.UserName + " \u00B7 Sfira";
+}
 
 <section class="profile" data-username="@Model.UserName">
     <header class="profileHeader">
@@ -43,25 +46,53 @@
 
 <section class="feed inactive" id="followersFeed"></section>
 
-@section MainAside{
+@section MainAside {
+    @if (Model.Description != null)
+    {
+        <section class="aside">
+            <header>
+                Summary
+            </header>
+            <p class="description">
+                @Html.Raw(Model.Description.FormatAsMessage())
+            </p>
+        </section>
+    }
+
     <section class="aside">
-        <header class="asideHeader">
-            <h4>Summary</h4>
+        <header>
+            Member since
         </header>
-        <p class="description">
-            @{if (Model.Description != null)
-                {
-                    @Html.Raw(Model.Description.FormatAsMessage())
-                }
-            }
+        <p class="date">
+            @Model.RegisterTime
         </p>
-        <div>@Model.RegisterTime</div>
-        <div>@Model.Location</div>
-        @*<TODO-CustomTagHelper shref="@Model.Website">@Model.Website</TODO>*@
     </section>
-    <section class="aside">
-        @*EMPTY*@
-    </section>
+
+    @if (Model.Location != null)
+    {
+        <section class="aside">
+            <header>
+                Location
+            </header>
+            <p class="location">
+                @Model.Location
+            </p>
+        </section>
+    }
+
+    @if (Model.Website != null)
+    {
+        <section class="aside">
+            <header>
+                Website
+            </header>
+            <p class="website">
+                @Model.Website
+                @*<TODO-CustomTagHelper shref="@Model.Website">@Model.Website</TODO>*@
+            </p>
+        </section>
+    }
 }
+
 @section Aside{
 }

@@ -46,10 +46,10 @@ namespace MroczekDotDev.Sfira.Data
                 .ToArray();
         }
 
-        public IEnumerable<Post> GetPostsByTag(string tag)
+        public IEnumerable<Post> GetPostsByTag(string tagName)
         {
             return context.Posts
-                .Where(p => p.Tags.Contains(tag))
+                .Where(p => p.Tags.Contains(tagName))
                 .OrderByDescending(p => p.PublicationTime)
                 .Include(p => p.Author)
                 .ToArray();

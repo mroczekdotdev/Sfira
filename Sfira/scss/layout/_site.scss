@@ -3,7 +3,8 @@
   max-width: 900px;
   min-height: 100%;
   margin: 0 auto;
-  padding: 0 $padding-base*2;
+  padding: 0 $padding-lg;
+  padding: 0 $padding-lg $padding-lg;
   background-color: $color-white;
 }
 
@@ -14,7 +15,7 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  padding: $padding-base*2 0;
+  padding: $padding-lg 0;
   border-bottom: $border-size-base solid $color-primary;
   background-color: $color-white;
   z-index: 2;
@@ -32,15 +33,12 @@
     padding: 0 $padding-base;
 
     .item {
-      padding: 0 $padding-base/2;
+      padding: 0 $padding-sm;
     }
   }
 
   .search-form {
     margin-right: $margin-base;
-  }
-
-  .user {
   }
 }
 
@@ -65,7 +63,7 @@
     min-width: 0;
 
     .side-content {
-      padding: $padding-base;
+      padding: $padding-lg;
       background-color: color-variant("superlight", $color-primary);
     }
 
@@ -78,6 +76,19 @@
     margin-top: ($margin-base)+($padding-base)-($border-size-base);
   }
 }
+
+.aside {
+
+  header {
+  margin: 0;
+  font-weight: $font-weight-bold;
+  }
+
+  &:nth-of-type(n+2){
+    margin-top: $margin-base;
+  }
+}
+
 
 .site-footer {
   padding: $padding-base;

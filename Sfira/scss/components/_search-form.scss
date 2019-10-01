@@ -4,7 +4,7 @@
 
   input {
     width: 100%;
-    padding: $padding-base/2 $padding-base;
+    padding: $padding-sm $padding-base;
     border: $border-size-base solid $color-primary;
     border-radius: $radius-base 0 0 $radius-base;
     background-color: color-variant("superlight", $color-primary);

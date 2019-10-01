@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -22,10 +26,10 @@
                 <div class="item"><a asp-controller="Messages" asp-action="@nameof(MessagesController.Index)"><i class="fas fa-envelope-square"></i> Messages</a></div>
             </nav>
             @*UNIMPLEMENTED
-            <form class="search-form">
-                <input type="search" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>*@
+                <form class="search-form">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </form>*@
             <section class="user">
                 @await Html.PartialAsync("_LoginPartial")
             </section>
