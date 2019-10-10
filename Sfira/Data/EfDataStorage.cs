@@ -32,10 +32,40 @@ namespace MroczekDotDev.Sfira.Data
 
         public IEnumerable<ApplicationUser> GetFollowersByUserName(string userName)
         {
-            return context.UserFollow
+            return context.UserFollows
                 .Where(uf => uf.FollowedUser.Name == userName)
                 .Select(uf => uf.FollowingUser)
                 .ToArray();
+        }
+
+        public void AddPost(PostViewModel post)
+        {
+            StringBuilder sb = new StringBuilder();
+            string bodyTags = Regex.Replace(post.Body, @"(?:)#\b(\w+)\b(?=.*\1)", "");
+
+            foreach (Match match in Regex.Matches(bodyTags, @"#(\w+)"))
+            {
+                sb.Append(match.Groups[1]).Append(' ');
+            }
+
+            var postToAdd = new Post
+            {
+                Author = post.Author,
+                PublicationTime = DateTime.Now,
+                Body = post.Body,
+                Tags = sb.ToString(),
+            };
+
+            context.Posts.Add(postToAdd);
+
+            if (post.Attachment != null)
+            {
+                AddAttachment(post.Attachment, postToAdd);
+            }
+            else
+            {
+                context.SaveChanges();
+            }
         }
 
         public Post GetPostById(int postId)
@@ -73,42 +103,12 @@ namespace MroczekDotDev.Sfira.Data
 
         public IEnumerable<Post> GetPostsByFollowerId(string userId)
         {
-            return context.UserFollow
+            return context.UserFollows
                 .Where(uf => uf.FollowingUserId == userId)
                 .SelectMany(uf => uf.FollowedUser.Posts)
                 .Include(p => p.Author)
                 .OrderByDescending(p => p.PublicationTime)
                 .ToArray();
-        }
-
-        public void AddPost(PostViewModel post)
-        {
-            StringBuilder sb = new StringBuilder();
-            string messageTags = Regex.Replace(post.Message, @"(?:)#\b(\w+)\b(?=.*\1)", "");
-
-            foreach (Match match in Regex.Matches(messageTags, @"#(\w+)"))
-            {
-                sb.Append(match.Groups[1]).Append(' ');
-            }
-
-            var postToAdd = new Post
-            {
-                Author = post.Author,
-                PublicationTime = DateTime.Now,
-                Message = post.Message,
-                Tags = sb.ToString(),
-            };
-
-            context.Posts.Add(postToAdd);
-
-            if (post.Attachment != null)
-            {
-                AddAttachment(post.Attachment, postToAdd);
-            }
-            else
-            {
-                context.SaveChanges();
-            }
         }
 
         public Attachment GetAttachmentByPostId(int postId)
@@ -246,7 +246,7 @@ namespace MroczekDotDev.Sfira.Data
             {
                 Author = comment.Author,
                 PublicationTime = DateTime.Now,
-                Message = comment.Message,
+                Body = comment.Body,
                 Parent = parent,
             };
 
@@ -270,9 +270,139 @@ namespace MroczekDotDev.Sfira.Data
                 .ToArray();
         }
 
+        public DirectChat AddDirectChat(string userId, string interlocutorId)
+        {
+            if (GetDirectChatByUserIds(userId, interlocutorId) == null)
+            {
+                var chatToAdd = new DirectChat();
+
+                var userChatForUser = new UserChat
+                {
+                    UserId = userId,
+                    Chat = chatToAdd,
+                };
+
+                var userChatForInterlocutor = new UserChat
+                {
+                    UserId = interlocutorId,
+                    Chat = chatToAdd,
+                };
+
+                context.AddRange(chatToAdd, userChatForUser, userChatForInterlocutor);
+                context.SaveChanges();
+
+                return chatToAdd;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<Chat> GetChatsListByUserId(string userId)
+        {
+            IEnumerable<Chat> chats = context.UserChats
+                .Where(uc => uc.UserId == userId)
+                .Select(uc => uc.Chat)
+                .OrderByDescending(c => c.LastMessage.PublicationTime)
+                .Include(c => c.UserChats)
+                    .ThenInclude(uc => uc.User)
+                .Include(c => c.LastMessage)
+                   .ThenInclude(m => m.Author)
+                .ToArray();
+
+            UserChat userUserChat = chats.First().UserChats.First(uc => uc.UserId == userId);
+
+            foreach (Chat chat in chats)
+            {
+                chat.UserChats.Remove(userUserChat);
+            }
+
+            return chats;
+        }
+
+        public Chat GetChatById(int chatId)
+        {
+            return context.Chats
+                .Where(c => c.Id == chatId)
+                .Include(c => c.UserChats)
+                    .ThenInclude(uc => uc.User)
+                .Include(c => c.LastMessage)
+                    .ThenInclude(m => m.Author)
+                .SingleOrDefault();
+        }
+
+        public DirectChat GetDirectChatByUserIds(string userId, string interlocutorId)
+        {
+            DirectChat directChat = context.Chats
+                .OfType<DirectChat>()
+                .Where(c => c.UserChats.Any(uc => uc.UserId == userId))
+                .Where(c => c.UserChats.Any(uc => uc.UserId == interlocutorId))
+                .Include(c => c.UserChats)
+                    .ThenInclude(uc => uc.User)
+                .SingleOrDefault();
+
+            if (directChat != null)
+            {
+                UserChat userUserChat = directChat.UserChats.First(uc => uc.UserId == userId);
+                directChat.UserChats.Remove(userUserChat);
+            }
+
+            return directChat;
+        }
+
+        public Message AddMessage(MessageViewModel message)
+        {
+            UserChat existingUserChat = context.UserChats
+                .Where(uc => uc.UserId == message.Author.Id)
+                .Where(uc => uc.ChatId == message.ChatId)
+                .SingleOrDefault();
+
+            if (existingUserChat != null)
+            {
+                var messageToAdd = new Message
+                {
+                    Author = message.Author,
+                    PublicationTime = DateTime.Now,
+                    Body = message.Body,
+                    ChatId = message.ChatId,
+                };
+
+                context.Chats.Find(message.ChatId).LastMessage = messageToAdd;
+                context.Messages.Add(messageToAdd);
+                context.SaveChanges();
+
+                return messageToAdd;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<Message> GetMessagesByChatId(int chatId)
+        {
+            return context.Messages
+                .Where(m => m.ChatId == chatId)
+                .OrderBy(m => m.PublicationTime)
+                .Include(m => m.Author)
+                .ToArray();
+        }
+
+        public IEnumerable<MessageViewModel> LoadCurrentUserAuthorship(
+            IEnumerable<MessageViewModel> messages, string currentUserId)
+        {
+            foreach (MessageViewModel message in messages)
+            {
+                message.IsCurrentUserAuthor = message.Author.Id == currentUserId;
+            }
+
+            return messages;
+        }
+
         public UserFollow GetUserFollow(string followingUserId, string followedUserId)
         {
-            return context.UserFollow.Find(followingUserId, followedUserId);
+            return context.UserFollows.Find(followingUserId, followedUserId);
         }
 
         public UserFollow AddUserFollow(string followingUserId, string followedUserUsername)
@@ -284,7 +414,7 @@ namespace MroczekDotDev.Sfira.Data
             if ((followedUser = GetUserByUserName(followedUserUsername)) != null
                 && followingUserId != followedUser.Id
                 && (followingUser = GetUserById(followingUserId)) != null
-                && (existingUserFollow = context.UserFollow.Find(followingUserId, followedUser.Id)) == null)
+                && (existingUserFollow = context.UserFollows.Find(followingUserId, followedUser.Id)) == null)
             {
                 var userFollow = new UserFollow
                 {
@@ -313,7 +443,7 @@ namespace MroczekDotDev.Sfira.Data
             if ((followedUser = GetUserByUserName(followedUserUsername)) != null
                 && followingUserId != followedUser.Id
                 && (followingUser = GetUserById(followingUserId)) != null
-                && (userFollow = context.UserFollow.Find(followingUserId, followedUser.Id)) != null)
+                && (userFollow = context.UserFollows.Find(followingUserId, followedUser.Id)) != null)
             {
                 followingUser.FollowingCount--;
                 followedUser.FollowersCount--;

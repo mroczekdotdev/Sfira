@@ -1,4 +1,11 @@
 ﻿@{
-    @model IEnumerable<ApplicationUser>;
+    @model IEnumerable<ChatViewModel>
     ViewBag.Title = "Messages \u00B7 Sfira";
 }
+
+<section class="conversations">
+    <h1>Conversations</h1>
+    @{await Html.RenderPartialAsync("_ChatsListPartial", Model);}
+    <br>
+    @*<a asp-controller="Chat" asp-action="@nameof(ChatController.CreateDirectChat)">Create Direct Chat</a>*@
+</section>

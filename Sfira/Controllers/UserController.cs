@@ -91,13 +91,13 @@ namespace MroczekDotDev.Sfira.Controllers
             }
         }
 
-        public PartialViewResult GetFollowers(string userName)
+        public PartialViewResult Followers(string userName)
         {
             IEnumerable<UserViewModel> result = dataStorage.GetFollowersByUserName(userName).ToViewModels();
             return PartialView("_FollowersFeedPartial", result);
         }
 
-        public PartialViewResult GetMedia(string userName)
+        public PartialViewResult Media(string userName)
         {
             IEnumerable<AttachmentViewModel> result = dataStorage.GetAttachmentsByUserName(userName).ToViewModels();
             return PartialView("_MediaFeedPartial", result);

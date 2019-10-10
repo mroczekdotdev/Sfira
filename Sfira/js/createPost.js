@@ -48,11 +48,12 @@
     }
   }
 
+
   function submitPostForm(attachment) {
-    var message = $("#postMessage").val();
+    var body = $("#postBody").val();
 
     var post = {
-      message
+      body
     };
 
     if (attachment !== undefined) {

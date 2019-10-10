@@ -13,10 +13,13 @@ namespace MroczekDotDev.Sfira.Data
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<UserPost> UserPosts { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<UserChat> UserChats { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
-        public DbSet<UserFollow> UserFollow { get; set; }
-        public DbSet<UserBlock> UserBlock { get; set; }
+        public DbSet<UserFollow> UserFollows { get; set; }
+        public DbSet<UserBlock> UserBlocks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -51,6 +54,32 @@ namespace MroczekDotDev.Sfira.Data
             builder.Entity<UserPost>()
                 .Property(up => up.Relation)
                 .HasConversion(new EnumToStringConverter<RelationType>());
+
+            builder.Entity<Chat>()
+                .HasMany(c => c.Messages)
+                .WithOne(m => m.Chat)
+                .HasForeignKey(m => m.ChatId);
+
+            builder.Entity<Chat>()
+                .HasOne(c => c.LastMessage)
+                .WithOne()
+                .HasForeignKey<Chat>(c => c.LastMessageId);
+
+            builder.Entity<UserChat>()
+                .HasKey(uc => new { uc.UserId, uc.ChatId });
+
+            builder.Entity<UserChat>()
+                .HasOne(uc => uc.User)
+                .WithMany(u => u.UserChats)
+                .HasForeignKey(uc => uc.UserId);
+
+            builder.Entity<UserChat>()
+                .HasOne(uc => uc.Chat)
+                .WithMany(c => c.UserChats)
+                .HasForeignKey(uc => uc.ChatId);
+
+            builder.Entity<DirectChat>()
+                .HasBaseType<Chat>();
 
             builder.Entity<Attachment>()
                 .HasKey(a => a.Name);

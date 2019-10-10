@@ -23,7 +23,7 @@
   .timestamp {
   }
 
-  .body {
+  .content {
     border: $border-size-base solid $color-primary;
     border-radius: $radius-base;
     background-color: color-variant("superlight", $color-primary);
@@ -77,7 +77,7 @@
     }
   }
 
-  .content {
+  .body {
     overflow-wrap: break-word;
     padding: $padding-base;
   }

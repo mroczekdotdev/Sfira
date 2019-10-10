@@ -13,9 +13,11 @@
         </div>
         <div class="avatar" sfira-id="@Model.Id" sfira-media="avatar"></div>
         <section class="profileActions">
-            @{if (User.Identity.IsAuthenticated && !Model.IsCurrentUser)
-                {
-                    if (Model.IsFollowedByCurrentUser)
+
+            @if (User.Identity.IsAuthenticated && !Model.IsCurrentUser)
+            {
+                <section class="primaryProfileActions">
+                    @if (Model.IsFollowedByCurrentUser)
                     {
                         <button class="unfollow">Unfollow</button>
                     }
@@ -23,8 +25,14 @@
                     {
                         <button class="follow">Follow</button>
                     }
-                    <button class="more">&bull;&bull;&bull;</button>
-                }
+                </section>
+                <section class="moreProfileActions" style="display: none;"><!--
+                    --><button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">Message</button><!--
+                    --><button class="block">Block</button><!--
+                    --><button class="report">Report</button><!--
+                -->
+                </section><!--
+                --><button class="more">&bull;&bull;&bull;</button>
             }
         </section>
         <nav class="profileMenu">
@@ -36,19 +44,17 @@
 </section>
 
 <section class="feed posts-feed active">
-    @{
-        if (Model.Posts.Any() == false)
-        {
-            <section class="app-message">
-                <header>User doesn’t have any posts</header>
-            </section>
-        }
-        else
-        {
-            <section class="feed posts-feed">
-                @{await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts); }
-            </section>
-        }
+    @if (!Model.Posts.Any())
+    {
+        <section class="app-message">
+            <header>User doesn’t have any posts</header>
+        </section>
+    }
+    else
+    {
+        <section class="feed posts-feed">
+            @{await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);}
+        </section>
     }
 </section>
 
@@ -64,7 +70,7 @@
                 Summary
             </header>
             <p class="description">
-                @Html.Raw(Model.Description.FormatAsMessage())
+                @Html.Raw(Model.Description.FormatAsEntry())
             </p>
         </section>
     }

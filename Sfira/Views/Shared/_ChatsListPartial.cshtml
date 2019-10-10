@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ChatViewModel>
+
+<section class="ChatsList">
+    @foreach (var chat in Model)
+    {
+        @if (chat is DirectChatViewModel directChat)
+        {
+            <section class="chat href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = directChat.Interlocutor.UserName })">
+                <section class="icon">
+                    <div class="avatar" sfira-id="@directChat.Interlocutor.Id" sfira-media="avatar"></div>
+                </section>
+                <div class="flexItem">
+                    <section class="header">
+                        <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@directChat.Interlocutor.UserName">
+                            <span class="name">@directChat.Interlocutor.Name</span><span class="username">@directChat.Interlocutor.UserName</span>
+                        </a>
+                        <span class="timestamp">@directChat.LastMessage.PublicationTime.Relative()</span>
+                    </section>
+
+                    <section class="body">
+                        <b>
+                            @if (chat.LastMessage.IsCurrentUserAuthor)
+                            {
+                                @:You:
+                            }
+                            else
+                            {
+                                @chat.LastMessage.Author.UserName@::
+                            }
+                        </b>@chat.LastMessage.Body
+                    </section>
+                </div>
+            </section>
+        }
+    }
+</section>

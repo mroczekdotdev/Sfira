@@ -38,19 +38,26 @@
   }
 
   .profileActions {
+    display: flex;
     position: absolute;
+    justify-content: space-around;
     bottom: 8%;
     right: 4%;
 
     button {
       font-weight: $font-weight-bold;
       border: $border-size-base solid $color-white;
+      margin-left: $padding-sm;
     }
 
       button.unfollow {
         color: $color-primary;
         border: $border-size-base solid $color-primary;
         background-color: $color-white;
+      }
+
+      button.more {
+        width: 2.5rem;
       }
   }
 

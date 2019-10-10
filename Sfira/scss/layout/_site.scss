@@ -74,17 +74,15 @@
 }
 
 .aside {
-
   header {
-  margin: 0;
-  font-weight: $font-weight-bold;
+    margin: 0;
+    font-weight: $font-weight-bold;
   }
 
-  &:nth-of-type(n+2){
+  &:nth-of-type(n+2) {
     margin-top: $margin-base;
   }
 }
-
 
 .site-footer {
   padding: $padding-base;
@@ -96,4 +94,8 @@
 .javascript-disabled {
   padding: $padding-base;
   background-color: $color-white;
+}
+
+.href {
+  cursor: pointer;
 }

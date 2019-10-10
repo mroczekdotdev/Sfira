@@ -23,10 +23,10 @@
   $(document).on("click", ".create-comment button", function () {
     var parent = $(this).parents(".single-post");
     var postId = parent.data("id");
-    var message = parent.find(".message");
+    var body = parent.find(".create-comment .body");
 
     var model = {
-      Message: message.val(),
+      Body: body.val(),
     };
 
     $.ajax({
@@ -34,24 +34,23 @@
       url: "/comment/create?postId=" + postId,
       data: JSON.stringify(model),
       contentType: "application/json",
-      success: function (result) {
-        if (result === "success") {
-          var comments = parent.find(".comments");
-          var a = parent.find("a.comment");
-          $.ajax({
-            type: "GET",
-            url: "/comments/" + postId,
-            success: function (result) {
-              message.val("");
-              comments.html(result);
-              var commentsCount = parent.find(".single-comment").length;
-              a.html('<i class="fas fa-comment-alt fa-sm fa-fw"></i>' + commentsCount).hide().fadeIn();
-            }
-          });
-        }
-        else {
-          alert("Reply have to be at least 3 characters.");
-        }
+      success: function () {
+        var comments = parent.find(".comments");
+        var a = parent.find("a.comment");
+        $.ajax({
+          type: "GET",
+          url: "/comments/" + postId,
+          success: function (result) {
+            body.val("");
+            comments.html(result);
+            var commentsCount = parent.find(".single-comment").length;
+            a.html('<i class="fas fa-comment-alt fa-sm fa-fw"></i>' + commentsCount).hide().fadeIn();
+          },
+          error: function () {
+          },
+          complete: function () {
+          },
+        });
       }
     });
   });

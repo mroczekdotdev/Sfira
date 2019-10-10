@@ -1,0 +1,9 @@
+﻿@model CommentViewModel
+<section class="CreateMessage">
+    <form class="form">
+        <textarea class="body" asp-for="@Model.Body" placeholder="Write your message."></textarea>
+    </form>
+    <section class="actions">
+        <button class="action submit" type="button">Submit</button>
+    </section>
+</section>

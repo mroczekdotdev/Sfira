@@ -24,6 +24,9 @@ namespace MroczekDotDev.Sfira.Models
         public ICollection<Post> Posts { get; set; }
         public ICollection<UserPost> UserPosts { get; set; }
 
+        public ICollection<Message> Messages { get; set; }
+        public ICollection<UserChat> UserChats { get; set; }
+
         public ICollection<Attachment> Attachments { get; set; }
 
         public ICollection<UserFollow> Following { get; set; }

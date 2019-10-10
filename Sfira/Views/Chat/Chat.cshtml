@@ -1,0 +1,16 @@
+﻿@{
+    @model ChatViewModel
+    ViewBag.Title = "Chat \u00B7 Sfira";
+}
+@if (Model is DirectChatViewModel directChat)
+{
+    <section class="Chat" data-id="@directChat.Id" data-interlocutor="@directChat.Interlocutor.Id">
+        <header class="subject">
+            <h1>
+                Conversation with @directChat.Interlocutor.Name
+            </h1>
+        </header>
+        @{await Html.RenderPartialAsync("_MessagesFeedPartial", Model.Messages);}
+    </section>
+}
+@{await Html.RenderPartialAsync("_CreateMessagePartial", new CommentViewModel());}

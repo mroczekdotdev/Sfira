@@ -93,7 +93,7 @@ CREATE TABLE "Posts" (
     "Id" serial NOT NULL,
     "AuthorId" text NULL,
     "PublicationTime" timestamp without time zone NOT NULL,
-    "Message" text NULL,
+    "Body" text NULL,
     "Tags" citext NULL,
     "LikesCount" integer NOT NULL,
     "FavoritesCount" integer NOT NULL,
@@ -102,20 +102,20 @@ CREATE TABLE "Posts" (
     CONSTRAINT "FK_Posts_AspNetUsers_AuthorId" FOREIGN KEY ("AuthorId") REFERENCES "AspNetUsers" ("Id") ON DELETE RESTRICT
 );
 
-CREATE TABLE "UserBlock" (
+CREATE TABLE "UserBlocks" (
     "BlockingUserId" text NOT NULL,
     "BlockedUserId" text NOT NULL,
-    CONSTRAINT "PK_UserBlock" PRIMARY KEY ("BlockingUserId", "BlockedUserId"),
-    CONSTRAINT "FK_UserBlock_AspNetUsers_BlockedUserId" FOREIGN KEY ("BlockedUserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE,
-    CONSTRAINT "FK_UserBlock_AspNetUsers_BlockingUserId" FOREIGN KEY ("BlockingUserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+    CONSTRAINT "PK_UserBlocks" PRIMARY KEY ("BlockingUserId", "BlockedUserId"),
+    CONSTRAINT "FK_UserBlocks_AspNetUsers_BlockedUserId" FOREIGN KEY ("BlockedUserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserBlocks_AspNetUsers_BlockingUserId" FOREIGN KEY ("BlockingUserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
 );
 
-CREATE TABLE "UserFollow" (
+CREATE TABLE "UserFollows" (
     "FollowingUserId" text NOT NULL,
     "FollowedUserId" text NOT NULL,
-    CONSTRAINT "PK_UserFollow" PRIMARY KEY ("FollowingUserId", "FollowedUserId"),
-    CONSTRAINT "FK_UserFollow_AspNetUsers_FollowedUserId" FOREIGN KEY ("FollowedUserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE,
-    CONSTRAINT "FK_UserFollow_AspNetUsers_FollowingUserId" FOREIGN KEY ("FollowingUserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+    CONSTRAINT "PK_UserFollows" PRIMARY KEY ("FollowingUserId", "FollowedUserId"),
+    CONSTRAINT "FK_UserFollows_AspNetUsers_FollowedUserId" FOREIGN KEY ("FollowedUserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserFollows_AspNetUsers_FollowingUserId" FOREIGN KEY ("FollowingUserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
 );
 
 CREATE TABLE "Attachments" (
@@ -133,7 +133,7 @@ CREATE TABLE "Comments" (
     "Id" serial NOT NULL,
     "AuthorId" text NULL,
     "PublicationTime" timestamp without time zone NOT NULL,
-    "Message" text NULL,
+    "Body" text NULL,
     "ParentId" integer NULL,
     CONSTRAINT "PK_Comments" PRIMARY KEY ("Id"),
     CONSTRAINT "FK_Comments_AspNetUsers_AuthorId" FOREIGN KEY ("AuthorId") REFERENCES "AspNetUsers" ("Id") ON DELETE RESTRICT,
@@ -147,6 +147,33 @@ CREATE TABLE "UserPosts" (
     CONSTRAINT "PK_UserPosts" PRIMARY KEY ("UserId", "PostId"),
     CONSTRAINT "FK_UserPosts_Posts_PostId" FOREIGN KEY ("PostId") REFERENCES "Posts" ("Id") ON DELETE CASCADE,
     CONSTRAINT "FK_UserPosts_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+
+CREATE TABLE "Messages" (
+    "Id" serial NOT NULL,
+    "AuthorId" text NULL,
+    "PublicationTime" timestamp without time zone NOT NULL,
+    "Body" text NULL,
+    "ChatId" integer NOT NULL,
+    CONSTRAINT "PK_Messages" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Messages_AspNetUsers_AuthorId" FOREIGN KEY ("AuthorId") REFERENCES "AspNetUsers" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "Chats" (
+    "Id" serial NOT NULL,
+    "LastMessageId" integer NULL,
+    "Discriminator" text NOT NULL,
+    CONSTRAINT "PK_Chats" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Chats_Messages_LastMessageId" FOREIGN KEY ("LastMessageId") REFERENCES "Messages" ("Id") ON DELETE RESTRICT
+);
+
+CREATE TABLE "UserChats" (
+    "UserId" text NOT NULL,
+    "ChatId" integer NOT NULL,
+    "LastReadTime" timestamp without time zone NOT NULL,
+    CONSTRAINT "PK_UserChats" PRIMARY KEY ("UserId", "ChatId"),
+    CONSTRAINT "FK_UserChats_Chats_ChatId" FOREIGN KEY ("ChatId") REFERENCES "Chats" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_UserChats_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
 );
 
 CREATE INDEX "IX_AspNetRoleClaims_RoleId" ON "AspNetRoleClaims" ("RoleId");
@@ -167,18 +194,28 @@ CREATE INDEX "IX_Attachments_OwnerId" ON "Attachments" ("OwnerId");
 
 CREATE UNIQUE INDEX "IX_Attachments_PostId" ON "Attachments" ("PostId");
 
+CREATE UNIQUE INDEX "IX_Chats_LastMessageId" ON "Chats" ("LastMessageId");
+
 CREATE INDEX "IX_Comments_AuthorId" ON "Comments" ("AuthorId");
 
 CREATE INDEX "IX_Comments_ParentId" ON "Comments" ("ParentId");
 
+CREATE INDEX "IX_Messages_AuthorId" ON "Messages" ("AuthorId");
+
+CREATE INDEX "IX_Messages_ChatId" ON "Messages" ("ChatId");
+
 CREATE INDEX "IX_Posts_AuthorId" ON "Posts" ("AuthorId");
 
-CREATE INDEX "IX_UserBlock_BlockedUserId" ON "UserBlock" ("BlockedUserId");
+CREATE INDEX "IX_UserBlocks_BlockedUserId" ON "UserBlocks" ("BlockedUserId");
 
-CREATE INDEX "IX_UserFollow_FollowedUserId" ON "UserFollow" ("FollowedUserId");
+CREATE INDEX "IX_UserChats_ChatId" ON "UserChats" ("ChatId");
+
+CREATE INDEX "IX_UserFollows_FollowedUserId" ON "UserFollows" ("FollowedUserId");
 
 CREATE INDEX "IX_UserPosts_PostId" ON "UserPosts" ("PostId");
 
+ALTER TABLE "Messages" ADD CONSTRAINT "FK_Messages_Chats_ChatId" FOREIGN KEY ("ChatId") REFERENCES "Chats" ("Id") ON DELETE CASCADE;
+
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20190930021501_Initial', '2.2.6-servicing-10079');
+VALUES ('20191010125514_initial', '2.2.6-servicing-10079');
 

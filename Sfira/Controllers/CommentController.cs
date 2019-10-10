@@ -38,7 +38,7 @@ namespace MroczekDotDev.Sfira.Controllers
             }
         }
 
-        public PartialViewResult GetComments(int postId)
+        public PartialViewResult Comments(int postId)
         {
             IEnumerable<CommentViewModel> result = dataStorage.GetCommentsByPostId(postId).ToViewModels();
             return PartialView("_CommentsPartial", result);

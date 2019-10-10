@@ -31,19 +31,19 @@
     text-align: right;
   }
 
-  .body {
+  .content {
     border: none;
     background-color: transparent;
   }
 
   .avatar {
+    position: static;
     display: inline-block;
     width: 2rem;
     height: 2rem;
-    position: static;
   }
 
-  .content {
+  .body {
     overflow-wrap: break-word;
     padding: 0;
   }

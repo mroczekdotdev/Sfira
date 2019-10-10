@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<UserViewModel>
 
 @{
-    if (Model.Any() == false)
+    if (!Model.Any())
     {
         <section class="app-message">
             <header>User doesn’t have any followers</header>

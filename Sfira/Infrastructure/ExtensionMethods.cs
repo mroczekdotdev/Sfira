@@ -45,11 +45,11 @@ namespace MroczekDotDev.Sfira.Infrastructure
             }
         }
 
-        public static string FormatAsMessage(this string message)
+        public static string FormatAsEntry(this string entry)
         {
-            message = Regex.Replace(message, @"#(\w+)", @"<a href=""/tag/$1"">#$1</a>");
-            message = message.Replace(Environment.NewLine, "<br>");
-            return message;
+            entry = Regex.Replace(entry, @"#(\w+)", @"<a href=""/tag/$1"">#$1</a>");
+            entry = entry.Replace(Environment.NewLine, "<br>");
+            return entry;
         }
 
         public static IEnumerable<T> ToViewModels<T>(this IEnumerable<IHaveViewModel<T>> models)

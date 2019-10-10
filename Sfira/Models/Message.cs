@@ -2,19 +2,20 @@
 
 namespace MroczekDotDev.Sfira.Models
 {
-    public class Comment : Entry, IHaveViewModel<CommentViewModel>
+    public class Message : Entry, IHaveViewModel<MessageViewModel>
     {
-        public Post Parent { get; set; }
+        public int ChatId { get; set; }
+        public Chat Chat { get; set; }
 
-        public CommentViewModel ToViewModel()
+        public MessageViewModel ToViewModel()
         {
-            return new CommentViewModel
+            return new MessageViewModel
             {
                 Id = Id,
                 Author = Author,
                 PublicationTime = PublicationTime,
                 Body = Body,
-                ParentId = Parent.Id,
+                ChatId = ChatId,
             };
         }
     }

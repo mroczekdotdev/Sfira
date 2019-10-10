@@ -68,13 +68,13 @@ namespace MroczekDotDev.Sfira
                 routes.MapRoute(
                     "Followers",
                     "{userName}/followers",
-                    new { controller = "User", action = "GetFollowers" }
+                    new { controller = "User", action = "Followers" }
                 );
 
                 routes.MapRoute(
                     "Media",
                     "{userName}/media",
-                    new { controller = "User", action = "GetMedia" }
+                    new { controller = "User", action = "Media" }
                 );
 
                 routes.MapRoute(
@@ -86,8 +86,26 @@ namespace MroczekDotDev.Sfira
                 routes.MapRoute(
                     "Comments",
                     "comments/{postId}",
-                    new { controller = "Comment", action = "GetComments" }
+                    new { controller = "Comment", action = "Comments" }
                 );
+
+                routes.MapRoute(
+                    "Chat",
+                    "{userName}/chat",
+                    new { controller = "Chat", action = "DirectChat" }
+                );
+
+                routes.MapRoute(
+                    "Chat",
+                    "chat/{chatId}/createmessage",
+                    new { controller = "Chat", action = "CreateMessage" }
+                );
+
+                routes.MapRoute(
+                     "Chat",
+                     "chat/{chatId}/messagesfeed",
+                     new { controller = "Chat", action = "MessagesFeed" }
+                 );
 
                 routes.MapRoute(
                     "Tag",
@@ -99,7 +117,7 @@ namespace MroczekDotDev.Sfira
                     "Default",
                     "{controller}/{action}/{id?}",
                     new { controller = "Home", action = "Index" },
-                    new { controller = "(attachment|comment|explore|home|identity|messages|post|search)" }
+                    new { controller = "(attachment|chat|comment|explore|home|identity|messages|post|search)" }
                 );
 
                 routes.MapRoute(

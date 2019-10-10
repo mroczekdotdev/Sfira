@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CommentViewModel>
 @{
-    if (Model.Any() == false)
+    if (!Model.Any())
     {
         <article class="single-comment">
             <span>Be first to comment!</span>
@@ -17,9 +17,9 @@
                 </a>
                 <span class="timestamp">@comment.PublicationTime.Relative()</span>
             </header>
-            <div class="body">
-                <p class="content">
-                    @Html.Raw(comment.Message.FormatAsMessage())
+            <div class="content">
+                <p class="body">
+                    @Html.Raw(comment.Body.FormatAsEntry())
                 </p>
             </div>
         </article>

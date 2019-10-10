@@ -17,14 +17,13 @@ namespace MroczekDotDev.Sfira.Models
         public Attachment Attachment { get; set; }
 
         public PostViewModel ToViewModel()
-
         {
             return new PostViewModel
             {
                 Id = Id,
                 Author = Author,
                 PublicationTime = PublicationTime,
-                Message = Message,
+                Body = Body,
                 LikesCount = LikesCount,
                 FavoritesCount = FavoritesCount,
                 CommentsCount = CommentsCount,

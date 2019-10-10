@@ -3,7 +3,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<div class="dropdown">
+<div class="dropdown-menu">
     @if (SignInManager.IsSignedIn(User))
     {
         <div class="avatar" sfira-id="@UserManager.GetUserId(User)" sfira-media="avatar"></div>

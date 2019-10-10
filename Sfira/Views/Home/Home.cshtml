@@ -3,7 +3,7 @@
     ViewBag.Title = "Home \u00B7 Sfira";
 }
 
-@{await Html.RenderPartialAsync("_CreatePostPartial", new PostViewModel()); }
+@{await Html.RenderPartialAsync("_CreatePostPartial", new PostViewModel());}
 
 @{if (User.Identity.IsAuthenticated)
     {
@@ -19,7 +19,7 @@
         else
         {
             <section class="feed posts-feed">
-                @{await Html.RenderPartialAsync("_PostsFeedPartial", Model); }
+                @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
             </section>
         }
     }

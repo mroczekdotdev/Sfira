@@ -9,7 +9,7 @@
             <span class="timestamp">@Model.PublicationTime.Relative()</span>
         </a>
     </header>
-    <div class="body">
+    <div class="content">
         <div class="top">
             <div class="avatar" sfira-id="@Model.Author.Id" sfira-media="avatar"></div>
             <section class="postActions">
@@ -75,8 +75,8 @@
                 <span class="more">&bull;&bull;&bull;</span>
             </section>
         </div>
-        <p class="content">
-            @Html.Raw(Model.Message.FormatAsMessage())
+        <p class="body">
+            @Html.Raw(Model.Body.FormatAsEntry())
         </p>
         @{
             if (Model.Attachment != null)

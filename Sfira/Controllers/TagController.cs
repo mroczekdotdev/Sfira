@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Infrastructure;
+using MroczekDotDev.Sfira.ViewModels;
+using System.Collections.Generic;
 
 namespace MroczekDotDev.Sfira.Controllers
 {
@@ -15,7 +17,8 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public IActionResult Index(string tagName)
         {
-            return View("Tag", dataStorage.GetPostsByTag(tagName).ToViewModels());
+            IEnumerable<PostViewModel> result = dataStorage.GetPostsByTag(tagName).ToViewModels();
+            return View("Tag", result);
         }
     }
 }

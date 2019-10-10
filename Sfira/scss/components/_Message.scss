@@ -1,0 +1,51 @@
+﻿.Message {
+  width: 80%;
+
+  &.-user {
+    margin-left: auto;
+
+    > .header {
+      > .user {
+        display: none;
+      }
+
+      > .timestamp {
+        margin-left: auto;
+      }
+    }
+
+    > .body {
+      color: $color-white;
+      background-color: $color-primary;
+    }
+  }
+
+  &:nth-of-type(n+2) {
+    margin-top: $margin-sm;
+  }
+
+  > .header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .name {
+      margin-right: $margin-sm;
+    }
+
+    .username {
+      color: color-variant("light", $color-primary);
+    }
+
+    > .timestamp {
+      color: color-variant("light", $color-primary);
+    }
+  }
+
+  > .body {
+    padding: $padding-base;
+    background-color: color-variant("superlight", $color-primary);
+    border-radius: $radius-base;
+  }
+}

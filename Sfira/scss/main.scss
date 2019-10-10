@@ -1,21 +1,27 @@
-@import 'utilities/functions';
-@import 'utilities/variables';
+@import "utilities/_functions.scss";
+@import "utilities/_variables.scss";
 
-@import 'base/reboot';
-@import 'base/base';
+@import "base/_reboot.scss";
+@import "base/_base.scss";
 
-@import 'layout/profile';
-@import 'layout/site';
+@import "layout/_Chat.scss";
+@import "layout/_messages.scss";
+@import "layout/_profile.scss";
+@import "layout/_site.scss";
 
-@import 'components/app-message';
-@import 'components/dropdown';
-@import 'components/image-modal';
-@import 'components/followers-feed';
-@import 'components/media-feed';
-@import 'components/posts-feed';
-@import 'components/search-form.scss';
-@import 'components/single-post';
-@import 'components/single-comment';
-@import 'components/create-post';
-@import 'components/create-comment';
-@import 'components/user';
+@import "components/_app-message.scss";
+@import "components/_ChatsList.scss";
+@import "components/CreateMessage.scss";
+@import "components/_dropdown-menu.scss";
+@import "components/_image-modal.scss";
+@import "components/_followers-feed.scss";
+@import "components/_media-feed.scss";
+@import "components/_Message.scss";
+@import "components/_MessagesFeed.scss";
+@import "components/_posts-feed.scss";
+@import "components/_search-form.scss";
+@import "components/_single-post.scss";
+@import "components/_single-comment.scss";
+@import "components/_create-post.scss";
+@import "components/_create-comment.scss";
+@import "components/_user.scss";

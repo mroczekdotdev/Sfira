@@ -1,0 +1,15 @@
+﻿@model MessageViewModel
+
+<section class="Message @if (Model.IsCurrentUserAuthor) {<text>-user</text>}">
+    <section class="header">
+        <span class="user">
+            <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@Model.Author.UserName">
+                <span class="name">@Model.Author.Name</span><span class="username">@Model.Author.UserName</span>
+            </a>
+        </span>
+        <span class="timestamp">@Model.PublicationTime.Relative()</span>
+    </section>
+    <section class="body">
+        @Model.Body
+    </section>
+</section>

@@ -1,4 +1,4 @@
-﻿.dropdown {
+﻿.dropdown-menu {
   position: relative;
   display: inline-block;
 
@@ -23,6 +23,6 @@
   }
 }
 
-  .dropdown:hover .dropdown-content {
+  .dropdown-menu:hover .dropdown-content {
     display: block;
   }
