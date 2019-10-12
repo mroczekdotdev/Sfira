@@ -313,11 +313,11 @@ namespace MroczekDotDev.Sfira.Data
 
             if (chats.Any())
             {
-                UserChat userUserChat = chats.First().UserChats.First(uc => uc.UserId == userId);
+                UserChat userChat = GetUserChat(userId, chats.First().Id);
 
                 foreach (Chat chat in chats)
                 {
-                    chat.UserChats.Remove(userUserChat);
+                    chat.UserChats.Remove(userChat);
                 }
             }
 
@@ -347,11 +347,16 @@ namespace MroczekDotDev.Sfira.Data
 
             if (directChat != null)
             {
-                UserChat userUserChat = directChat.UserChats.First(uc => uc.UserId == userId);
-                directChat.UserChats.Remove(userUserChat);
+                UserChat userChat = GetUserChat(userId, directChat.Id);
+                directChat.UserChats.Remove(userChat);
             }
 
             return directChat;
+        }
+
+        public UserChat GetUserChat(string userId, int chatId)
+        {
+            return context.UserChats.Find(userId, chatId);
         }
 
         public Message AddMessage(MessageViewModel message)

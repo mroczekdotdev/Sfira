@@ -50,10 +50,20 @@ namespace MroczekDotDev.Sfira.Controllers
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
 
-            IEnumerable<MessageViewModel> messages = dataStorage.GetMessagesByChatId(chatId).ToViewModels();
-            messages = dataStorage.LoadCurrentUserAuthorship(messages, currentUser.Id);
+            UserChat userChat = dataStorage.GetUserChat(currentUser.Id, chatId);
 
-            return PartialView("_MessagesFeedPartial", messages);
+            if (userChat != null)
+            {
+                IEnumerable<MessageViewModel> messages = dataStorage.GetMessagesByChatId(chatId).ToViewModels();
+                messages = dataStorage.LoadCurrentUserAuthorship(messages, currentUser.Id);
+
+                return PartialView("_MessagesFeedPartial", messages);
+            }
+            else
+            {
+                return BadRequest();
+            }
+
         }
 
         [Authorize]

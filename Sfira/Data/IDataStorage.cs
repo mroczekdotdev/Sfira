@@ -31,6 +31,8 @@ namespace MroczekDotDev.Sfira.Data
         Chat GetChatById(int chatId);
         DirectChat GetDirectChatByUserIds(string userId, string interlocutorId);
 
+        UserChat GetUserChat(string userId, int chatId);
+
         Message AddMessage(MessageViewModel message);
         IEnumerable<Message> GetMessagesByChatId(int chatId);
         IEnumerable<MessageViewModel> LoadCurrentUserAuthorship(IEnumerable<MessageViewModel> messages, string currentUserId);
