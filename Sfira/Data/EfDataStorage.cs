@@ -311,11 +311,14 @@ namespace MroczekDotDev.Sfira.Data
                    .ThenInclude(m => m.Author)
                 .ToArray();
 
-            UserChat userUserChat = chats.First().UserChats.First(uc => uc.UserId == userId);
-
-            foreach (Chat chat in chats)
+            if (chats.Any())
             {
-                chat.UserChats.Remove(userUserChat);
+                UserChat userUserChat = chats.First().UserChats.First(uc => uc.UserId == userId);
+
+                foreach (Chat chat in chats)
+                {
+                    chat.UserChats.Remove(userUserChat);
+                }
             }
 
             return chats;

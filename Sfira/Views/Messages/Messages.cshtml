@@ -5,7 +5,14 @@
 
 <section class="conversations">
     <h1>Conversations</h1>
-    @{await Html.RenderPartialAsync("_ChatsListPartial", Model);}
-    <br>
-    @*<a asp-controller="Chat" asp-action="@nameof(ChatController.CreateDirectChat)">Create Direct Chat</a>*@
+    @if (Model.Any())
+    {
+        await Html.RenderPartialAsync("_ChatsListPartial", Model);
+    }
+    else
+    {
+        <section class="app-message">
+            <header>You don't have any conversations</header>
+        </section>
+    }
 </section>
