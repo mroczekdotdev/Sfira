@@ -1,113 +1,122 @@
 ﻿@{
     @model UserViewModel;
-    ViewBag.Title = "@" + Model.UserName + " \u00B7 Sfira";
+    var usernameNameWithSymbol = "@" + ViewContext.RouteData.Values["userName"];
+    ViewBag.Title = usernameNameWithSymbol + " \u00B7 Sfira";
+
 }
 
-<section class="profile" data-username="@Model.UserName">
-    <header class="profileHeader">
-        <div class="cover" sfira-id="@Model.Id" sfira-media="cover">
-            <div class="profileTitle">
-                <div class="name">@Model.Name</div>
-                <div class="username">@Model.UserName</div>
+@if (Model != null)
+{
+    <section class="profile" data-username="@Model.UserName">
+        <header class="profileHeader">
+            <div class="cover" sfira-id="@Model.Id" sfira-media="cover">
+                <div class="profileTitle">
+                    <div class="name">@Model.Name</div>
+                    <div class="username">@Model.UserName</div>
+                </div>
             </div>
-        </div>
-        <div class="avatar" sfira-id="@Model.Id" sfira-media="avatar"></div>
-        <section class="profileActions">
+            <div class="avatar" sfira-id="@Model.Id" sfira-media="avatar"></div>
+            <section class="profileActions">
 
-            @if (User.Identity.IsAuthenticated && !Model.IsCurrentUser)
-            {
-                <section class="primaryProfileActions">
-                    @if (Model.IsFollowedByCurrentUser)
-                    {
-                        <button class="unfollow">Unfollow</button>
-                    }
-                    else
-                    {
-                        <button class="follow">Follow</button>
-                    }
-                </section>
-                <section class="moreProfileActions" style="display: none;"><!--
-                    --><button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">Message</button><!--
-                    --><button class="block">Block</button><!--
-                    --><button class="report">Report</button><!--
-                -->
-                </section><!--
-                --><button class="more">&bull;&bull;&bull;</button>
-            }
-        </section>
-        <nav class="profileMenu">
-            <a class="menuItem showPosts active" href="javascript:void(0)">Posts</a>
-            <a class="menuItem showMedia" href="javascript:void(0)">Media</a>
-            <a class="menuItem showFollowers" href="javascript:void(0)">Followers (<span id="followersCount">@Model.FollowersCount</span>)</a>
-        </nav>
-    </header>
-</section>
-
-<section class="feed posts-feed active">
-    @if (!Model.Posts.Any())
-    {
-        <section class="app-message">
-            <header>User doesn’t have any posts</header>
-        </section>
-    }
-    else
-    {
-        <section class="feed posts-feed">
-            @{await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);}
-        </section>
-    }
-</section>
-
-<section class="feed media-feed" style="display: none;"></section>
-
-<section class="feed followers-feed" style="display: none;"></section>
-
-@section MainAside {
-    @if (Model.Description != null)
-    {
-        <section class="aside">
-            <header>
-                Summary
-            </header>
-            <p class="description">
-                @Html.Raw(Model.Description.FormatAsEntry())
-            </p>
-        </section>
-    }
-
-    <section class="aside">
-        <header>
-            Member since
+                @if (User.Identity.IsAuthenticated && !Model.IsCurrentUser)
+                {
+                    <section class="primaryProfileActions">
+                        @if (Model.IsFollowedByCurrentUser)
+                        {
+                            <button class="unfollow">Unfollow</button>
+                        }
+                        else
+                        {
+                            <button class="follow">Follow</button>
+                        }
+                    </section>
+                        <section class="moreProfileActions" style="display: none;"><!--
+                            --><button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">Message</button><!--
+                            --><button class="block">Block</button><!--
+                            --><button class="report">Report</button><!--
+                        -->
+                        </section><!--
+                        --><button class="more">&bull;&bull;&bull;</button>
+                }
+            </section>
+            <nav class="profileMenu">
+                <a class="menuItem showPosts active" href="javascript:void(0)">Posts</a>
+                <a class="menuItem showMedia" href="javascript:void(0)">Media</a>
+                <a class="menuItem showFollowers" href="javascript:void(0)">Followers (<span id="followersCount">@Model.FollowersCount</span>)</a>
+            </nav>
         </header>
-        <p class="date">
-            @Model.RegisterTime
-        </p>
     </section>
 
-    @if (Model.Location != null)
-    {
-        <section class="aside">
-            <header>
-                Location
-            </header>
-            <p class="location">
-                @Model.Location
-            </p>
-        </section>
-    }
+    <section class="feed posts-feed active">
+        @if (!Model.Posts.Any())
+        {
+            <section class="app-message">
+                <header>User doesn’t have any posts</header>
+            </section>
+        }
+        else
+        {
+            <section class="feed posts-feed">
+                @{await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);}
+            </section>
+        }
+    </section>
+    <section class="feed media-feed" style="display: none;"></section>
+    <section class="feed followers-feed" style="display: none;"></section>
 
-    @if (Model.Website != null)
-    {
+    @section MainAside {
+        @if (Model.Description != null)
+        {
+            <section class="aside">
+                <header>
+                    Summary
+                </header>
+                <p class="description">
+                    @Html.Raw(Model.Description.FormatAsEntry())
+                </p>
+            </section>
+        }
+
         <section class="aside">
             <header>
-                Website
+                Member since
             </header>
-            <p class="website">
-                @Model.Website
-                @*<TODO-CustomTagHelper shref="@Model.Website">@Model.Website</TODO>*@
+            <p class="date">
+                @Model.RegisterTime
             </p>
         </section>
+
+        @if (Model.Location != null)
+        {
+            <section class="aside">
+                <header>
+                    Location
+                </header>
+                <p class="location">
+                    @Model.Location
+                </p>
+            </section>
+        }
+
+        @if (Model.Website != null)
+        {
+            <section class="aside">
+                <header>
+                    Website
+                </header>
+                <p class="website">
+                    @Model.Website
+                    @*<TODO-CustomTagHelper shref="@Model.Website">@Model.Website</TODO>*@
+                </p>
+            </section>
+        }
     }
+}
+else
+{
+    <section class="app-message">
+        <header>@usernameNameWithSymbol user doesn't exist</header>
+    </section>
 }
 
 @section Aside{

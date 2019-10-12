@@ -25,11 +25,7 @@ namespace MroczekDotDev.Sfira.Controllers
         {
             UserViewModel result = dataStorage.GetUserByUserName(userName)?.ToViewModel();
 
-            if (result == null)
-            {
-                return BadRequest();
-            }
-            else
+            if (result != null)
             {
                 result.Posts = dataStorage.GetPostsByUserName(userName)?.ToViewModels();
 
@@ -52,9 +48,9 @@ namespace MroczekDotDev.Sfira.Controllers
                         result.IsFollowedByCurrentUser = dataStorage.GetUserFollow(currentUser.Id, result.Id) != null;
                     }
                 }
-
-                return View("User", result);
             }
+
+            return View("User", result);
         }
 
         [Authorize]
