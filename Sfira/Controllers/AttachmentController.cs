@@ -76,7 +76,14 @@ namespace MroczekDotDev.Sfira.Controllers
                     return BadRequest();
             }
 
-            return new OkObjectResult(new { type, name, extension });
+            var attachmentInfo = new
+            {
+                type,
+                name,
+                extension,
+            };
+
+            return Ok(attachmentInfo);
         }
 
         [NonAction]

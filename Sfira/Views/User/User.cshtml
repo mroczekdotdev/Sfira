@@ -47,22 +47,10 @@
         </header>
     </section>
 
-    <section class="feed posts-feed active">
-        @if (!Model.Posts.Any())
-        {
-            <section class="app-message">
-                <header>User doesn’t have any posts</header>
-            </section>
-        }
-        else
-        {
-            <section class="feed posts-feed">
-                @{await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);}
-            </section>
-        }
-    </section>
-    <section class="feed media-feed" style="display: none;"></section>
-    <section class="feed followers-feed" style="display: none;"></section>
+    await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);
+
+    <section class="Feed MediaFeed" style="display: none;"></section>
+    <section class="Feed FollowersFeed" style="display: none;"></section>
 
     @section MainAside {
         @if (Model.Description != null)
@@ -114,7 +102,7 @@
 }
 else
 {
-    <section class="app-message">
+    <section class="Info">
         <header>@usernameNameWithSymbol user doesn't exist</header>
     </section>
 }

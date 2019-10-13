@@ -422,7 +422,7 @@ namespace MroczekDotDev.Sfira.Data
             if ((followedUser = GetUserByUserName(followedUserUsername)) != null
                 && followingUserId != followedUser.Id
                 && (followingUser = GetUserById(followingUserId)) != null
-                && (existingUserFollow = context.UserFollows.Find(followingUserId, followedUser.Id)) == null)
+                && (existingUserFollow = GetUserFollow(followingUserId, followedUser.Id)) == null)
             {
                 var userFollow = new UserFollow
                 {
@@ -451,7 +451,7 @@ namespace MroczekDotDev.Sfira.Data
             if ((followedUser = GetUserByUserName(followedUserUsername)) != null
                 && followingUserId != followedUser.Id
                 && (followingUser = GetUserById(followingUserId)) != null
-                && (userFollow = context.UserFollows.Find(followingUserId, followedUser.Id)) != null)
+                && (userFollow = GetUserFollow(followingUserId, followedUser.Id)) != null)
             {
                 followingUser.FollowingCount--;
                 followedUser.FollowersCount--;

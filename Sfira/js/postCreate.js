@@ -40,14 +40,9 @@
         success: function (result) {
           submitPostForm(result)
         },
-        error: function () {
-        },
-        complete: function () {
-        },
       });
     }
   }
-
 
   function submitPostForm(attachment) {
     var body = $("#postBody").val();
@@ -69,10 +64,6 @@
         $(".attachmentForm")[0].reset();
         $(".postForm")[0].reset();
         attachmentPreview.hide();
-      },
-      error: function () {
-      },
-      complete: function () {
       },
     });
   }

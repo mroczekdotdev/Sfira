@@ -30,12 +30,16 @@
     justify-content: space-between;
     align-items: center;
 
-    .name {
-      margin-right: $margin-sm;
-    }
+    > .user {
+      > .name {
+        display: inline-block;
+        margin-right: $margin-sm;
+      }
 
-    .username {
-      color: color-variant("light", $color-primary);
+      > .username {
+        display: inline-block;
+        color: color-variant("light", $color-primary);
+      }
     }
 
     > .timestamp {

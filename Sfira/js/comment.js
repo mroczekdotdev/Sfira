@@ -1,29 +1,30 @@
 ﻿$(document).ready(function () {
   $(document).on("click", "a.comment", function () {
-    var parent = $(this).parents(".single-post");
-    var postid = parent.data("id");
-    var comments = parent.find(".comments");
-    var createComment = parent.find(".create-comment");
-    if ($.trim(comments.html()) == "") {
+    var post = $(this).parents(".Post");
+    var postId = post.data("id");
+    var commentsFeed = post.find(".CommentsFeed");
+    var commentCreate = post.find(".CommentCreate");
+
+    if ($.trim(commentsFeed.html()) == "") {
       $.ajax({
         type: "GET",
-        url: "/comments/" + postid,
+        url: postId + "/comments",
         success: function (result) {
-          createComment.slideDown();
-          comments.html(result).hide().slideDown();
+          commentCreate.slideDown();
+          commentsFeed.replaceWith(result).hide().slideDown();
         }
       });
     }
     else {
-      createComment.slideToggle();
-      comments.slideToggle();
+      commentCreate.slideToggle();
+      commentsFeed.slideToggle();
     }
   });
 
-  $(document).on("click", ".create-comment button", function () {
-    var parent = $(this).parents(".single-post");
-    var postId = parent.data("id");
-    var body = parent.find(".create-comment .body");
+  $(document).on("click", ".CommentCreate button", function () {
+    var post = $(this).parents(".Post");
+    var postId = post.data("id");
+    var body = post.find(".CommentCreate .body");
 
     var model = {
       Body: body.val(),
@@ -35,23 +36,20 @@
       data: JSON.stringify(model),
       contentType: "application/json",
       success: function () {
-        var comments = parent.find(".comments");
-        var a = parent.find("a.comment");
+        var comments = post.find(".CommentsFeed");
+        var a = post.find("a.comment");
+
         $.ajax({
           type: "GET",
-          url: "/comments/" + postId,
+          url: postId + "/comments",
           success: function (result) {
             body.val("");
-            comments.html(result);
-            var commentsCount = parent.find(".single-comment").length;
+            comments.replaceWith(result);
+            var commentsCount = post.find(".Comment").length;
             a.html('<i class="fas fa-comment-alt fa-sm fa-fw"></i>' + commentsCount).hide().fadeIn();
           },
-          error: function () {
-          },
-          complete: function () {
-          },
         });
-      }
+      },
     });
   });
 });

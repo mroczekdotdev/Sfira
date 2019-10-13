@@ -2,6 +2,7 @@
   $(document).on("click", "button.follow", function () {
     var $this = $(this);
     var userId = $this.parents(".profile").data("username");
+
     $.ajax({
       type: "GET",
       url: userId + "/follow",
@@ -15,6 +16,7 @@
   $(document).on("click", "button.unfollow", function () {
     var $this = $(this);
     var userId = $this.parents(".profile").data("username");
+
     $.ajax({
       type: "GET",
       url: userId + "/unfollow",

@@ -1,7 +1,7 @@
 ﻿@model PostViewModel
 @{if (User.Identity.IsAuthenticated)
     {
-        <section class="create-post">
+        <section class="PostCreate">
             <form class="postForm">
                 <h1>Create a post</h1>
                 <div class="postContent">
@@ -23,7 +23,7 @@
     }
     else
     {
-        <section class="app-message">
+        <section class="Info">
             <header>Welcome to Sfira!</header>
             <p>
                 <a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>

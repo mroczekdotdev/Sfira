@@ -1,0 +1,38 @@
+﻿.CommentCreate {
+  padding: $padding-base;
+  border-top: $border-size-sm solid $color-primary;
+  background-color: $color-primary;
+
+  > .form {
+
+    > .body {
+      display: block;
+      height: 4rem;
+      min-height: 4rem;
+      border: none;
+      background: none;
+      border-radius: $radius-base;
+      background-color: color-variant("superlight", $color-primary);
+
+      &:focus {
+        background-color: $color-white;
+      }
+    }
+  }
+
+  > .actions {
+    display: block;
+    margin-left: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    > .action {
+      color: $color-white;
+      margin-top: $margin-sm;
+      margin-left: auto;
+      background-color: $color-primary;
+      border: $border-size-base solid $color-white;
+    }
+  }
+}

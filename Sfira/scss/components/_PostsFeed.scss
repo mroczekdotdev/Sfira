@@ -1,5 +1,5 @@
-﻿.posts-feed {
-  .single-post {
+﻿.PostsFeed {
+  .Post {
     &:nth-of-type(n+2) {
       margin-top: ($margin-base)+($padding-base)-($border-size-base)
     }

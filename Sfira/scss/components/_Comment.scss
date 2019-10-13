@@ -1,0 +1,46 @@
+﻿.Comment {
+  font-size: $font-size-sm;
+  border-top: $border-size-sm solid $color-primary;
+  background-color: transparent;
+  padding: $padding-base;
+
+  > .header {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0;
+
+    > .avatar {
+      position: static;
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    > .user {
+      > .name {
+        display: inline-block;
+        margin-right: $padding-base;
+        margin-left: $padding-base;
+      }
+
+      > .username {
+        display: inline-block;
+        color: color-variant("light", $color-primary);
+      }
+    }
+
+    > .timestamp {
+      flex-grow: 1;
+      text-align: right;
+    }
+  }
+
+  > .body {
+    overflow-wrap: break-word;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+  }
+}

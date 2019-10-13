@@ -4,21 +4,19 @@
     ViewBag.Title = tagNameWithSymbol + " \u00B7 Sfira";
 }
 
-@{await Html.RenderPartialAsync("_CreatePostPartial", new PostViewModel());}
+@{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
 
-@{
-    if (!Model.Any())
-    {
-        <section class="app-message">
-            <header>@tagNameWithSymbol doesn’t have any posts</header>
-        </section>
-    }
-    else
-    {
-        <section class="feed posts-feed">
-            @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
-        </section>
-    }
+@if (Model.Any())
+{
+    <section class="feed PostsFeed">
+        @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
+    </section>
+}
+else
+{
+    <section class="Info">
+        <header>@tagNameWithSymbol tag doesn't have any posts</header>
+    </section>
 }
 
 @section MainAside{

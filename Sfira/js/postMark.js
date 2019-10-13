@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
   $(document).on("click", "a.like", function () {
     var $this = $(this);
-    var postId = $this.parents(".single-post").data("id");
+    var postId = $this.parents(".Post").data("id");
+
     $.ajax({
       type: "GET",
       url: postId + "/like",
@@ -13,7 +14,8 @@
 
   $(document).on("click", "a.unlike", function () {
     var $this = $(this);
-    var postId = $this.parents(".single-post").data("id");
+    var postId = $this.parents(".Post").data("id");
+
     $.ajax({
       type: "GET",
       url: postId + "/unlike",
@@ -25,7 +27,8 @@
 
   $(document).on("click", "a.favorite", function () {
     var $this = $(this);
-    var postId = $this.parents(".single-post").data("id");
+    var postId = $this.parents(".Post").data("id");
+
     $.ajax({
       type: "GET",
       url: postId + "/favorite",
@@ -37,7 +40,8 @@
 
   $(document).on("click", "a.unfavorite", function () {
     var $this = $(this);
-    var postId = $this.parents(".single-post").data("id");
+    var postId = $this.parents(".Post").data("id");
+
     $.ajax({
       type: "GET",
       url: postId + "/unfavorite",

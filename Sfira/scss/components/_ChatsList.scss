@@ -38,10 +38,12 @@
         align-items: center;
 
         .name {
+          display: inline-block;
           margin-right: $margin-sm;
         }
 
         .username {
+          display: inline-block;
           color: color-variant("light", $color-primary);
         }
 

@@ -1,6 +1,17 @@
 ﻿@model IEnumerable<PostViewModel>
 
-@foreach (var post in Model)
-{
-    await Html.RenderPartialAsync("_PostPartial", post);
-}
+<section class="Feed PostsFeed">
+    @if (Model.Any())
+    {
+        @foreach (var post in Model)
+        {
+            await Html.RenderPartialAsync("_PostPartial", post);
+        }
+    }
+    else
+    {
+        <section class="Info">
+            <header>User doesn’t have any posts</header>
+        </section>
+    }
+</section>

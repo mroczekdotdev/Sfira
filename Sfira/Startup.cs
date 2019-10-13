@@ -78,31 +78,31 @@ namespace MroczekDotDev.Sfira
                 );
 
                 routes.MapRoute(
+                    "Comments",
+                    "{postId}/comments",
+                    new { controller = "Comment", action = "Feed" }
+                );
+
+                routes.MapRoute(
                     "Mark",
                     "{postId}/{interaction}",
                     new { controller = "Post", action = "Mark" }
                 );
 
                 routes.MapRoute(
-                    "Comments",
-                    "comments/{postId}",
-                    new { controller = "Comment", action = "Comments" }
-                );
-
-                routes.MapRoute(
-                    "Chat",
+                    "DirectChat",
                     "{userName}/chat",
                     new { controller = "Chat", action = "DirectChat" }
                 );
 
                 routes.MapRoute(
-                    "Chat",
+                    "Message",
                     "chat/{chatId}/createmessage",
                     new { controller = "Chat", action = "CreateMessage" }
                 );
 
                 routes.MapRoute(
-                     "Chat",
+                     "Messages",
                      "chat/{chatId}/messagesfeed",
                      new { controller = "Chat", action = "MessagesFeed" }
                  );

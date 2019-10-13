@@ -3,13 +3,13 @@
     ViewBag.Title = "Home \u00B7 Sfira";
 }
 
-@{await Html.RenderPartialAsync("_CreatePostPartial", new PostViewModel());}
+@{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
 
 @{if (User.Identity.IsAuthenticated)
     {
         if (Model == null)
         {
-            <section class="app-message">
+            <section class="Info">
                 <header>Welcome to Sfira!</header>
                 <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
                     <p>Find some users to follow</p>
@@ -18,7 +18,7 @@
         }
         else
         {
-            <section class="feed posts-feed">
+            <section class="feed PostsFeed">
                 @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
             </section>
         }

@@ -1,20 +1,22 @@
 ﻿@model IEnumerable<UserViewModel>
 
-@{
-    if (!Model.Any())
+<section class="Feed FollowersFeed">
+    @if (Model.Any())
     {
-        <section class="app-message">
-            <header>User doesn’t have any followers</header>
+        foreach (var user in Model)
+        {
+            <article class="single-user">
+                <div class="avatar" sfira-id="@user.Id" sfira-media="avatar"></div>
+                <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@user.UserName">
+                    <span class="name">@user.Name</span><span class="username">@user.UserName</span>
+                </a>
+            </article>
+        }
+    }
+    else
+    {
+        <section class="Info">
+            <header>User doesn't have any followers</header>
         </section>
     }
-
-    foreach (var user in Model)
-    {
-        <article class="single-user">
-            <div class="avatar" sfira-id="@user.Id" sfira-media="avatar"></div>
-            <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@user.UserName">
-                <span class="name">@user.Name</span><span class="username">@user.UserName</span>
-            </a>
-        </article>
-    }
-}
+</section>

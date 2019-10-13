@@ -22,9 +22,9 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<PostViewModel> result = dataStorage.GetPosts().ToViewModels();
+            IEnumerable<PostViewModel> posts = dataStorage.GetPosts().ToViewModels();
 
-            foreach (var post in result)
+            foreach (var post in posts)
             {
                 post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
             }
@@ -32,10 +32,10 @@ namespace MroczekDotDev.Sfira.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                result = dataStorage.LoadCurrentUserRelations(result, currentUser.Id);
+                posts = dataStorage.LoadCurrentUserRelations(posts, currentUser.Id);
             }
 
-            return View("Explore", result);
+            return View("Explore", posts);
         }
     }
 }

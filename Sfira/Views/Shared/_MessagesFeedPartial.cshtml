@@ -1,13 +1,11 @@
 ﻿@model IEnumerable<MessageViewModel>
 
-<section class="MessagesFeed">
-    @{
-        if (Model != null)
+<section class="Feed MessagesFeed">
+    @if (Model != null)
+    {
+        foreach (var message in Model)
         {
-            foreach (var message in Model)
-            {
-                await Html.RenderPartialAsync("_MessagePartial", message);
-            }
+            await Html.RenderPartialAsync("_MessagePartial", message);
         }
     }
 </section>

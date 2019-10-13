@@ -1,13 +1,11 @@
 ﻿@model PostViewModel
 
-<article class="single-post" data-id="@Model.Id">
+<article class="Post" data-id="@Model.Id">
     <header class="header">
-        <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@Model.Author.UserName">
+        <a class="user" asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@Model.Author.UserName">
             <span class="name">@Model.Author.Name</span><span class="username">@Model.Author.UserName</span>
         </a>
-        <a href="#">
-            <span class="timestamp">@Model.PublicationTime.Relative()</span>
-        </a>
+        <span class="timestamp">@Model.PublicationTime.Relative()</span>
     </header>
     <div class="content">
         <div class="top">
@@ -75,9 +73,9 @@
                 <span class="more">&bull;&bull;&bull;</span>
             </section>
         </div>
-        <p class="body">
+        <section class="body">
             @Html.Raw(Model.Body.FormatAsEntry())
-        </p>
+        </section>
         @{
             if (Model.Attachment != null)
             {
@@ -86,7 +84,7 @@
                 </section>
             }
         }
-        <section class="comments"></section>
-        @{await Html.RenderPartialAsync("_CreateCommentPartial", new CommentViewModel());}
+        <section class="CommentsFeed"></section>
+        @{await Html.RenderPartialAsync("_CommentCreatePartial", new CommentViewModel());}
     </div>
 </article>

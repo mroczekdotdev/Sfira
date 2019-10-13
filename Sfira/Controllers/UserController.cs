@@ -23,13 +23,13 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public async Task<IActionResult> Index(string userName)
         {
-            UserViewModel result = dataStorage.GetUserByUserName(userName)?.ToViewModel();
+            UserViewModel user = dataStorage.GetUserByUserName(userName)?.ToViewModel();
 
-            if (result != null)
+            if (user != null)
             {
-                result.Posts = dataStorage.GetPostsByUserName(userName)?.ToViewModels();
+                user.Posts = dataStorage.GetPostsByUserName(userName)?.ToViewModels();
 
-                foreach (var post in result.Posts)
+                foreach (var post in user.Posts)
                 {
                     post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
                 }
@@ -37,20 +37,20 @@ namespace MroczekDotDev.Sfira.Controllers
                 if (User.Identity.IsAuthenticated)
                 {
                     ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                    result.Posts = dataStorage.LoadCurrentUserRelations(result.Posts, currentUser.Id);
+                    user.Posts = dataStorage.LoadCurrentUserRelations(user.Posts, currentUser.Id);
 
-                    if (currentUser.Id == result.Id)
+                    if (currentUser.Id == user.Id)
                     {
-                        result.IsCurrentUser = true;
+                        user.IsCurrentUser = true;
                     }
                     else
                     {
-                        result.IsFollowedByCurrentUser = dataStorage.GetUserFollow(currentUser.Id, result.Id) != null;
+                        user.IsFollowedByCurrentUser = dataStorage.GetUserFollow(currentUser.Id, user.Id) != null;
                     }
                 }
             }
 
-            return View("User", result);
+            return View("User", user);
         }
 
         [Authorize]
@@ -89,14 +89,14 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public PartialViewResult Followers(string userName)
         {
-            IEnumerable<UserViewModel> result = dataStorage.GetFollowersByUserName(userName).ToViewModels();
-            return PartialView("_FollowersFeedPartial", result);
+            IEnumerable<UserViewModel> followers = dataStorage.GetFollowersByUserName(userName).ToViewModels();
+            return PartialView("_FollowersFeedPartial", followers);
         }
 
         public PartialViewResult Media(string userName)
         {
-            IEnumerable<AttachmentViewModel> result = dataStorage.GetAttachmentsByUserName(userName).ToViewModels();
-            return PartialView("_MediaFeedPartial", result);
+            IEnumerable<AttachmentViewModel> attachments = dataStorage.GetAttachmentsByUserName(userName).ToViewModels();
+            return PartialView("_MediaFeedPartial", attachments);
         }
     }
 }

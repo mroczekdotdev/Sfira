@@ -25,14 +25,14 @@ namespace MroczekDotDev.Sfira.Controllers
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            IEnumerable<ChatViewModel> result = dataStorage.GetChatsListByUserId(currentUser.Id).ToViewModels();
+            IEnumerable<ChatViewModel> chats = dataStorage.GetChatsListByUserId(currentUser.Id).ToViewModels();
 
-            foreach (ChatViewModel chat in result)
+            foreach (ChatViewModel chat in chats)
             {
                 chat.LastMessage.IsCurrentUserAuthor = chat.LastMessage.Author == currentUser ? true : false;
             }
 
-            return View("Messages", result);
+            return View("Messages", chats);
         }
     }
 }

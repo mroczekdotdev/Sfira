@@ -42,11 +42,17 @@ Make sure that **Docker** is installed:
 docker --version
 ```
 
-Download the repository:
+Download the repository, then extract the files:
 
 | https://github.com/mroczekdotdev/Sfira/archive/master.zip |
 | --------------------------------------------------------- |
 
+
+or clone the repository into a new directory:
+
+```console
+git clone https://github.com/mroczekdotdev/Sfira
+```
 
 ### Configuration
 

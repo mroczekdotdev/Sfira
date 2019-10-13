@@ -1,17 +1,19 @@
 ﻿@model IEnumerable<AttachmentViewModel>
 
-@{
-    if (!Model.Any())
+<section class="Feed MediaFeed">
+    @if (Model.Any())
     {
-        <section class="app-message">
-            <header>User doesn’t have any media</header>
+        foreach (var attachment in Model)
+        {
+            <section class="item">
+                @(await Component.InvokeAsync<AttachmentViewComponent>(attachment))
+            </section>
+        }
+    }
+    else
+    {
+        <section class="Info">
+            <header>User doesn't have any media</header>
         </section>
     }
-
-    foreach (var attachment in Model)
-    {
-        <section class="item">
-            @(await Component.InvokeAsync<AttachmentViewComponent>(attachment))
-        </section>
-    }
-}
+</section>

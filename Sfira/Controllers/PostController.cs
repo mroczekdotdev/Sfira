@@ -52,12 +52,13 @@ namespace MroczekDotDev.Sfira.Controllers
             {
                 PostViewModel post = dataStorage.GetPostById(postId).ToViewModel();
 
-                var result = new
+                var postCounters = new
                 {
                     likescount = post.LikesCount,
                     favoritescount = post.FavoritesCount,
                 };
-                return Ok(result);
+
+                return Ok(postCounters);
             }
             else
             {

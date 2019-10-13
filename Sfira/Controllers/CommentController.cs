@@ -38,10 +38,11 @@ namespace MroczekDotDev.Sfira.Controllers
             }
         }
 
-        public PartialViewResult Comments(int postId)
+        public PartialViewResult Feed(int postId)
         {
-            IEnumerable<CommentViewModel> result = dataStorage.GetCommentsByPostId(postId).ToViewModels();
-            return PartialView("_CommentsPartial", result);
+            IEnumerable<CommentViewModel> comments = dataStorage.GetCommentsByPostId(postId).ToViewModels();
+
+            return PartialView("_CommentsFeedPartial", comments);
         }
     }
 }

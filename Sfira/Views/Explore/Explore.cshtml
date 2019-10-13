@@ -3,9 +3,9 @@
     ViewBag.Title = "Explore \u00B7 Sfira";
 }
 
-@{await Html.RenderPartialAsync("_CreatePostPartial", new PostViewModel());}
+@{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
 
-<section class="feed posts-feed">
+<section class="feed PostsFeed">
     @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
 </section>
 

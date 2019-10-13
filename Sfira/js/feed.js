@@ -1,36 +1,36 @@
 ﻿$(document).ready(function () {
   $(document).on("click", ".showPosts", function () {
-    loadFeed($(this), "posts");
+    loadFeed($(this), "Posts");
   });
 
   $(document).on("click", ".showMedia", function () {
-    loadFeed($(this), "media");
+    loadFeed($(this), "Media");
   });
 
   $(document).on("click", ".showFollowers", function () {
-    loadFeed($(this), "followers");
+    loadFeed($(this), "Followers");
   });
 
   function loadFeed(caller, feedName) {
-    var parent = caller.parents(".profile");
-    var userName = parent.data("username");
-    var feed = parent.siblings("." + feedName + "-feed");
-    var activeMenuItem = parent.find(".profileMenu > .menuItem")
+    var profile = caller.parents(".profile");
+    var userName = profile.data("username");
+    var allFeeds = profile.siblings(".Feed")
+    var feedToLoad = profile.siblings("." + feedName + "Feed");
+    var activeMenuItem = profile.find(".profileMenu > .menuItem")
 
-    var activeFeed = $(".feed.active")
-
-    if ($.trim(feed.html()) == "") {
+    if ($.trim(feedToLoad.html()) == "") {
       $.ajax({
         type: "GET",
         url: userName + "/" + feedName + "/",
         success: function (result) {
-          feed.html(result);
+          feedToLoad.replaceWith(result);
         }
       });
     }
-    activeFeed.removeClass("active").hide();
-    feed.addClass("active").show();
+
+    allFeeds.hide();
+    feedToLoad.show();
     activeMenuItem.removeClass("active");
-    caller.addClass("active");;
-  }
+    caller.addClass("active");
+  };
 });

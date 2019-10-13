@@ -17,8 +17,8 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public IActionResult Index(string tagName)
         {
-            IEnumerable<PostViewModel> result = dataStorage.GetPostsByTag(tagName).ToViewModels();
-            return View("Tag", result);
+            IEnumerable<PostViewModel> posts = dataStorage.GetPostsByTag(tagName).ToViewModels();
+            return View("Tag", posts);
         }
     }
 }

@@ -24,34 +24,34 @@ namespace MroczekDotDev.Sfira.Controllers
         [Route("")]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<PostViewModel> result;
+            IEnumerable<PostViewModel> posts;
 
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
 
-                result = dataStorage.GetPostsByFollowerId(currentUser.Id).ToViewModels();
+                posts = dataStorage.GetPostsByFollowerId(currentUser.Id).ToViewModels();
 
-                if (result.Count() > 0)
+                if (posts.Count() > 0)
                 {
-                    foreach (var post in result)
+                    foreach (var post in posts)
                     {
                         post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
                     }
 
-                    result = dataStorage.LoadCurrentUserRelations(result, currentUser.Id);
+                    posts = dataStorage.LoadCurrentUserRelations(posts, currentUser.Id);
                 }
                 else
                 {
-                    result = null;
+                    posts = null;
                 }
             }
             else
             {
-                result = null;
+                posts = null;
             }
 
-            return View("Home", result);
+            return View("Home", posts);
         }
     }
 }

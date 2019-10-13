@@ -1,4 +1,4 @@
-﻿.thumbnail {
+﻿.Thumbnail {
   cursor: pointer;
   transition: 0.2s;
 
@@ -7,7 +7,7 @@
   }
 }
 
-#image-modal {
+#ImageModal {
   display: none;
   position: fixed;
   z-index: 2;

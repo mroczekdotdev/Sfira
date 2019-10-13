@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-  $(document).on("click", ".CreateMessage .submit", function () {
-    var form = $(this).parents(".CreateMessage");
+  $(document).on("click", ".MessageCreate .submit", function () {
+    var form = $(this).parents(".MessageCreate");
     var chat = form.siblings(".Chat");
     var chatId = chat.attr("data-id");
     var messageBody = form.find(".body");
@@ -30,10 +30,6 @@
           success: function (result) {
             messageBody.val("");
             messagesFeed.replaceWith(result);
-          },
-          error: function () {
-          },
-          complete: function () {
           },
         });
       },
