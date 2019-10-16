@@ -1,12 +1,8 @@
-﻿using MroczekDotDev.Sfira.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System;
 
-namespace MroczekDotDev.Sfira.Infrastructure
+namespace MroczekDotDev.Sfira.Extensions
 {
-    public static class ExtensionMethods
+    public static class DateTimeExtensions
     {
         public static string Relative(this DateTime dateTime)
         {
@@ -43,18 +39,6 @@ namespace MroczekDotDev.Sfira.Infrastructure
                 default:
                     return dateTime.ToString("MMMM d, yyyy");
             }
-        }
-
-        public static string FormatAsEntry(this string entry)
-        {
-            entry = Regex.Replace(entry, @"#(\w+)", @"<a href=""/tag/$1"">#$1</a>");
-            entry = entry.Replace(Environment.NewLine, "<br>");
-            return entry;
-        }
-
-        public static IEnumerable<T> ToViewModels<T>(this IEnumerable<IHaveViewModel<T>> models)
-        {
-            return models.Select(m => m.ToViewModel()).ToArray();
         }
     }
 }

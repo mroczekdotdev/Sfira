@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.IO;
 
-namespace MroczekDotDev.Sfira.Infrastructure.TagHelpers
+namespace MroczekDotDev.Sfira.TagHelpers
 {
     [HtmlTargetElement("div", Attributes = "sfira-id, sfira-media")]
     public class UserMediaTagHelper : TagHelper

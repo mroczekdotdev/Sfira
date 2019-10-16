@@ -1,5 +1,4 @@
-﻿using MroczekDotDev.Sfira.Infrastructure;
-using MroczekDotDev.Sfira.ViewModels;
+﻿using MroczekDotDev.Sfira.ViewModels;
 using System.Linq;
 
 namespace MroczekDotDev.Sfira.Models

@@ -47,7 +47,18 @@
         </header>
     </section>
 
-    await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);
+    if (Model.Posts.Any())
+    {
+            await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);
+    }
+    else
+    {
+        <section class="Feed PostsFeed">
+            <section class="Info">
+                <header>User doesn’t have any posts</header>
+            </section>
+        </section>
+    }
 
     <section class="Feed MediaFeed" style="display: none;"></section>
     <section class="Feed FollowersFeed" style="display: none;"></section>

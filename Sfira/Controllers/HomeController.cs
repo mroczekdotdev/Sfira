@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MroczekDotDev.Sfira.Data;
-using MroczekDotDev.Sfira.Infrastructure;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewModels;
 using System.Collections.Generic;

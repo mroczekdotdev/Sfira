@@ -4,13 +4,13 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # MroczekDotDev
-desktop.ini
-.graphic-design/
-**/media/user/
-Migrations/
 **/.ignore/
-launchSettings.json
+Sfira/Migrations/
+Sfira/wwwroot/media/user/
+
 *.Development.json
+desktop.ini
+launchSettings.json
 package-lock.json
 
 # User-specific files
