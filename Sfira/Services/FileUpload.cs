@@ -1,93 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using MroczekDotDev.Sfira.Data;
-using MroczekDotDev.Sfira.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace MroczekDotDev.Sfira.Controllers
+namespace MroczekDotDev.Sfira.Services
 {
-    public class AttachmentController : Controller
+    public class FileUpload
     {
-        private readonly IHostingEnvironment environment;
-        private readonly IDataStorage dataStorage;
-        private readonly UserManager<ApplicationUser> userManager;
-
-        public AttachmentController(IHostingEnvironment environment, IDataStorage dataStorage,
-            UserManager<ApplicationUser> userManager)
-        {
-            this.environment = environment;
-            this.dataStorage = dataStorage;
-            this.userManager = userManager;
-        }
-
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> Create(IFormFile file)
-        {
-            const int maxSizeInBytes = 25165824;
-
-            if (file.Length == 0 || file.Length > maxSizeInBytes)
-            {
-                return BadRequest();
-            }
-
-            ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            string type;
-            string directory = Path.Combine(new[] {
-                environment.WebRootPath, "media", "user", currentUser.Id + Path.DirectorySeparatorChar });
-            string name = Guid.NewGuid().ToString();
-            string extension;
-
-            async Task AttachmentToImage()
-            {
-                type = "image";
-                extension = FilenameExtension.jpg.ToString();
-                ImageFormat imageFormat = ImageFormat.Jpeg;
-                long imageQuality = 40L;
-
-                using (var memoryStream = new MemoryStream())
-                {
-                    await file.CopyToAsync(memoryStream);
-                    Image image = Image.FromStream(memoryStream);
-                    IEnumerable<(Image, string fileName)> images = ProcessImage(image, name, extension);
-                    SaveImages(images, directory, imageFormat, imageQuality);
-                }
-            }
-
-            switch (file.ContentType.ToLower())
-            {
-                case "image/jpeg":
-                case "image/png":
-                    Directory.CreateDirectory(directory);
-                    await AttachmentToImage();
-                    break;
-
-                default:
-                    return BadRequest();
-            }
-
-            var attachmentInfo = new
-            {
-                type,
-                name,
-                extension,
-            };
-
-            return Ok(attachmentInfo);
-        }
-
-        [NonAction]
-        private IEnumerable<(Image, string fileName)> ProcessImage(Image image, string name, string extension)
+        public IEnumerable<(Image, string fileName)> ProcessImage(Image image, string name, string extension)
         {
             const int maxWidth = 1920;
             const int maxHeight = 1080;
@@ -120,8 +42,7 @@ namespace MroczekDotDev.Sfira.Controllers
             return images;
         }
 
-        [NonAction]
-        private void SaveImages(IEnumerable<(Image image, string fileName)> images, string directory,
+        public void SaveImages(IEnumerable<(Image image, string fileName)> images, string directory,
             ImageFormat imageFormat, long imageQuality)
         {
             ImageCodecInfo imageCodecInfo = ImageCodecInfo.GetImageDecoders()
@@ -139,7 +60,6 @@ namespace MroczekDotDev.Sfira.Controllers
             }
         }
 
-        [NonAction]
         private Image GenerateThumbnail(Image image)
         {
             const int thumbWidth = 512;

@@ -5,25 +5,25 @@
 
 @{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
 
-@{if (User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated)
+{
+    if (Model == null)
     {
-        if (Model == null)
-        {
-            <section class="Info">
-                <header>Welcome to Sfira!</header>
-                <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
-                    <p>Find some users to follow</p>
-                </a>
-            </section>
-        }
-        else
-        {
-            <section class="feed PostsFeed">
-                @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
-            </section>
-        }
+        <section class="Info">
+            <header>Welcome to Sfira!</header>
+            <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
+                <p>Find some users to follow</p>
+            </a>
+        </section>
+    }
+    else
+    {
+        <section class="feed PostsFeed">
+            @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
+        </section>
     }
 }
+
 
 @section MainAside{
 }

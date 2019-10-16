@@ -1,35 +1,34 @@
 ﻿@model PostViewModel
-@{if (User.Identity.IsAuthenticated)
-    {
-        <section class="PostCreate">
-            <form class="postForm">
-                <h1>Create a post</h1>
-                <div class="postContent">
-                    <textarea asp-for="@Model.Body" id="postBody" placeholder="Write your post."></textarea>
-                    <section class="attachmentPreview" style="display: none;">
-                        <div class="cover" id="imagePreview">
-                        </div>
-                    </section>
-                </div>
-            </form>
-            <form class="attachmentForm">
-                <input class="attachmentInput" id="imageAttachment" type="file" accept="image/jpeg, image/png" style="display: none;">
-            </form>
-            <section class="actions">
-                <button class="attachImage" type="button" onclick="document.getElementById('imageAttachment').click();"><i class="fas fa-image fa-lg fa-fw"></i></button>
-                <button class="sendPost" type="button">Submit</button>
-            </section>
+@if (User.Identity.IsAuthenticated)
+{
+    <section class="PostCreate">
+        <form class="postForm">
+            <h1>Create a post</h1>
+            <div class="postContent">
+                <textarea asp-for="@Model.Body" id="postBody" placeholder="Write your post."></textarea>
+                <section class="attachmentPreview" style="display: none;">
+                    <div class="cover" id="imagePreview">
+                    </div>
+                </section>
+            </div>
+        </form>
+        <form class="attachmentForm">
+            <input class="attachmentInput" id="imageAttachment" type="file" accept="image/jpeg, image/png" style="display: none;">
+        </form>
+        <section class="actions">
+            <button class="attachImage" type="button" onclick="document.getElementById('imageAttachment').click();"><i class="fas fa-image fa-lg fa-fw"></i></button>
+            <button class="sendPost" type="button">Submit</button>
         </section>
-    }
-    else
-    {
-        <section class="Info">
-            <header>Welcome to Sfira!</header>
-            <p>
-                <a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                or
-                <a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            </p>
-        </section>
-    }
+    </section>
+}
+else
+{
+    <section class="Info">
+        <header>Welcome to Sfira!</header>
+        <p>
+            <a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            or
+            <a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </p>
+    </section>
 }

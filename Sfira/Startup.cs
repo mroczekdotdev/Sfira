@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Services;
 
 namespace MroczekDotDev.Sfira
 {
@@ -30,6 +31,8 @@ namespace MroczekDotDev.Sfira
                 options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
 
             services.AddTransient<IDataStorage, EfDataStorage>();
+
+            services.AddTransient<FileUpload>();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2); //remove in 3.0
@@ -117,7 +120,7 @@ namespace MroczekDotDev.Sfira
                     "Default",
                     "{controller}/{action}/{id?}",
                     new { controller = "Home", action = "Index" },
-                    new { controller = "(attachment|chat|comment|explore|home|identity|messages|post|search)" }
+                    new { controller = "(chat|comment|explore|home|identity|messages|post|search)" }
                 );
 
                 routes.MapRoute(

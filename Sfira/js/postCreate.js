@@ -1,70 +1,53 @@
 ﻿$(document).ready(function () {
   var attachmentPreview = $(".attachmentPreview");
 
-  $(document).on("change", "#imageAttachment", function (e) {
+  $(document).on("change", "#imageAttachment", function () {
+    $this = $(this);
     $(".attachmentInput").attr("data-selected", "false");
-    e.target.setAttribute("data-selected", "true");
+    $this.attr("data-selected", "true");
 
-    var img = new Image;
-    img.src = URL.createObjectURL(e.target.files[0]);
+    var img = new Image();
+    img.src = URL.createObjectURL($this[0].files[0]);
     $("#imagePreview").css({
       "background-image": "url(" + img.src + ")",
       "background-position": "center",
       "background-size": "cover",
-      "background-repeat": "no-repeat",
+      "background-repeat": "no-repeat"
     });
 
     attachmentPreview.show();
   });
 
   $(document).on("click", ".sendPost", function () {
-    submitAttachmentForm();
-  });
-
-  function submitAttachmentForm() {
-    var selected = $('.attachmentInput[data-selected="true"]');
-
-    if (selected[0] == undefined) {
-      submitPostForm();
-    }
-    else {
-      var file = new FormData();
-      file.append("file", selected[0].files[0]);
-
-      $.ajax({
-        type: "POST",
-        url: "/attachment/create",
-        data: file,
-        processData: false,
-        contentType: false,
-        success: function (result) {
-          submitPostForm(result)
-        },
-      });
-    }
-  }
-
-  function submitPostForm(attachment) {
+    var attachmentInput = $('.attachmentInput[data-selected="true"]');
     var body = $("#postBody").val();
 
-    var post = {
-      body
-    };
+    var form = new FormData();
 
-    if (attachment !== undefined) {
-      post.attachment = attachment
+    form.append(
+      "post",
+      new Blob(["post"], {
+        type: "application/json"
+      })
+    );
+
+    form.append("body", body);
+
+    if (attachmentInput[0] !== undefined) {
+      form.append("file", attachmentInput[0].files[0]);
     }
 
     $.ajax({
       type: "POST",
       url: "/post/create",
-      data: JSON.stringify(post),
-      contentType: "application/json; charset=UTF-8",
-      success: function (result) {
+      data: form,
+      contentType: false,
+      processData: false,
+      success: function () {
         $(".attachmentForm")[0].reset();
         $(".postForm")[0].reset();
         attachmentPreview.hide();
       },
     });
-  }
+  });
 });
