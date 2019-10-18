@@ -12,7 +12,7 @@ services:
       dockerfile: .docker/database.Dockerfile
     restart: always
     environment:
-      - POSTGRES_USER=${Database_User}
+      - POSTGRES_USER=${Database_Username}
       - POSTGRES_PASSWORD=${Database_Password}
       - POSTGRES_DB=${Database_Name}
     networks:
@@ -32,7 +32,12 @@ services:
     restart: always
     environment:
       - ASPNETCORE_URLS=http://+:5000
-      - ConnectionStrings__PostgreSQL=Host=database; Port=5432; Database=${Database_Name}; Username=${Database_User}; Password=${Database_Password}; Pooling=true
+      - ConnectionStrings__PostgreSQL=Host=database; Port=5432; Database=${Database_Name}; Username=${Database_Username}; Password=${Database_Password}; Pooling=true
+      - EmailSettings__Host=${EMail_Host}
+      - EmailSettings__Port=${EMail_Port}
+      - EmailSettings__Username=${EMail_Username}
+      - EmailSettings__Password=${EMail_Password}
+      - EmailSettings__SenderName=${EMail_SenderName}
     networks:
       network:
         aliases:

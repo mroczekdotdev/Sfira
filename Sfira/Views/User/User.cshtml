@@ -18,26 +18,40 @@
             <div class="avatar" sfira-id="@Model.Id" sfira-media="avatar"></div>
             <section class="profileActions">
 
-                @if (User.Identity.IsAuthenticated && !Model.IsCurrentUser)
+                @if (User.Identity.IsAuthenticated)
                 {
-                    <section class="primaryProfileActions">
-                        @if (Model.IsFollowedByCurrentUser)
-                        {
-                            <button class="unfollow">Unfollow</button>
-                        }
-                        else
-                        {
-                            <button class="follow">Follow</button>
-                        }
-                    </section>
-                        <section class="moreProfileActions" style="display: none;"><!--
-                            --><button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">Message</button><!--
-                            --><button class="block">Block</button><!--
-                            --><button class="report">Report</button><!--
-                        -->
-                        </section><!--
-                        --><button class="more">&bull;&bull;&bull;</button>
+                    @if (!Model.IsCurrentUser)
+                    {
+                        <section class="primaryProfileActions">
+                            @if (Model.IsFollowedByCurrentUser)
+                            {
+                                <button class="unfollow">Unfollow</button>
+                            }
+                            else
+                            {
+                                <button class="follow">Follow</button>
+                            }
+                        </section>
+                        <section class="moreProfileActions" style="display: none;">
+                            <button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">
+                                Message
+                            </button><button class="block">
+                                Block
+                            </button><button class="report">
+                                Report
+                            </button>
+                        </section><button class="more">
+                            &bull;&bull;&bull;
+                        </button>
+                    }
+                    else
+                    {
+                        <section class="primaryProfileActions">
+                            <button class="editProfile">Edit Profile</button>
+                        </section>
+                    }
                 }
+
             </section>
             <nav class="profileMenu">
                 <a class="menuItem showPosts active" href="javascript:void(0)">Posts</a>
@@ -49,7 +63,7 @@
 
     if (Model.Posts.Any())
     {
-            await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);
+        await Html.RenderPartialAsync("_PostsFeedPartial", Model.Posts);
     }
     else
     {

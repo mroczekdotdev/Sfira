@@ -1,4 +1,7 @@
 ﻿@model PostViewModel
+
+
+
 @if (User.Identity.IsAuthenticated)
 {
     <section class="PostCreate">
@@ -26,9 +29,9 @@ else
     <section class="Info">
         <header>Welcome to Sfira!</header>
         <p>
-            <a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a id="register" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Register">Register</a>
             or
-            <a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a id="login" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Login">Login</a>
         </p>
     </section>
 }
