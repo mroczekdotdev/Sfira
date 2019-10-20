@@ -1,0 +1,9 @@
+﻿@model string
+
+@if (!String.IsNullOrEmpty(Model))
+{
+    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
+    <span class="Alert -@statusMessageClass -closable">
+        @Model<span class="closeButton"><i class="fas fa-times"></i></span>
+    </span>
+}

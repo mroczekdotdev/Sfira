@@ -1,0 +1,88 @@
+form,
+label {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  > button {
+    margin-top: $margin-base;
+  }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  > input {
+    margin-right: $margin-sm;
+  }
+}
+
+label {
+  font-size: $font-size-sm;
+}
+
+.formGroup {
+  &:nth-child(n+1) {
+    margin-top: $padding-sm;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  > .item {
+    display: inline;
+    white-space: nowrap;
+
+    &:nth-child(even) {
+      margin-left: $margin-sm;
+    }
+
+    &.verified {
+      color: $color-success;
+    }
+  }
+}
+
+input:not([type=checkbox]), textarea {
+  width: 100%;
+  font-size: $font-size-sm;
+  border: $border-size-sm solid $color-gray;
+  border-radius: $radius-sm;
+  padding: $padding-base;
+}
+
+textarea {
+  height: 4rem;
+  min-height: 4rem;
+}
+
+button, .button {
+  display: inline-block;
+  padding: $padding-base;
+  border-radius: $radius-base;
+  border: none;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $color-white;
+  background-color: $color-primary;
+}
+
+.validation {
+  color: $color-warning;
+  font-size: $font-size-sm;
+
+  > ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  &.summary {
+    margin-bottom: $margin-sm;
+  }
+}

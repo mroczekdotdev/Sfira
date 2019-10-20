@@ -41,20 +41,6 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
             [Required]
             [EmailAddress]
             public string Email { get; set; }
-
-            [Required]
-            [RegularExpression(@"^[ -~]+$", ErrorMessage = "Name can contain only basic characters.")]
-            [StringLength(36, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 1)]
-            public string Name { get; set; }
-
-            [StringLength(240, ErrorMessage = "{0} can't be longer than {1} characters.")]
-            public string Description { get; set; }
-
-            [StringLength(36, ErrorMessage = "{0} can't be longer than {1} characters.")]
-            public string Location { get; set; }
-
-            [RegularExpression(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$", ErrorMessage = "URL must be valid.")]
-            public string Website { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -67,20 +53,12 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
 
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
-            var name = user.Name;
-            var description = user.Description;
-            var location = user.Location;
-            var website = user.Website;
 
             Username = userName;
 
             Input = new InputModel
             {
                 Email = email,
-                Name = name,
-                Description = description,
-                Location = location,
-                Website = website
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
@@ -112,30 +90,10 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
                 }
             }
 
-            if (Input.Name != user.Name)
-            {
-                user.Name = Input.Name;
-            }
-
-            if (Input.Description != user.Description)
-            {
-                user.Description = Input.Description;
-            }
-
-            if (Input.Location != user.Location)
-            {
-                user.Location = Input.Location;
-            }
-
-            if (Input.Website != user.Website)
-            {
-                user.Website = Input.Website;
-            }
-
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Your account has been updated";
             return RedirectToPage();
         }
 

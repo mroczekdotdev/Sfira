@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MroczekDotDev.Sfira.Models
+@inject UserManager<ApplicationUser> UserManager
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="UserMenu">
+        <div class="avatar" sfira-id="@UserManager.GetUserId(User)" sfira-media="avatar"></div>
+        <div class="items">
+            <a class="item" asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@User.Identity.Name">
+                <i class="fas fa-at fa-sm fa-fw"></i> @User.Identity.Name
+            </a>
+            <a class="item" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Profile"><i class="fas fa-pen fa-sm fa-fw"></i> Edit Profile</a>
+            <a class="item" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Manage/Index"><i class="fas fa-cog fa-sm fa-fw"></i> Manage Account</a>
+            <a class="item" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Logout" asp-route-returnurl="@Context.Request.Path"><i class="fas fa-sign-out-alt fa-sm fa-fw"></i> Log out </a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="UserMenu">
+        <a class="button logInButton -noHover" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Login" asp-route-returnurl="@Context.Request.Path" method="get">
+            <span class="buttonText">Log In</span>
+        </a>
+        <a class="button registerButton -noHover" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Register" asp-route-returnurl="@Context.Request.Path" method="get">
+            <span class="buttonText">Register</span>
+        </a>
+    </div>
+}

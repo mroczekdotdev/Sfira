@@ -1,0 +1,22 @@
+﻿.Alert {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: $padding-base;
+  border-radius: $radius-base;
+  font-size: $font-size-sm;
+
+  &.-success {
+    color: $color-white;
+    background-color: $color-success;
+  }
+
+  &.-error {
+    color: $color-white;
+    background-color: $color-error;
+  }
+
+  .closeButton {
+    margin-right: $padding-sm;
+  }
+}

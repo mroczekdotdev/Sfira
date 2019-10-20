@@ -18,6 +18,8 @@ namespace MroczekDotDev.Sfira.Areas.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
+        private string[] nonRedirectableUrls = { "/account/register", "/account/login" };
+
         public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
@@ -43,7 +45,6 @@ namespace MroczekDotDev.Sfira.Areas.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
         }
 
@@ -54,19 +55,27 @@ namespace MroczekDotDev.Sfira.Areas.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/");
+            if (returnUrl == null || nonRedirectableUrls.Contains(returnUrl))
+            {
+                ReturnUrl = Url.Content("~/");
+            }
+            else
+            {
+                ReturnUrl = returnUrl;
+            }
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            ReturnUrl = returnUrl;
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            if (returnUrl == null || nonRedirectableUrls.Contains(returnUrl))
+            {
+                returnUrl = Url.Content("~/");
+            }
 
             if (ModelState.IsValid)
             {
@@ -77,10 +86,6 @@ namespace MroczekDotDev.Sfira.Areas.Account
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {

@@ -26,10 +26,10 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    margin-top: $margin-sm;
 
     > .action {
       color: $color-white;
-      margin-top: $margin-sm;
       margin-left: auto;
       background-color: $color-primary;
       border: $border-size-base solid $color-white;

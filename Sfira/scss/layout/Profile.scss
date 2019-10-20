@@ -44,8 +44,7 @@
     bottom: 8%;
     right: 4%;
 
-    button {
-      font-weight: $font-weight-bold;
+    button, .button {
       border: $border-size-base solid $color-white;
       margin-left: $padding-sm;
     }
@@ -64,7 +63,7 @@
   .profileMenu {
     position: absolute;
     display: flex;
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
     align-items: center;
     justify-content: space-around;
     width: 76%;

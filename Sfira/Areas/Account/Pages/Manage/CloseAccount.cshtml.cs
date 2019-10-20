@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
 {
-    public class DeletePersonalDataModel : PageModel
+    public class CloseAccount : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly ILogger<CloseAccount> _logger;
 
-        public DeletePersonalDataModel(
+        public CloseAccount(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<CloseAccount> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -1,0 +1,25 @@
+﻿@page
+@model CloseAccount
+@{
+    ViewData["Title"] = "Close Account";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h4>Deleting your personal data will permanently remove your account. This cannot be undone.</h4>
+
+<section>
+    <form method="post" class="formGroup">
+        @if (Model.RequirePassword)
+        {
+            <div class="formGroup">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password"/>
+                <span asp-validation-for="Input.Password" class="validation"></span>
+            </div>
+        }
+        <button type="submit">Delete personal data</button>
+    </form>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using MroczekDotDev.Sfira.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
@@ -19,6 +20,8 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+
+        private string[] nonRedirectableUrls = { "/account/register", "/account/login" };
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -67,7 +70,11 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            if (returnUrl == null || nonRedirectableUrls.Contains(returnUrl))
+            {
+                ReturnUrl = Url.Content("~/");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser

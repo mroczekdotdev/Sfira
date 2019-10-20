@@ -33,21 +33,13 @@
                             }
                         </section>
                         <section class="moreProfileActions" style="display: none;">
-                            <button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">
-                                Message
-                            </button><button class="block">
-                                Block
-                            </button><button class="report">
-                                Report
-                            </button>
-                        </section><button class="more">
-                            &bull;&bull;&bull;
-                        </button>
+                            <button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">Message</button><button class="block">Block</button><button class="report">Report</button>
+                        </section><button class="more">&bull;&bull;&bull;</button>
                     }
                     else
                     {
                         <section class="primaryProfileActions">
-                            <button class="editProfile">Edit Profile</button>
+                            <a class="editProfile button" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Profile">Edit Profile</a>
                         </section>
                     }
                 }

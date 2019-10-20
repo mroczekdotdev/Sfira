@@ -1,20 +1,22 @@
-@import "utilities/_functions.scss";
-@import "utilities/_variables.scss";
+@import "utilities/Functions.scss";
+@import "utilities/Variables.scss";
 
-@import "base/_reboot.scss";
-@import "base/_base.scss";
+@import "base/Reboot.scss";
+@import "base/Forms.scss";
 
-@import "layout/_Chat.scss";
-@import "layout/_messages.scss";
-@import "layout/_profile.scss";
-@import "layout/_site.scss";
-@import "layout/_user.scss";
+@import "layout/Chat.scss";
+@import "layout/Messages.scss";
+@import "layout/Profile.scss";
+@import "layout/Site.scss";
 
+@import "parts/_avatar.scss";
+@import "parts/_username.scss";
+
+@import "components/_Alert.scss";
 @import "components/_ChatsList.scss";
 @import "components/_Comment.scss";
 @import "components/_CommentCreate.scss";
 @import "components/_CommentsFeed.scss";
-@import "components/_Dropdown.scss";
 @import "components/_FollowersFeed.scss";
 @import "components/_ImageModal.scss";
 @import "components/_Info.scss";
@@ -25,3 +27,4 @@
 @import "components/_PostCreate.scss";
 @import "components/_PostsFeed.scss";
 @import "components/_SearchForm.scss";
+@import "components/_UserMenu.scss";

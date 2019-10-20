@@ -1,3 +1,12 @@
+// Breakpoints
+
+//$screen-xxs: "only screen and (max-width: 359px)";
+$screen-xs: "only screen and (max-width: 599px)";
+$screen-sm: "only screen and (max-width: 899px)";
+$screen-md: "only screen and (max-width: 1199px)";
+$screen-lg: "only screen and (max-width: 1799px)";
+
+
 $margin-base: 1rem;
 $margin-sm: 0.5rem;
 $margin-lg: 2rem;
@@ -17,25 +26,7 @@ $border-size-sm: 0.08rem;
 $border-size-lg: 0.32rem;
 
 
-// Breakpoints
-
-//$screen-xxs: "only screen and (max-width: 359px)";
-$screen-xs: "only screen and (max-width: 599px)";
-$screen-sm: "only screen and (max-width: 899px)";
-$screen-md: "only screen and (max-width: 1199px)";
-$screen-lg: "only screen and (max-width: 1799px)";
-
-
 // Colors
-
-$color-adjust-light-saturation: -20;
-$color-adjust-light-lightness: 20;
-$color-adjust-superlight-saturation: -30;
-$color-adjust-superlight-lightness: 30;
-$color-adjust-dark-saturation: -40;
-$color-adjust-dark-lightness: -20;
-$color-adjust-superdark-saturation: -80;
-$color-adjust-superdark-lightness: -40;
 
 $color-white: #fff;
 $color-black: #000;
@@ -44,10 +35,19 @@ $color-gray: #888;
 $color-primary: #7452FF;
 $color-secondary: #B638FF;
 
-$color-success: null;
+$color-success: #009c3e;
 $color-info: null;
-$color-warning: null;
-$color-error: null;
+$color-warning: #ff3700;
+$color-error: $color-warning;
+
+$color-adjust-light-saturation: -20;
+$color-adjust-light-lightness: 20;
+$color-adjust-superlight-saturation: -30;
+$color-adjust-superlight-lightness: 30;
+$color-adjust-dark-saturation: -40;
+$color-adjust-dark-lightness: -30;
+$color-adjust-superdark-saturation: -80;
+$color-adjust-superdark-lightness: -40;
 
 
 // Typography
@@ -91,7 +91,7 @@ $link-active-color: lighten($link-color, 15%);
 $link-active-decoration: underline;
 
 $link-hover-color: color-variant("dark", $link-color);
-$link-hover-decoration: $link-active-decoration;
+$link-hover-decoration: none;
 
 $link-visited: desaturate($color-secondary, 60%);
 $link-visited-decoration: $link-decoration;

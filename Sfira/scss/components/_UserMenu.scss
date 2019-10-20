@@ -1,0 +1,48 @@
+﻿.UserMenu {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+
+  > .avatar {
+    width: 36px;
+    height: 36px;
+    border: none;
+  }
+
+  > .button {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  > .logInButton {
+    height: 36px;
+    padding: 0 $padding-base;
+    color: $color-primary;
+    background-color: $color-white;
+    border: $border-size-base solid $color-primary;
+  }
+
+  > .registerButton {
+    height: 36px;
+    padding: 0 $padding-base;
+    margin-left: $margin-sm;
+  }
+
+  > .items {
+    display: none;
+    z-index: 3;
+    position: absolute;
+    right: 0;
+    padding: $padding-base;
+    background-color: $color-white;
+    box-shadow: 0px 0px 0px $border-size-lg $color-white;
+    border: $border-size-base solid $color-primary;
+    border-radius: $radius-base;
+
+    > .item {
+      display: block;
+      white-space: nowrap;
+    }
+  }
+}
