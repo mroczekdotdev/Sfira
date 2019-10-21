@@ -22,9 +22,9 @@ namespace MroczekDotDev.Sfira.ViewComponents
         {
             string view;
 
-            switch (Enum.Parse<AttachmentType>(attachment.Type))
+            switch (Enum.Parse<FileType>(attachment.Type))
             {
-                case AttachmentType.image:
+                case FileType.image:
                     view = "ImageAttachment";
                     break;
 

@@ -1,4 +1,5 @@
-﻿import "./js/comment.js";
+﻿import "./js/account.js";
+import "./js/comment.js";
 import "./js/closable";
 import "./js/feed.js";
 import "./js/href";

@@ -1,0 +1,24 @@
+﻿.formGroup {
+  > .origin {
+    position: relative;
+    padding-bottom: 33.33%; //fallback
+    padding-bottom: calc(100% / 3);
+
+    > .avatar {
+      position: absolute;
+      width: 33.33%; //fallback
+      width: calc(100% / 3);
+      height: 100%;
+      border: $border-size-sm solid $color-gray;
+      border-radius: $radius-sm;
+    }
+
+    > .cover {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: $border-size-sm solid $color-gray;
+      border-radius: $radius-sm;
+    }
+  }
+}

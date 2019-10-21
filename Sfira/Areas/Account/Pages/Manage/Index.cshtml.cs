@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
 {
-    public partial class IndexModel : PageModel
+    public class IndexModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IEmailSender emailSender;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _emailSender = emailSender;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.emailSender = emailSender;
         }
 
         public string Username { get; set; }
@@ -45,14 +45,14 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
             }
 
-            var userName = await _userManager.GetUserNameAsync(user);
-            var email = await _userManager.GetEmailAsync(user);
+            var userName = await userManager.GetUserNameAsync(user);
+            var email = await userManager.GetEmailAsync(user);
 
             Username = userName;
 
@@ -61,7 +61,7 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
                 Email = email,
             };
 
-            IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
+            IsEmailConfirmed = await userManager.IsEmailConfirmedAsync(user);
 
             return Page();
         }
@@ -73,26 +73,26 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
                 return Page();
             }
 
-            var user = await _userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
             }
 
-            var email = await _userManager.GetEmailAsync(user);
+            var email = await userManager.GetEmailAsync(user);
             if (Input.Email != email)
             {
-                var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
+                var setEmailResult = await userManager.SetEmailAsync(user, Input.Email);
                 if (!setEmailResult.Succeeded)
                 {
-                    var userId = await _userManager.GetUserIdAsync(user);
+                    var userId = await userManager.GetUserIdAsync(user);
                     throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
                 }
             }
 
-            await _userManager.UpdateAsync(user);
+            await userManager.UpdateAsync(user);
 
-            await _signInManager.RefreshSignInAsync(user);
+            await signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your account has been updated";
             return RedirectToPage();
         }
@@ -104,21 +104,21 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
                 return Page();
             }
 
-            var user = await _userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
             }
 
-            var userId = await _userManager.GetUserIdAsync(user);
-            var email = await _userManager.GetEmailAsync(user);
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var userId = await userManager.GetUserIdAsync(user);
+            var email = await userManager.GetEmailAsync(user);
+            var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             var callbackUrl = Url.Page(
                 "/ConfirmEmail",
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
+            await emailSender.SendEmailAsync(
                 email,
                 "Confirm your email",
                 $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");

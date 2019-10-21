@@ -15,15 +15,15 @@ namespace MroczekDotDev.Sfira.Areas.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<LoginModel> logger;
 
         private string[] nonRedirectableUrls = { "/account/register", "/account/login" };
 
         public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
         {
-            _signInManager = signInManager;
-            _logger = logger;
+            this.signInManager = signInManager;
+            this.logger = logger;
         }
 
         [BindProperty]
@@ -67,7 +67,7 @@ namespace MroczekDotDev.Sfira.Areas.Account
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -81,15 +81,15 @@ namespace MroczekDotDev.Sfira.Areas.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                var result = await signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
                 else

@@ -469,9 +469,9 @@ namespace MroczekDotDev.Sfira.Data
         {
             Attachment attachmentToAdd;
 
-            switch (Enum.Parse<AttachmentType>(attachment.Type))
+            switch (Enum.Parse<FileType>(attachment.Type))
             {
-                case AttachmentType.image:
+                case FileType.image:
                     attachmentToAdd = new ImageAttachment
                     {
                         Parent = parent,

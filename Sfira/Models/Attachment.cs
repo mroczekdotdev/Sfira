@@ -3,7 +3,7 @@ using System;
 
 namespace MroczekDotDev.Sfira.Models
 {
-    public enum AttachmentType
+    public enum FileType
     {
         image = 1,
     }

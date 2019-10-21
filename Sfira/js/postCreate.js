@@ -34,7 +34,7 @@
     form.append("body", body);
 
     if (attachmentInput[0] !== undefined) {
-      form.append("file", attachmentInput[0].files[0]);
+      form.append("formFile", attachmentInput[0].files[0]);
     }
 
     $.ajax({

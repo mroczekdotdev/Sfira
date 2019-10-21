@@ -8,8 +8,6 @@ using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.Services;
 using MroczekDotDev.Sfira.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
@@ -21,70 +19,54 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly IHostingEnvironment environment;
         private readonly IDataStorage dataStorage;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly FileUpload fileUpload;
+        private readonly FileUploader fileUploader;
 
         public PostController(IHostingEnvironment environment, IDataStorage dataStorage,
-            UserManager<ApplicationUser> userManager, FileUpload fileUpload)
+            UserManager<ApplicationUser> userManager, FileUploader fileUploader)
         {
             this.environment = environment;
             this.dataStorage = dataStorage;
             this.userManager = userManager;
-            this.fileUpload = fileUpload;
+            this.fileUploader = fileUploader;
         }
 
         [Authorize]
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Create(PostViewModel post, IFormFile file)
+        public async Task<IActionResult> Create(PostViewModel post, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
                 post.Author = currentUser;
 
-                if (file != null && file.Length > 0)
+                if (formFile != null && formFile.Length > 0)
                 {
-                    string fileType;
-                    string directory = Path.Combine(new[] {
+                    string userMediaPath = Path.Combine(new[] {
                         environment.WebRootPath, "media", "user", currentUser.Id + Path.DirectorySeparatorChar });
-                    string fileName = Guid.NewGuid().ToString();
-                    string fileExtension;
 
-                    async Task AttachmentToImage()
+                    var file = new UploadableImageFile
                     {
-                        fileType = "image";
-                        fileExtension = FilenameExtension.jpg.ToString();
-                        ImageFormat imageFormat = ImageFormat.Jpeg;
-                        long imageQuality = 40L;
-
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            await file.CopyToAsync(memoryStream);
-                            Image image = Image.FromStream(memoryStream);
-                            IEnumerable<(Image, string fileName)> images = fileUpload.ProcessImage(image, fileName,
-                                fileExtension);
-                            fileUpload.SaveImages(images, directory, imageFormat, imageQuality);
-                        }
-                    }
-
-                    switch (file.ContentType.ToLower())
-                    {
-                        case "image/jpeg":
-                        case "image/png":
-                            Directory.CreateDirectory(directory);
-                            await AttachmentToImage();
-                            break;
-
-                        default:
-                            return BadRequest();
-                    }
+                        formFile = formFile,
+                        directory = userMediaPath,
+                        name = Guid.NewGuid().ToString(),
+                        extension = FilenameExtension.jpg.ToString(),
+                        format = ImageFormat.Jpeg,
+                        quality = 40L,
+                        maxWidth = 1920,
+                        maxHeight = 1080,
+                        hasThumbnail = true,
+                        thumbWidth = 512,
+                        thumbHeight = 512,
+                    };
+                    await fileUploader.Upload(file);
 
                     post.Attachment = new AttachmentViewModel
                     {
                         Owner = currentUser,
-                        Type = fileType,
-                        Name = fileName,
-                        Extension = fileExtension,
+                        Type = FileType.image.ToString(),
+                        Name = file.name,
+                        Extension = file.extension,
                     };
                 }
 

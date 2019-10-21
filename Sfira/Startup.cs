@@ -30,7 +30,7 @@ namespace MroczekDotDev.Sfira
 
             services.AddTransient<IDataStorage, EfDataStorage>();
 
-            services.AddTransient<FileUpload>();
+            services.AddSingleton<FileUploader>();
 
             services.AddSingleton<IEmailSender, EmailSender>();
 

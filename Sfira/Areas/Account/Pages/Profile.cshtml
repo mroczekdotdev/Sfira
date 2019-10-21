@@ -1,19 +1,41 @@
 ﻿@page
 @model ProfileModel
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Edit Profile";
+    ApplicationUser currentUser = await UserManager.GetUserAsync(User);
 }
 
 <h1>@ViewData["Title"]</h1>
 <h4>Edit your Sfira user profile.</h4>
-<partial name="_StatusMessage" for="StatusMessage" />
-<form method="post">
+<partial name="_StatusMessagePartial" for="StatusMessage" />
+<form class="editProfileForm" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="validation"></div>
     <div class="formGroup">
         <label asp-for="Input.Name"></label>
         <input asp-for="Input.Name" />
         <span asp-validation-for="Input.Name" class="validation"></span>
     </div>
+
+
+    <div class="formGroup">
+        <label asp-for="Input.Avatar">Avatar</label>
+        <input asp-for="Input.Avatar" accept="image/jpeg, image/png" style="display: none;">
+        <div class="origin">
+            <div class="avatar" id="avatarPreview" sfira-id="@currentUser.Id" sfira-media="avatar" onclick="document.getElementById('Input_Avatar').click();"></div>
+        </div>
+    </div>
+
+    <div class="formGroup">
+        <label asp-for="Input.Cover">Cover</label>
+        <input asp-for="Input.Cover" accept="image/jpeg, image/png" style="display: none;">
+        <div class="origin">
+            <div class="cover" id="coverPreview" sfira-id="@currentUser.Id" sfira-media="cover" onclick="document.getElementById('Input_Cover').click();"></div>
+        </div>
+    </div>
+
+
     <div class="formGroup">
         <label asp-for="Input.Description"></label>
         <textarea asp-for="Input.Description">@Model.Input.Description</textarea>
@@ -29,7 +51,6 @@
     </div>
     <button type="submit">Save</button>
 </form>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

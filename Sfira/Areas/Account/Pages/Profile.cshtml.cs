@@ -1,23 +1,35 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MroczekDotDev.Sfira.Models;
+using MroczekDotDev.Sfira.Services;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Areas.Account.Pages
 {
-    public partial class ProfileModel : PageModel
+    public class ProfileModel : PageModel
     {
+        private readonly IHostingEnvironment environment;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly FileUploader fileUploader;
 
         public ProfileModel(
+            IHostingEnvironment environment,
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            FileUploader fileUploader)
         {
+            this.environment = environment;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.fileUploader = fileUploader;
         }
 
         public string Username { get; set; }
@@ -43,6 +55,12 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
 
             [RegularExpression(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$", ErrorMessage = "URL must be valid.")]
             public string Website { get; set; }
+
+            [BindProperty]
+            public IFormFile Avatar { get; set; }
+
+            [BindProperty]
+            public IFormFile Cover { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -66,7 +84,9 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                 Name = name,
                 Description = description,
                 Location = location,
-                Website = website
+                Website = website,
+                Avatar = null,
+                Cover = null,
             };
 
             return Page();
@@ -106,9 +126,54 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
             }
 
             await userManager.UpdateAsync(user);
-
             await signInManager.RefreshSignInAsync(user);
+
+            if (HttpContext.Request.Form.Files.Count > 0)
+            {
+                string userMediaPath = Path.Combine(new[] {
+                    environment.WebRootPath, "media", "user", user.Id + Path.DirectorySeparatorChar });
+
+                var files = new List<UploadableFile>();
+
+                if (Input.Avatar != null && Input.Avatar.Length > 0)
+                {
+                    var file = new UploadableImageFile
+                    {
+                        formFile = Input.Avatar,
+                        directory = userMediaPath,
+                        name = "avatar",
+                        extension = FilenameExtension.jpg.ToString(),
+                        format = ImageFormat.Jpeg,
+                        quality = 40L,
+                        maxWidth = 512,
+                        maxHeight = 512,
+                    };
+
+                    files.Add(file);
+                }
+
+                if (Input.Cover != null && Input.Cover.Length > 0)
+                {
+                    var file = new UploadableImageFile
+                    {
+                        formFile = Input.Cover,
+                        directory = userMediaPath,
+                        name = "cover",
+                        extension = FilenameExtension.jpg.ToString(),
+                        format = ImageFormat.Jpeg,
+                        quality = 40L,
+                        maxWidth = 1920,
+                        maxHeight = 1080,
+                    };
+
+                    files.Add(file);
+                }
+
+                await fileUploader.Upload(files);
+            }
+
             StatusMessage = "Your profile has been updated";
+
             return RedirectToPage();
         }
     }

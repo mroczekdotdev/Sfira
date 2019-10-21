@@ -11,11 +11,11 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
     [AllowAnonymous]
     public class ResetPasswordModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ResetPasswordModel(UserManager<ApplicationUser> userManager)
         {
-            _userManager = userManager;
+            this.userManager = userManager;
         }
 
         [BindProperty]
@@ -50,7 +50,7 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
             {
                 Input = new InputModel
                 {
-                    Code = code
+                    Code = code,
                 };
                 return Page();
             }
@@ -63,14 +63,14 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                 return Page();
             }
 
-            var user = await _userManager.FindByEmailAsync(Input.Email);
+            var user = await userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
+            var result = await userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
                 return RedirectToPage("./ResetPasswordConfirmation");
