@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing.Imaging;
@@ -125,9 +126,6 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                 user.Website = Input.Website;
             }
 
-            await userManager.UpdateAsync(user);
-            await signInManager.RefreshSignInAsync(user);
-
             if (HttpContext.Request.Form.Files.Count > 0)
             {
                 string userMediaPath = Path.Combine(new[] {
@@ -141,7 +139,7 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                     {
                         formFile = Input.Avatar,
                         directory = userMediaPath,
-                        name = "avatar",
+                        name = Guid.NewGuid().ToString(),
                         extension = FilenameExtension.jpg.ToString(),
                         format = ImageFormat.Jpeg,
                         quality = 40L,
@@ -150,6 +148,13 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                     };
 
                     files.Add(file);
+
+                    if (user.AvatarImage != null)
+                    {
+                        System.IO.File.Delete(userMediaPath + user.AvatarImage);
+                    }
+
+                    user.AvatarImage = file.name + "." + file.extension;
                 }
 
                 if (Input.Cover != null && Input.Cover.Length > 0)
@@ -158,7 +163,7 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                     {
                         formFile = Input.Cover,
                         directory = userMediaPath,
-                        name = "cover",
+                        name = Guid.NewGuid().ToString(),
                         extension = FilenameExtension.jpg.ToString(),
                         format = ImageFormat.Jpeg,
                         quality = 40L,
@@ -167,10 +172,20 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                     };
 
                     files.Add(file);
+
+                    if (user.CoverImage != null)
+                    {
+                        System.IO.File.Delete(userMediaPath + user.CoverImage);
+                    }
+
+                    user.CoverImage = file.name + "." + file.extension;
                 }
 
                 await fileUploader.Upload(files);
             }
+
+            await userManager.UpdateAsync(user);
+            await signInManager.RefreshSignInAsync(user);
 
             StatusMessage = "Your profile has been updated";
 

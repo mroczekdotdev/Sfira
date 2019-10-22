@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MroczekDotDev.Sfira.Models
 {
-    public class Post : Entry, IHaveViewModel<PostViewModel>
+    public class Post : Entry, IHasViewModel<PostViewModel>
     {
         public string Tags { get; set; }
 
@@ -16,18 +16,15 @@ namespace MroczekDotDev.Sfira.Models
 
         public Attachment Attachment { get; set; }
 
-        public PostViewModel ToViewModel()
+        public PostViewModel ToViewModel => new PostViewModel
         {
-            return new PostViewModel
-            {
-                Id = Id,
-                Author = Author,
-                PublicationTime = PublicationTime,
-                Body = Body,
-                LikesCount = LikesCount,
-                FavoritesCount = FavoritesCount,
-                CommentsCount = CommentsCount,
-            };
-        }
+            Id = Id,
+            Author = Author,
+            PublicationTime = PublicationTime,
+            Body = Body,
+            LikesCount = LikesCount,
+            FavoritesCount = FavoritesCount,
+            CommentsCount = CommentsCount,
+        };
     }
 }

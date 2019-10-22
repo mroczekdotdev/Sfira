@@ -22,7 +22,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public async Task<IActionResult> Index(string userName)
         {
-            UserViewModel user = dataStorage.GetUserByUserName(userName)?.ToViewModel();
+            UserViewModel user = dataStorage.GetUserByUserName(userName)?.ToViewModel;
 
             if (user != null)
             {
@@ -30,7 +30,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
                 foreach (var post in user.Posts)
                 {
-                    post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
+                    post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel;
                 }
 
                 if (User.Identity.IsAuthenticated)

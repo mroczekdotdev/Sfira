@@ -35,11 +35,11 @@ CREATE TABLE "AspNetUsers" (
     "Description" text NULL,
     "Location" text NULL,
     "Website" text NULL,
-    "ProfileImage" boolean NOT NULL,
-    "HeaderImage" boolean NOT NULL,
     "CountryRegion" text NULL,
     "Language" text NULL,
     "TimeZone" text NULL,
+    "AvatarImage" text NULL,
+    "CoverImage" text NULL,
     "FollowingCount" integer NOT NULL,
     "FollowersCount" integer NOT NULL,
     CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
@@ -64,8 +64,8 @@ CREATE TABLE "AspNetUserClaims" (
 );
 
 CREATE TABLE "AspNetUserLogins" (
-    "LoginProvider" character varying(128) NOT NULL,
-    "ProviderKey" character varying(128) NOT NULL,
+    "LoginProvider" text NOT NULL,
+    "ProviderKey" text NOT NULL,
     "ProviderDisplayName" text NULL,
     "UserId" text NOT NULL,
     CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
@@ -82,8 +82,8 @@ CREATE TABLE "AspNetUserRoles" (
 
 CREATE TABLE "AspNetUserTokens" (
     "UserId" text NOT NULL,
-    "LoginProvider" character varying(128) NOT NULL,
-    "Name" character varying(128) NOT NULL,
+    "LoginProvider" text NOT NULL,
+    "Name" text NOT NULL,
     "Value" text NULL,
     CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
     CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
@@ -217,5 +217,5 @@ CREATE INDEX "IX_UserPosts_PostId" ON "UserPosts" ("PostId");
 ALTER TABLE "Messages" ADD CONSTRAINT "FK_Messages_Chats_ChatId" FOREIGN KEY ("ChatId") REFERENCES "Chats" ("Id") ON DELETE CASCADE;
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20191010125514_initial', '2.2.6-servicing-10079');
+VALUES ('20191022045542_Initial', '2.2.6-servicing-10079');
 

@@ -25,7 +25,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
             foreach (var post in posts)
             {
-                post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
+                post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel;
             }
 
             if (User.Identity.IsAuthenticated)

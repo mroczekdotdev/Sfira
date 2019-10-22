@@ -5,15 +5,12 @@ namespace MroczekDotDev.Sfira.Models
 {
     public class DirectChat : Chat
     {
-        public override ChatViewModel ToViewModel()
+        public override ChatViewModel ToViewModel => new DirectChatViewModel
         {
-            return new DirectChatViewModel
-            {
-                Id = Id,
-                Messages = Messages?.ToViewModels(),
-                Interlocutor = UserChats.Last().User.ToViewModel(),
-                LastMessage = LastMessage?.ToViewModel(),
-            };
-        }
+            Id = Id,
+            Messages = Messages?.ToViewModels(),
+            Interlocutor = UserChats.Last().User.ToViewModel,
+            LastMessage = LastMessage?.ToViewModel,
+        };
     }
 }

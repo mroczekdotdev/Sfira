@@ -24,24 +24,28 @@ namespace MroczekDotDev.Sfira.Controllers
         public async Task<IActionResult> DirectChat(string userName)
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            ApplicationUser interlocutor = dataStorage.GetUserByUserName(userName);
 
-            ChatViewModel chat = dataStorage.GetDirectChatByUserIds(currentUser.Id, interlocutor.Id)?.ToViewModel();
-
-            if (chat == null)
+            if (currentUser.UserName.ToLower() != userName)
             {
-                chat = new DirectChatViewModel
+                ApplicationUser interlocutor = dataStorage.GetUserByUserName(userName);
+                ChatViewModel chat = dataStorage.GetDirectChatByUserIds(currentUser.Id, interlocutor.Id)?.ToViewModel;
+
+                if (chat == null)
                 {
-                    Interlocutor = interlocutor.ToViewModel(),
-                };
+                    chat = new DirectChatViewModel { Interlocutor = interlocutor.ToViewModel};
+                }
+                else
+                {
+                    chat.Messages = dataStorage.GetMessagesByChatId(chat.Id).ToViewModels();
+                    chat.Messages = dataStorage.LoadCurrentUserAuthorship(chat.Messages, currentUser.Id);
+                }
+
+                return View("Chat", chat);
             }
             else
             {
-                chat.Messages = dataStorage.GetMessagesByChatId(chat.Id).ToViewModels();
-                chat.Messages = dataStorage.LoadCurrentUserAuthorship(chat.Messages, currentUser.Id);
+                return RedirectToAction(nameof(MessagesController.Index), "Messages");
             }
-
-            return View("Chat", chat);
         }
 
         [Authorize]
@@ -62,7 +66,6 @@ namespace MroczekDotDev.Sfira.Controllers
             {
                 return BadRequest();
             }
-
         }
 
         [Authorize]

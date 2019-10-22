@@ -21,8 +21,11 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly FileUploader fileUploader;
 
-        public PostController(IHostingEnvironment environment, IDataStorage dataStorage,
-            UserManager<ApplicationUser> userManager, FileUploader fileUploader)
+        public PostController(
+            IHostingEnvironment environment,
+            IDataStorage dataStorage,
+            UserManager<ApplicationUser> userManager,
+            FileUploader fileUploader)
         {
             this.environment = environment;
             this.dataStorage = dataStorage;
@@ -88,7 +91,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
             if (userPost != null)
             {
-                PostViewModel post = dataStorage.GetPostById(postId).ToViewModel();
+                PostViewModel post = dataStorage.GetPostById(postId).ToViewModel;
 
                 var postCounters = new
                 {

@@ -113,13 +113,13 @@ namespace MroczekDotDev.Sfira
 
                 routes.MapRoute(
                     "Comments",
-                    "{postId}/comments",
+                    "{postId:int}/comments",
                     new { controller = "Comment", action = "Feed" }
                 );
 
                 routes.MapRoute(
                     "Mark",
-                    "{postId}/{interaction}",
+                    "{postId:int}/{interaction}",
                     new { controller = "Post", action = "Mark" }
                 );
 
@@ -130,14 +130,14 @@ namespace MroczekDotDev.Sfira
                 );
 
                 routes.MapRoute(
-                    "Message",
-                    "chat/{chatId}/createmessage",
+                    "CreateMessage",
+                    "chat/{chatId:int}/createmessage",
                     new { controller = "Chat", action = "CreateMessage" }
                 );
 
                 routes.MapRoute(
                      "Messages",
-                     "chat/{chatId}/messagesfeed",
+                     "chat/{chatId:int}/messagesfeed",
                      new { controller = "Chat", action = "MessagesFeed" }
                  );
 
@@ -151,7 +151,7 @@ namespace MroczekDotDev.Sfira
                     "Default",
                     "{controller}/{action}/{id?}",
                     new { controller = "Home", action = "Index" },
-                    new { controller = "(chat|comment|explore|home|identity|messages|post|search)" }
+                    new { controller = "(chat|comment|explore|home|messages|post)" }
                 );
 
                 routes.MapRoute(

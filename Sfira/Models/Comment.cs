@@ -2,20 +2,17 @@
 
 namespace MroczekDotDev.Sfira.Models
 {
-    public class Comment : Entry, IHaveViewModel<CommentViewModel>
+    public class Comment : Entry, IHasViewModel<CommentViewModel>
     {
         public Post Parent { get; set; }
 
-        public CommentViewModel ToViewModel()
+        public CommentViewModel ToViewModel => new CommentViewModel
         {
-            return new CommentViewModel
-            {
-                Id = Id,
-                Author = Author,
-                PublicationTime = PublicationTime,
-                Body = Body,
-                ParentId = Parent.Id,
-            };
-        }
+            Id = Id,
+            Author = Author,
+            PublicationTime = PublicationTime,
+            Body = Body,
+            ParentId = Parent.Id,
+        };
     }
 }

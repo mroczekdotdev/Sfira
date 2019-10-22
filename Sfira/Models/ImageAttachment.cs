@@ -6,16 +6,13 @@ namespace MroczekDotDev.Sfira.Models
     {
         public FilenameExtension Extension { get; set; }
 
-        public override AttachmentViewModel ToViewModel()
+        public override AttachmentViewModel ToViewModel => new AttachmentViewModel
         {
-            return new AttachmentViewModel
-            {
-                ParentId = PostId,
-                Owner = Owner,
-                Name = Name.ToString(),
-                Type = ToString(),
-                Extension = Extension.ToString(),
-            };
-        }
+            ParentId = PostId,
+            Owner = Owner,
+            Name = Name.ToString(),
+            Type = ToString(),
+            Extension = Extension.ToString(),
+        };
     }
 }

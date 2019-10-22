@@ -35,7 +35,7 @@ namespace MroczekDotDev.Sfira.Controllers
                 {
                     foreach (var post in posts)
                     {
-                        post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel();
+                        post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel;
                     }
 
                     posts = dataStorage.LoadCurrentUserRelations(posts, currentUser.Id);

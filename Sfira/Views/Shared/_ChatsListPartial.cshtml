@@ -7,7 +7,7 @@
         {
             <section class="chat href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = directChat.Interlocutor.UserName })">
                 <section class="icon">
-                    <div class="avatar" sfira-id="@directChat.Interlocutor.Id" sfira-media="avatar"></div>
+                    <div class="avatar" sfira-user="@directChat.Interlocutor" sfira-media="avatar"></div>
                 </section>
                 <div class="flexItem">
                     <section class="header">

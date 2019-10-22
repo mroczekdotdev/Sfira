@@ -33,7 +33,7 @@ namespace MroczekDotDev.Sfira.Data
         public IEnumerable<ApplicationUser> GetFollowersByUserName(string userName)
         {
             return context.UserFollows
-                .Where(uf => uf.FollowedUser.Name == userName)
+                .Where(uf => uf.FollowedUser.UserName == userName)
                 .Select(uf => uf.FollowingUser)
                 .ToArray();
         }

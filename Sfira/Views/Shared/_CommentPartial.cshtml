@@ -2,7 +2,7 @@
 
 <article class="Comment">
     <header class="header">
-        <div class="avatar" sfira-id="@Model.Author.Id" sfira-media="avatar"></div>
+        <div class="avatar" sfira-user="@Model.Author" sfira-media="avatar"></div>
         <a class="user" asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@Model.Author.UserName">
             <span class="name">@Model.Author.Name</span><span class="username">@Model.Author.UserName</span>
         </a>

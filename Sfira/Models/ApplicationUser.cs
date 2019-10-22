@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MroczekDotDev.Sfira.Models
 {
-    public class ApplicationUser : IdentityUser, IHaveViewModel<UserViewModel>
+    public class ApplicationUser : IdentityUser, IHasViewModel<UserViewModel>, IHasUserMedia
     {
         public DateTime RegisterTime { get; set; }
 
@@ -14,12 +14,12 @@ namespace MroczekDotDev.Sfira.Models
         public string Location { get; set; }
         public string Website { get; set; }
 
-        public bool ProfileImage { get; set; }
-        public bool HeaderImage { get; set; }
-
         public string CountryRegion { get; set; }
         public string Language { get; set; }
         public string TimeZone { get; set; }
+
+        public string AvatarImage { get; set; }
+        public string CoverImage { get; set; }
 
         public ICollection<Post> Posts { get; set; }
         public ICollection<UserPost> UserPosts { get; set; }
@@ -37,22 +37,19 @@ namespace MroczekDotDev.Sfira.Models
 
         public ICollection<UserBlock> Blocking { get; set; }
 
-        public UserViewModel ToViewModel()
+        public UserViewModel ToViewModel => new UserViewModel
         {
-            return new UserViewModel
-            {
-                Id = Id,
-                RegisterTime = RegisterTime,
-                UserName = UserName,
-                Name = Name,
-                Description = Description,
-                Location = Location,
-                Website = Website,
-                ProfileImage = ProfileImage,
-                HeaderImage = HeaderImage,
-                FollowingCount = FollowingCount,
-                FollowersCount = FollowersCount,
-            };
-        }
+            Id = Id,
+            RegisterTime = RegisterTime,
+            UserName = UserName,
+            Name = Name,
+            Description = Description,
+            Location = Location,
+            Website = Website,
+            AvatarImage = AvatarImage,
+            CoverImage = CoverImage,
+            FollowingCount = FollowingCount,
+            FollowersCount = FollowersCount,
+        };
     }
 }

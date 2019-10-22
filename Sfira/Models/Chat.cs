@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MroczekDotDev.Sfira.Models
 {
-    public abstract class Chat : IHaveViewModel<ChatViewModel>
+    public abstract class Chat : IHasViewModel<ChatViewModel>
     {
         public int Id { get; set; }
         public ICollection<Message> Messages { get; set; }
@@ -12,6 +12,6 @@ namespace MroczekDotDev.Sfira.Models
         public int? LastMessageId { get; set; }
         public Message LastMessage { get; set; }
 
-        public abstract ChatViewModel ToViewModel();
+        public abstract ChatViewModel ToViewModel { get; }
     }
 }
