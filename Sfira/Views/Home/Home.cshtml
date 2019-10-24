@@ -1,5 +1,5 @@
 ﻿@{
-    @model IEnumerable<PostViewModel>;
+    @model PostsFeedLoaderViewModel;
     ViewBag.Title = "Home \u00B7 Sfira";
 }
 
@@ -7,21 +7,21 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    if (Model == null)
-    {
-        <section class="Info">
-            <header>Welcome to Sfira!</header>
-            <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
-                <p>Find some users to follow</p>
-            </a>
-        </section>
-    }
-    else
-    {
-        <section class="feed PostsFeed">
-            @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
-        </section>
-    }
+    <section class="Feed PostsFeed">
+        @if (Model != null)
+        {
+            await Html.RenderPartialAsync("_PostsFeedLoaderPartial", Model);
+        }
+        else
+        {
+            <section class="Info">
+                <header>Welcome to Sfira!</header>
+                <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
+                    <p>Find some users to follow</p>
+                </a>
+            </section>
+        }
+    </section>
 }
 
 

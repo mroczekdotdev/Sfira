@@ -4,6 +4,7 @@ using MroczekDotDev.Sfira.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -75,39 +76,87 @@ namespace MroczekDotDev.Sfira.Data
                 .SingleOrDefault(p => p.Id == postId);
         }
 
-        public IEnumerable<Post> GetPosts()
+        public IEnumerable<Post> GetPosts(int? count = null, int? cursor = null)
         {
-            return context.Posts
-                .OrderByDescending(p => p.PublicationTime)
+            IQueryable<Post> query = context.Posts
+                .OrderByDescending(p => p.Id);
+
+            if (cursor != null)
+            {
+                query = query.Where(p => p.Id < cursor);
+            }
+
+            if (count != null)
+            {
+                query = query.Take((int)count);
+            }
+
+            return query
                 .Include(p => p.Author)
                 .ToArray();
         }
 
-        public IEnumerable<Post> GetPostsByTag(string tagName)
+        public IEnumerable<Post> GetPostsByTag(string tagName, int? count = null, int? cursor = null)
         {
-            return context.Posts
+            IQueryable<Post> query = context.Posts
                 .Where(p => p.Tags.Contains(tagName))
-                .OrderByDescending(p => p.PublicationTime)
+                .OrderByDescending(p => p.Id);
+
+            if (cursor != null)
+            {
+                query = query.Where(p => p.Id < cursor);
+            }
+
+            if (count != null)
+            {
+                query = query.Take((int)count);
+            }
+
+            return query
                 .Include(p => p.Author)
                 .ToArray();
         }
 
-        public IEnumerable<Post> GetPostsByUserName(string userName)
+        public IEnumerable<Post> GetPostsByUserName(string userName, int? count = null, int? cursor = null)
         {
-            return context.Posts
+            IQueryable<Post> query = context.Posts
                 .Where(p => p.Author.UserName == userName)
-                .OrderByDescending(p => p.PublicationTime)
+                .OrderByDescending(p => p.Id);
+
+            if (cursor != null)
+            {
+                query = query.Where(p => p.Id < cursor);
+            }
+
+            if (count != null)
+            {
+                query = query.Take((int)count);
+            }
+
+            return query
                 .Include(p => p.Author)
                 .ToArray();
         }
 
-        public IEnumerable<Post> GetPostsByFollowerId(string userId)
+        public IEnumerable<Post> GetPostsByFollowerId(string userId, int? count = null, int? cursor = null)
         {
-            return context.UserFollows
+            IQueryable<Post> query = context.UserFollows
                 .Where(uf => uf.FollowingUserId == userId)
                 .SelectMany(uf => uf.FollowedUser.Posts)
+                .OrderByDescending(p => p.Id);
+
+            if (cursor != null)
+            {
+                query = query.Where(p => p.Id < cursor);
+            }
+
+            if (count != null)
+            {
+                query = query.Take((int)count);
+            }
+
+            return query
                 .Include(p => p.Author)
-                .OrderByDescending(p => p.PublicationTime)
                 .ToArray();
         }
 

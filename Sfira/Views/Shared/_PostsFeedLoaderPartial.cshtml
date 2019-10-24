@@ -1,0 +1,10 @@
+﻿@model PostsFeedLoaderViewModel
+
+@(await Component.InvokeAsync<PostsFeedViewComponent>(Model.Posts))
+
+@if (Model.HasLoader)
+{
+    <section class="Loader" data-link="@Model.LoaderLink" data-count="@Model.LoaderCount" data-cursor="@Model.LoaderCursor">
+        Load more
+    </section>
+}

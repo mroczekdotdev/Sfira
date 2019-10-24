@@ -18,7 +18,7 @@ namespace MroczekDotDev.Sfira.ViewModels
         public string AvatarImage { get; set; }
         public string CoverImage { get; set; }
 
-        public IEnumerable<PostViewModel> Posts { get; set; }
+        public PostsFeedLoaderViewModel PostsFeedLoader { get; set; }
 
         public int FollowingCount { get; set; }
         public int FollowersCount { get; set; }

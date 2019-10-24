@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
+using MroczekDotDev.Sfira.ViewComponents;
 using MroczekDotDev.Sfira.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Controllers
@@ -13,6 +15,7 @@ namespace MroczekDotDev.Sfira.Controllers
     {
         private readonly IDataStorage dataStorage;
         private readonly UserManager<ApplicationUser> userManager;
+        private const int PostsFeedCount = 10;
 
         public UserController(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
         {
@@ -26,17 +29,11 @@ namespace MroczekDotDev.Sfira.Controllers
 
             if (user != null)
             {
-                user.Posts = dataStorage.GetPostsByUserName(userName)?.ToViewModels();
-
-                foreach (var post in user.Posts)
-                {
-                    post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel;
-                }
+                ApplicationUser currentUser = null;
 
                 if (User.Identity.IsAuthenticated)
                 {
-                    ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                    user.Posts = dataStorage.LoadCurrentUserRelations(user.Posts, currentUser.Id);
+                    currentUser = await userManager.FindByNameAsync(User.Identity.Name);
 
                     if (currentUser.Id == user.Id)
                     {
@@ -47,9 +44,45 @@ namespace MroczekDotDev.Sfira.Controllers
                         user.IsFollowedByCurrentUser = dataStorage.GetUserFollow(currentUser.Id, user.Id) != null;
                     }
                 }
+
+                var posts = dataStorage.GetPostsByUserName(userName, PostsFeedCount).ToViewModels();
+
+                if (posts.Any())
+                {
+                    var postsFeedLoader = new PostsFeedLoaderViewModel();
+                    postsFeedLoader.Posts = posts;
+
+                    if (posts.Count() == PostsFeedCount)
+                    {
+                        postsFeedLoader.HasLoader = true;
+                        postsFeedLoader.LoaderLink = user.UserName + "/PostsFeed/";
+                        postsFeedLoader.LoaderCount = PostsFeedCount;
+                        postsFeedLoader.LoaderCursor = posts.Last().Id;
+                    }
+                    user.PostsFeedLoader = postsFeedLoader;
+                }
             }
 
             return View("User", user);
+        }
+
+        public IActionResult PostsFeed(string userName, int count, int cursor)
+        {
+            IEnumerable<PostViewModel> posts = dataStorage.GetPostsByUserName(userName, count, cursor).ToViewModels();
+
+            return ViewComponent(typeof(PostsFeedViewComponent), posts);
+        }
+
+        public PartialViewResult Followers(string userName)
+        {
+            IEnumerable<UserViewModel> followers = dataStorage.GetFollowersByUserName(userName).ToViewModels();
+            return PartialView("_FollowersFeedPartial", followers);
+        }
+
+        public PartialViewResult Media(string userName)
+        {
+            IEnumerable<AttachmentViewModel> attachments = dataStorage.GetAttachmentsByUserName(userName).ToViewModels();
+            return PartialView("_MediaFeedPartial", attachments);
         }
 
         [Authorize]
@@ -84,18 +117,6 @@ namespace MroczekDotDev.Sfira.Controllers
             {
                 return BadRequest();
             }
-        }
-
-        public PartialViewResult Followers(string userName)
-        {
-            IEnumerable<UserViewModel> followers = dataStorage.GetFollowersByUserName(userName).ToViewModels();
-            return PartialView("_FollowersFeedPartial", followers);
-        }
-
-        public PartialViewResult Media(string userName)
-        {
-            IEnumerable<AttachmentViewModel> attachments = dataStorage.GetAttachmentsByUserName(userName).ToViewModels();
-            return PartialView("_MediaFeedPartial", attachments);
         }
     }
 }

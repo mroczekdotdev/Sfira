@@ -1,12 +1,12 @@
 ﻿@{
-    @model IEnumerable<PostViewModel>;
+    @model PostsFeedLoaderViewModel;
     ViewBag.Title = "Explore \u00B7 Sfira";
 }
 
 @{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
 
-<section class="feed PostsFeed">
-    @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
+<section class="Feed PostsFeed">
+    @{await Html.RenderPartialAsync("_PostsFeedLoaderPartial", Model); }
 </section>
 
 @section MainAside{

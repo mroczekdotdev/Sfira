@@ -8,8 +8,8 @@ namespace MroczekDotDev.Sfira.Models
         public override ChatViewModel ToViewModel => new DirectChatViewModel
         {
             Id = Id,
-            Messages = Messages?.ToViewModels(),
-            Interlocutor = UserChats.Last().User.ToViewModel,
+            Messages = Messages.ToViewModels(),
+            Interlocutor = UserChats.Last().User?.ToViewModel,
             LastMessage = LastMessage?.ToViewModel,
         };
     }

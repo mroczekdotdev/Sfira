@@ -88,75 +88,57 @@ namespace MroczekDotDev.Sfira
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    "Follow",
-                    "{userName}/follow",
-                    new { controller = "User", action = "Follow" }
+                    "Home.PostsFeed",
+                    "/PostsFeed/{count:int?}/{cursor:int?}",
+                    new { controller = "Home", action = "PostsFeed" }
                 );
 
                 routes.MapRoute(
-                    "Unfollow",
-                    "{userName}/unfollow",
-                    new { controller = "User", action = "Unfollow" }
+                    "Explore",
+                    "Explore/{action}/{count:int?}/{cursor:int?}",
+                    new { controller = "Explore", action = "Index" }
                 );
 
                 routes.MapRoute(
-                    "Followers",
-                    "{userName}/followers",
-                    new { controller = "User", action = "Followers" }
+                    "Tag",
+                    "Tag/{tagName}/{action}/{count:int?}/{cursor:int?}",
+                    new { controller = "Tag", action = "Index" }
                 );
 
                 routes.MapRoute(
-                    "Media",
-                    "{userName}/media",
-                    new { controller = "User", action = "Media" }
+                    "Chat",
+                    "Chat/{chatId:int}/{action}",
+                    new { controller = "Chat" }
                 );
 
                 routes.MapRoute(
-                    "Comments",
-                    "{postId:int}/comments",
+                   "User.DirectChat",
+                   "{userName}/Chat",
+                   new { controller = "Chat", action = "DirectChat" }
+                );
+
+                routes.MapRoute(
+                    "Post.CommentsFeed",
+                    "{postId:int}/Comments",
                     new { controller = "Comment", action = "Feed" }
                 );
 
                 routes.MapRoute(
-                    "Mark",
+                    "Post.Mark",
                     "{postId:int}/{interaction}",
                     new { controller = "Post", action = "Mark" }
                 );
 
                 routes.MapRoute(
-                    "DirectChat",
-                    "{userName}/chat",
-                    new { controller = "Chat", action = "DirectChat" }
-                );
-
-                routes.MapRoute(
-                    "CreateMessage",
-                    "chat/{chatId:int}/createmessage",
-                    new { controller = "Chat", action = "CreateMessage" }
-                );
-
-                routes.MapRoute(
-                     "Messages",
-                     "chat/{chatId:int}/messagesfeed",
-                     new { controller = "Chat", action = "MessagesFeed" }
-                 );
-
-                routes.MapRoute(
-                    "Tag",
-                    "tag/{tagName}",
-                    new { controller = "Tag", action = "Index" }
-                );
-
-                routes.MapRoute(
                     "Default",
                     "{controller}/{action}/{id?}",
-                    new { controller = "Home", action = "Index" },
-                    new { controller = "(chat|comment|explore|home|messages|post)" }
+                    new { action = "Index" },
+                    new { controller = "(Comment|Home|Messages|Post)" }
                 );
 
                 routes.MapRoute(
                     "User",
-                    "{userName}",
+                    "{userName}/{action}/{count:int?}/{cursor:int?}",
                     new { controller = "User", action = "Index" }
                 );
             });

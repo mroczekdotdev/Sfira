@@ -12,10 +12,10 @@ namespace MroczekDotDev.Sfira.Data
 
         void AddPost(PostViewModel post);
         Post GetPostById(int postId);
-        IEnumerable<Post> GetPosts();
-        IEnumerable<Post> GetPostsByTag(string tagName);
-        IEnumerable<Post> GetPostsByUserName(string userName);
-        IEnumerable<Post> GetPostsByFollowerId(string userId);
+        IEnumerable<Post> GetPosts(int? count = null, int? cursor = null);
+        IEnumerable<Post> GetPostsByTag(string tagName, int? count = null, int? cursor = null);
+        IEnumerable<Post> GetPostsByUserName(string userName, int? count = null, int? cursor = null);
+        IEnumerable<Post> GetPostsByFollowerId(string userId, int? count = null, int? cursor = null);
 
         Attachment GetAttachmentByPostId(int postId);
         IEnumerable<Attachment> GetAttachmentsByUserName(string userName);

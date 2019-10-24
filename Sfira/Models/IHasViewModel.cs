@@ -12,7 +12,7 @@ namespace MroczekDotDev.Sfira.Models
     {
         public static IEnumerable<T> ToViewModels<T>(this IEnumerable<IHasViewModel<T>> models)
         {
-            return models.Select(m => m.ToViewModel).ToArray();
+            return models?.Select(m => m.ToViewModel).ToArray();
         }
     }
 }

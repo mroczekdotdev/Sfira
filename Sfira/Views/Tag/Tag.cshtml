@@ -1,23 +1,24 @@
 ﻿@{
-    @model IEnumerable<PostViewModel>;
+    @model PostsFeedLoaderViewModel;
     var tagNameWithSymbol = "#" + ViewContext.RouteData.Values["tagName"];
     ViewBag.Title = tagNameWithSymbol + " \u00B7 Sfira";
 }
 
 @{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
 
-@if (Model.Any())
-{
-    <section class="feed PostsFeed">
-        @{await Html.RenderPartialAsync("_PostsFeedPartial", Model);}
-    </section>
-}
-else
-{
-    <section class="Info">
-        <header>@tagNameWithSymbol tag doesn't have any posts</header>
-    </section>
-}
+<section class="Feed PostsFeed">
+    @if (Model != null)
+    {
+        await Html.RenderPartialAsync("_PostsFeedLoaderPartial", Model);
+    }
+    else
+    {
+        <section class="Info">
+            <header>@tagNameWithSymbol tag doesn't have any posts</header>
+        </section>
+    }
+</section>
+
 
 @section MainAside{
 }
