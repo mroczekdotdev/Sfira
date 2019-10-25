@@ -1,26 +1,38 @@
 ﻿$(document).ready(function () {
-  var attachmentPreview = $(".attachmentPreview");
-
   $(document).on("change", "#imageAttachment", function () {
     $this = $(this);
+    var parent = $this.parents(".PostCreate");
+    var attachmentPreview = parent.find(".attachmentPreview");
+    var imagePreview = parent.find("#imagePreview");
+    var addAttachment = parent.find(".addAttachment");
+    var removeAttachment = parent.find(".removeAttachment");
+
     $(".attachmentInput").attr("data-selected", "false");
     $this.attr("data-selected", "true");
 
     var img = new Image();
     img.src = URL.createObjectURL($this[0].files[0]);
-    $("#imagePreview").css({
+    imagePreview.css({
       "background-image": "url(" + img.src + ")",
       "background-position": "center",
       "background-size": "cover",
       "background-repeat": "no-repeat"
     });
 
+    addAttachment.hide();
+    removeAttachment.show();
     attachmentPreview.show();
   });
 
   $(document).on("click", ".sendPost", function () {
-    var attachmentInput = $('.attachmentInput[data-selected="true"]');
-    var body = $("#postBody").val();
+    var parent = $(this).parents(".PostCreate");
+    var attachmentPreview = parent.find(".attachmentPreview");
+    var addAttachment = parent.find(".addAttachment");
+    var removeAttachment = parent.find(".removeAttachment");
+    var attachmentInput = parent.find('.attachmentInput[data-selected="true"]');
+    var attachmentForm = parent.find(".attachmentForm");
+    var postForm = parent.find(".postForm");
+    var body = postForm.find("#postBody").val();
 
     var form = new FormData();
 
@@ -44,10 +56,25 @@
       contentType: false,
       processData: false,
       success: function () {
-        $(".attachmentForm")[0].reset();
-        $(".postForm")[0].reset();
+        postForm[0].reset();
+        attachmentForm[0].reset();
         attachmentPreview.hide();
+        removeAttachment.hide();
+        addAttachment.show();
       },
     });
+  });
+
+  $(document).on("click", ".removeAttachment", function () {
+    $this = $(this);
+    var parent = $this.parents(".PostCreate");
+    var attachmentPreview = parent.find(".attachmentPreview");
+    var addAttachment = parent.find(".addAttachment");
+    var attachmentForm = parent.find(".attachmentForm");
+
+    $this.hide()
+    addAttachment.show();
+    attachmentForm[0].reset();
+    attachmentPreview.hide();
   });
 });

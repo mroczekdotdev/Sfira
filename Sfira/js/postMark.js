@@ -7,7 +7,7 @@
       type: "GET",
       url: postId + "/like",
       success: function (result) {
-        $this.html('<i class="fas fa-heart fa-sm fa-fw"></i>' + result.likescount).removeClass("like").addClass("unlike").hide().fadeIn();
+        $this.html('<i class="fas fa-heart fa-sm fa-fw"></i><span class="counter">' + result.likescount + "</span>").removeClass("like").addClass("unlike").hide().fadeIn();
       }
     });
   });
@@ -20,7 +20,7 @@
       type: "GET",
       url: postId + "/unlike",
       success: function (result) {
-        $this.html('<i class="far fa-heart fa-sm fa-fw"></i>' + result.likescount).removeClass("unlike").addClass("like").hide().fadeIn();
+        $this.html('<i class="far fa-heart fa-sm fa-fw"></i><span class="counter">' + result.likescount + "</span>").removeClass("unlike").addClass("like").hide().fadeIn();
       }
     });
   });
@@ -33,7 +33,7 @@
       type: "GET",
       url: postId + "/favorite",
       success: function (result) {
-        $this.html('<i class="fas fa-star fa-sm fa-fw"></i>' + result.favoritescount).removeClass("favorite").addClass("unfavorite").hide().fadeIn();
+        $this.html('<i class="fas fa-star fa-sm fa-fw"></i><span class="counter">' + result.favoritescount + "</span>").removeClass("favorite").addClass("unfavorite").hide().fadeIn();
       }
     });
   });
@@ -46,7 +46,7 @@
       type: "GET",
       url: postId + "/unfavorite",
       success: function (result) {
-        $this.html('<i class="far fa-star fa-sm fa-fw"></i>' + result.favoritescount).removeClass("unfavorite").addClass("favorite").hide().fadeIn();
+        $this.html('<i class="far fa-star fa-sm fa-fw"></i><span class="counter">' + result.favoritescount + "</span>").removeClass("unfavorite").addClass("favorite").hide().fadeIn();
       }
     });
   });

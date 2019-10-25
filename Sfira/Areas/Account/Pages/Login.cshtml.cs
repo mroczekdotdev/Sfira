@@ -82,6 +82,7 @@ namespace MroczekDotDev.Sfira.Areas.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+
                 if (result.Succeeded)
                 {
                     logger.LogInformation("User logged in.");
@@ -90,7 +91,7 @@ namespace MroczekDotDev.Sfira.Areas.Account
                 if (result.IsLockedOut)
                 {
                     logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    return LocalRedirect("./Lockout");
                 }
                 else
                 {

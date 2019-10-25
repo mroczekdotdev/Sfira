@@ -79,7 +79,7 @@
         @{
             if (Model.Attachment != null)
             {
-                <section class="attachment">
+                <section class="attachment bottom">
                     @(await Component.InvokeAsync<AttachmentViewComponent>(Model.Attachment))
                 </section>
             }

@@ -2,45 +2,48 @@
   padding-top: $padding-base;
   margin-bottom: $margin-base;
 
-  .postContent {
-    background-color: color-variant("superlight", $color-primary);
-    border: $border-size-base solid $color-primary;
-    border-radius: $radius-base;
-  }
+  > .postForm {
+    > .postContent {
+      background-color: color-variant("superlight", $color-primary);
+      border: $border-size-base solid $color-primary;
+      border-radius: $radius-base;
 
-  textarea {
-    display: block;
-    height: 4rem;
-    min-height: 4rem;
-    border: none;
-    background: none;
-    border-radius: $radius-base;
+      > textarea {
+        display: block;
+        height: 4rem;
+        min-height: 4rem;
+        border: none;
+        background: none;
+        border-radius: $radius-base;
 
-    &:focus {
-      background-color: $color-white;
+        &:focus {
+          background-color: $color-white;
+        }
+      }
+
+      .attachmentPreview {
+        position: relative;
+        padding-bottom: 100%;
+
+        .cover {
+          border-width: $border-size-base 0 0 0;
+          border-style: solid;
+          border-color: $color-primary;
+          border-radius: 0 0 $radius-base $radius-base;
+          border-radius: 0 0 $radius-base/2 $radius-base/2;
+        }
+      }
     }
   }
 
-  .actions {
+  > .actions {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     margin-top: $margin-sm;
-  }
 
-  .attachmentPreview {
-    position: relative;
-    padding-bottom: 100%;
-
-    .cover {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-width: $border-size-base 0 0 0;
-      border-style: solid;
-      border-color: $color-primary;
-      border-radius: 0 0 $radius-base $radius-base;
-      border-radius: 0 0 $radius-base/2 $radius-base/2;
+    > .removeAttachment {
+      background-color: $color-warning;
     }
   }
 }

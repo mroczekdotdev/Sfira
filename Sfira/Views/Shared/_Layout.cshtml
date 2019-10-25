@@ -1,5 +1,7 @@
 ﻿@{
     CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+
+    var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
 }
 
 <!DOCTYPE html>
@@ -13,17 +15,27 @@
     <script defer src="~/lib/jquery/jquery.min.js"></script>
     <script defer src="~/site.js" asp-append-version="true"></script>
     <title>@ViewBag.Title</title>
-    @await Html.PartialAsync("_Favicons")
+    @{await Html.RenderPartialAsync("_Favicons"); }
 </head>
 
 <body>
-    <div class="site-container">
-        <header class="site-header">
-            <a href="#"><img class="logo" src="~/media/site/sfira-logo-primary.png" alt=""></a>
-            <nav class="site-menu">
-                <div class="item"><a asp-controller="Home" asp-action="@nameof(HomeController.Index)"><i class="fas fa-home"></i> Home</a></div>
-                <div class="item"><a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)"><i class="fas fa-globe-americas"></i> Explore</a></div>
-                <div class="item"><a asp-controller="Messages" asp-action="@nameof(MessagesController.Index)"><i class="fas fa-envelope-square"></i> Messages</a></div>
+    <div class="Site">
+        <header class="siteHeader">
+            <img class="logo" src="~/media/site/sfira-logo-primary.png" alt="">
+            <nav class="siteMenu">
+                <div class="item @if (controller == "Home") {<text>active</text>} ">
+                    <a asp-controller="Home" asp-action="@nameof(HomeController.Index)"><i class="fas fa-home"></i> Home</a>
+                </div>
+                <div class="item @if (controller == "Explore") {<text>active</text>} ">
+                    <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
+                        <i class="fas fa-globe-americas"></i> Explore
+                    </a>
+                </div>
+                <div class="item @if (controller == "Messages") {<text>active</text>} ">
+                    <a asp-controller="Messages" asp-action="@nameof(MessagesController.Index)">
+                        <i class="fas fa-envelope-square"></i> Messages
+                    </a>
+                </div>
             </nav>
             @*UNIMPLEMENTED
                 <form class="SearchForm">
@@ -31,7 +43,7 @@
                     <button type="submit">Search</button>
                 </form>*@
             <section class="user">
-                @await Html.PartialAsync("_UserMenuPartial")
+                @{await Html.RenderPartialAsync("_UserMenuPartial"); }
             </section>
         </header>
 
@@ -59,12 +71,12 @@
         </div>
     </div>
 
-    @await Html.PartialAsync("_ImageModal")
+    @{await Html.RenderPartialAsync("_ImageModal"); }
 
     @RenderSection("Scripts", required: false)
     <noscript>
         <style>
-            .site-container {
+            .Site {
                 display: none;
             }
         </style>

@@ -19,7 +19,9 @@
             <input class="attachmentInput" id="imageAttachment" type="file" accept="image/jpeg, image/png" style="display: none;">
         </form>
         <section class="actions">
-            <button class="attachImage" type="button" onclick="document.getElementById('imageAttachment').click();"><i class="fas fa-image fa-lg fa-fw"></i></button>
+            <button class="addAttachment" type="button" onclick="document.getElementById('imageAttachment').click();">
+                <i class="fas fa-image fa-lg fa-fw"></i>
+            </button><button class="removeAttachment" type="button" style="display: none;">Remove attachment</button>
             <button class="sendPost" type="button">Submit</button>
         </section>
     </section>

@@ -4,6 +4,7 @@
     var postId = post.data("id");
     var commentsFeed = post.find(".CommentsFeed");
     var commentCreate = post.find(".CommentCreate");
+    var attachmentPreview = post.find(".attachment");
 
     if ($.trim(commentsFeed.html()) == "") {
       $.ajax({
@@ -12,12 +13,14 @@
         success: function (result) {
           commentCreate.slideDown();
           commentsFeed.replaceWith(result).hide().slideDown();
+          attachmentPreview.toggleClass("bottom");
         }
       });
     }
     else {
       commentCreate.slideToggle();
       commentsFeed.slideToggle();
+      attachmentPreview.toggleClass("bottom");
     }
   });
 
@@ -46,7 +49,7 @@
             body.val("");
             comments.replaceWith(result);
             var commentsCount = post.find(".Comment").length;
-            a.html('<i class="fas fa-comment-alt fa-sm fa-fw"></i>' + commentsCount).hide().fadeIn();
+            a.html('<i class="fas fa-comment-alt fa-sm fa-fw"></i><span class="counter">' + commentsCount + "</span>").hide().fadeIn();
           },
         });
       },
