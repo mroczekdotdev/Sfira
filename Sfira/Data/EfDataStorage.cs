@@ -51,7 +51,7 @@ namespace MroczekDotDev.Sfira.Data
             var postToAdd = new Post
             {
                 Author = post.Author,
-                PublicationTime = DateTime.Now,
+                PublicationTime = DateTime.UtcNow,
                 Body = post.Body,
                 Tags = sb.ToString(),
             };
@@ -293,7 +293,7 @@ namespace MroczekDotDev.Sfira.Data
             var commentToAdd = new Comment
             {
                 Author = comment.Author,
-                PublicationTime = DateTime.Now,
+                PublicationTime = DateTime.UtcNow,
                 Body = comment.Body,
                 Parent = parent,
             };
@@ -419,7 +419,7 @@ namespace MroczekDotDev.Sfira.Data
                 var messageToAdd = new Message
                 {
                     Author = message.Author,
-                    PublicationTime = DateTime.Now,
+                    PublicationTime = DateTime.UtcNow,
                     Body = message.Body,
                     ChatId = message.ChatId,
                 };

@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Extensions.DependencyInjection;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.Services;
 
@@ -30,10 +30,9 @@ namespace MroczekDotDev.Sfira
 
             services.AddTransient<IDataStorage, EfDataStorage>();
 
-            services.AddSingleton<FileUploader>();
+            services.AddFileUploader();
 
-            services.AddSingleton<IEmailSender, EmailSender>();
-
+            services.AddEmailSender();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -67,6 +66,8 @@ namespace MroczekDotDev.Sfira
                 options.LogoutPath = $"/account/logout";
                 options.AccessDeniedPath = $"/account/accessdenied";
             });
+
+            services.AddScheduler();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

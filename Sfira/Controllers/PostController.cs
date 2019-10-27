@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
-using MroczekDotDev.Sfira.Services;
+using MroczekDotDev.Sfira.Services.FileUploading;
 using MroczekDotDev.Sfira.ViewModels;
 using System;
 using System.Drawing.Imaging;
@@ -19,13 +19,13 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly IHostingEnvironment environment;
         private readonly IDataStorage dataStorage;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly FileUploader fileUploader;
+        private readonly IFileUploader fileUploader;
 
         public PostController(
             IHostingEnvironment environment,
             IDataStorage dataStorage,
             UserManager<ApplicationUser> userManager,
-            FileUploader fileUploader)
+            IFileUploader fileUploader)
         {
             this.environment = environment;
             this.dataStorage = dataStorage;

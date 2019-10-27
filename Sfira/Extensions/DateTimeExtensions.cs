@@ -11,7 +11,7 @@ namespace MroczekDotDev.Sfira.Extensions
             const int secondsInOneDay = 86400;
             const int secondsInThirtyDays = 2592000;
 
-            TimeSpan delta = DateTime.Now.Subtract(dateTime);
+            TimeSpan delta = DateTime.UtcNow.Subtract(dateTime);
 
             switch (delta.TotalSeconds)
             {

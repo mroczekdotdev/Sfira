@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace MroczekDotDev.Sfira.Services
+namespace MroczekDotDev.Sfira.Services.FileUploading
 {
     public abstract class UploadableFile
     {

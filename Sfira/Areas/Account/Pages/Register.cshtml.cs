@@ -82,7 +82,7 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                     UserName = Input.UserName,
                     Name = Input.UserName,
                     Email = Input.Email,
-                    RegisterTime = DateTime.Now,
+                    RegisterTime = DateTime.UtcNow,
                 };
 
                 var result = await userManager.CreateAsync(user, Input.Password);

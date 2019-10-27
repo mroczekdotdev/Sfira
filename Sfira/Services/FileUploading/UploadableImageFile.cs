@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MroczekDotDev.Sfira.Services
+namespace MroczekDotDev.Sfira.Services.FileUploading
 {
     public class UploadableImageFile : UploadableFile
     {

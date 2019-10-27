@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MroczekDotDev.Sfira.Models;
-using MroczekDotDev.Sfira.Services;
+using MroczekDotDev.Sfira.Services.FileUploading;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,13 +19,13 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
         private readonly IHostingEnvironment environment;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly FileUploader fileUploader;
+        private readonly IFileUploader fileUploader;
 
         public ProfileModel(
             IHostingEnvironment environment,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            FileUploader fileUploader)
+            IFileUploader fileUploader)
         {
             this.environment = environment;
             this.userManager = userManager;

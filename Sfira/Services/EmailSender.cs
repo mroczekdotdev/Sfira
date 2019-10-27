@@ -10,9 +10,9 @@ namespace MroczekDotDev.Sfira.Services
     {
         private readonly EmailSettings settings;
 
-        public EmailSender(IOptions<EmailSettings> settings)
+        public EmailSender(IOptions<EmailSettings> settingsOptions)
         {
-            this.settings = settings.Value;
+            settings = settingsOptions.Value;
         }
 
         public Task SendEmailAsync(string email, string subject, string message)
