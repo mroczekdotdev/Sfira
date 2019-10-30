@@ -12,13 +12,13 @@ namespace MroczekDotDev.Sfira.ViewComponents
 {
     public class PostsFeedViewComponent : ViewComponent
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
         private const int PostsFeedCount = 10;
 
-        public PostsFeedViewComponent(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public PostsFeedViewComponent(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 
@@ -26,13 +26,13 @@ namespace MroczekDotDev.Sfira.ViewComponents
         {
             foreach (var post in posts)
             {
-                post.Attachment = dataStorage.GetAttachmentByPostId(post.Id)?.ToViewModel;
+                post.Attachment = repository.GetAttachmentByPostId(post.Id)?.ToViewModel;
             }
 
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                posts = dataStorage.LoadCurrentUserRelations(posts, currentUser.Id);
+                posts = repository.LoadCurrentUserRelations(posts, currentUser.Id);
             }
 
             if (posts.Count() < PostsFeedCount)

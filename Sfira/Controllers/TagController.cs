@@ -11,20 +11,20 @@ namespace MroczekDotDev.Sfira.Controllers
 {
     public class TagController : Controller
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
         private const int PostsFeedCount = 10;
 
-        public TagController(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public TagController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 
         public IActionResult Index(string tagName)
         {
             PostsFeedLoaderViewModel postsFeedLoader = null;
-            IEnumerable<PostViewModel> posts = dataStorage.GetPostsByTag(tagName, PostsFeedCount).ToViewModels();
+            IEnumerable<PostViewModel> posts = repository.GetPostsByTag(tagName, PostsFeedCount).ToViewModels();
 
             if (posts.Any())
             {
@@ -45,7 +45,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public IActionResult PostsFeed(string tagName, int count, int cursor)
         {
-            IEnumerable<PostViewModel> posts = dataStorage.GetPostsByTag(tagName, count, cursor).ToViewModels();
+            IEnumerable<PostViewModel> posts = repository.GetPostsByTag(tagName, count, cursor).ToViewModels();
 
             return ViewComponent(typeof(PostsFeedViewComponent), posts);
         }

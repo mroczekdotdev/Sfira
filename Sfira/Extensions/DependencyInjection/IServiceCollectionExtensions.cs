@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Services;
 using MroczekDotDev.Sfira.Services.CachedStorage;
 using MroczekDotDev.Sfira.Services.FileUploading;
@@ -12,6 +13,12 @@ namespace MroczekDotDev.Sfira.Extensions.DependencyInjection
 {
     public static class IServiceCollectionExtensions
     {
+        public static IServiceCollection AddRepository(this IServiceCollection services)
+        {
+            services.AddTransient<IRepository, EntityFrameworkRepository>();
+            return services;
+        }
+
         public static IServiceCollection AddEmailSender(this IServiceCollection services)
         {
             services.AddSingleton<IEmailSender, EmailSender>();

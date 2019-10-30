@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MroczekDotDev.Sfira.Data
 {
-    public interface IDataStorage
+    public interface IRepository
     {
         ApplicationUser GetUserById(string userId);
         ApplicationUser GetUserByUserName(string userName);

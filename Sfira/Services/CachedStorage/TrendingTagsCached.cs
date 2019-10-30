@@ -8,11 +8,11 @@ namespace MroczekDotDev.Sfira.Services.CachedStorage
     public class TrendingTagsCached : Cached<string>
     {
         private const int samplesPerMinute = 600;
-        private readonly SfiraDbContext context;
+        private readonly PostgreSqlDbContext context;
         private readonly TimeSpan period = TimeSpan.FromMinutes(60);
         private readonly int sampleSize;
 
-        public TrendingTagsCached(SfiraDbContext context)
+        public TrendingTagsCached(PostgreSqlDbContext context)
         {
             this.context = context;
             sampleSize = (int)period.TotalMinutes * samplesPerMinute;

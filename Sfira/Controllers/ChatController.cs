@@ -11,12 +11,12 @@ namespace MroczekDotDev.Sfira.Controllers
 {
     public class ChatController : Controller
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ChatController(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public ChatController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 
@@ -27,8 +27,8 @@ namespace MroczekDotDev.Sfira.Controllers
 
             if (currentUser.UserName.ToLower() != userName)
             {
-                ApplicationUser interlocutor = dataStorage.GetUserByUserName(userName);
-                ChatViewModel chat = dataStorage.GetDirectChatByUserIds(currentUser.Id, interlocutor.Id)?.ToViewModel;
+                ApplicationUser interlocutor = repository.GetUserByUserName(userName);
+                ChatViewModel chat = repository.GetDirectChatByUserIds(currentUser.Id, interlocutor.Id)?.ToViewModel;
 
                 if (chat == null)
                 {
@@ -36,8 +36,8 @@ namespace MroczekDotDev.Sfira.Controllers
                 }
                 else
                 {
-                    chat.Messages = dataStorage.GetMessagesByChatId(chat.Id).ToViewModels();
-                    chat.Messages = dataStorage.LoadCurrentUserAuthorship(chat.Messages, currentUser.Id);
+                    chat.Messages = repository.GetMessagesByChatId(chat.Id).ToViewModels();
+                    chat.Messages = repository.LoadCurrentUserAuthorship(chat.Messages, currentUser.Id);
                 }
 
                 return View("Chat", chat);
@@ -53,12 +53,12 @@ namespace MroczekDotDev.Sfira.Controllers
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
 
-            UserChat userChat = dataStorage.GetUserChat(currentUser.Id, chatId);
+            UserChat userChat = repository.GetUserChat(currentUser.Id, chatId);
 
             if (userChat != null)
             {
-                IEnumerable<MessageViewModel> messages = dataStorage.GetMessagesByChatId(chatId).ToViewModels();
-                messages = dataStorage.LoadCurrentUserAuthorship(messages, currentUser.Id);
+                IEnumerable<MessageViewModel> messages = repository.GetMessagesByChatId(chatId).ToViewModels();
+                messages = repository.LoadCurrentUserAuthorship(messages, currentUser.Id);
 
                 return PartialView("_MessagesFeedPartial", messages);
             }
@@ -78,12 +78,12 @@ namespace MroczekDotDev.Sfira.Controllers
 
                 if (chatId == 0)
                 {
-                    chatId = dataStorage.AddDirectChat(currentUser.Id, interlocutorId).Id;
+                    chatId = repository.AddDirectChat(currentUser.Id, interlocutorId).Id;
                 }
 
                 message.ChatId = chatId;
                 message.Author = currentUser;
-                Message createdMessage = dataStorage.AddMessage(message);
+                Message createdMessage = repository.AddMessage(message);
 
                 if (createdMessage != null)
                 {

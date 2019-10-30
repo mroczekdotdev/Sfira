@@ -9,11 +9,11 @@ namespace MroczekDotDev.Sfira.Services.CachedStorage
     public class PopularUsersCached : Cached<ApplicationUser>
     {
         private const int samplesPerMinute = 600;
-        private readonly SfiraDbContext context;
+        private readonly PostgreSqlDbContext context;
         private readonly TimeSpan period = TimeSpan.FromMinutes(60);
         private readonly int sampleSize;
 
-        public PopularUsersCached(SfiraDbContext context)
+        public PopularUsersCached(PostgreSqlDbContext context)
         {
             this.context = context;
             sampleSize = (int)period.TotalMinutes * samplesPerMinute;

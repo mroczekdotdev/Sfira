@@ -18,16 +18,16 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly ILogger<RegisterModel> logger;
 
         private string[] nonRedirectableUrls = { "/account/register", "/account/login" };
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ILogger<RegisterModel> logger)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;

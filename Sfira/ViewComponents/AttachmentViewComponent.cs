@@ -9,12 +9,12 @@ namespace MroczekDotDev.Sfira.ViewComponents
 {
     public class AttachmentViewComponent : ViewComponent
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public AttachmentViewComponent(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public AttachmentViewComponent(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 

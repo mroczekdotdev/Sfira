@@ -11,19 +11,19 @@ namespace MroczekDotDev.Sfira.Controllers
 {
     public class ExploreController : Controller
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
         private const int PostsFeedCount = 10;
 
-        public ExploreController(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public ExploreController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<PostViewModel> posts = dataStorage.GetPosts(PostsFeedCount).ToViewModels();
+            IEnumerable<PostViewModel> posts = repository.GetPosts(PostsFeedCount).ToViewModels();
             var postsFeedLoader = new PostsFeedLoaderViewModel();
             postsFeedLoader.Posts = posts;
 
@@ -40,7 +40,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public IActionResult PostsFeed(int count, int cursor)
         {
-            IEnumerable<PostViewModel> posts = dataStorage.GetPosts(count, cursor).ToViewModels();
+            IEnumerable<PostViewModel> posts = repository.GetPosts(count, cursor).ToViewModels();
 
             return ViewComponent(typeof(PostsFeedViewComponent), posts);
         }

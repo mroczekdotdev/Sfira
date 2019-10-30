@@ -13,13 +13,13 @@ namespace MroczekDotDev.Sfira.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
         private const int PostsFeedCount = 10;
 
-        public HomeController(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public HomeController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 
@@ -31,7 +31,7 @@ namespace MroczekDotDev.Sfira.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                IEnumerable<PostViewModel> posts = dataStorage.GetPostsByFollowerId(currentUser.Id, PostsFeedCount).ToViewModels();
+                IEnumerable<PostViewModel> posts = repository.GetPostsByFollowerId(currentUser.Id, PostsFeedCount).ToViewModels();
 
                 if (posts.Any())
                 {
@@ -56,7 +56,7 @@ namespace MroczekDotDev.Sfira.Controllers
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
 
-            IEnumerable<PostViewModel> posts = dataStorage.GetPostsByFollowerId(currentUser.Id, count, cursor).ToViewModels();
+            IEnumerable<PostViewModel> posts = repository.GetPostsByFollowerId(currentUser.Id, count, cursor).ToViewModels();
 
             return ViewComponent(typeof(PostsFeedViewComponent), posts);
         }

@@ -9,11 +9,11 @@ using System.Text.RegularExpressions;
 
 namespace MroczekDotDev.Sfira.Data
 {
-    public class EfDataStorage : IDataStorage
+    public class EntityFrameworkRepository : IRepository
     {
-        private readonly SfiraDbContext context;
+        private readonly PostgreSqlDbContext context;
 
-        public EfDataStorage(SfiraDbContext context)
+        public EntityFrameworkRepository(PostgreSqlDbContext context)
         {
             this.context = context;
         }
@@ -41,7 +41,7 @@ namespace MroczekDotDev.Sfira.Data
         public void AddPost(PostViewModel post)
         {
             StringBuilder sb = new StringBuilder();
-            string bodyTags = Regex.Replace(post.Body, @"(?:)#\b(\w+)\b(?=.*\1)", "");
+            string bodyTags = Regex.Replace(post.Body, @"(?:)(#\b(\w+)\b)(?=.*\1)", "", RegexOptions.IgnoreCase);
 
             foreach (Match match in Regex.Matches(bodyTags, @"#(\w+)"))
             {

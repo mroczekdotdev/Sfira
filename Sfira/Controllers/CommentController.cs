@@ -11,12 +11,12 @@ namespace MroczekDotDev.Sfira.Controllers
 {
     public class CommentController : Controller
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public CommentController(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public CommentController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 
@@ -28,7 +28,7 @@ namespace MroczekDotDev.Sfira.Controllers
             {
                 comment.Author = await userManager.FindByNameAsync(User.Identity.Name);
                 comment.ParentId = postId;
-                dataStorage.AddComment(comment);
+                repository.AddComment(comment);
                 return Ok();
             }
             else
@@ -39,7 +39,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public PartialViewResult Feed(int postId)
         {
-            IEnumerable<CommentViewModel> comments = dataStorage.GetCommentsByPostId(postId).ToViewModels();
+            IEnumerable<CommentViewModel> comments = repository.GetCommentsByPostId(postId).ToViewModels();
 
             return PartialView("_CommentsFeedPartial", comments);
         }

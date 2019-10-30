@@ -5,9 +5,9 @@ using MroczekDotDev.Sfira.Models;
 
 namespace MroczekDotDev.Sfira.Data
 {
-    public class SfiraDbContext : IdentityDbContext<ApplicationUser>
+    public class PostgreSqlDbContext : IdentityDbContext<ApplicationUser>
     {
-        public SfiraDbContext(DbContextOptions<SfiraDbContext> options) : base(options)
+        public PostgreSqlDbContext(DbContextOptions<PostgreSqlDbContext> options) : base(options)
         {
         }
 
@@ -27,16 +27,16 @@ namespace MroczekDotDev.Sfira.Data
 
             var extensionEnumToStringConverter = new EnumToStringConverter<FilenameExtension>();
 
-            builder.HasPostgresExtension("citext"); //PostgreSQL only
+            builder.HasPostgresExtension("citext");
 
             builder.Entity<ApplicationUser>(e =>
             {
                 e.HasIndex(u => u.NormalizedEmail).IsUnique();
-                e.Property(u => u.UserName).HasColumnType("citext"); //PostgreSQL only
+                e.Property(u => u.UserName).HasColumnType("citext");
             });
 
             builder.Entity<Post>()
-                .Property(p => p.Tags).HasColumnType("citext"); //PostgreSQL only
+                .Property(p => p.Tags).HasColumnType("citext");
 
             builder.Entity<UserPost>()
                 .HasKey(up => new { up.UserId, up.PostId });

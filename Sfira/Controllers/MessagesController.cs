@@ -11,12 +11,12 @@ namespace MroczekDotDev.Sfira.Controllers
 {
     public class MessagesController : Controller
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public MessagesController(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public MessagesController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 
@@ -24,7 +24,7 @@ namespace MroczekDotDev.Sfira.Controllers
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            IEnumerable<ChatViewModel> chats = dataStorage.GetChatsListByUserId(currentUser.Id).ToViewModels();
+            IEnumerable<ChatViewModel> chats = repository.GetChatsListByUserId(currentUser.Id).ToViewModels();
 
             foreach (ChatViewModel chat in chats)
             {

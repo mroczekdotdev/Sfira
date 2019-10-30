@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MroczekDotDev.Sfira.Extensions
+namespace MroczekDotDev.Sfira.Extensions.System
 {
     public static class DateTimeExtensions
     {

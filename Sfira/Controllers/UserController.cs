@@ -13,19 +13,19 @@ namespace MroczekDotDev.Sfira.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
         private const int PostsFeedCount = 10;
 
-        public UserController(IDataStorage dataStorage, UserManager<ApplicationUser> userManager)
+        public UserController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index(string userName)
         {
-            UserViewModel user = dataStorage.GetUserByUserName(userName)?.ToViewModel;
+            UserViewModel user = repository.GetUserByUserName(userName)?.ToViewModel;
 
             if (user != null)
             {
@@ -41,11 +41,11 @@ namespace MroczekDotDev.Sfira.Controllers
                     }
                     else
                     {
-                        user.IsFollowedByCurrentUser = dataStorage.GetUserFollow(currentUser.Id, user.Id) != null;
+                        user.IsFollowedByCurrentUser = repository.GetUserFollow(currentUser.Id, user.Id) != null;
                     }
                 }
 
-                var posts = dataStorage.GetPostsByUserName(userName, PostsFeedCount).ToViewModels();
+                var posts = repository.GetPostsByUserName(userName, PostsFeedCount).ToViewModels();
 
                 if (posts.Any())
                 {
@@ -68,20 +68,20 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public IActionResult PostsFeed(string userName, int count, int cursor)
         {
-            IEnumerable<PostViewModel> posts = dataStorage.GetPostsByUserName(userName, count, cursor).ToViewModels();
+            IEnumerable<PostViewModel> posts = repository.GetPostsByUserName(userName, count, cursor).ToViewModels();
 
             return ViewComponent(typeof(PostsFeedViewComponent), posts);
         }
 
         public PartialViewResult Followers(string userName)
         {
-            IEnumerable<UserViewModel> followers = dataStorage.GetFollowersByUserName(userName).ToViewModels();
+            IEnumerable<UserViewModel> followers = repository.GetFollowersByUserName(userName).ToViewModels();
             return PartialView("_FollowersFeedPartial", followers);
         }
 
         public PartialViewResult Media(string userName)
         {
-            IEnumerable<AttachmentViewModel> attachments = dataStorage.GetAttachmentsByUserName(userName).ToViewModels();
+            IEnumerable<AttachmentViewModel> attachments = repository.GetAttachmentsByUserName(userName).ToViewModels();
             return PartialView("_MediaFeedPartial", attachments);
         }
 
@@ -89,11 +89,11 @@ namespace MroczekDotDev.Sfira.Controllers
         public async Task<IActionResult> Follow(string userName)
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            UserFollow userFollow = dataStorage.AddUserFollow(currentUser.Id, userName);
+            UserFollow userFollow = repository.AddUserFollow(currentUser.Id, userName);
 
             if (userFollow != null)
             {
-                string followersCount = dataStorage.GetUserByUserName(userName).FollowersCount.ToString();
+                string followersCount = repository.GetUserByUserName(userName).FollowersCount.ToString();
                 return Ok(followersCount);
             }
             else
@@ -106,11 +106,11 @@ namespace MroczekDotDev.Sfira.Controllers
         public async Task<IActionResult> Unfollow(string userName)
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            UserFollow userFollow = dataStorage.RemoveUserFollow(currentUser.Id, userName);
+            UserFollow userFollow = repository.RemoveUserFollow(currentUser.Id, userName);
 
             if (userFollow != null)
             {
-                string followersCount = dataStorage.GetUserByUserName(userName).FollowersCount.ToString();
+                string followersCount = repository.GetUserByUserName(userName).FollowersCount.ToString();
                 return Ok(followersCount);
             }
             else

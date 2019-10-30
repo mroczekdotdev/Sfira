@@ -25,10 +25,10 @@ namespace MroczekDotDev.Sfira
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SfiraDbContext>(options =>
+            services.AddDbContext<PostgreSqlDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
 
-            services.AddTransient<IDataStorage, EfDataStorage>();
+            services.AddRepository();
 
             services.AddFileUploader();
 
@@ -40,7 +40,7 @@ namespace MroczekDotDev.Sfira
                 options.SignIn.RequireConfirmedEmail = false;
                 options.User.RequireUniqueEmail = true;
             })
-                .AddEntityFrameworkStores<SfiraDbContext>()
+                .AddEntityFrameworkStores<PostgreSqlDbContext>()
                 .AddSignInManager<SignInManager<ApplicationUser>>()
                 .AddDefaultTokenProviders();
 

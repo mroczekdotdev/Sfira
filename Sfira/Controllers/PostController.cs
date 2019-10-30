@@ -17,18 +17,18 @@ namespace MroczekDotDev.Sfira.Controllers
     public class PostController : Controller
     {
         private readonly IHostingEnvironment environment;
-        private readonly IDataStorage dataStorage;
+        private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFileUploader fileUploader;
 
         public PostController(
             IHostingEnvironment environment,
-            IDataStorage dataStorage,
+            IRepository repository,
             UserManager<ApplicationUser> userManager,
             IFileUploader fileUploader)
         {
             this.environment = environment;
-            this.dataStorage = dataStorage;
+            this.repository = repository;
             this.userManager = userManager;
             this.fileUploader = fileUploader;
         }
@@ -73,7 +73,7 @@ namespace MroczekDotDev.Sfira.Controllers
                     };
                 }
 
-                dataStorage.AddPost(post);
+                repository.AddPost(post);
 
                 return Ok();
             }
@@ -87,11 +87,11 @@ namespace MroczekDotDev.Sfira.Controllers
         public async Task<IActionResult> Mark(int postId, string interaction)
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            UserPost userPost = dataStorage.MarkPost(currentUser.Id, postId, interaction);
+            UserPost userPost = repository.MarkPost(currentUser.Id, postId, interaction);
 
             if (userPost != null)
             {
-                PostViewModel post = dataStorage.GetPostById(postId).ToViewModel;
+                PostViewModel post = repository.GetPostById(postId).ToViewModel;
 
                 var postCounters = new
                 {
