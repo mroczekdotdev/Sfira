@@ -1,0 +1,11 @@
+﻿@model IEnumerable<string>
+
+@if (Model.Any())
+{
+    foreach (var trendingTag in Model)
+    {
+        <p>
+            <a asp-controller="Tag" asp-action="@nameof(HomeController.Index)" asp-route-tagName="@trendingTag">#@trendingTag</a>
+        </p>
+    }
+}

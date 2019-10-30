@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Services.Scheduling
 {
-    public class TrendingTagsScheduledTask : IScheduledTask
+    public class PopularUsersScheduledTask : IScheduledTask
     {
-        private readonly TrendingTagsCached cache;
-        private readonly ILogger<TrendingTagsScheduledTask> logger;
+        private readonly PopularUsersCached cache;
+        private readonly ILogger<PopularUsersScheduledTask> logger;
 
-        public TrendingTagsScheduledTask(TrendingTagsCached cache, ILogger<TrendingTagsScheduledTask> logger)
+        public PopularUsersScheduledTask(PopularUsersCached cache, ILogger<PopularUsersScheduledTask> logger)
         {
             this.cache = cache;
             this.logger = logger;

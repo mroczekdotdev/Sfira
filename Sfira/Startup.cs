@@ -50,7 +50,7 @@ namespace MroczekDotDev.Sfira
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)  //remove in 3.0
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddRazorPagesOptions(options =>
                 {
                     options.AllowAreas = true;
@@ -66,6 +66,8 @@ namespace MroczekDotDev.Sfira
                 options.LogoutPath = $"/account/logout";
                 options.AccessDeniedPath = $"/account/accessdenied";
             });
+
+            services.AddCachedStorage();
 
             services.AddScheduler();
         }

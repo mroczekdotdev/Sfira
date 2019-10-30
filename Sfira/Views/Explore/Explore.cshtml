@@ -17,16 +17,12 @@
         <header>
             Trending tags
         </header>
-        <p>
-            Trending content here.
-        </p>
+            @(await Component.InvokeAsync<TrendingTagsViewComponent>())
     </section>
     <section class="aside">
         <header>
-            Trending users
+            Popular users
         </header>
-        <p>
-            Trending content here.
-        </p>
+            @(await Component.InvokeAsync<PopularUsersViewComponent>())
     </section>
 }

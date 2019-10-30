@@ -1,0 +1,11 @@
+﻿@model IEnumerable<UserViewModel>
+
+@if (Model.Any())
+{
+    foreach (var popularUser in Model)
+    {
+        <p>
+            <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@popularUser.UserName">@@@popularUser.UserName</a>
+        </p>
+    }
+}
