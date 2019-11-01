@@ -1,6 +1,6 @@
 ﻿@{
     @model PostsFeedLoaderViewModel;
-    ViewBag.Title = "Explore \u00B7 Sfira";
+    ViewBag.Title = "Explore";
 }
 
 @{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
@@ -9,10 +9,10 @@
     @{await Html.RenderPartialAsync("_PostsFeedLoaderPartial", Model); }
 </section>
 
-@section MainAside{
+@section PrimaryAside{
 }
 
-@section Aside{
+@section SecondaryAside{
     <section class="aside">
         <header>
             Trending tags

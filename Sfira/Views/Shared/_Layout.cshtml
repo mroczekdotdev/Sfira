@@ -1,6 +1,5 @@
 ﻿@{
     CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
-
     var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
 }
 
@@ -14,14 +13,14 @@
     <script defer src="~/lib/font-awesome/all.min.js"></script>
     <script defer src="~/lib/jquery/jquery.min.js"></script>
     <script defer src="~/site.js" asp-append-version="true"></script>
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title &middot; Sfira</title>
     @{await Html.RenderPartialAsync("_Favicons"); }
 </head>
 
 <body>
     <div class="Site">
         <header class="siteHeader">
-            <img class="logo" src="~/media/site/sfira-logo-primary.png" alt="">
+            <a class="logo" asp-controller="Home" asp-action="@nameof(HomeController.Index)"><img src="~/media/site/sfira-logo-primary.png" alt=""></a>
             <nav class="siteMenu">
                 <div class="item @if (controller == "Home") {<text>active</text>} ">
                     <a asp-controller="Home" asp-action="@nameof(HomeController.Index)"><i class="fas fa-home"></i> Home</a>
@@ -37,7 +36,7 @@
                     </a>
                 </div>
             </nav>
-            @*UNIMPLEMENTED
+            @*NotImplemented
                 <form class="SearchForm">
                     <input type="search" placeholder="Search...">
                     <button type="submit">Search</button>
@@ -47,25 +46,28 @@
             </section>
         </header>
 
-        <div class="main-container">
-            <main class="main-column">
+        <div class="mainContainer">
+            <main class="mainColumn">
                 @RenderBody()
             </main>
-
-            <div class="side-column">
-                <div class="side-content">
-                    <div class="main-aside">
-                        @RenderSection("MainAside", required: false)
+            <div class="sideColumn">
+                <div class="sideContent">
+                    <div class="PrimaryAside">
+                        @RenderSection("PrimaryAside", required: false)
                     </div>
-
-                    <aside class="site-aside">
-                        @RenderSection("Aside", required: false)
+                    <aside class="secondaryAside">
+                        @RenderSection("SecondaryAside", required: false)
                     </aside>
                 </div>
-
-                <footer class="site-footer">
-                    Terms &middot; Privacy policy &middot; Cookies<br>
-                    &copy; @DateTime.UtcNow.Year <a href="https://mroczek.dev/">https://mroczek.dev/</a>
+                <footer class="siteFooter">
+                    <a class="link" asp-area="@nameof(MroczekDotDev.Sfira.Areas.About)" asp-page="/Index">
+                        About
+                    </a> &middot; <a class="link" asp-area="@nameof(MroczekDotDev.Sfira.Areas.About)" asp-page="/TermsOfUse">
+                        Terms of Use
+                    </a> &middot; <a class="link" asp-area="@nameof(MroczekDotDev.Sfira.Areas.About)" asp-page="/PrivacyPolicy">
+                        Privacy Policy
+                    </a><br>
+                    &copy; @DateTime.UtcNow.Year <a class="link" href="https://mroczek.dev/">mroczek.dev</a>
                 </footer>
             </div>
         </div>

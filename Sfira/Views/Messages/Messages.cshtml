@@ -1,6 +1,6 @@
 ﻿@{
     @model IEnumerable<ChatViewModel>
-    ViewBag.Title = "Messages \u00B7 Sfira";
+    ViewBag.Title = "Messages";
 }
 
 <section class="conversations">
@@ -16,3 +16,14 @@
         </section>
     }
 </section>
+
+@section PrimaryAside{
+    <section class="aside">
+        <p>
+            You may not use language that could be offensive. Threatening or harassing another user is intolerable. Any violation of the rules will result in account restrictions.
+        </p>
+        <ul>
+            <li><a class="link" asp-area="@nameof(MroczekDotDev.Sfira.Areas.About)" asp-page="/TermsOfUse">Terms of Use</a></li>
+        </ul>
+    </section>
+}

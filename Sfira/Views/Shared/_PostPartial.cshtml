@@ -70,11 +70,12 @@
                         }
                     }
                 </span>
-                <span class="more">&bull;&bull;&bull;</span>
+                @*NotImplemented
+                    <span class="more">&bull;&bull;&bull;</span>*@
             </section>
         </div>
         <section class="body">
-            @Html.Raw(Model.Body.FormatAsEntry())
+            @Html.Raw(Model.Body.ToHypertext())
         </section>
         @{
             if (Model.Attachment != null)

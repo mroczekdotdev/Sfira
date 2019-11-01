@@ -52,6 +52,17 @@
     <button type="submit">Save</button>
 </form>
 
+@section PrimaryAside{
+    <section class="aside">
+        <p>
+            All the information in your profile must be appropriate and inoffensive. Any violation of the rules will result in account restrictions.
+        </p>
+        <ul>
+            <li><a class="link" asp-area="@nameof(MroczekDotDev.Sfira.Areas.About)" asp-page="/TermsOfUse">Terms of Use</a></li>
+        </ul>
+    </section>
+}
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

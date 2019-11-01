@@ -28,15 +28,19 @@
         <input asp-for="Input.ConfirmPassword" />
         <span asp-validation-for="Input.ConfirmPassword" class="validation"></span>
     </div>
+    <div class="formGroup">
+        By clicking <strong>Register</strong>, you agree to <a asp-area="@nameof(MroczekDotDev.Sfira.Areas.About)" asp-page="/TermsOfUse">Terms of Use</a> and <a asp-area="@nameof(MroczekDotDev.Sfira.Areas.About)" asp-page="/PrivacyPolicy">Privacy Policy</a>.
+    </div>
     <button type="submit">Register</button>
 </form>
 
-@section MainAside{
-    <p>
-        <a asp-page="./Login">Already have an account?</a>
-    </p>
+@section PrimaryAside{
+    <section class="aside">
+        <ul>
+            <li><a asp-page="./Login">Already have an account?</a></li>
+        </ul>
+    </section>
 }
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

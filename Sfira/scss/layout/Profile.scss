@@ -67,4 +67,9 @@
       font-weight: $font-weight-bold;
     }
   }
+
+  .disabled {
+    color: $color-white;
+    background-color: color-variant("light", $color-primary);
+  }
 }

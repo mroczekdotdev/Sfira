@@ -23,6 +23,10 @@
       flex: 0;
       height: 36px;
       display: inline-block;
+
+      > img {
+        height: 36px;
+      }
     }
 
     > .siteMenu {
@@ -46,62 +50,77 @@
       margin-right: $margin-base;
     }
   }
-}
 
-.main-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-
-  .main-column {
+  > .mainContainer {
     display: flex;
-    flex: 2;
-    flex-direction: column;
-    min-width: 0;
-    margin-right: $margin-base;
-  }
+    flex-direction: row;
+    flex-wrap: nowrap;
 
-  .side-column {
-    display: flex;
-    flex: 1;
-    flex-shrink: 0;
-    flex-direction: column;
-    min-width: 0;
-
-    .side-content {
-      padding: $padding-lg;
-      background-color: color-variant("superlight", $color-primary);
+    > .mainColumn {
+      display: flex;
+      flex: 2;
+      flex-direction: column;
+      min-width: 0;
+      margin-right: $margin-base;
     }
 
-    @media #{$screen-sm} {
-      display: none;
+    > .sideColumn {
+      display: flex;
+      flex: 1;
+      flex-shrink: 0;
+      flex-direction: column;
+      min-width: 0;
+
+      > .sideContent {
+        padding: $padding-lg;
+        background-color: color-variant("superlight", $color-primary);
+
+        .aside {
+          > header {
+            margin: 0;
+            font-weight: $font-weight-bold;
+          }
+
+          > ul {
+            margin: 0;
+            padding: 0;
+          }
+
+          &:nth-of-type(n+2) {
+            margin-top: $margin-base;
+          }
+        }
+      }
+
+      > .siteFooter {
+        padding: $padding-base;
+        font-size: $font-size-sm;
+        color: $color-gray;
+        background-color: $color-white;
+
+        > .link {
+          color: $color-gray;
+
+          &:hover {
+            color: color-variant("dark", $color-gray);
+          }
+        }
+      }
+
+      @media #{$screen-sm} {
+        display: none;
+      }
     }
   }
 }
 
-.aside {
-  header {
-    margin: 0;
-    font-weight: $font-weight-bold;
-  }
-
+.articleSection {
   &:nth-of-type(n+2) {
     margin-top: $margin-base;
   }
 }
 
-.site-footer {
-  padding: $padding-base;
-  font-size: $font-size-sm;
-  color: $color-gray;
-  background-color: $color-white;
-}
-
 .javascript-disabled {
   padding: $padding-base;
   background-color: $color-white;
-}
-
-.href {
-  cursor: pointer;
 }

@@ -54,7 +54,9 @@ namespace MroczekDotDev.Sfira
                 .AddRazorPagesOptions(options =>
                 {
                     options.AllowAreas = true;
-                    options.Conventions.AuthorizeAreaFolder("Account", "/Manage");
+                    options.Conventions.AuthorizeAreaPage("Account", "/Index");
+                    options.Conventions.AuthorizeAreaPage("Account", "/ChangePassword");
+                    options.Conventions.AuthorizeAreaPage("Account", "/CloseAccount");
                     options.Conventions.AuthorizeAreaPage("Account", "/ConfirmEmail");
                     options.Conventions.AuthorizeAreaPage("Account", "/Logout");
                     options.Conventions.AuthorizeAreaPage("Account", "/Profile");
@@ -62,9 +64,9 @@ namespace MroczekDotDev.Sfira
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = $"/account/login";
-                options.LogoutPath = $"/account/logout";
-                options.AccessDeniedPath = $"/account/accessdenied";
+                options.LoginPath = "/account/login";
+                options.LogoutPath = "/account/logout";
+                options.AccessDeniedPath = "/account/accessdenied";
             });
 
             services.AddCachedStorage();
@@ -80,7 +82,7 @@ namespace MroczekDotDev.Sfira
             }
             if (env.IsProduction() || env.IsStaging())
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/error");
             }
 
             app.UseStatusCodePages();

@@ -2,10 +2,10 @@
 
 @if (Model.Any())
 {
-    foreach (var trendingTag in Model)
-    {
-        <p>
-            <a asp-controller="Tag" asp-action="@nameof(HomeController.Index)" asp-route-tagName="@trendingTag">#@trendingTag</a>
-        </p>
-    }
+    <ul>
+        @foreach (var trendingTag in Model)
+        {
+            <li><a asp-controller="Tag" asp-action="@nameof(HomeController.Index)" asp-route-tagName="@trendingTag">#@trendingTag</a></li>
+        }
+    </ul>
 }

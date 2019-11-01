@@ -7,7 +7,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
-namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
+namespace MroczekDotDev.Sfira.Areas.Account.Pages
 {
     public class CloseAccount : PageModel
     {

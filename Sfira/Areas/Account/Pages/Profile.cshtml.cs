@@ -54,7 +54,8 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
             [StringLength(36, ErrorMessage = "{0} can't be longer than {1} characters.")]
             public string Location { get; set; }
 
-            [RegularExpression(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$", ErrorMessage = "URL must be valid.")]
+            [StringLength(72, ErrorMessage = "URL can't be longer than {1} characters.")]
+            [RegularExpression(@"^(?:https?://)?[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]+\.[A-Za-z]{2,}\.[\w!#\$%&'\(\)\*\+,\-\./:;=?@\[\]~]*$", ErrorMessage = "URL must be valid.")]
             public string Website { get; set; }
 
             [BindProperty]

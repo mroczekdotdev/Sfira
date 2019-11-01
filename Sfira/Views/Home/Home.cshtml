@@ -1,6 +1,6 @@
 ﻿@{
     @model PostsFeedLoaderViewModel;
-    ViewBag.Title = "Home \u00B7 Sfira";
+    ViewBag.Title = "Home";
 }
 
 @{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
@@ -25,10 +25,10 @@
 }
 
 
-@section MainAside{
+@section PrimaryAside{
 }
 
-@section Aside{
+@section SecondaryAside{
     <section class="aside">
         <header>
             You may like

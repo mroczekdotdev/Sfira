@@ -70,6 +70,10 @@ button, .button {
   font-weight: $font-weight-bold;
   color: $color-white;
   background-color: $color-primary;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .validation {

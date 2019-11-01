@@ -1,7 +1,6 @@
 ﻿@{
     @model UserViewModel;
-    var usernameNameWithSymbol = "@" + ViewContext.RouteData.Values["userName"];
-    ViewBag.Title = usernameNameWithSymbol + " \u00B7 Sfira";
+    ViewBag.Title = "@" + ViewContext.RouteData.Values["userName"];
 }
 
 @if (Model != null)
@@ -32,7 +31,13 @@
                             }
                         </section>
                         <section class="moreProfileActions" style="display: none;">
-                            <button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">Message</button><button class="block">Block</button><button class="report">Report</button>
+                            <button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">
+                                Message
+                            </button><button class="block disabled">
+                                Block
+                            </button><button class="report disabled">
+                                Report
+                            </button>
                         </section><button class="more">&bull;&bull;&bull;</button>
                     }
                     else
@@ -42,7 +47,6 @@
                         </section>
                     }
                 }
-
             </section>
             <nav class="profileMenu">
                 <a class="menuItem showPosts active" href="javascript:void(0)">Posts</a>
@@ -68,7 +72,7 @@
     <section class="Feed MediaFeed" style="display: none;"></section>
     <section class="Feed FollowersFeed" style="display: none;"></section>
 
-    @section MainAside {
+    @section PrimaryAside {
         @if (Model.Description != null)
         {
             <section class="aside">
@@ -76,7 +80,7 @@
                     Summary
                 </header>
                 <p class="description">
-                    @Html.Raw(Model.Description.FormatAsEntry())
+                    @Html.Raw(Model.Description.ToHypertext())
                 </p>
             </section>
         }
@@ -108,10 +112,9 @@
                 <header>
                     Website
                 </header>
-                <p class="website">
+                <a href="@Model.Website.ToWebUrl()" class="website">
                     @Model.Website
-                    @*<TODO-CustomTagHelper shref="@Model.Website">@Model.Website</TODO>*@
-                </p>
+                </a>
             </section>
         }
     }
@@ -119,9 +122,9 @@
 else
 {
     <section class="Info">
-        <header>@usernameNameWithSymbol user doesn't exist</header>
+        <header>@ViewBag.Title user doesn't exist</header>
     </section>
 }
 
-@section Aside{
+@section SecondaryAside{
 }

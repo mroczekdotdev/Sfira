@@ -72,6 +72,10 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin-top: 0;
   margin-bottom: 0;
+
+  &:nth-of-type(n+2) {
+    margin-top: $margin-sm;
+  }
 }
 
 // Abbreviations
@@ -279,8 +283,8 @@ button {
   //
   // Credit: https://github.com/suitcss/base/
   button:focus {
-    outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color;
+    /*outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color;*/
   }
 
 input,

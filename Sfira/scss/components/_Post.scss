@@ -55,14 +55,6 @@
         .action {
           padding-right: $padding-base;
           color: $color-white;
-
-          &:hover {
-            text-decoration: none;
-          }
-
-          &:focus {
-            outline: none;
-          }
         }
 
         .counter {

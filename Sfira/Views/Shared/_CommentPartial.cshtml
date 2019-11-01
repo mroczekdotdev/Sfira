@@ -9,6 +9,6 @@
         <span class="timestamp">@Model.PublicationTime.Relative()</span>
     </header>
     <section class="body">
-        @Html.Raw(Model.Body.FormatAsEntry())
+        @Html.Raw(Model.Body.ToHypertext())
     </section>
 </article>

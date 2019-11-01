@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace MroczekDotDev.Sfira.Areas.Account.Pages.Manage
+namespace MroczekDotDev.Sfira.Areas.Account.Pages
 {
     public class IndexModel : PageModel
     {

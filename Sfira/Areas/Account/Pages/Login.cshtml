@@ -28,13 +28,13 @@
 </form>
 
 
-@section MainAside{
-    <p>
-        <a asp-page="./ForgotPassword">Forgot your password?</a>
-    </p>
-    <p>
-        <a asp-page="./Register">Register as a new user</a>
-    </p>
+@section PrimaryAside{
+    <section class="aside">
+        <ul>
+            <li><a asp-page="./ForgotPassword">Forgot your password?</a></li>
+            <li><a asp-page="./Register">Register as a new user</a></li>
+        </ul>
+    </section>
 }
 
 @section Scripts {

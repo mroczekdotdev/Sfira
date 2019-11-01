@@ -1,7 +1,6 @@
 ﻿@{
     @model PostsFeedLoaderViewModel;
-    var tagNameWithSymbol = "#" + ViewContext.RouteData.Values["tagName"];
-    ViewBag.Title = tagNameWithSymbol + " \u00B7 Sfira";
+    ViewBag.Title = "#" + ViewContext.RouteData.Values["tagName"];
 }
 
 @{await Html.RenderPartialAsync("_PostCreatePartial", new PostViewModel());}
@@ -14,30 +13,26 @@
     else
     {
         <section class="Info">
-            <header>@tagNameWithSymbol tag doesn't have any posts</header>
+            <header>@ViewBag.Title tag doesn't have any posts</header>
         </section>
     }
 </section>
 
 
-@section MainAside{
+@section PrimaryAside{
 }
 
-@section Aside{
+@section SecondaryAside{
     <section class="aside">
         <header>
-            Top Posts
+            Trending tags
         </header>
-        <p>
-            Top Posts content here.
-        </p>
+            @(await Component.InvokeAsync<TrendingTagsViewComponent>())
     </section>
     <section class="aside">
         <header>
-            Trending
+            Popular users
         </header>
-        <p>
-            Trending content here.
-        </p>
+            @(await Component.InvokeAsync<PopularUsersViewComponent>())
     </section>
 }

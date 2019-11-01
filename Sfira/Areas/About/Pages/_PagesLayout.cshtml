@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@RenderBody()
+
+@section PrimaryAside{
+    <section class="aside">
+        <ul>
+            <li><a asp-page="./Index">About</a></li>
+            <li><a asp-page="./TermsOfUse">Terms of Use</a></li>
+            <li><a asp-page="./PrivacyPolicy">Privacy Policy</a></li>
+        </ul>
+    </section>
+}
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
