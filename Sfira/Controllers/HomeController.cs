@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewComponents;
@@ -15,12 +16,18 @@ namespace MroczekDotDev.Sfira.Controllers
     {
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
-        private const int PostsFeedCount = 10;
+        private readonly FeedOptions feedOptions;
+        private readonly int postsFeedCount;
 
-        public HomeController(IRepository repository, UserManager<ApplicationUser> userManager)
+        public HomeController(
+            IRepository repository,
+            UserManager<ApplicationUser> userManager,
+            IOptionsMonitor<FeedOptions> feedOptionsAccessor)
         {
             this.repository = repository;
             this.userManager = userManager;
+            feedOptions = feedOptionsAccessor.CurrentValue;
+            postsFeedCount = feedOptions.PostsFeedCount;
         }
 
         [Route("")]
@@ -31,18 +38,18 @@ namespace MroczekDotDev.Sfira.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                IEnumerable<PostViewModel> posts = repository.GetPostsByFollowerId(currentUser.Id, PostsFeedCount).ToViewModels();
+                IEnumerable<PostViewModel> posts = repository.GetPostsByFollowerId(currentUser.Id, postsFeedCount).ToViewModels();
 
                 if (posts.Any())
                 {
                     postsFeedLoader = new PostsFeedLoaderViewModel();
                     postsFeedLoader.Posts = posts;
 
-                    if (posts.Count() == PostsFeedCount)
+                    if (posts.Count() == postsFeedCount)
                     {
                         postsFeedLoader.HasLoader = true;
                         postsFeedLoader.LoaderLink = "/PostsFeed/";
-                        postsFeedLoader.LoaderCount = PostsFeedCount;
+                        postsFeedLoader.LoaderCount = postsFeedCount;
                         postsFeedLoader.LoaderCursor = posts.Last().Id;
                     }
                 }

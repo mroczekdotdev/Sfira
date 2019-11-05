@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -11,25 +12,35 @@ namespace MroczekDotDev.Sfira.Services.FileUploading
 {
     public class UploadableImageFile : UploadableFile
     {
-        public ImageFormat format { get; set; }
-        public long quality { get; set; }
-        public int maxWidth { get; set; }
-        public int maxHeight { get; set; }
+        private readonly ImageFormat format;
+        private readonly long quality;
 
-        public bool hasThumbnail { get; set; }
-        public int thumbWidth { get; set; }
-        public int thumbHeight { get; set; }
+        public IFormFile FormFile { get; set; }
+        public string Directory { get; set; }
+
+        public int MaxWidth { get; set; }
+        public int MaxHeight { get; set; }
+
+        public bool HasThumbnail { get; set; }
+        public int ThumbWidth { get; set; }
+        public int ThumbHeight { get; set; }
+
+        public UploadableImageFile(ImageFormat format, string extension, long quality) : base(extension)
+        {
+            this.quality = quality;
+            this.format = format;
+        }
 
         public override async Task Upload()
         {
             using (var memoryStream = new MemoryStream())
             {
-                await formFile.CopyToAsync(memoryStream);
+                await FormFile.CopyToAsync(memoryStream);
                 Image image = Image.FromStream(memoryStream);
 
-                if (image.Width > maxWidth || image.Height > maxHeight)
+                if (image.Width > MaxWidth || image.Height > MaxHeight)
                 {
-                    double scale = Math.Min(maxWidth / (double)image.Width, maxHeight / (double)image.Height);
+                    double scale = Math.Min(MaxWidth / (double)image.Width, MaxHeight / (double)image.Height);
                     int newWidth = (int)(image.Width * scale);
                     int newHeight = (int)(image.Height * scale);
 
@@ -47,14 +58,14 @@ namespace MroczekDotDev.Sfira.Services.FileUploading
                 }
 
                 var images = new List<(Image, string fileName)>();
-                images.Add((image, name + "." + extension));
+                images.Add((image, Name + "." + Extension));
 
-                if (hasThumbnail)
+                if (HasThumbnail)
                 {
-                    images.Add((GenerateThumbnail(image), name + "-thumb." + extension));
+                    images.Add((GenerateThumbnail(image), Name + "-thumb." + Extension));
                 }
 
-                Save(images, directory, format, quality);
+                Save(images, Directory, format, quality);
             }
         }
 
@@ -73,7 +84,7 @@ namespace MroczekDotDev.Sfira.Services.FileUploading
                 new EncoderParameter(Encoder.Quality, quality),
             };
 
-            Directory.CreateDirectory(directory);
+            System.IO.Directory.CreateDirectory(directory);
 
             foreach (var image in images)
             {
@@ -83,14 +94,14 @@ namespace MroczekDotDev.Sfira.Services.FileUploading
 
         private Image GenerateThumbnail(Image image)
         {
-            double scale = Math.Max(thumbWidth / (double)image.Width, thumbHeight / (double)image.Height);
+            double scale = Math.Max(ThumbWidth / (double)image.Width, ThumbHeight / (double)image.Height);
             int newWidth = (int)Math.Round(image.Width * scale);
             int newHeight = (int)Math.Round(image.Height * scale);
 
-            int cropX = -(int)Math.Ceiling((newWidth - thumbWidth) / 2D);
-            int cropY = -(int)Math.Ceiling((newHeight - thumbHeight) / 2D);
+            int cropX = -(int)Math.Ceiling((newWidth - ThumbWidth) / 2D);
+            int cropY = -(int)Math.Ceiling((newHeight - ThumbHeight) / 2D);
 
-            Bitmap thumbnail = new Bitmap(thumbWidth, thumbHeight);
+            Bitmap thumbnail = new Bitmap(ThumbWidth, ThumbHeight);
 
             using (Graphics graphics = Graphics.FromImage(thumbnail))
             {

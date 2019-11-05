@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace MroczekDotDev.Sfira.Services.Scheduling
 {
-    public class PeriodicScheduledJob : IScheduledJob
+    public class PeriodicJob : IScheduledJob
     {
-        private readonly IEnumerable<IScheduledTask> tasks;
-        private readonly TimeSpan interval;
-        private DateTime LastRun { get; set; }
-        private DateTime NextRun { get; set; }
+        protected IEnumerable<IScheduledTask> Tasks { get; set; }
+        protected TimeSpan Interval { get; set; }
+        protected DateTime LastRun { get; set; }
+        protected DateTime NextRun { get; set; }
 
-        public PeriodicScheduledJob(IEnumerable<IScheduledTask> tasks, DateTime currentTime, TimeSpan interval)
+        public PeriodicJob(IEnumerable<IScheduledTask> tasks, DateTime currentTime, TimeSpan interval)
         {
             NextRun = currentTime;
-            this.interval = interval;
-            this.tasks = tasks;
+            Interval = interval;
+            Tasks = tasks;
         }
 
         public bool ShouldRun(DateTime currentTime)
@@ -26,13 +26,13 @@ namespace MroczekDotDev.Sfira.Services.Scheduling
 
         public async Task Run(CancellationToken cancellationToken)
         {
-            foreach (var task in tasks)
+            foreach (var task in Tasks)
             {
                 await task.ExecuteAsync(cancellationToken);
             }
 
             LastRun = NextRun;
-            NextRun = LastRun + interval;
+            NextRun = LastRun + Interval;
         }
     }
 }

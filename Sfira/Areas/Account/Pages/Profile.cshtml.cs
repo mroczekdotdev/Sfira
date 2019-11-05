@@ -8,7 +8,6 @@ using MroczekDotDev.Sfira.Services.FileUploading;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -136,17 +135,12 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
 
                 if (Input.Avatar != null && Input.Avatar.Length > 0)
                 {
-                    var file = new UploadableImageFile
-                    {
-                        formFile = Input.Avatar,
-                        directory = userMediaPath,
-                        name = Guid.NewGuid().ToString(),
-                        extension = FilenameExtension.jpg.ToString(),
-                        format = ImageFormat.Jpeg,
-                        quality = 40L,
-                        maxWidth = 512,
-                        maxHeight = 512,
-                    };
+                    UploadableImageFile file = fileUploader.NewUploadableImageFile();
+                    file.FormFile = Input.Avatar;
+                    file.Directory = userMediaPath;
+                    file.Name = Guid.NewGuid().ToString();
+                    file.MaxWidth = 512;
+                    file.MaxHeight = 512;
 
                     files.Add(file);
 
@@ -155,22 +149,17 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                         System.IO.File.Delete(userMediaPath + user.AvatarImage);
                     }
 
-                    user.AvatarImage = file.name + "." + file.extension;
+                    user.AvatarImage = file.Name + "." + file.Extension;
                 }
 
                 if (Input.Cover != null && Input.Cover.Length > 0)
                 {
-                    var file = new UploadableImageFile
-                    {
-                        formFile = Input.Cover,
-                        directory = userMediaPath,
-                        name = Guid.NewGuid().ToString(),
-                        extension = FilenameExtension.jpg.ToString(),
-                        format = ImageFormat.Jpeg,
-                        quality = 40L,
-                        maxWidth = 1920,
-                        maxHeight = 1080,
-                    };
+                    UploadableImageFile file = fileUploader.NewUploadableImageFile();
+                    file.FormFile = Input.Cover;
+                    file.Directory = userMediaPath;
+                    file.Name = Guid.NewGuid().ToString();
+                    file.MaxWidth = 1920;
+                    file.MaxHeight = 1080;
 
                     files.Add(file);
 
@@ -179,7 +168,7 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
                         System.IO.File.Delete(userMediaPath + user.CoverImage);
                     }
 
-                    user.CoverImage = file.name + "." + file.extension;
+                    user.CoverImage = file.Name + "." + file.Extension;
                 }
 
                 await fileUploader.Upload(files);

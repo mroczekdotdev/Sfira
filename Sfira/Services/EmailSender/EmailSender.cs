@@ -4,24 +4,24 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace MroczekDotDev.Sfira.Services
+namespace MroczekDotDev.Sfira.Services.EmailSender
 {
     public class EmailSender : IEmailSender
     {
-        private readonly EmailSettings settings;
+        private readonly EmailSenderOptions options;
 
-        public EmailSender(IOptions<EmailSettings> settingsOptions)
+        public EmailSender(IOptionsMonitor<EmailSenderOptions> optionsAccessor)
         {
-            settings = settingsOptions.Value;
+            options = optionsAccessor.CurrentValue;
         }
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            var credentials = new NetworkCredential(settings.Username, settings.Password);
+            var credentials = new NetworkCredential(options.Username, options.Password);
 
             var mail = new MailMessage()
             {
-                From = new MailAddress(settings.Username, settings.SenderName),
+                From = new MailAddress(options.Username, options.SenderName),
                 Subject = subject,
                 Body = message,
                 IsBodyHtml = true
@@ -31,10 +31,10 @@ namespace MroczekDotDev.Sfira.Services
 
             var client = new SmtpClient()
             {
-                Port = settings.Port,
+                Port = options.Port,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Host = settings.Host,
+                Host = options.Host,
                 EnableSsl = true,
                 Credentials = credentials
             };
@@ -43,14 +43,5 @@ namespace MroczekDotDev.Sfira.Services
 
             return Task.CompletedTask;
         }
-    }
-
-    public class EmailSettings
-    {
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string SenderName { get; set; }
     }
 }

@@ -24,17 +24,20 @@
     </section>
 }
 
-
 @section PrimaryAside{
 }
 
 @section SecondaryAside{
     <section class="aside">
         <header>
-            You may like
+            Trending tags
         </header>
-        <p>
-            Related content here.
-        </p>
+        @(await Component.InvokeAsync<TrendingTagsViewComponent>())
+    </section>
+    <section class="aside">
+        <header>
+            Popular users
+        </header>
+        @(await Component.InvokeAsync<PopularUsersViewComponent>())
     </section>
 }

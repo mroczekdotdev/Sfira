@@ -8,7 +8,6 @@ using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.Services.FileUploading;
 using MroczekDotDev.Sfira.ViewModels;
 using System;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -48,28 +47,24 @@ namespace MroczekDotDev.Sfira.Controllers
                     string userMediaPath = Path.Combine(new[] {
                         environment.WebRootPath, "media", "user", currentUser.Id + Path.DirectorySeparatorChar });
 
-                    var file = new UploadableImageFile
-                    {
-                        formFile = formFile,
-                        directory = userMediaPath,
-                        name = Guid.NewGuid().ToString(),
-                        extension = FilenameExtension.jpg.ToString(),
-                        format = ImageFormat.Jpeg,
-                        quality = 40L,
-                        maxWidth = 1920,
-                        maxHeight = 1080,
-                        hasThumbnail = true,
-                        thumbWidth = 512,
-                        thumbHeight = 512,
-                    };
+                    UploadableImageFile file = fileUploader.NewUploadableImageFile();
+                    file.FormFile = formFile;
+                    file.Directory = userMediaPath;
+                    file.Name = Guid.NewGuid().ToString();
+                    file.MaxWidth = 1920;
+                    file.MaxHeight = 1080;
+                    file.HasThumbnail = true;
+                    file.ThumbWidth = 512;
+                    file.ThumbHeight = 512;
+
                     await fileUploader.Upload(file);
 
                     post.Attachment = new AttachmentViewModel
                     {
                         Owner = currentUser,
                         Type = FileType.image.ToString(),
-                        Name = file.name,
-                        Extension = file.extension,
+                        Name = file.Name,
+                        Extension = file.Extension,
                     };
                 }
 

@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Extensions.DependencyInjection;
 using MroczekDotDev.Sfira.Models;
-using MroczekDotDev.Sfira.Services;
 
 namespace MroczekDotDev.Sfira
 {
@@ -30,10 +29,15 @@ namespace MroczekDotDev.Sfira
 
             services.AddRepository();
 
-            services.AddFileUploader();
+            services.Configure<FeedOptions>(Configuration.GetSection("Feed"));
 
-            services.AddEmailSender();
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddFileUploader(Configuration.GetSection("FileUploader"));
+
+            services.AddEmailSender(Configuration.GetSection("EmailSender"));
+
+            services.AddCachedStorage(Configuration.GetSection("CachedStorage"));
+
+            services.AddJobScheduler(Configuration.GetSection("JobScheduler"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -68,10 +72,6 @@ namespace MroczekDotDev.Sfira
                 options.LogoutPath = "/account/logout";
                 options.AccessDeniedPath = "/account/accessdenied";
             });
-
-            services.AddCachedStorage();
-
-            services.AddScheduler();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

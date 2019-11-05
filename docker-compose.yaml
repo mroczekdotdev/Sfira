@@ -33,11 +33,19 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:5000
       - ConnectionStrings__PostgreSQL=Host=database; Port=5432; Database=${Database_Name}; Username=${Database_Username}; Password=${Database_Password}; Pooling=true
-      - EmailSettings__Host=${EMail_Host}
-      - EmailSettings__Port=${EMail_Port}
-      - EmailSettings__Username=${EMail_Username}
-      - EmailSettings__Password=${EMail_Password}
-      - EmailSettings__SenderName=${EMail_SenderName}
+      - EmailSender__Host=${EmailSender_Host}
+      - EmailSender__Port=${EmailSender_Port}
+      - EmailSender__Username=${EmailSender_Username}
+      - EmailSender__Password=${EmailSender_Password}
+      - EmailSender__SenderName=${EmailSender_SenderName}
+      - FileUploader__ImageQuality=${FileUploader_ImageQuality}
+      - CachedStorage__Cached__MaxCount=${CachedStorage_Cached_MaxCount}
+      - JobScheduler__PopularContent__IntervalInMinutes=${JobScheduler_PopularContent_IntervalInMinutes}
+      - JobScheduler__PopularContent__PeriodInMinutes=${JobScheduler_PopularContent_PeriodInMinutes}
+      - JobScheduler__PopularContent__SamplesPerMinute=${JobScheduler_PopularContent_SamplesPerMinuteOfPeriod}
+      - JobScheduler__PopularContent__PopularUsersCount=${JobScheduler_PopularContent_PopularUsersCount}
+      - JobScheduler__PopularContent__TrendingTagsCount=${JobScheduler_PopularContent_TrendingTagsCount}
+      - Feed__PostsFeedCount=${PostsFeed_Count}
     networks:
       network:
         aliases:

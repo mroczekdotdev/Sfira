@@ -1,4 +1,5 @@
-﻿using MroczekDotDev.Sfira.Data;
+﻿using Microsoft.Extensions.Options;
+using MroczekDotDev.Sfira.Data;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
@@ -7,21 +8,23 @@ namespace MroczekDotDev.Sfira.Services.CachedStorage
 {
     public class TrendingTagsCached : Cached<string>
     {
-        private const int samplesPerMinute = 600;
         private readonly PostgreSqlDbContext context;
-        private readonly TimeSpan period = TimeSpan.FromMinutes(60);
-        private readonly int sampleSize;
+        private TimeSpan period;
+        private int sampleSize;
 
-        public TrendingTagsCached(PostgreSqlDbContext context)
+        public TrendingTagsCached(PostgreSqlDbContext context, IOptionsMonitor<CachedOptions> optionsAccessor) :
+            base(optionsAccessor)
         {
             this.context = context;
-            sampleSize = (int)period.TotalMinutes * samplesPerMinute;
         }
 
-        public override ImmutableArray<string> items { get; set; }
+        public override ImmutableArray<string> Items { get; set; }
 
-        public override void Reload()
+        public override void Reload(int periodInMinutes, int samplesPerMinute)
         {
+            period = TimeSpan.FromMinutes(periodInMinutes);
+            sampleSize = periodInMinutes * samplesPerMinute;
+
             var query = context.Posts
                 .Where(p => p.PublicationTime > DateTime.UtcNow - period);
 
@@ -47,7 +50,7 @@ namespace MroczekDotDev.Sfira.Services.CachedStorage
                     .GroupBy(t => t.ToLower());
             }
 
-            items = groupingQuery
+            Items = groupingQuery
                 .OrderByDescending(g => g.Count())
                 .Select(g => g.Key)
                 .Take(maxCount)

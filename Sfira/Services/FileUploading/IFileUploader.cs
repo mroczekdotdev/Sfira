@@ -8,5 +8,7 @@ namespace MroczekDotDev.Sfira.Services.FileUploading
         Task Upload(UploadableFile file);
 
         Task Upload(IEnumerable<UploadableFile> files);
+
+        UploadableImageFile NewUploadableImageFile();
     }
 }

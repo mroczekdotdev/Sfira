@@ -1,13 +1,21 @@
-﻿using System.Collections.Immutable;
+﻿using Microsoft.Extensions.Options;
+using System.Collections.Immutable;
 
 namespace MroczekDotDev.Sfira.Services.CachedStorage
 {
     public abstract class Cached<T>
     {
-        protected const int maxCount = 10;
+        protected readonly CachedOptions options;
+        protected int maxCount;
 
-        public abstract ImmutableArray<T> items { get; set; }
+        public abstract ImmutableArray<T> Items { get; set; }
 
-        public abstract void Reload();
+        protected Cached(IOptionsMonitor<CachedOptions> optionsAccessor)
+        {
+            options = optionsAccessor.CurrentValue;
+            maxCount = options.MaxCount;
+        }
+
+        public abstract void Reload(int periodInMinutes, int samplesPerMinute);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,12 +14,18 @@ namespace MroczekDotDev.Sfira.ViewComponents
     {
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
-        private const int PostsFeedCount = 10;
+        private readonly FeedOptions feedOptions;
+        private readonly int postsFeedCount;
 
-        public PostsFeedViewComponent(IRepository repository, UserManager<ApplicationUser> userManager)
+        public PostsFeedViewComponent(
+            IRepository repository,
+            UserManager<ApplicationUser> userManager,
+            IOptionsMonitor<FeedOptions> feedOptionsAccessor)
         {
             this.repository = repository;
             this.userManager = userManager;
+            feedOptions = feedOptionsAccessor.CurrentValue;
+            postsFeedCount = feedOptions.PostsFeedCount;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(IEnumerable<PostViewModel> posts)
@@ -35,7 +41,7 @@ namespace MroczekDotDev.Sfira.ViewComponents
                 posts = repository.LoadCurrentUserRelations(posts, currentUser.Id);
             }
 
-            if (posts.Count() < PostsFeedCount)
+            if (posts.Count() < postsFeedCount)
             {
                 ViewContext.HttpContext.Response.Headers.Add("Loader-Keep", "false");
             }

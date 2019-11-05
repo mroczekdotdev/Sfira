@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewComponents;
@@ -13,29 +14,35 @@ namespace MroczekDotDev.Sfira.Controllers
     {
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
-        private const int PostsFeedCount = 10;
+        private readonly FeedOptions feedOptions;
+        private readonly int postsFeedCount;
 
-        public TagController(IRepository repository, UserManager<ApplicationUser> userManager)
+        public TagController(
+            IRepository repository,
+            UserManager<ApplicationUser> userManager,
+            IOptionsMonitor<FeedOptions> feedOptionsAccessor)
         {
             this.repository = repository;
             this.userManager = userManager;
+            feedOptions = feedOptionsAccessor.CurrentValue;
+            postsFeedCount = feedOptions.PostsFeedCount;
         }
 
         public IActionResult Index(string tagName)
         {
             PostsFeedLoaderViewModel postsFeedLoader = null;
-            IEnumerable<PostViewModel> posts = repository.GetPostsByTag(tagName, PostsFeedCount).ToViewModels();
+            IEnumerable<PostViewModel> posts = repository.GetPostsByTag(tagName, postsFeedCount).ToViewModels();
 
             if (posts.Any())
             {
                 postsFeedLoader = new PostsFeedLoaderViewModel();
                 postsFeedLoader.Posts = posts;
 
-                if (posts.Count() == PostsFeedCount)
+                if (posts.Count() == postsFeedCount)
                 {
                     postsFeedLoader.HasLoader = true;
                     postsFeedLoader.LoaderLink = "/Tag/" + tagName + "/PostsFeed/";
-                    postsFeedLoader.LoaderCount = PostsFeedCount;
+                    postsFeedLoader.LoaderCount = postsFeedCount;
                     postsFeedLoader.LoaderCursor = posts.Last().Id;
                 }
             }

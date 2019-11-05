@@ -1,4 +1,5 @@
-﻿using MroczekDotDev.Sfira.Data;
+﻿using Microsoft.Extensions.Options;
+using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
 using System;
 using System.Collections.Immutable;
@@ -8,21 +9,23 @@ namespace MroczekDotDev.Sfira.Services.CachedStorage
 {
     public class PopularUsersCached : Cached<ApplicationUser>
     {
-        private const int samplesPerMinute = 600;
         private readonly PostgreSqlDbContext context;
-        private readonly TimeSpan period = TimeSpan.FromMinutes(60);
-        private readonly int sampleSize;
+        private TimeSpan period;
+        private int sampleSize;
 
-        public PopularUsersCached(PostgreSqlDbContext context)
+        public PopularUsersCached(PostgreSqlDbContext context, IOptionsMonitor<CachedOptions> optionsAccessor) :
+            base(optionsAccessor)
         {
             this.context = context;
-            sampleSize = (int)period.TotalMinutes * samplesPerMinute;
         }
 
-        public override ImmutableArray<ApplicationUser> items { get; set; }
+        public override ImmutableArray<ApplicationUser> Items { get; set; }
 
-        public override void Reload()
+        public override void Reload(int periodInMinutes, int samplesPerMinute)
         {
+            period = TimeSpan.FromMinutes(periodInMinutes);
+            sampleSize = periodInMinutes * samplesPerMinute;
+
             var query = context.Posts
                 .Where(p => p.PublicationTime > DateTime.UtcNow - period)
                 .Where(p => p.CommentsCount > 0 || p.LikesCount > 0 || p.FavoritesCount > 0);
@@ -44,7 +47,7 @@ namespace MroczekDotDev.Sfira.Services.CachedStorage
                     .GroupBy(p => p.Author);
             }
 
-            items = groupingQuery
+            Items = groupingQuery
                 .Select(g => new
                 {
                     Author = g.Key,

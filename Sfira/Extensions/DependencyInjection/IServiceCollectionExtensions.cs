@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using MroczekDotDev.Sfira.Data;
-using MroczekDotDev.Sfira.Services;
 using MroczekDotDev.Sfira.Services.CachedStorage;
+using MroczekDotDev.Sfira.Services.EmailSender;
 using MroczekDotDev.Sfira.Services.FileUploading;
 using MroczekDotDev.Sfira.Services.Scheduling;
 using System;
@@ -19,37 +21,50 @@ namespace MroczekDotDev.Sfira.Extensions.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddEmailSender(this IServiceCollection services)
+        public static IServiceCollection AddEmailSender(
+            this IServiceCollection services, IConfigurationSection options)
         {
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailSenderOptions>(options);
             return services;
         }
 
-        public static IServiceCollection AddFileUploader(this IServiceCollection services)
+        public static IServiceCollection AddFileUploader(
+            this IServiceCollection services, IConfigurationSection options)
         {
             services.AddSingleton<IFileUploader, FileUploader>();
+            services.Configure<FileUploaderOptions>(options);
+
             return services;
         }
 
-        public static IServiceCollection AddCachedStorage(this IServiceCollection services)
+        public static IServiceCollection AddCachedStorage(
+            this IServiceCollection services, IConfigurationSection options)
         {
             services.AddSingleton<TrendingTagsCached>();
             services.AddSingleton<PopularUsersCached>();
+
+            services.Configure<CachedOptions>(options.GetSection("Cached"));
+
             return services;
         }
 
-        public static IServiceCollection AddScheduler(this IServiceCollection services)
+        public static IServiceCollection AddJobScheduler(
+            this IServiceCollection services, IConfigurationSection options)
         {
-            services.AddSingleton<TrendingTagsScheduledTask>();
-            services.AddSingleton<PopularUsersScheduledTask>();
+            services.AddSingleton<TrendingTagsTask>();
+            services.AddSingleton<PopularUsersTask>();
 
             services.AddSingleton<IScheduledJob>(sp =>
             {
                 var tasks = new List<IScheduledTask>();
-                tasks.Add(sp.GetRequiredService<TrendingTagsScheduledTask>());
-                tasks.Add(sp.GetRequiredService<PopularUsersScheduledTask>());
-                return new PeriodicScheduledJob(tasks, DateTime.UtcNow, TimeSpan.FromMinutes(60));
+                tasks.Add(sp.GetRequiredService<TrendingTagsTask>());
+                tasks.Add(sp.GetRequiredService<PopularUsersTask>());
+                return new PopularContentJob(
+                    tasks, DateTime.UtcNow, sp.GetRequiredService<IOptionsMonitor<PopularContentOptions>>());
             });
+
+            services.Configure<PopularContentOptions>(options.GetSection("PopularContent"));
 
             services.AddSingleton<IHostedService, JobSchedulerHostedService>();
 

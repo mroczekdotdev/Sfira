@@ -1,3 +1,3 @@
 FROM postgres:11-alpine
 
-COPY postgres.sql /docker-entrypoint-initdb.d/0-init.sql
+COPY postgresql-initial.sql /docker-entrypoint-initdb.d/000-init.sql
