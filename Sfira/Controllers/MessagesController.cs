@@ -14,6 +14,9 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
 
+        public static string Name { get; } = nameof(MessagesController)
+            .Substring(0, nameof(MessagesController).LastIndexOf(nameof(Controller)));
+
         public MessagesController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
             this.repository = repository;

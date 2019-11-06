@@ -20,6 +20,9 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFileUploader fileUploader;
 
+        public static string Name { get; } = nameof(PostController)
+            .Substring(0, nameof(PostController).LastIndexOf(nameof(Controller)));
+
         public PostController(
             IHostingEnvironment environment,
             IRepository repository,

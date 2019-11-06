@@ -43,8 +43,8 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
         public class ProfileInputModel
         {
             [Required]
+            [StringLength(36, ErrorMessage = "{0} length must be between {2} and {1} characters.", MinimumLength = 3)]
             [RegularExpression(@"^[ -~]+$", ErrorMessage = "Name can contain only basic characters.")]
-            [StringLength(36, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 1)]
             public string Name { get; set; }
 
             [StringLength(240, ErrorMessage = "{0} can't be longer than {1} characters.")]
@@ -54,7 +54,9 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
             public string Location { get; set; }
 
             [StringLength(72, ErrorMessage = "URL can't be longer than {1} characters.")]
-            [RegularExpression(@"^(?:https?://)?[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]+\.[A-Za-z]{2,}\.[\w!#\$%&'\(\)\*\+,\-\./:;=?@\[\]~]*$", ErrorMessage = "URL must be valid.")]
+            [RegularExpression(
+                @"^(?:https?://)?[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]+\.[A-Za-z]{2,}\.[\w!#\$%&'\(\)\*\+,\-\./:;=?@\[\]~]*$",
+                ErrorMessage = "URL must be valid.")]
             public string Website { get; set; }
 
             [BindProperty]

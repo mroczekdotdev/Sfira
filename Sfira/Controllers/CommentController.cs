@@ -14,6 +14,9 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
 
+        public static string Name { get; } = nameof(CommentController)
+            .Substring(0, nameof(CommentController).LastIndexOf(nameof(Controller)));
+
         public CommentController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
             this.repository = repository;

@@ -14,6 +14,9 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
 
+        public static string Name { get; } = nameof(ChatController)
+            .Substring(0, nameof(ChatController).LastIndexOf(nameof(Controller)));
+
         public ChatController(IRepository repository, UserManager<ApplicationUser> userManager)
         {
             this.repository = repository;
@@ -32,7 +35,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
                 if (chat == null)
                 {
-                    chat = new DirectChatViewModel { Interlocutor = interlocutor.ToViewModel};
+                    chat = new DirectChatViewModel { Interlocutor = interlocutor.ToViewModel };
                 }
                 else
                 {

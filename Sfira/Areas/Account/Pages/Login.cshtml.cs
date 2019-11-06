@@ -17,8 +17,7 @@ namespace MroczekDotDev.Sfira.Areas.Account
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
-
-        private string[] nonRedirectableUrls = { "/account/register", "/account/login" };
+        private readonly string[] nonRedirectableUrls = { "/account/register", "/account/login" };
 
         public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
         {

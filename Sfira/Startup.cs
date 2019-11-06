@@ -94,7 +94,7 @@ namespace MroczekDotDev.Sfira
             {
                 routes.MapRoute(
                     "Home.PostsFeed",
-                    "/PostsFeed/{count:int?}/{cursor:int?}",
+                    "PostsFeed/{count:int?}/{cursor:int?}",
                     new { controller = "Home", action = "PostsFeed" }
                 );
 

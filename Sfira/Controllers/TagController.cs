@@ -17,6 +17,9 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly FeedOptions feedOptions;
         private readonly int postsFeedCount;
 
+        public static string Name { get; } = nameof(TagController)
+            .Substring(0, nameof(TagController).LastIndexOf(nameof(Controller)));
+
         public TagController(
             IRepository repository,
             UserManager<ApplicationUser> userManager,
