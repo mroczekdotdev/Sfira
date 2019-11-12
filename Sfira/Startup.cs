@@ -15,29 +15,33 @@ namespace MroczekDotDev.Sfira
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private readonly IHostingEnvironment environment;
+        private readonly IConfiguration configuration;
 
-        public IConfiguration Configuration { get; }
+        public Startup(IHostingEnvironment environment, IConfiguration configuration)
+        {
+            this.environment = environment;
+            this.configuration = configuration;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PostgreSqlDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
+                options.UseNpgsql(configuration.GetConnectionString("PostgreSQL")));
+
+            services.SeedDatabase(configuration.GetSection("Seeding"));
 
             services.AddRepository();
 
-            services.Configure<FeedOptions>(Configuration.GetSection("Feed"));
+            services.Configure<FeedOptions>(configuration.GetSection("Feed"));
 
-            services.AddFileUploader(Configuration.GetSection("FileUploader"));
+            services.AddFileUploader(configuration.GetSection("FileUploader"));
 
-            services.AddEmailSender(Configuration.GetSection("EmailSender"));
+            services.AddEmailSender(configuration.GetSection("EmailSender"));
 
-            services.AddCachedStorage(Configuration.GetSection("CachedStorage"));
+            services.AddCachedStorage(configuration.GetSection("CachedStorage"));
 
-            services.AddJobScheduler(Configuration.GetSection("JobScheduler"));
+            services.AddJobScheduler(configuration.GetSection("JobScheduler"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -74,13 +78,13 @@ namespace MroczekDotDev.Sfira
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            if (env.IsProduction() || env.IsStaging())
+            if (environment.IsProduction() || environment.IsStaging())
             {
                 app.UseExceptionHandler("/error");
             }

@@ -1,0 +1,642 @@
+[
+  {
+    "Id": 1,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-08-08 12:39",
+    "Body": "All systems go.\r\n#Sfira #aspnetcore",
+    "Tags": "Sfira aspnetcore",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 2,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-08-09 18:02",
+    "Body": "Massa sed elementum tempus egestas sed sed. Imperdiet sed euismod nisi porta. Sed libero enim sed faucibus turpis in eu mi bibendum. Eget magna fermentum. Nibh mauris cursus mattis molestie a. Urna eget nunc scelerisque viverra.\r\n#Sfira",
+    "Tags": "Sfira",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 1
+  },
+  {
+    "Id": 3,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-09-04 19:38",
+    "Body": "Quam pellentesque nec nam aliquam sem et tortor consequat #HTML id #CSS? Volutpat sed cras ornare arcu dui vivamus!",
+    "Tags": "HTML CSS",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 4,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-09-11 21:19",
+    "Body": "Nibh tortor id aliquet lectus proin nibh. Dis #3D montes nascetur ridiculus mus mauris vitae. Lectus vestibulum mattis ullamcorper velit.\r\n",
+    "Tags": "3D",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 5,
+    "AuthorId": "DummyData-Trist",
+    "PublicationTime": "2019-09-11 07:36",
+    "Body": "Ultrices ceros in cursus turpis massa tincidunt. Dui nunc mattis enim ut. Imperdiet proin fermentum leo vel #orcs. Id aliquet risus feugiat in. Commodo nulla nullam vehicula ipsum a arcu cursus vitae! Urna viverra justo nec. #ORC #ORCS",
+    "Tags": "orcs ORC",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 6,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-09-17 17:20",
+    "Body": "#Sfira non enim praesent elementum facilisis. Eget #CSS scelerisque mauris in aliquam sem fringilla. Pellentesque eu tincidunt tortor aliquam. Massa tempor.",
+    "Tags": "Sfira CSS",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 2
+  },
+  {
+    "Id": 7,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-09-17 18:50",
+    "Body": "Magna fermentum iaculis eu non diam phasellus? Pellentesque id nibh tortor id. Fermentum dui faucibus in ornare quam.",
+    "Tags": "",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 8,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-09-17 18:54",
+    "Body": "#Sfira Quisque non tellus orci ac auctor augue mauris augue. Lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant. Sit amet est placerat in egestas erat imperdiet! #font",
+    "Tags": "Sfira font",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 9,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-09-17 22:43",
+    "Body": "Orci a scelerisque purus semper. Ultrices mi tempus imperdiet nulla malesuada pellentesque elit.\r\n#aspnetcore",
+    "Tags": "aspnetcore",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 10,
+    "AuthorId": "DummyData-ArcavePress",
+    "PublicationTime": "2019-09-18 10:48",
+    "Body": "In arcu cursus euismod quis #DTP viverra nibh cras pulvinar. Habitant #CMYK morbi tristique senectus et.",
+    "Tags": "DTP CMYK",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 11,
+    "AuthorId": "DummyData-ArcavePress",
+    "PublicationTime": "2019-09-19 11:20",
+    "Body": "Suspendisse sed nisi lacus #Hamilton viverra tellus.",
+    "Tags": "Hamilton",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 12,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-09-21 09:43",
+    "Body": "Consectetur #aspnetcore elit pellentesque habitant #JSON tristique. Odio ut sem nulla pharetra diam sit amet nisl suscipit. Pellentesque massa placerat duis ultricies lacus sed turpis.",
+    "Tags": "aspnetcore JSON",
+    "LikesCount": 3,
+    "FavoritesCount": 0,
+    "CommentsCount": 2
+  },
+  {
+    "Id": 13,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-09-21 11:36",
+    "Body": "#Terminal pretium #Shell sapien nec sagittis aliquam malesuada bibendum. Pretium #MPEG ipsum consequat nisl vel. Sed cras ornare arcu dui vivamus arcu felis. Ut porttitor leo a diam sollicitudin tempor id eu?",
+    "Tags": "Terminal Shell MPEG",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 14,
+    "AuthorId": "DummyData-Roccille",
+    "PublicationTime": "2019-09-21 10:02",
+    "Body": "Tortor consequat id porta nibh venenatis cras. Bibendum enim facilisis gravida neque convallis a cras semper auctor. Suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam!\r\n#3D #CMOS",
+    "Tags": "3D CMOS",
+    "LikesCount": 3,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 15,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-09-22 14:22",
+    "Body": "#Sfira purus in mollis #Docker sed. Nisl purus in mollis #IEEE sed id semper risus in. Hendrerit dolor #aspnetcore eget lorem ipsum dolor. Sed vulputate mi sit amet #Shell. Congue mauris #Docker aenean vel.",
+    "Tags": "Sfira Docker IEEE aspnetcore Shell",
+    "LikesCount": 3,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 16,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-09-23 01:19",
+    "Body": "Facilisis sed odio morbi quis commodo! Curabitur vitae nunc sed velit dignissim sodales. Est velit egestas dui id ornare arcu odio ut.",
+    "Tags": "",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 17,
+    "AuthorId": "DummyData-Trist",
+    "PublicationTime": "2019-09-23 04:03",
+    "Body": "Dolor sit amet. #1024",
+    "Tags": "1024",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 18,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-09-23 21:45",
+    "Body": "Tristique et egestas quis ipsum suspendisse ULTRICES GRAVIDA. Magna sit amet purus gravida quis? Aliquet eget sit amet tellus cras adipiscing enim.\r\n#Docker #Terminal",
+    "Tags": "Docker Terminal",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 19,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-09-30 23:02",
+    "Body": "Cursus vitae congue mauris rhoncus aenean vel elit scelerisque mauris. Consequat mauris nunc congue nisi vitae suscipit tellus.",
+    "Tags": "",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 1
+  },
+  {
+    "Id": 20,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-09-30 23:40",
+    "Body": "Leo a diam sollicitudin tempor id. #Sfira nulla pharetra diam sit amet nisl suscipit adipiscing #markdown. Arcu felis bibendum ut tristique.",
+    "Tags": "Sfira markdown",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 21,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-10-01 12:23",
+    "Body": "Quis lectus nulla at volutpat diam. #SGML est lorem ipsum dolor sit amet consectetur. #MIME duis convallis convallis tellus. Elit at imperdiet dui accumsan amet nulla facilisi morbi? Sed #HTML non odio euismod LACINIA!",
+    "Tags": "SGML MIME HTML",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 22,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-10-01 18:43",
+    "Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at consectetur lorem donec massa sapien faucibus et. At quis risus sed vulputate odio ut enim. #json #yaml",
+    "Tags": "json yaml",
+    "LikesCount": 6,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 23,
+    "AuthorId": "DummyData-KSEO",
+    "PublicationTime": "2019-10-02 09:37",
+    "Body": "#KSEO nullam #KORE nisi est sit amet facilisis magna. Aliquam sem fringilla ut morbi tincidunt augue interdum velit. #KORE sed pulvinar proin gravida hendrerit lectus a #KSEO.",
+    "Tags": "KSEO KORE",
+    "LikesCount": 5,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 24,
+    "AuthorId": "DummyData-Roccille",
+    "PublicationTime": "2019-10-04 09:55",
+    "Body": "Ornare arcu odio ut sem. Cras semper auctor neque vitae tempus quam pellentesque.\r\n#3D",
+    "Tags": "3D",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 25,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-10-06 23:58",
+    "Body": "Mauris nunc congue nisi vitae suscipit tellus mauris a. Pulvinar elementum integer enim neque volutpat ac. Semper quis lectus nulla at. Facilisi etiam dignissim diam quis enim lobortis. Odio aenean sed adipiscing diam.",
+    "Tags": "",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 26,
+    "AuthorId": "DummyData-ArcavePress",
+    "PublicationTime": "2019-10-07 07:44",
+    "Body": "#Hamilton viverra mauris in aliquam sem fringilla ut morbi. Senectus et netus et malesuada. Sed pulvinar proin gravida hendrerit lectus. Sit amet nisl suscipit adipiscing bibendum est ultricies integer #Hamilton quis?",
+    "Tags": "Hamilton",
+    "LikesCount": 5,
+    "FavoritesCount": 0,
+    "CommentsCount": 3
+  },
+  {
+    "Id": 27,
+    "AuthorId": "DummyData-AkcelTelecom",
+    "PublicationTime": "2019-10-09 14:01",
+    "Body": "Velit laoreet id donec ultrices tincidunt? Dolor sit amet consectetur adipiscing. Est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque. #akcel #one #gsm",
+    "Tags": "akcel one gsm",
+    "LikesCount": 8,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 28,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-10-10 07:17",
+    "Body": "Nec ullamcorper sit amet risus #akcel eget #gsm. Placerat vestibulum lectus mauris ultrices eros in.",
+    "Tags": "akcel gsm",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 29,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-10-11 06:24",
+    "Body": "Non consectetur a erat nam at. Eu tincidunt tortor aliquam nulla facilisi cras. Cras pulvinar mattis nunc sed blandit libero volutpat sed. Tristique risus nec feugiat in fermentum! Ut ornare lectus sit amet est.\r\n#Sfira #markdown #emoji",
+    "Tags": "Sfira markdown emoji",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 30,
+    "AuthorId": "DummyData-Trist",
+    "PublicationTime": "2019-10-13 13:29",
+    "Body": "Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat est. #orc",
+    "Tags": "orc",
+    "LikesCount": 3,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 31,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-10-14 06:21",
+    "Body": "Elit scelerisque #photoshop. Mauris pellentesque pulvinar.",
+    "Tags": "photoshop",
+    "LikesCount": 5,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 32,
+    "AuthorId": "DummyData-AkcelTelecom",
+    "PublicationTime": "2019-10-14 14:59",
+    "Body": "Rhoncus mattis rhoncus urna neque viverra justo. Auctor urna nunc id CURSUS metus. Mattis nunc sed blandit libero volutpat sed cras ornare. #akcel #one",
+    "Tags": "akcel one",
+    "LikesCount": 8,
+    "FavoritesCount": 0,
+    "CommentsCount": 4
+  },
+  {
+    "Id": 33,
+    "AuthorId": "DummyData-rharvey",
+    "PublicationTime": "2019-10-16 14:36",
+    "Body": "Nulla facilisi etiam dignissim diam quis enim lobortis. Augue neque gravida in fermentum. #sfira #aspnetcore #docker",
+    "Tags": "sfira aspnetcore docker",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 34,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-10-16 14:39",
+    "Body": "Ridiculus mus mauris #ERP ultricies #KORE integer malesuada nunc. Nulla facilisi nullam vehicula ipsum a arcu cursus. Senectus et netus et malesuada. #KSEO neque vitae tempus quam!",
+    "Tags": "ERP KORE KSEO",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 35,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-10-16 22:53",
+    "Body": "Ut sem nulla pharetra diam sit amet nisl suscipit. Montes nascetur ridiculus mus mauris vitae. Habitant morbi tristique senectus et netus et. Orci ac auctor augue mauris augue. #YAML #SGML",
+    "Tags": "YAML SGML",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 36,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-10-17 04:22",
+    "Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? Vel pharetra vel turpis nunc eget lorem dolor sed viverra?",
+    "Tags": "",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 37,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-18 11:45",
+    "Body": "Sed vulputate. Molestie ac feugiat sed lectus. Ultrices mi tempus imperdiet nulla. Rhoncus est pellentesque elit ullamcorper dignissim. Felis eget nunc lobortis mattis.\r\n#Sfira",
+    "Tags": "Sfira",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 38,
+    "AuthorId": "DummyData-rharvey",
+    "PublicationTime": "2019-10-18 22:15",
+    "Body": "Quam #Scalesoft pulvinar etiam non quam lacus #software faucibus interdum. Habitant morbi tristique senectus et netus et malesuada fames. Pellentesque habitant morbi tristique senectus et malesuada #ERP.",
+    "Tags": "Scalesoft software ERP",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 39,
+    "AuthorId": "DummyData-KSEO",
+    "PublicationTime": "2019-10-19 12:05",
+    "Body": "#KORE nibh #ERP pulvinar mattis nunc sed blandit libero. Morbi leo urna molestie at elementum eu facilisis. Mi quis hendrerit dolor magna eget est lorem ipsum dolor. Mi quis hendrerit dolor magna.",
+    "Tags": "KORE ERP",
+    "LikesCount": 7,
+    "FavoritesCount": 0,
+    "CommentsCount": 2
+  },
+  {
+    "Id": 40,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-19 16:53",
+    "Body": "Eleifend quam adipiscing vitae proin. Orci sagittis eu volutpat odio facilisis. Vehicula ipsum a arcu cursus vitae congue mauris. Sed elementum tempus egestas sed sed risus pretium.",
+    "Tags": "",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 41,
+    "AuthorId": "DummyData-ArcavePress",
+    "PublicationTime": "2019-10-19 21:45",
+    "Body": "Ut enim blandit arial maecenas volutpat blandit aliquam! Cursus risus at font mi tempus imperdiet nulla. Placerat duis ultricies lacus sed turpis tincidunt id. Sed turpis tincidunt id arial risus feugiat in ante? #arial #font",
+    "Tags": "arial font",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 42,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-10-20 14:00",
+    "Body": "Odio pellentesque diam volutpat commodo sed egestas EGESTAS fringilla phasellus.",
+    "Tags": "",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 43,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-10-20 20:49",
+    "Body": "Eget aliquet nibh #MIME tristique magna sit amet. Sapien eget mi proin sed libero enim sed. Pellentesque sit amet porttitor eget dolor morbi non arcu risus. Platea dictumst vestibulum #MPEG est pellentesque elit ullamcorper.",
+    "Tags": "MIME MPEG",
+    "LikesCount": 3,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 44,
+    "AuthorId": "DummyData-AkcelTelecom",
+    "PublicationTime": "2019-10-21 07:02",
+    "Body": "Congue nisi vitae suscipit tellus mauris a diam. Eget mauris pharetra et ultrices neque ornare aenean. Ut sem viverra aliquet eget sit amet. #4G #GSM",
+    "Tags": "4G GSM",
+    "LikesCount": 9,
+    "FavoritesCount": 0,
+    "CommentsCount": 1
+  },
+  {
+    "Id": 45,
+    "AuthorId": "DummyData-Roccille",
+    "PublicationTime": "2019-10-21 19:41",
+    "Body": "Pretium vulputate sapien nec sagittis aliquam. Sagittis vitae et leo duis ut. Vestibulum lectus mauris ultrices eros in cursus turpis massa.\r\n#foundry",
+    "Tags": "foundry",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 46,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-10-22 08:10",
+    "Body": "Tortor id aliquet lectus proin nibh nisl condimentum? Lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi.",
+    "Tags": "",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 47,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-10-22 11:34",
+    "Body": "Massa ultricies mi quis hendrerit. Ultrices gravida dictum fusce ut. Sit amet luctus venenatis lectus magna fringilla urna porttitor rhoncus.",
+    "Tags": "",
+    "LikesCount": 4,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 48,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-10-23 16:21",
+    "Body": "Porta non pulvinar neque laoreet suspendisse interdum consectetur libero. Leo JSON molestie at elementum eu facilisis sed odio. Eu non diam phasellus vestibulum lorem. Quis lectus YAML at volutpat diam ut. #YAML #JSON",
+    "Tags": "YAML JSON",
+    "LikesCount": 5,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 49,
+    "AuthorId": "DummyData-Trist",
+    "PublicationTime": "2019-10-23 22:01",
+    "Body": "#1024 amet nulla facilisi morbi tempus iaculis urna id volutpat. #2048 vestibulum rhoncus est pellentesque elit ullamcorper. Pellentesque habitant morbi tristique senectus et netus. Neque gravida in fermentum.",
+    "Tags": "1024 2048",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 50,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-10-24 08:15",
+    "Body": "Faucibus pulvinar elementum integer enim neque VOLUTPAT ac tincidunt vitae. Blandit libero volutpat sed cras ornare arcu dui. Eu consequat ac felis donec et odio pellentesque diam.",
+    "Tags": "",
+    "LikesCount": 6,
+    "FavoritesCount": 0,
+    "CommentsCount": 2
+  },
+  {
+    "Id": 51,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-10-24 11:12",
+    "Body": "Ultrices gravida dictum fusce ut placerat orci?",
+    "Tags": "",
+    "LikesCount": 4,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 52,
+    "AuthorId": "DummyData-rharvey",
+    "PublicationTime": "2019-10-24 22:55",
+    "Body": "Volutpat sed cras ornare arcu dui vivamus arcu. Pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus. Posuere ac ut consequat semper viverra nam libero justo laoreet. Luctus accumsan tortor posuere ac ut.\r\n#aspnetcore #dotnet",
+    "Tags": "aspnetcore dotnetcore",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 53,
+    "AuthorId": "DummyData-ArcavePress",
+    "PublicationTime": "2019-10-25 19:27",
+    "Body": "Urna neque viverra JUSTO NEC ULTRICES DUI. Viverra ipsum nunc aliquet bibendum enim. In egestas erat imperdiet sed euismod. Quis hendrerit dolor magna eget est lorem. #CMYK",
+    "Tags": "CMYK",
+    "LikesCount": 6,
+    "FavoritesCount": 0,
+    "CommentsCount": 3
+  },
+  {
+    "Id": 54,
+    "AuthorId": "DummyData-rharvey",
+    "PublicationTime": "2019-10-26 15:03",
+    "Body": "Lorem ipsum dolor sit amet, #Scalesoft adipiscing elit, sed do #software tempor incididunt ut labore et dolore magna aliqua. Amet volutpat #enterprise mauris nunc congue nisi vitae. Tincidunt eget non nisi est sit amet magna.",
+    "Tags": "Scalesoft software enterprise",
+    "LikesCount": 4,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 55,
+    "AuthorId": "DummyData-WeathermoreApp",
+    "PublicationTime": "2019-10-27 11:18",
+    "Body": "Congue eu consequat ac felis donec et odio pellentesque diam? eget nulla facilisi etiam. Duis at consectetur lorem donec massa sapien faucibus et molestie. Tincidunt vitae semper quis lectus nulla at. #Sfira #Weathermore #weather",
+    "Tags": "Sfira Weathermore weather",
+    "LikesCount": 7,
+    "FavoritesCount": 0,
+    "CommentsCount": 2
+  },
+  {
+    "Id": 56,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-10-27 12:07",
+    "Body": "#Sfira gravida #Weathermore blandit turpis! Potenti! Nullam ac tortor vitae purus. Quis vel eros donec ac odio tempor orci. Ipsum a arcu cursus vitae congue mauris rhoncus aenean vel. Ornare aenean euismod elementum nisi quis.",
+    "Tags": "Sfira Weathermore",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 57,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-10-28 04:36",
+    "Body": "In nulla posuere sollicitudin aliquam. Bibendum ut tristique et egestas quis ipsum. Vehicula ipsum a arcu cursus vitae congue mauris.",
+    "Tags": "",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 58,
+    "AuthorId": "DummyData-WeathermoreApp",
+    "PublicationTime": "2019-10-29 13:58",
+    "Body": "Phasellus vestibulum lorem sed risus ultricies. Sociis natoque penatibus et magnis dis parturient montes nascetur. Cras semper auctor neque vitae tempus quam pellentesque nec. #Weathermore #weather",
+    "Tags": "Weathermore weather",
+    "LikesCount": 6,
+    "FavoritesCount": 0,
+    "CommentsCount": 2
+  },
+  {
+    "Id": 59,
+    "AuthorId": "DummyData-Roccille",
+    "PublicationTime": "2019-10-30 11:45",
+    "Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae.\r\n#3D #OpenGL",
+    "Tags": "3D OpenGL",
+    "LikesCount": 2,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 60,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-30 21:05",
+    "Body": "Dictum varius duis at consectetur lorem donec massa SAPIEN! Sit amet consectetur adipiscing elit ut aliquam purus sit. Enim facilisis gravida neque.\r\n#Weathermore",
+    "Tags": "Weathermore",
+    "LikesCount": 8,
+    "FavoritesCount": 0,
+    "CommentsCount": 4
+  },
+  {
+    "Id": 61,
+    "AuthorId": "DummyData-KSEO",
+    "PublicationTime": "2019-10-31 14:28",
+    "Body": "#SEO sristique senectus et malesuada fames ac. #KSEO tristique magna sit amet purus gravida quis blandit. Vel fringilla est ullamcorper eget nulla facilisi",
+    "Tags": "SEO KSEO",
+    "LikesCount": 5,
+    "FavoritesCount": 0,
+    "CommentsCount": 1
+  },
+  {
+    "Id": 62,
+    "AuthorId": "DummyData-mkmangeshkar",
+    "PublicationTime": "2019-11-01 15:20",
+    "Body": "Itae ultricies leo integer SGML nunc. Convallis a SGML semper auctor neque vitae tempus quam. SGML imperdiet nulla malesuada pellentesque elit eget gravida cum sociis. #SGML",
+    "Tags": "SGML",
+    "LikesCount": 1,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  },
+  {
+    "Id": 63,
+    "AuthorId": "DummyData-ParkMinSoo",
+    "PublicationTime": "2019-11-01 23:52",
+    "Body": "Varius! Sit amet mattis vulputate enim nulla aliquet porttitor Minsoo. Ullamcorper Fancy tincidunt ornare massa. Arcu ac tortor dignissim convallis aenean et tortor at Sfira.\r\n#Minsoo #Fancy #Sfira",
+    "Tags": "Minsoo Fancy Sfira",
+    "LikesCount": 15,
+    "FavoritesCount": 0,
+    "CommentsCount": 6
+  },
+  {
+    "Id": 64,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-11-11 00:00",
+    "Body": "Hello and welcome to Sfira.\r\nRegister new account or log in with these credentials:\r\nUsername: user1\r\nPassword: user1",
+    "Tags": "Sfira",
+    "LikesCount": 0,
+    "FavoritesCount": 0,
+    "CommentsCount": 0
+  }
+]

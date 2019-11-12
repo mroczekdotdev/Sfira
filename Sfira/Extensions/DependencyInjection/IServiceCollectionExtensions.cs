@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MroczekDotDev.Sfira.Data;
+using MroczekDotDev.Sfira.Data.Extensions;
 using MroczekDotDev.Sfira.Services.CachedStorage;
 using MroczekDotDev.Sfira.Services.EmailSender;
 using MroczekDotDev.Sfira.Services.FileUploading;
@@ -18,6 +19,20 @@ namespace MroczekDotDev.Sfira.Extensions.DependencyInjection
         public static IServiceCollection AddRepository(this IServiceCollection services)
         {
             services.AddTransient<IRepository, EntityFrameworkRepository>();
+            return services;
+        }
+
+        public static IServiceCollection SeedDatabase(
+            this IServiceCollection services, IConfigurationSection options)
+        {
+            services.Configure<SeedingOptions>(options);
+
+            var sp = services.BuildServiceProvider();
+            var context = sp.GetService<PostgreSqlDbContext>();
+            var seedingOptions = sp.GetService<IOptions<SeedingOptions>>();
+
+            context.EnsureSeeded(seedingOptions);
+
             return services;
         }
 

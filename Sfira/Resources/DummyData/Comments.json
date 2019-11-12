@@ -1,0 +1,268 @@
+﻿[
+  {
+    "Id": 1,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-09-04 19:47",
+    "Body": "Adipiscing erat hac enim aenean #dotnet hendrerit convallis placerat vel.",
+    "ParentId": 2
+  },
+
+  {
+    "Id": 2,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-09-17 21:08",
+    "Body": "Ut condimentum mattis vivamus parturient cum #SASS.",
+    "ParentId": 6
+  },
+  {
+    "Id": 3,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-09-17 21:43",
+    "Body": "Nulla scelerisque ante lorem praesent tempus eget sem cubilia lorem a vestibulum ultrices dictumst nascetur parturient dis.",
+    "ParentId": 6
+  },
+
+  {
+    "Id": 4,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-09-21 10:10",
+    "Body": "Scelerisque parturient nam nisi condimentum a at nec consectetur adipiscing quam blandit et vitae a lobortis fames sapien nam malesuada sagittis consectetur taciti mattis scelerisque?",
+    "ParentId": 12
+  },
+  {
+    "Id": 5,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-09-21 14:53",
+    "Body": "Eleifend adipiscing mattis id #XML risus sem amet interdum consectetur commodo elit congue.",
+    "ParentId": 12
+  },
+
+  {
+    "Id": 6,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-10-01 09:14",
+    "Body": "Suscipit cras curae suspendisse laoreet.",
+    "ParentId": 19
+  },
+
+  {
+    "Id": 7,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-10-07 09:18",
+    "Body": "Nec nisi quisque a suspendisse ac sagittis parturient non aliquet tristique ullamcorper aliquet vivamus dis maecenas a inceptos odio dis a consectetur eu!",
+    "ParentId": 26
+  },
+  {
+    "Id": 8,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-10-07 09:26",
+    "Body": "Elit erat ut condimentum est dui a ac a vulputate non in turpis lacus sociosqu nam a mollis duis quis suspendisse penatibus dictum libero condimentum tincidunt. A sodales eu adipiscing parturient egestas.",
+    "ParentId": 26
+  },
+  {
+    "Id": 9,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-10-09 12:38",
+    "Body": "At neque velit integer scelerisque facilisi mollis.",
+    "ParentId": 26
+  },
+
+  {
+    "Id": 10,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-10-14 16:11",
+    "Body": "Nascetur hendrerit facilisi sagittis magnis a consectetur arcu. Luctus adipiscing penatibus conubia mattis consectetur a.",
+    "ParentId": 32
+  },
+  {
+    "Id": 11,
+    "AuthorId": "DummyData-codebloc",
+    "PublicationTime": "2019-10-14 16:39",
+    "Body": "Parturient massa quam varius vehicula parturient natoque a #GSM himenaeos.",
+    "ParentId": 32
+  },
+  {
+    "Id": 12,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-10-14 23:08",
+    "Body": "Diam justo per ultrices nullam vel per ultrices?",
+    "ParentId": 32
+  },
+  {
+    "Id": 13,
+    "AuthorId": "DummyData-AkcelTelecom",
+    "PublicationTime": "2019-10-15 09:21",
+    "Body": "Rutrum maecenas habitant placerat eleifend eros parturient lacus dictum vestibulum amet a vestibulum eget scelerisque litora.",
+    "ParentId": 32
+  },
+
+  {
+    "Id": 14,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-19 18:26",
+    "Body": "Per sed torquent?",
+    "ParentId": 39
+  },
+  {
+    "Id": 15,
+    "AuthorId": "DummyData-KSEO",
+    "PublicationTime": "2019-10-20 07:57",
+    "Body": "Est quis purus dis ad a felis nec pharetra in mi ultricies aliquet ullamcorper ut.",
+    "ParentId": 39
+  },
+
+  {
+    "Id": 16,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-10-21 07:14",
+    "Body": "Quam egestas iaculis egestas fames cursus bibendum tempor convallis a amet ut curae morbi vestibulum at donec feugiat morbi parturient.",
+    "ParentId": 44
+  },
+
+  {
+    "Id": 17,
+    "AuthorId": "DummyData-Trist",
+    "PublicationTime": "2019-10-24 18:46",
+    "Body": "SCELERISQUE TACITI #1024.",
+    "ParentId": 50
+  },
+  {
+    "Id": 18,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-10-24 19:04",
+    "Body": "Erat at ultrices sodales sagittis luctus. Citae ac platea a sit pulvinar commodo varius at.",
+    "ParentId": 50
+  },
+
+  {
+    "Id": 19,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-10-25 20:14",
+    "Body": "Sed vivamus neque elementum purus et a condimentum dignissim nisi placerat a ac parturient molestie consectetur pulvinar. Parturient magnis placerat sem maecenas volutpat a fusce justo at senectus elit cum metus auctor a lacinia.",
+    "ParentId": 53
+  },
+  {
+    "Id": 20,
+    "AuthorId": "DummyData-Trist",
+    "PublicationTime": "2019-10-25 20:38",
+    "Body": "Dipiscing #3D porttitor sem suscipit dictum vestibulum fringilla orci.",
+    "ParentId": 53
+  },
+  {
+    "Id": 21,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-27 11:04",
+    "Body": "LIBERO!",
+    "ParentId": 53
+  },
+
+  {
+    "Id": 22,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-27 14:56",
+    "Body": "Ad elementum suspendisse odio feugiat mattis aliquam.",
+    "ParentId": 55
+  },
+  {
+    "Id": 23,
+    "AuthorId": "DummyData-WeathermoreApp",
+    "PublicationTime": "2019-10-27 16:12",
+    "Body": "Adipiscing porttitor sem suscipit dictum vestibulum fringilla orci a libero nam metus adipiscing elit a cum id adipiscing vestibulum per odio sed natoque.",
+    "ParentId": 55
+  },
+
+  {
+    "Id": 24,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-10-29 18:26",
+    "Body": "Dapibus nascetur non lorem ullamcorper parturient.",
+    "ParentId": 58
+  },
+  {
+    "Id": 25,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-31 21:07",
+    "Body": "A egestas suspendisse in accumsan quam ridiculus vulputate #android.",
+    "ParentId": 58
+  },
+
+  {
+    "Id": 26,
+    "AuthorId": "DummyData-MaksimMedved1973",
+    "PublicationTime": "2019-10-30 23:18",
+    "Body": "Ante suspendisse montes urna fringilla netus. Vitae phasellus senectus ut a iaculis ullamcorper a posuere libero odio. Torquent habitasse nec euismod eros eros et est ad. Id mauris porttitor per velit per cum eu a elit parturient.",
+    "ParentId": 60
+  },
+  {
+    "Id": 27,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-31 05:12",
+    "Body": "Nunc dictumst accumsan a luctus et cras placerat feugiat suscipit ullamcorper a in nec sapien?",
+    "ParentId": 60
+  },
+  {
+    "Id": 28,
+    "AuthorId": "DummyData-Trist",
+    "PublicationTime": "2019-10-31 09:00",
+    "Body": "Magna hac ullamcorper.",
+    "ParentId": 60
+  },
+  {
+    "Id": 29,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-10-31 21:07",
+    "Body": "Faucibus condimentum euismod non vestibulum a hendrerit eu ac etiam aliquet fringilla posuere netus non congue cubilia pretium. Sit dui dolor ut non consectetur at parturient posuere.",
+    "ParentId": 60
+  },
+
+  {
+    "Id": 30,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-11-01 10:48",
+    "Body": "Quam #dotnet consectetur vestibulum.",
+    "ParentId": 61
+  },
+
+  {
+    "Id": 31,
+    "AuthorId": "DummyData-mkmangeshkar",
+    "PublicationTime": "2019-11-02 08:27",
+    "Body": "Lacinia quisque vivamus.",
+    "ParentId": 63
+  },
+  {
+    "Id": 32,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-11-02 23:52",
+    "Body": "Vivamus vestibulum conubia porttitor.",
+    "ParentId": 63
+  },
+  {
+    "Id": 33,
+    "AuthorId": "DummyData-Melanie256",
+    "PublicationTime": "2019-11-03 06:11",
+    "Body": "Conubia ad #LOVE condimentum.",
+    "ParentId": 63
+  },
+  {
+    "Id": 34,
+    "AuthorId": "DummyData-Trist",
+    "PublicationTime": "2019-11-04 13:29",
+    "Body": "Fermentum lorem laoreet #pop.",
+    "ParentId": 63
+  },
+  {
+    "Id": 35,
+    "AuthorId": "DummyData-sternchen1",
+    "PublicationTime": "2019-11-06 08:52",
+    "Body": "Fermentum pretium.",
+    "ParentId": 63
+  },
+  {
+    "Id": 36,
+    "AuthorId": "DummyData-WilliamJPichler",
+    "PublicationTime": "2019-11-07 12:06",
+    "Body": "Sit sit quisque massa eros.",
+    "ParentId": 63
+  }
+]

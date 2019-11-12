@@ -14,7 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\ReservedKeywords.txt" />
+    <Content Include="Resources\DummyData\media\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -7,7 +7,7 @@
 **/Migrations/
 **/node_modules/
 **/Rubbish/
-**/media/user/
+**/wwwroot/media/user/
 
 **/.dockerignore
 **/.gitattributes

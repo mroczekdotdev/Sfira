@@ -62,6 +62,8 @@ Edit values after equals signs.
 
 Save the file.
 
+⚠ **IMPORTANT NOTICE!** By default, database seeding with dummy data is set to `true`.
+
 ### Build and run
 
 From the root of the repository open `run.sh` or execute following command:

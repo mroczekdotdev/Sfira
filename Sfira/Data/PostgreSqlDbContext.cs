@@ -11,15 +11,15 @@ namespace MroczekDotDev.Sfira.Data
         {
         }
 
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<UserPost> UserPosts { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Chat> Chats { get; set; }
-        public DbSet<UserChat> UserChats { get; set; }
-        public DbSet<Comment> Comments { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
-        public DbSet<UserFollow> UserFollows { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Post> Posts { get; set; }
         public DbSet<UserBlock> UserBlocks { get; set; }
+        public DbSet<UserChat> UserChats { get; set; }
+        public DbSet<UserFollow> UserFollows { get; set; }
+        public DbSet<UserPost> UserPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

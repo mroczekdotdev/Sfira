@@ -1,0 +1,315 @@
+[
+  {
+    "FollowingUserId": "DummyData-AkcelTelecom",
+    "FollowedUserId": "DummyData-codebloc"
+  },
+  {
+    "FollowingUserId": "DummyData-AkcelTelecom",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-ArcavePress",
+    "FollowedUserId": "DummyData-MaksimMedved1973"
+  },
+  {
+    "FollowingUserId": "DummyData-ArcavePress",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-ArcavePress",
+    "FollowedUserId": "DummyData-Roccille"
+  },
+  {
+    "FollowingUserId": "DummyData-codebloc",
+    "FollowedUserId": "DummyData-AkcelTelecom"
+  },
+  {
+    "FollowingUserId": "DummyData-codebloc",
+    "FollowedUserId": "DummyData-KSEO"
+  },
+  {
+    "FollowingUserId": "DummyData-codebloc",
+    "FollowedUserId": "DummyData-MarcinMroczek"
+  },
+  {
+    "FollowingUserId": "DummyData-codebloc",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-codebloc",
+    "FollowedUserId": "DummyData-rharvey"
+  },
+  {
+    "FollowingUserId": "DummyData-codebloc",
+    "FollowedUserId": "DummyData-WeathermoreApp"
+  },
+  {
+    "FollowingUserId": "DummyData-KSEO",
+    "FollowedUserId": "DummyData-codebloc"
+  },
+  {
+    "FollowingUserId": "DummyData-KSEO",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-MaksimMedved1973",
+    "FollowedUserId": "DummyData-ArcavePress"
+  },
+  {
+    "FollowingUserId": "DummyData-MaksimMedved1973",
+    "FollowedUserId": "DummyData-MarcinMroczek"
+  },
+  {
+    "FollowingUserId": "DummyData-MaksimMedved1973",
+    "FollowedUserId": "DummyData-Melanie256"
+  },
+  {
+    "FollowingUserId": "DummyData-MaksimMedved1973",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-MarcinMroczek",
+    "FollowedUserId": "DummyData-ArcavePress"
+  },
+  {
+    "FollowingUserId": "DummyData-MarcinMroczek",
+    "FollowedUserId": "DummyData-codebloc"
+  },
+  {
+    "FollowingUserId": "DummyData-MarcinMroczek",
+    "FollowedUserId": "DummyData-MaksimMedved1973"
+  },
+  {
+    "FollowingUserId": "DummyData-MarcinMroczek",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-MarcinMroczek",
+    "FollowedUserId": "DummyData-sternchen1"
+  },
+  {
+    "FollowingUserId": "DummyData-MarcinMroczek",
+    "FollowedUserId": "DummyData-Trist"
+  },
+  {
+    "FollowingUserId": "DummyData-MarcinMroczek",
+    "FollowedUserId": "DummyData-user1"
+  },
+  {
+    "FollowingUserId": "DummyData-MarcinMroczek",
+    "FollowedUserId": "DummyData-WilliamJPichler"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-ArcavePress"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-codebloc"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-MaksimMedved1973"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-MarcinMroczek"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-mkmangeshkar"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-rharvey"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-Roccille"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-sternchen1"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-Trist"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-user1"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-WeathermoreApp"
+  },
+  {
+    "FollowingUserId": "DummyData-Melanie256",
+    "FollowedUserId": "DummyData-WilliamJPichler"
+  },
+  {
+    "FollowingUserId": "DummyData-mkmangeshkar",
+    "FollowedUserId": "DummyData-Melanie256"
+  },
+  {
+    "FollowingUserId": "DummyData-mkmangeshkar",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-mkmangeshkar",
+    "FollowedUserId": "DummyData-sternchen1"
+  },
+  {
+    "FollowingUserId": "DummyData-mkmangeshkar",
+    "FollowedUserId": "DummyData-WeathermoreApp"
+  },
+  {
+    "FollowingUserId": "DummyData-rharvey",
+    "FollowedUserId": "DummyData-codebloc"
+  },
+  {
+    "FollowingUserId": "DummyData-rharvey",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-rharvey",
+    "FollowedUserId": "DummyData-WilliamJPichler"
+  },
+  {
+    "FollowingUserId": "DummyData-Roccille",
+    "FollowedUserId": "DummyData-ArcavePress"
+  },
+  {
+    "FollowingUserId": "DummyData-Roccille",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-sternchen1",
+    "FollowedUserId": "DummyData-ArcavePress"
+  },
+  {
+    "FollowingUserId": "DummyData-sternchen1",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-sternchen1",
+    "FollowedUserId": "DummyData-Roccille"
+  },
+  {
+    "FollowingUserId": "DummyData-sternchen1",
+    "FollowedUserId": "DummyData-Trist"
+  },
+  {
+    "FollowingUserId": "DummyData-sternchen1",
+    "FollowedUserId": "DummyData-WeathermoreApp"
+  },
+  {
+    "FollowingUserId": "DummyData-Trist",
+    "FollowedUserId": "DummyData-ArcavePress"
+  },
+  {
+    "FollowingUserId": "DummyData-Trist",
+    "FollowedUserId": "DummyData-MaksimMedved1973"
+  },
+  {
+    "FollowingUserId": "DummyData-Trist",
+    "FollowedUserId": "DummyData-MarcinMroczek"
+  },
+  {
+    "FollowingUserId": "DummyData-Trist",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-AkcelTelecom"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-ArcavePress"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-codebloc"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-KSEO"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-MaksimMedved1973"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-MarcinMroczek"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-Melanie256"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-mkmangeshkar"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-rharvey"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-Roccille"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-sternchen1"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-Trist"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-WeathermoreApp"
+  },
+  {
+    "FollowingUserId": "DummyData-user1",
+    "FollowedUserId": "DummyData-WilliamJPichler"
+  },
+  {
+    "FollowingUserId": "DummyData-WeathermoreApp",
+    "FollowedUserId": "DummyData-codebloc"
+  },
+  {
+    "FollowingUserId": "DummyData-WeathermoreApp",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+
+  {
+    "FollowingUserId": "DummyData-WilliamJPichler",
+    "FollowedUserId": "DummyData-AkcelTelecom"
+  },
+  {
+    "FollowingUserId": "DummyData-WilliamJPichler",
+    "FollowedUserId": "DummyData-KSEO"
+  },
+  {
+    "FollowingUserId": "DummyData-WilliamJPichler",
+    "FollowedUserId": "DummyData-MarcinMroczek"
+  },
+  {
+    "FollowingUserId": "DummyData-WilliamJPichler",
+    "FollowedUserId": "DummyData-ParkMinSoo"
+  },
+  {
+    "FollowingUserId": "DummyData-WilliamJPichler",
+    "FollowedUserId": "DummyData-rharvey"
+  }
+]

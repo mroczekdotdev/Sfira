@@ -17,6 +17,7 @@ namespace MroczekDotDev.Sfira.Models
     {
         public int PostId { get; set; }
         public Post Parent { get; set; }
+        public string OwnerId { get; set; }
         public ApplicationUser Owner { get; set; }
         public Guid Name { get; set; }
 

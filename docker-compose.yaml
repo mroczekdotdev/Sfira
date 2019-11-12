@@ -33,6 +33,7 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:5000
       - ConnectionStrings__PostgreSQL=Host=database; Port=5432; Database=${Database_Name}; Username=${Database_Username}; Password=${Database_Password}; Pooling=true
+      - Seeding__SeedDummyData=${Database_SeedDummyData}
       - EmailSender__Host=${EmailSender_Host}
       - EmailSender__Port=${EmailSender_Port}
       - EmailSender__Username=${EmailSender_Username}
