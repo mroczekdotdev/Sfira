@@ -120,13 +120,13 @@ CREATE TABLE "UserFollows" (
 
 CREATE TABLE "Attachments" (
     "Name" uuid NOT NULL,
-    "PostId" integer NOT NULL,
+    "ParentId" integer NOT NULL,
     "OwnerId" text NULL,
     "Discriminator" text NOT NULL,
     "Extension" text NULL,
     CONSTRAINT "PK_Attachments" PRIMARY KEY ("Name"),
     CONSTRAINT "FK_Attachments_AspNetUsers_OwnerId" FOREIGN KEY ("OwnerId") REFERENCES "AspNetUsers" ("Id") ON DELETE RESTRICT,
-    CONSTRAINT "FK_Attachments_Posts_PostId" FOREIGN KEY ("PostId") REFERENCES "Posts" ("Id") ON DELETE CASCADE
+    CONSTRAINT "FK_Attachments_Posts_ParentId" FOREIGN KEY ("ParentId") REFERENCES "Posts" ("Id") ON DELETE CASCADE
 );
 
 CREATE TABLE "Comments" (
@@ -134,10 +134,10 @@ CREATE TABLE "Comments" (
     "AuthorId" text NULL,
     "PublicationTime" timestamp without time zone NOT NULL,
     "Body" text NULL,
-    "ParentId" integer NULL,
+    "ParentId" integer NOT NULL,
     CONSTRAINT "PK_Comments" PRIMARY KEY ("Id"),
     CONSTRAINT "FK_Comments_AspNetUsers_AuthorId" FOREIGN KEY ("AuthorId") REFERENCES "AspNetUsers" ("Id") ON DELETE RESTRICT,
-    CONSTRAINT "FK_Comments_Posts_ParentId" FOREIGN KEY ("ParentId") REFERENCES "Posts" ("Id") ON DELETE RESTRICT
+    CONSTRAINT "FK_Comments_Posts_ParentId" FOREIGN KEY ("ParentId") REFERENCES "Posts" ("Id") ON DELETE CASCADE
 );
 
 CREATE TABLE "UserPosts" (
@@ -192,7 +192,7 @@ CREATE UNIQUE INDEX "UserNameIndex" ON "AspNetUsers" ("NormalizedUserName");
 
 CREATE INDEX "IX_Attachments_OwnerId" ON "Attachments" ("OwnerId");
 
-CREATE UNIQUE INDEX "IX_Attachments_PostId" ON "Attachments" ("PostId");
+CREATE UNIQUE INDEX "IX_Attachments_ParentId" ON "Attachments" ("ParentId");
 
 CREATE UNIQUE INDEX "IX_Chats_LastMessageId" ON "Chats" ("LastMessageId");
 
@@ -217,5 +217,5 @@ CREATE INDEX "IX_UserPosts_PostId" ON "UserPosts" ("PostId");
 ALTER TABLE "Messages" ADD CONSTRAINT "FK_Messages_Chats_ChatId" FOREIGN KEY ("ChatId") REFERENCES "Chats" ("Id") ON DELETE CASCADE;
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20191022045542_Initial', '2.2.6-servicing-10079');
+VALUES ('20191115002357_Initial', '2.2.6-servicing-10079');
 

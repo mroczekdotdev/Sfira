@@ -9,7 +9,7 @@
     <div class="UserMenu">
         <div class="avatar" sfira-user="@currentUser" sfira-media="avatar"></div>
         <div class="items">
-            <a class="item" asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@User.Identity.Name">
+            <a class="item" asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@User.Identity.Name">
                 <i class="fas fa-at fa-sm fa-fw"></i> @User.Identity.Name
             </a>
             <a class="item" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Profile"><i class="fas fa-pen fa-sm fa-fw"></i> Edit Profile</a>

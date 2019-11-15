@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\ReservedKeywords.txt" />
     <EmbeddedResource Include="Resources\ReservedKeywords.txt" />
   </ItemGroup>
 

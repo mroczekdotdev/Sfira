@@ -78,11 +78,19 @@ namespace MroczekDotDev.Sfira.Data
         public IEnumerable<Post> GetPosts(int? count = null, int? cursor = null)
         {
             IQueryable<Post> query = context.Posts
-                .OrderByDescending(p => p.Id);
+                .OrderByDescending(p => p.PublicationTime)
+                .ThenByDescending(p => p.Id);
 
             if (cursor != null)
             {
-                query = query.Where(p => p.Id < cursor);
+                DateTime cursorTime = context.Posts
+                    .Where(p => p.Id == cursor)
+                    .SingleOrDefault()
+                    .PublicationTime;
+
+                query = query.Where(
+                    p => p.PublicationTime < cursorTime ||
+                    (p.PublicationTime == cursorTime && p.Id < cursor));
             }
 
             if (count != null)
@@ -99,11 +107,19 @@ namespace MroczekDotDev.Sfira.Data
         {
             IQueryable<Post> query = context.Posts
                 .Where(p => p.Tags.Contains(tagName))
-                .OrderByDescending(p => p.Id);
+                .OrderByDescending(p => p.PublicationTime)
+                .ThenByDescending(p => p.Id);
 
             if (cursor != null)
             {
-                query = query.Where(p => p.Id < cursor);
+                DateTime cursorTime = context.Posts
+                    .Where(p => p.Id == cursor)
+                    .SingleOrDefault()
+                    .PublicationTime;
+
+                query = query.Where(
+                    p => p.PublicationTime < cursorTime ||
+                    (p.PublicationTime == cursorTime && p.Id < cursor));
             }
 
             if (count != null)
@@ -120,11 +136,19 @@ namespace MroczekDotDev.Sfira.Data
         {
             IQueryable<Post> query = context.Posts
                 .Where(p => p.Author.UserName == userName)
-                .OrderByDescending(p => p.Id);
+                .OrderByDescending(p => p.PublicationTime)
+                .ThenByDescending(p => p.Id);
 
             if (cursor != null)
             {
-                query = query.Where(p => p.Id < cursor);
+                DateTime cursorTime = context.Posts
+                    .Where(p => p.Id == cursor)
+                    .SingleOrDefault()
+                    .PublicationTime;
+
+                query = query.Where(
+                    p => p.PublicationTime < cursorTime ||
+                    (p.PublicationTime == cursorTime && p.Id < cursor));
             }
 
             if (count != null)
@@ -142,11 +166,19 @@ namespace MroczekDotDev.Sfira.Data
             IQueryable<Post> query = context.UserFollows
                 .Where(uf => uf.FollowingUserId == userId)
                 .SelectMany(uf => uf.FollowedUser.Posts)
-                .OrderByDescending(p => p.Id);
+                .OrderByDescending(p => p.PublicationTime)
+                .ThenByDescending(p => p.Id);
 
             if (cursor != null)
             {
-                query = query.Where(p => p.Id < cursor);
+                DateTime cursorTime = context.Posts
+                    .Where(p => p.Id == cursor)
+                    .SingleOrDefault()
+                    .PublicationTime;
+
+                query = query.Where(
+                    p => p.PublicationTime < cursorTime ||
+                    (p.PublicationTime == cursorTime && p.Id < cursor));
             }
 
             if (count != null)
@@ -163,7 +195,7 @@ namespace MroczekDotDev.Sfira.Data
         {
             return context.Attachments
                 .Include(a => a.Owner)
-                .SingleOrDefault(a => a.PostId == postId);
+                .SingleOrDefault(a => a.ParentId == postId);
         }
 
         public IEnumerable<Attachment> GetAttachmentsByUserName(string userName)

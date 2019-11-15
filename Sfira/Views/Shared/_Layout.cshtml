@@ -20,18 +20,18 @@
 <body>
     <div class="Site">
         <header class="siteHeader">
-            <a class="logo" asp-controller="Home" asp-action="@nameof(HomeController.Index)"><img src="~/media/site/sfira-logo-primary.png" alt=""></a>
+            <a class="logo" asp-controller="@HomeController.Name" asp-action="@nameof(HomeController.Index)"><img src="~/media/site/sfira-logo-primary.png" alt=""></a>
             <nav class="siteMenu">
                 <div class="item @if (controller == "Home") {<text>active</text>} ">
-                    <a asp-controller="Home" asp-action="@nameof(HomeController.Index)"><i class="fas fa-home"></i> Home</a>
+                    <a asp-controller="@HomeController.Name" asp-action="@nameof(HomeController.Index)"><i class="fas fa-home"></i> Home</a>
                 </div>
                 <div class="item @if (controller == "Explore") {<text>active</text>} ">
-                    <a asp-controller="Explore" asp-action="@nameof(ExploreController.Index)">
+                    <a asp-controller="@ExploreController.Name" asp-action="@nameof(ExploreController.Index)">
                         <i class="fas fa-globe-americas"></i> Explore
                     </a>
                 </div>
                 <div class="item @if (controller == "Messages") {<text>active</text>} ">
-                    <a asp-controller="Messages" asp-action="@nameof(MessagesController.Index)">
+                    <a asp-controller="@MessagesController.Name" asp-action="@nameof(MessagesController.Index)">
                         <i class="fas fa-envelope-square"></i> Messages
                     </a>
                 </div>

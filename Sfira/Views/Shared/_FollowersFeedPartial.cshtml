@@ -7,7 +7,7 @@
         {
             <article class="single-user">
                 <div class="avatar" sfira-user="@user" sfira-media="avatar"></div>
-                <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@user.UserName">
+                <a asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@user.UserName">
                     <span class="name">@user.Name</span><span class="username">@user.UserName</span>
                 </a>
             </article>

@@ -8,7 +8,7 @@ namespace MroczekDotDev.Sfira.Models
 
         public override AttachmentViewModel ToViewModel => new AttachmentViewModel
         {
-            ParentId = PostId,
+            ParentId = ParentId,
             Owner = Owner,
             Name = Name.ToString(),
             Type = ToString(),

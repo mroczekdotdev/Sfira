@@ -62,7 +62,7 @@ Edit values after equals signs.
 
 Save the file.
 
-⚠ **IMPORTANT NOTICE!** By default, database seeding with dummy data is set to `true`.
+⚠ **IMPORTANT NOTICE!** Database seeding with dummy data is enabled by default.
 
 ### Build and run
 

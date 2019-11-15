@@ -15,7 +15,7 @@ namespace MroczekDotDev.Sfira.Models
 
     public abstract class Attachment : IHasViewModel<AttachmentViewModel>
     {
-        public int PostId { get; set; }
+        public int ParentId { get; set; }
         public Post Parent { get; set; }
         public string OwnerId { get; set; }
         public ApplicationUser Owner { get; set; }

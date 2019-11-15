@@ -11,7 +11,7 @@
                 </section>
                 <div class="flexItem">
                     <section class="header">
-                        <a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@directChat.Interlocutor.UserName">
+                        <a asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@directChat.Interlocutor.UserName">
                             <span class="name">@directChat.Interlocutor.Name</span><span class="username">@directChat.Interlocutor.UserName</span>
                         </a>
                         <span class="timestamp">@directChat.LastMessage.PublicationTime.Relative()</span>

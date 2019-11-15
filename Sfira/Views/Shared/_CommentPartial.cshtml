@@ -3,7 +3,7 @@
 <article class="Comment">
     <header class="header">
         <div class="avatar" sfira-user="@Model.Author" sfira-media="avatar"></div>
-        <a class="user" asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@Model.Author.UserName">
+        <a class="user" asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@Model.Author.UserName">
             <span class="name">@Model.Author.Name</span><span class="username">@Model.Author.UserName</span>
         </a>
         <span class="timestamp">@Model.PublicationTime.Relative()</span>

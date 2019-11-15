@@ -5,7 +5,7 @@
     <ul>
         @foreach (var popularUser in Model)
         {
-            <li><a asp-controller="User" asp-action="@nameof(UserController.Index)" asp-route-userName="@popularUser.UserName">@@@popularUser.UserName</a></li>
+            <li><a asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@popularUser.UserName">@@@popularUser.UserName</a></li>
         }
     </ul>
 }

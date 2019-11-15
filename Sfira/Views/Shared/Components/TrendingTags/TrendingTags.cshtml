@@ -5,7 +5,7 @@
     <ul>
         @foreach (var trendingTag in Model)
         {
-            <li><a asp-controller="Tag" asp-action="@nameof(HomeController.Index)" asp-route-tagName="@trendingTag">#@trendingTag</a></li>
+            <li><a asp-controller="@TagController.Name" asp-action="@nameof(HomeController.Index)" asp-route-tagName="@trendingTag">#@trendingTag</a></li>
         }
     </ul>
 }
