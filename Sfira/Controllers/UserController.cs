@@ -6,6 +6,7 @@ using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewComponents;
 using MroczekDotDev.Sfira.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,12 +56,16 @@ namespace MroczekDotDev.Sfira.Controllers
                     }
                 }
 
-                var posts = repository.GetPostsByUserName(userName, postsFeedCount).ToViewModels();
+                var posts = repository.GetPostsAndFavoritesByUserName(userName, postsFeedCount).ToViewModels();
 
                 if (posts.Any())
                 {
-                    var postsFeedLoader = new PostsFeedLoaderViewModel();
-                    postsFeedLoader.Posts = posts;
+                    posts = AddFavoritedBy(posts, user.Name);
+
+                    var postsFeedLoader = new PostsFeedLoaderViewModel
+                    {
+                        Posts = posts
+                    };
 
                     if (posts.Count() == postsFeedCount)
                     {
@@ -78,7 +83,18 @@ namespace MroczekDotDev.Sfira.Controllers
 
         public IActionResult PostsFeed(string userName, int count, int cursor)
         {
-            IEnumerable<PostViewModel> posts = repository.GetPostsByUserName(userName, count, cursor).ToViewModels();
+            ApplicationUser user = repository.GetUserByUserName(userName);
+            IEnumerable<PostViewModel> posts = null;
+
+            if (user != null)
+            {
+                posts = repository.GetPostsAndFavoritesByUserName(userName, count, cursor).ToViewModels();
+
+                if (posts.Any())
+                {
+                    posts = AddFavoritedBy(posts, user.Name);
+                }
+            }
 
             return ViewComponent(typeof(PostsFeedViewComponent), posts);
         }
@@ -127,6 +143,20 @@ namespace MroczekDotDev.Sfira.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [NonAction]
+        private IEnumerable<PostViewModel> AddFavoritedBy(IEnumerable<PostViewModel> posts, string name)
+        {
+            foreach (var post in posts)
+            {
+                if (!post.Author.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    post.FavoritedBy = name;
+                }
+            }
+
+            return posts;
         }
     }
 }

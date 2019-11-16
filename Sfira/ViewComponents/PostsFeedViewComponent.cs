@@ -30,24 +30,31 @@ namespace MroczekDotDev.Sfira.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(IEnumerable<PostViewModel> posts)
         {
-            foreach (var post in posts)
+            if (posts != null)
             {
-                post.Attachment = repository.GetAttachmentByPostId(post.Id)?.ToViewModel;
-            }
+                foreach (var post in posts)
+                {
+                    post.Attachment = repository.GetAttachmentByPostId(post.Id)?.ToViewModel;
+                }
 
-            if (User.Identity.IsAuthenticated)
-            {
-                ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                posts = repository.LoadCurrentUserRelations(posts, currentUser.Id);
-            }
+                if (User.Identity.IsAuthenticated)
+                {
+                    ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+                    posts = repository.LoadCurrentUserRelations(posts, currentUser.Id);
+                }
 
-            if (posts.Count() < postsFeedCount)
-            {
-                ViewContext.HttpContext.Response.Headers.Add("Loader-Keep", "false");
+                if (posts.Count() < postsFeedCount)
+                {
+                    ViewContext.HttpContext.Response.Headers.Add("Loader-Keep", "false");
+                }
+                else
+                {
+                    ViewContext.HttpContext.Response.Headers.Add("Loader-Cursor", posts.Last().Id.ToString());
+                }
             }
             else
             {
-                ViewContext.HttpContext.Response.Headers.Add("Loader-Cursor", posts.Last().Id.ToString());
+                posts = Enumerable.Empty<PostViewModel>();
             }
 
             return View("PostsFeed", posts);

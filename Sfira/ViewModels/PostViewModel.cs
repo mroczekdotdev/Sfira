@@ -21,6 +21,8 @@ namespace MroczekDotDev.Sfira.ViewModels
         public int LikesCount { get; set; }
         public int FavoritesCount { get; set; }
 
+        public string FavoritedBy { get; set; }
+
         public ICollection<CommentViewModel> Comments { get; set; }
         public int CommentsCount { get; set; }
 

@@ -25,7 +25,7 @@ namespace MroczekDotDev.Sfira.Data
         {
             base.OnModelCreating(builder);
 
-            var extensionEnumToStringConverter = new EnumToStringConverter<FilenameExtension>();
+            var filenameExtensionConverter = new EnumToStringConverter<FilenameExtension>();
 
             builder.HasPostgresExtension("citext");
 
@@ -87,7 +87,7 @@ namespace MroczekDotDev.Sfira.Data
             builder.Entity<ImageAttachment>()
                 .HasBaseType<Attachment>()
                 .Property(a => a.Extension)
-                .HasConversion(extensionEnumToStringConverter);
+                .HasConversion(filenameExtensionConverter);
 
             builder.Entity<Attachment>()
                 .Property(a => a.Name)

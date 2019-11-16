@@ -1,4 +1,9 @@
 ﻿.Post {
+  > .flags {
+    font-size: $font-size-sm;
+    color: $color-secondary;
+  }
+
   > .header {
     display: flex;
     flex-flow: row nowrap;

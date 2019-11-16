@@ -15,6 +15,7 @@ namespace MroczekDotDev.Sfira.Data
         IEnumerable<Post> GetPosts(int? count = null, int? cursor = null);
         IEnumerable<Post> GetPostsByTag(string tagName, int? count = null, int? cursor = null);
         IEnumerable<Post> GetPostsByUserName(string userName, int? count = null, int? cursor = null);
+        IEnumerable<Post> GetPostsAndFavoritesByUserName(string userName, int? count = null, int? cursor = null);
         IEnumerable<Post> GetPostsByFollowerId(string userId, int? count = null, int? cursor = null);
 
         Attachment GetAttachmentByPostId(int postId);

@@ -1,6 +1,12 @@
 ﻿@model PostViewModel
 
 <article class="Post" data-id="@Model.Id">
+    <div class="flags">
+        @if (Model.FavoritedBy != null)
+        {
+            <span class="flag favoritedBy"><i class="fas fa-star fa-sm fa-fw"></i> Favorited by @Model.FavoritedBy</span>
+        }
+    </div>
     <header class="header">
         <a class="user" asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@Model.Author.UserName">
             <span class="name">@Model.Author.Name</span><span class="username">@Model.Author.UserName</span>

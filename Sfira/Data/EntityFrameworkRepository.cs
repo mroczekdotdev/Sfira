@@ -161,6 +161,45 @@ namespace MroczekDotDev.Sfira.Data
                 .ToArray();
         }
 
+        public IEnumerable<Post> GetPostsAndFavoritesByUserName(string userName, int? count = null, int? cursor = null)
+        {
+            var FavoritedPosts = context.UserPosts
+                .Where(up => up.User.UserName == userName)
+                .Where(up => (
+                    up.Relation == (RelationType.Favorite) ||
+                    up.Relation == (RelationType.Favorite ^ RelationType.Like) ||
+                    up.Relation == (RelationType.Favorite ^ RelationType.Comment) ||
+                    up.Relation == (RelationType.Favorite ^ RelationType.Like ^ RelationType.Comment)))
+                .Select(up => up.Post);
+
+            IQueryable<Post> query = context.Posts
+                .Where(p => p.Author.UserName == userName)
+                .Concat(FavoritedPosts)
+                .OrderByDescending(p => p.PublicationTime)
+                .ThenByDescending(p => p.Id);
+
+            if (cursor != null)
+            {
+                DateTime cursorTime = context.Posts
+                    .Where(p => p.Id == cursor)
+                    .SingleOrDefault()
+                    .PublicationTime;
+
+                query = query.Where(
+                    p => p.PublicationTime < cursorTime ||
+                    (p.PublicationTime == cursorTime && p.Id < cursor));
+            }
+
+            if (count != null)
+            {
+                query = query.Take((int)count);
+            }
+
+            return query
+                .Include(p => p.Author)
+                .ToArray();
+        }
+
         public IEnumerable<Post> GetPostsByFollowerId(string userId, int? count = null, int? cursor = null)
         {
             IQueryable<Post> query = context.UserFollows
@@ -208,10 +247,9 @@ namespace MroczekDotDev.Sfira.Data
 
         public IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId)
         {
-            Dictionary<int, RelationType> currentUserRelations = context.Users
-                .Where(u => u.Id == currentUserId)
-                .SelectMany(up => up.UserPosts)
-                .ToDictionary(t => t.PostId, t => t.Relation);
+            Dictionary<int, RelationType> currentUserRelations = context.UserPosts
+                .Where(up => up.UserId == currentUserId)
+                .ToDictionary(up => up.PostId, up => up.Relation);
 
             foreach (PostViewModel p in posts)
             {
@@ -234,7 +272,7 @@ namespace MroczekDotDev.Sfira.Data
                 switch (interaction)
                 {
                     case "like":
-                        if ((relation & RelationType.Like) != RelationType.Like)
+                        if ((relation & RelationType.Like) == 0)
                         {
                             relation |= RelationType.Like;
                             post.LikesCount++;
@@ -243,7 +281,7 @@ namespace MroczekDotDev.Sfira.Data
                         return null;
 
                     case "unlike":
-                        if ((relation & RelationType.Like) == RelationType.Like)
+                        if ((relation & RelationType.Like) != 0)
                         {
                             relation ^= RelationType.Like;
                             post.LikesCount--;
@@ -252,7 +290,7 @@ namespace MroczekDotDev.Sfira.Data
                         return null;
 
                     case "favorite":
-                        if ((relation & RelationType.Favorite) != RelationType.Favorite)
+                        if ((relation & RelationType.Favorite) == 0)
                         {
                             relation |= RelationType.Favorite;
                             post.FavoritesCount++;
@@ -261,7 +299,7 @@ namespace MroczekDotDev.Sfira.Data
                         return null;
 
                     case "unfavorite":
-                        if ((relation & RelationType.Favorite) == RelationType.Favorite)
+                        if ((relation & RelationType.Favorite) != 0)
                         {
                             relation ^= RelationType.Favorite;
                             post.FavoritesCount--;
@@ -270,7 +308,7 @@ namespace MroczekDotDev.Sfira.Data
                         return null;
 
                     case "comment":
-                        if ((relation & RelationType.Comment) != RelationType.Comment)
+                        if ((relation & RelationType.Comment) == 0)
                         {
                             relation |= RelationType.Comment;
                             break;
@@ -278,7 +316,7 @@ namespace MroczekDotDev.Sfira.Data
                         return null;
 
                     case "uncomment":
-                        if ((relation & RelationType.Comment) == RelationType.Comment)
+                        if ((relation & RelationType.Comment) != 0)
                         {
                             relation ^= RelationType.Comment;
                             break;

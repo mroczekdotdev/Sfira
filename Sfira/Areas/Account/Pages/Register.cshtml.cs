@@ -48,7 +48,7 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
             public string Email { get; set; }
 
             [Required]
-            [StringLength(36, ErrorMessage = "{0} length must be between {2} and {1} characters.", MinimumLength = 3)]
+            [StringLength(24, ErrorMessage = "{0} length must be between {2} and {1} characters.", MinimumLength = 3)]
             [RegularExpression(@"^[A-Za-z][^_\W]+$",
                 ErrorMessage = "{0} must start with a letter and contain only letters and numbers.")]
             [NonRestrictedName(ErrorMessage = "{0} '{1}' is not available.")]
