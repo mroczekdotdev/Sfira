@@ -56,12 +56,20 @@
     flex-direction: row;
     flex-wrap: nowrap;
 
+    @media #{$screen-sm} {
+      flex-direction: column;
+    }
+
     > .mainColumn {
       display: flex;
       flex: 2;
       flex-direction: column;
       min-width: 0;
       margin-right: $margin-base;
+
+      @media #{$screen-sm} {
+        margin-right: 0;
+      }
     }
 
     > .sideColumn {
@@ -71,11 +79,17 @@
       flex-direction: column;
       min-width: 0;
 
+      @media #{$screen-sm} {
+        margin-top: $margin-base;
+      }
+
       > .sideContent {
         padding: $padding-lg;
         background-color: color-variant("superlight", $color-primary);
 
         .aside {
+          overflow-wrap: break-word;
+
           > header {
             margin: 0;
             font-weight: $font-weight-bold;
@@ -105,10 +119,6 @@
             color: color-variant("dark", $color-gray);
           }
         }
-      }
-
-      @media #{$screen-sm} {
-        display: none;
       }
     }
   }

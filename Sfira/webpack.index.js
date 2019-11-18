@@ -9,6 +9,7 @@ import "./js/modal.js";
 import "./js/postCreate.js";
 import "./js/postMark.js";
 import "./js/profile.js";
+import "./js/sendVerification.js";
 import "./js/userMenu.js";
 
 import "./scss/Main.scss";

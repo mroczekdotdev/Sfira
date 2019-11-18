@@ -253,7 +253,10 @@ namespace MroczekDotDev.Sfira.Data
 
             foreach (PostViewModel p in posts)
             {
-                p.CurrentUserRelation = currentUserRelations.TryGetValue(p.Id, out RelationType value) ? value : RelationType.None;
+                if (!(p.IsCurrentUserAuthor = p.Author.Id == currentUserId))
+                {
+                    p.CurrentUserRelation = currentUserRelations.TryGetValue(p.Id, out RelationType value) ? value : RelationType.None;
+                }
             }
 
             return posts;

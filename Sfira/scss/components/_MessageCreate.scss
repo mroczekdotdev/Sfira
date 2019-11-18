@@ -1,17 +1,14 @@
 ﻿.MessageCreate {
-margin-top: $margin-base;
+  margin-top: $margin-base;
 
   > .form {
-    background-color: color-variant("superlight", $color-primary);
-    border: $border-size-base solid $color-primary;
-    border-radius: $radius-base;
 
     > .body {
       display: block;
       height: 4rem;
       min-height: 4rem;
-      border: none;
-      background: none;
+      background-color: color-variant("superlight", $color-primary);
+      border: $border-size-base solid $color-primary;
       border-radius: $radius-base;
 
       &:focus {

@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-  $(document).on("click", "a.comment", function () {
+  $(document).on("click", "span.comment", function () {
     var post = $(this).parents(".Post");
     var postId = post.data("id");
     var commentsFeed = post.find(".CommentsFeed");
@@ -9,7 +9,7 @@
     if ($.trim(commentsFeed.html()) == "") {
       $.ajax({
         type: "GET",
-        url: postId + "/comments",
+        url: "/" + postId + "/comments",
         success: function (result) {
           commentCreate.slideDown();
           commentsFeed.replaceWith(result).hide().slideDown();
@@ -28,6 +28,7 @@
     var post = $(this).parents(".Post");
     var postId = post.data("id");
     var body = post.find(".CommentCreate .body");
+    var isCurrentUserAuthor = post.hasClass("-user");
 
     var model = {
       Body: body.val(),
@@ -40,16 +41,25 @@
       contentType: "application/json",
       success: function () {
         var comments = post.find(".CommentsFeed");
-        var a = post.find("a.comment");
+        var action = post.find("span.comment");
 
         $.ajax({
           type: "GET",
-          url: postId + "/comments",
+          url: "/" + postId + "/comments",
           success: function (result) {
             body.val("");
             comments.replaceWith(result);
             var commentsCount = post.find(".Comment").length;
-            a.html('<i class="fas fa-comment-alt fa-sm fa-fw"></i><span class="counter">' + commentsCount + "</span>").hide().fadeIn();
+
+            var icon;
+            if (isCurrentUserAuthor) {
+              icon = '<i class="far fa-comment-alt fa-sm fa-fw"></i>'
+            }
+            else {
+              icon = '<i class="fas fa-comment-alt fa-sm fa-fw"></i>'
+            }
+
+            action.html(icon + '<span class="counter">' + commentsCount + "</span>").hide().fadeIn();
           },
         });
       },

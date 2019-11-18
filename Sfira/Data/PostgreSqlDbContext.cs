@@ -9,6 +9,7 @@ namespace MroczekDotDev.Sfira.Data
     {
         public PostgreSqlDbContext(DbContextOptions<PostgreSqlDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<Attachment> Attachments { get; set; }

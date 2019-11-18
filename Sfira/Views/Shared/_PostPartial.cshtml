@@ -1,6 +1,6 @@
 ﻿@model PostViewModel
 
-<article class="Post" data-id="@Model.Id">
+<article class="Post @if (Model.IsCurrentUserAuthor) {<text>-user</text>}" data-id="@Model.Id">
     <div class="flags">
         @if (Model.FavoritedBy != null)
         {
@@ -20,59 +20,60 @@
                 <span class="major">
                     @{
                         if (!User.Identity.IsAuthenticated)
-                        { <a class="action comment" href="javascript:void(0)">
+                        {
+                            <span class="action comment">
                                 <i class="far fa-comment-alt fa-sm fa-fw"></i><span class="counter">@Model.CommentsCount</span>
-                            </a>
+                            </span>
                         }
                         else if ((@Model.CurrentUserRelation & RelationType.Comment) != RelationType.Comment)
                         {
-                            <a class="action comment" href="javascript:void(0)">
+                            <span class="action comment">
                                 <i class="far fa-comment-alt fa-sm fa-fw"></i><span class="counter">@Model.CommentsCount</span>
-                            </a>
+                            </span>
                         }
                         else
                         {
-                            <a class="action comment" href="javascript:void(0)">
+                            <span class="action comment">
                                 <i class="fas fa-comment-alt fa-sm fa-fw"></i><span class="counter">@Model.CommentsCount</span>
-                            </a>
+                            </span>
                         }
 
-                        if (!User.Identity.IsAuthenticated)
+                        if (!User.Identity.IsAuthenticated || Model.IsCurrentUserAuthor)
                         {
                             <span class="action">
                                 <i class="far fa-heart fa-sm fa-fw"></i><span class="counter">@Model.LikesCount</span>
                             </span>
                         }
-                        else if ((@Model.CurrentUserRelation & RelationType.Like) != RelationType.Like)
+                        else if ((Model.CurrentUserRelation & RelationType.Like) != RelationType.Like)
                         {
-                            <a class="action like" href="javascript:void(0)">
+                            <span class="action like">
                                 <i class="far fa-heart fa-sm fa-fw"></i><span class="counter">@Model.LikesCount</span>
-                            </a>
+                            </span>
                         }
                         else
                         {
-                            <a class="action unlike" href="javascript:void(0)">
+                            <span class="action unlike">
                                 <i class="fas fa-heart fa-sm fa-fw"></i><span class="counter">@Model.LikesCount</span>
-                            </a>
+                            </span>
                         }
 
-                        if (!User.Identity.IsAuthenticated)
+                        if (!User.Identity.IsAuthenticated || Model.IsCurrentUserAuthor)
                         {
                             <span class="action">
                                 <i class="far fa-star fa-sm fa-fw"></i><span class="counter">@Model.FavoritesCount</span>
                             </span>
                         }
-                        else if ((@Model.CurrentUserRelation & RelationType.Favorite) != RelationType.Favorite)
+                        else if ((Model.CurrentUserRelation & RelationType.Favorite) != RelationType.Favorite)
                         {
-                            <a class="action favorite" href="javascript:void(0)">
+                            <span class="action favorite">
                                 <i class="far fa-star fa-sm fa-fw"></i><span class="counter">@Model.FavoritesCount</span>
-                            </a>
+                            </span>
                         }
                         else
                         {
-                            <a class="action unfavorite" href="javascript:void(0)">
+                            <span class="action unfavorite">
                                 <i class="fas fa-star fa-sm fa-fw"></i><span class="counter">@Model.FavoritesCount</span>
-                            </a>
+                            </span>
                         }
                     }
                 </span>

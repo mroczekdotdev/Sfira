@@ -12,7 +12,8 @@ namespace MroczekDotDev.Sfira.ViewModels
         public DateTime PublicationTime { get; set; }
 
         [Required]
-        [StringLength(240, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 3)]
+        [StringLength(240, ErrorMessage = "{0} length must be between {2} and {1} characters.", MinimumLength = 3)]
+        [Display(Name = "Post")]
         public string Body { get; set; }
 
         public string Tags { get; set; }
@@ -27,5 +28,7 @@ namespace MroczekDotDev.Sfira.ViewModels
         public int CommentsCount { get; set; }
 
         public AttachmentViewModel Attachment { get; set; }
+
+        public bool IsCurrentUserAuthor { get; set; }
     }
 }

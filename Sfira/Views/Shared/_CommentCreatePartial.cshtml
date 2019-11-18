@@ -3,6 +3,7 @@
 <section class="CommentCreate" style="display: none;">
     <form class="form">
         <textarea class="body" asp-for="@Model.Body" placeholder="Write your reply."></textarea>
+        <span asp-validation-for="@Model.Body" class="validation"></span>
     </form>
     <section class="actions">
         <button class="action submit" type="button">Submit</button>

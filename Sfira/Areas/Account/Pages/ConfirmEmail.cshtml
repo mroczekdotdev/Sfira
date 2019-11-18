@@ -1,10 +1,18 @@
 ﻿@page
 @model ConfirmEmailModel
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = "Confirm Email";
 }
 
 <h1>@ViewData["Title"]</h1>
 <p>
     Thank you for confirming your email.
 </p>
+
+@section PrimaryAside{
+    <section class="aside">
+        <ul>
+            <li><a asp-page="./Login">Log in to your Sfira account</a></li>
+        </ul>
+    </section>
+}

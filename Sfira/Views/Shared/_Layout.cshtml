@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="~/site.css" asp-append-version="true">
     <script defer src="~/lib/font-awesome/all.min.js"></script>
     <script defer src="~/lib/jquery/jquery.min.js"></script>
+    <script defer src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script defer src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script defer src="~/site.js" asp-append-version="true"></script>
     <title>@ViewBag.Title &middot; Sfira</title>
     @{await Html.RenderPartialAsync("_Favicons"); }
@@ -36,11 +38,11 @@
                     </a>
                 </div>
             </nav>
-            @*NotImplemented
-                <form class="SearchForm">
-                    <input type="search" placeholder="Search...">
-                    <button type="submit">Search</button>
-                </form>*@
+            @*NotImplemented*@
+            @*<form class="SearchForm">
+                <input type="search" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>*@
             <section class="user">
                 @{await Html.RenderPartialAsync("_UserMenuPartial"); }
             </section>

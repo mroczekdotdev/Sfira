@@ -1,7 +1,5 @@
 ﻿@model PostViewModel
 
-
-
 @if (User.Identity.IsAuthenticated)
 {
     <section class="PostCreate">
@@ -14,6 +12,7 @@
                     </div>
                 </section>
             </div>
+            <span asp-validation-for="@Model.Body" class="validation"></span>
         </form>
         <form class="attachmentForm">
             <input class="attachmentInput" id="imageAttachment" type="file" accept="image/jpeg, image/png" style="display: none;">

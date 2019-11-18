@@ -11,7 +11,8 @@ namespace MroczekDotDev.Sfira.ViewModels
         public DateTime PublicationTime { get; set; }
 
         [Required]
-        [StringLength(240, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 3)]
+        [StringLength(240, ErrorMessage = "{0} length must be between {2} and {1} characters.", MinimumLength = 3)]
+        [Display(Name = "Message")]
         public string Body { get; set; }
 
         [Required]

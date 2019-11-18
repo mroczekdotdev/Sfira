@@ -57,9 +57,12 @@
         margin-left: 5rem - $border-size-base;
         color: $color-white;
 
-        .action {
-          padding-right: $padding-base;
-          color: $color-white;
+        > .major {
+          > .action {
+            padding-right: $padding-base;
+            color: $color-white;
+            cursor: pointer;
+          }
         }
 
         .counter {
