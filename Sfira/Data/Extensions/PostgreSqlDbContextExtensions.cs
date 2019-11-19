@@ -45,11 +45,32 @@ namespace MroczekDotDev.Sfira.Data.Extensions
                         File.ReadAllText(dummyDataDirectory + "ImageAttachments.json"));
                     context.AddRange(ImageAttachments);
 
+                    var UserPosts = JsonConvert.DeserializeObject<List<UserPost>>(
+                        File.ReadAllText(dummyDataDirectory + "UserPosts.json"));
+                    context.AddRange(UserPosts);
+
                     var Comments = JsonConvert.DeserializeObject<List<Comment>>(
                         File.ReadAllText(dummyDataDirectory + "Comments.json"));
                     context.AddRange(Comments);
                     context.Database.ExecuteSqlCommand("ALTER SEQUENCE \"Comments_Id_seq\" RESTART WITH 37");
 
+                    var DirectChats = JsonConvert.DeserializeObject<List<DirectChat>>(
+                        File.ReadAllText(dummyDataDirectory + "DirectChats.json"));
+                    context.AddRange(DirectChats);
+                    context.Database.ExecuteSqlCommand("ALTER SEQUENCE \"Chats_Id_seq\" RESTART WITH 2");
+
+                    var UserChats = JsonConvert.DeserializeObject<List<UserChat>>(
+                        File.ReadAllText(dummyDataDirectory + "UserChats.json"));
+                    context.AddRange(UserChats);
+
+                    var Messages = JsonConvert.DeserializeObject<List<Message>>(
+                        File.ReadAllText(dummyDataDirectory + "Messages.json"));
+                    context.AddRange(Messages);
+                    context.Database.ExecuteSqlCommand("ALTER SEQUENCE \"Messages_Id_seq\" RESTART WITH 2");
+
+                    context.SaveChanges();
+                    DirectChats[0].LastMessage = Messages[0];
+                    context.Chats.UpdateRange(DirectChats);
                     context.SaveChanges();
 
                     CopyDirectoryRecursively(dummyDataDirectory + "media", userMediaDirectory);

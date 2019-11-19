@@ -31,7 +31,7 @@ namespace MroczekDotDev.Sfira.Controllers
 
             foreach (ChatViewModel chat in chats)
             {
-                chat.LastMessage.IsCurrentUserAuthor = chat.LastMessage.Author == currentUser ? true : false;
+                chat.LastMessage.IsCurrentUserAuthor = chat.LastMessage.Author == currentUser;
             }
 
             return View("Messages", chats);

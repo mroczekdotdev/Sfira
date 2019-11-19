@@ -1,0 +1,12 @@
+[
+  {
+    "UserId": "DummyData-MarcinMroczek",
+    "ChatId": 1,
+    "LastReadTime": "2019-11-11 00:12"
+  },
+  {
+    "UserId": "DummyData-user1",
+    "ChatId": 1,
+    "LastReadTime": "0001-01-01 00:00"
+  }
+]

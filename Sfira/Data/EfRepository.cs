@@ -9,11 +9,11 @@ using System.Text.RegularExpressions;
 
 namespace MroczekDotDev.Sfira.Data
 {
-    public class EntityFrameworkRepository : IRepository
+    public class EfRepository : IRepository
     {
         private readonly PostgreSqlDbContext context;
 
-        public EntityFrameworkRepository(PostgreSqlDbContext context)
+        public EfRepository(PostgreSqlDbContext context)
         {
             this.context = context;
         }
@@ -432,14 +432,12 @@ namespace MroczekDotDev.Sfira.Data
                    .ThenInclude(m => m.Author)
                 .ToArray();
 
-            if (chats.Any())
+            foreach (var chat in chats)
             {
-                UserChat userChat = GetUserChat(userId, chats.First().Id);
-
-                foreach (Chat chat in chats)
-                {
-                    chat.UserChats.Remove(userChat);
-                }
+                chat.UserChats = chat.UserChats
+                    .OrderByDescending(uc => uc.UserId == userId)
+                    .ThenByDescending(uc => uc.UserId)
+                    .ToList() as ICollection<UserChat>;
             }
 
             return chats;

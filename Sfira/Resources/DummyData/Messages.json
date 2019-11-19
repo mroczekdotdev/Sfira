@@ -1,0 +1,9 @@
+[
+  {
+    "Id": 1,
+    "AuthorId": "DummyData-MarcinMroczek",
+    "PublicationTime": "2019-11-11 00:12",
+    "Body": "Hello",
+    "ChatId": 1
+  }
+]

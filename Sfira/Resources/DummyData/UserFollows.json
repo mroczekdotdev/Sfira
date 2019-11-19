@@ -7,6 +7,7 @@
     "FollowingUserId": "DummyData-AkcelTelecom",
     "FollowedUserId": "DummyData-ParkMinSoo"
   },
+
   {
     "FollowingUserId": "DummyData-ArcavePress",
     "FollowedUserId": "DummyData-MaksimMedved1973"
@@ -19,6 +20,7 @@
     "FollowingUserId": "DummyData-ArcavePress",
     "FollowedUserId": "DummyData-Roccille"
   },
+
   {
     "FollowingUserId": "DummyData-codebloc",
     "FollowedUserId": "DummyData-AkcelTelecom"
@@ -43,6 +45,7 @@
     "FollowingUserId": "DummyData-codebloc",
     "FollowedUserId": "DummyData-WeathermoreApp"
   },
+
   {
     "FollowingUserId": "DummyData-KSEO",
     "FollowedUserId": "DummyData-codebloc"
@@ -51,6 +54,7 @@
     "FollowingUserId": "DummyData-KSEO",
     "FollowedUserId": "DummyData-ParkMinSoo"
   },
+
   {
     "FollowingUserId": "DummyData-MaksimMedved1973",
     "FollowedUserId": "DummyData-ArcavePress"
@@ -67,6 +71,7 @@
     "FollowingUserId": "DummyData-MaksimMedved1973",
     "FollowedUserId": "DummyData-ParkMinSoo"
   },
+
   {
     "FollowingUserId": "DummyData-MarcinMroczek",
     "FollowedUserId": "DummyData-ArcavePress"
@@ -99,6 +104,7 @@
     "FollowingUserId": "DummyData-MarcinMroczek",
     "FollowedUserId": "DummyData-WilliamJPichler"
   },
+
   {
     "FollowingUserId": "DummyData-Melanie256",
     "FollowedUserId": "DummyData-ArcavePress"
@@ -151,6 +157,7 @@
     "FollowingUserId": "DummyData-Melanie256",
     "FollowedUserId": "DummyData-WilliamJPichler"
   },
+
   {
     "FollowingUserId": "DummyData-mkmangeshkar",
     "FollowedUserId": "DummyData-Melanie256"
@@ -167,6 +174,7 @@
     "FollowingUserId": "DummyData-mkmangeshkar",
     "FollowedUserId": "DummyData-WeathermoreApp"
   },
+
   {
     "FollowingUserId": "DummyData-rharvey",
     "FollowedUserId": "DummyData-codebloc"
@@ -179,6 +187,7 @@
     "FollowingUserId": "DummyData-rharvey",
     "FollowedUserId": "DummyData-WilliamJPichler"
   },
+
   {
     "FollowingUserId": "DummyData-Roccille",
     "FollowedUserId": "DummyData-ArcavePress"
@@ -187,6 +196,7 @@
     "FollowingUserId": "DummyData-Roccille",
     "FollowedUserId": "DummyData-ParkMinSoo"
   },
+
   {
     "FollowingUserId": "DummyData-sternchen1",
     "FollowedUserId": "DummyData-ArcavePress"
@@ -207,6 +217,7 @@
     "FollowingUserId": "DummyData-sternchen1",
     "FollowedUserId": "DummyData-WeathermoreApp"
   },
+
   {
     "FollowingUserId": "DummyData-Trist",
     "FollowedUserId": "DummyData-ArcavePress"
@@ -223,6 +234,7 @@
     "FollowingUserId": "DummyData-Trist",
     "FollowedUserId": "DummyData-ParkMinSoo"
   },
+
   {
     "FollowingUserId": "DummyData-user1",
     "FollowedUserId": "DummyData-AkcelTelecom"
@@ -283,6 +295,7 @@
     "FollowingUserId": "DummyData-user1",
     "FollowedUserId": "DummyData-WilliamJPichler"
   },
+
   {
     "FollowingUserId": "DummyData-WeathermoreApp",
     "FollowedUserId": "DummyData-codebloc"

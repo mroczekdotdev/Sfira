@@ -1,0 +1,144 @@
+[
+  {
+    "UserId": "DummyData-AkcelTelecom",
+    "PostId": 28,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-ArcavePress",
+    "PostId": 14,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-codebloc",
+    "PostId": 4,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-codebloc",
+    "PostId": 27,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-codebloc",
+    "PostId": 39,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-codebloc",
+    "PostId": 55,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-KSEO",
+    "PostId": 34,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-MarcinMroczek",
+    "PostId": 43,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-MarcinMroczek",
+    "PostId": 44,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-MarcinMroczek",
+    "PostId": 53,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-MarcinMroczek",
+    "PostId": 63,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-Melanie256",
+    "PostId": 47,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-Melanie256",
+    "PostId": 49,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-Melanie256",
+    "PostId": 57,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-Melanie256",
+    "PostId": 63,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-mkmangeshkar",
+    "PostId": 60,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-rharvey",
+    "PostId": 35,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-rharvey",
+    "PostId": 43,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-rharvey",
+    "PostId": 48,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-Roccille",
+    "PostId": 26,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-sternchen1",
+    "PostId": 30,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-sternchen1",
+    "PostId": 49,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-Trist",
+    "PostId": 16,
+    "Relation": "Favorite"
+  },
+  {
+    "UserId": "DummyData-Trist",
+    "PostId": 63,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-WeathermoreApp",
+    "PostId": 56,
+    "Relation": "Favorite"
+  },
+
+  {
+    "UserId": "DummyData-WilliamJPichler",
+    "PostId": 18,
+    "Relation": "Favorite"
+  }
+]

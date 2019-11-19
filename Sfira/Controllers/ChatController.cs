@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Models;
 using MroczekDotDev.Sfira.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace MroczekDotDev.Sfira.Controllers
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
 
-            if (currentUser.UserName.ToLower() != userName)
+            if (!userName.Equals(currentUser.UserName, StringComparison.OrdinalIgnoreCase))
             {
                 ApplicationUser interlocutor = repository.GetUserByUserName(userName);
                 ChatViewModel chat = repository.GetDirectChatByUserIds(currentUser.Id, interlocutor.Id)?.ToViewModel;

@@ -13,7 +13,7 @@
         @{await Html.RenderPartialAsync("_MessagesFeedPartial", Model.Messages);}
     </section>
 }
-@{await Html.RenderPartialAsync("_MessageCreatePartial", new CommentViewModel());}
+@{await Html.RenderPartialAsync("_MessageCreatePartial", new MessageViewModel());}
 
 @section PrimaryAside{
     <section class="aside">

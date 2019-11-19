@@ -5,10 +5,6 @@
     justify-content: flex-start;
     padding: $padding-sm 0;
 
-    &:first-of-type {
-      border-top: $border-size-base solid $color-primary;
-    }
-
     &:last-of-type {
       border-bottom: $border-size-base solid $color-primary;
     }
