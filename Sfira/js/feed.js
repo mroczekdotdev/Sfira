@@ -23,7 +23,7 @@
         type: "GET",
         url: userName + "/" + feedName + "/",
         success: function (result) {
-          feedToLoad.replaceWith(result);
+          feedToLoad.html(result);
         }
       });
     }

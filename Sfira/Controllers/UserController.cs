@@ -19,6 +19,7 @@ namespace MroczekDotDev.Sfira.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly FeedOptions feedOptions;
         private readonly int postsFeedCount;
+        private readonly int mediaFeedCount;
 
         public static string Name { get; } = nameof(UserController)
             .Substring(0, nameof(UserController).LastIndexOf(nameof(Controller)));
@@ -32,6 +33,7 @@ namespace MroczekDotDev.Sfira.Controllers
             this.userManager = userManager;
             feedOptions = feedOptionsAccessor.CurrentValue;
             postsFeedCount = feedOptions.PostsFeedCount;
+            mediaFeedCount = feedOptions.MediaFeedCount;
         }
 
         public async Task<IActionResult> Index(string userName)
@@ -99,16 +101,38 @@ namespace MroczekDotDev.Sfira.Controllers
             return ViewComponent(typeof(PostsFeedViewComponent), posts);
         }
 
-        public PartialViewResult Followers(string userName)
+        public IActionResult Media(string userName)
+        {
+            IEnumerable<AttachmentViewModel> media =
+                repository.GetAttachmentsByUserName(userName, mediaFeedCount).ToViewModels();
+
+            var mediaFeedLoader = new MediaFeedLoaderViewModel
+            {
+                Media = media
+            };
+
+            if (media.Any() && media.Count() == mediaFeedCount)
+            {
+                mediaFeedLoader.HasLoader = true;
+                mediaFeedLoader.LoaderLink = userName + "/MediaFeed/";
+                mediaFeedLoader.LoaderCount = mediaFeedCount;
+                mediaFeedLoader.LoaderCursor = media.Last().ParentId;
+            }
+
+            return PartialView("_MediaFeedLoaderPartial", mediaFeedLoader);
+        }
+
+        public IActionResult MediaFeed(string userName, int count, int cursor)
+        {
+            IEnumerable<AttachmentViewModel> media =
+                repository.GetAttachmentsByUserName(userName, count, cursor).ToViewModels();
+            return ViewComponent(typeof(MediaFeedViewComponent), media);
+        }
+
+        public IActionResult Followers(string userName)
         {
             IEnumerable<UserViewModel> followers = repository.GetFollowersByUserName(userName).ToViewModels();
             return PartialView("_FollowersFeedPartial", followers);
-        }
-
-        public PartialViewResult Media(string userName)
-        {
-            IEnumerable<AttachmentViewModel> attachments = repository.GetAttachmentsByUserName(userName).ToViewModels();
-            return PartialView("_MediaFeedPartial", attachments);
         }
 
         [Authorize]

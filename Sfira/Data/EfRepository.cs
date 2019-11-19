@@ -237,10 +237,31 @@ namespace MroczekDotDev.Sfira.Data
                 .SingleOrDefault(a => a.ParentId == postId);
         }
 
-        public IEnumerable<Attachment> GetAttachmentsByUserName(string userName)
+        public IEnumerable<Attachment> GetAttachmentsByUserName(string userName, int? count = null, int? cursor = null)
         {
-            return context.Attachments
+            IQueryable<Attachment> query = context.Attachments
                 .Where(a => a.Owner.UserName == userName)
+                .OrderByDescending(a => a.Parent.PublicationTime)
+                .ThenByDescending(a => a.Parent.Id);
+
+            if (cursor != null)
+            {
+                DateTime cursorTime = context.Posts
+                    .Where(p => p.Id == cursor)
+                    .SingleOrDefault()
+                    .PublicationTime;
+
+                query = query.Where(
+                    a => a.Parent.PublicationTime < cursorTime ||
+                    (a.Parent.PublicationTime == cursorTime && a.Parent.Id < cursor));
+            }
+
+            if (count != null)
+            {
+                query = query.Take((int)count);
+            }
+
+            return query
                 .Include(a => a.Owner)
                 .ToArray();
         }

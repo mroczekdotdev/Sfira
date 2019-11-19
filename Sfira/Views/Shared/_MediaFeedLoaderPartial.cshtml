@@ -1,0 +1,14 @@
+﻿@model MediaFeedLoaderViewModel
+
+@(await Component.InvokeAsync<MediaFeedViewComponent>(Model.Media))
+
+@if (Model.HasLoader)
+{
+    <section class="item Loader" data-link="@Model.LoaderLink" data-count="@Model.LoaderCount" data-cursor="@Model.LoaderCursor">
+        <div class="content">
+            <div class="item">
+                Load<br>more<br>media
+            </div>
+        </div>
+    </section>
+}

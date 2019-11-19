@@ -47,6 +47,7 @@ services:
       - JobScheduler__PopularContent__PopularUsersCount=${JobScheduler_PopularContent_PopularUsersCount}
       - JobScheduler__PopularContent__TrendingTagsCount=${JobScheduler_PopularContent_TrendingTagsCount}
       - Feed__PostsFeedCount=${PostsFeed_Count}
+      - Feed__MediaFeedCount=${MediaFeed_Count}
     networks:
       network:
         aliases:

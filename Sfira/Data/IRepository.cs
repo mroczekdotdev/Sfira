@@ -19,7 +19,7 @@ namespace MroczekDotDev.Sfira.Data
         IEnumerable<Post> GetPostsByFollowerId(string userId, int? count = null, int? cursor = null);
 
         Attachment GetAttachmentByPostId(int postId);
-        IEnumerable<Attachment> GetAttachmentsByUserName(string userName);
+        IEnumerable<Attachment> GetAttachmentsByUserName(string userName, int? count = null, int? cursor = null);
 
         UserPost MarkPost(string userId, int postId, string interaction);
         IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId);
