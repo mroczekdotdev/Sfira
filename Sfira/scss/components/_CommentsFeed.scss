@@ -1,3 +1,22 @@
 ﻿.CommentsFeed {
   background-color: $color-white;
+
+  > .Comment {
+    border-top: $border-size-sm solid $color-primary;
+  }
+
+  > .Loader {
+    padding: $margin-base;
+    border-top: $border-size-sm solid $color-primary;
+
+    > .loaderButton {
+      padding: $padding-base;
+      font-weight: $font-weight-bold;
+      text-align: center;
+      color: $color-white;
+      background-color: $color-primary;
+      border-radius: $radius-base;
+      cursor: pointer;
+    }
+  }
 }

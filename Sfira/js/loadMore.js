@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-  $(document).on("click", ".Feed .Loader", function () {
-    var $this = $(this);
+  $(document).on("click", ".Feed .Loader .loaderButton", function () {
+    var $this = $(this).parents(".Loader");
     var link = $this.attr("data-link");
     var count = $this.attr("data-count");
     var cursor = $this.attr("data-cursor");

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<CommentViewModel>
+
+@if (Model.Any())
+{
+    foreach (var comment in Model)
+    {
+        await Html.RenderPartialAsync("_CommentPartial", comment);
+    }
+}

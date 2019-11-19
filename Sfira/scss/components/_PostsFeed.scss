@@ -7,12 +7,15 @@
 
   > .Loader {
     margin-top: ($margin-base)+($padding-base)-($border-size-base);
-    padding: $padding-base;
     font-weight: $font-weight-bold;
     text-align: center;
     color: $color-white;
     background-color: $color-primary;
     border-radius: $radius-base;
     cursor: pointer;
+
+    > .loaderButton {
+      padding: $padding-base;
+    }
   }
 }

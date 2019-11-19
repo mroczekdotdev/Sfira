@@ -25,7 +25,8 @@ namespace MroczekDotDev.Sfira.Data
         IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId);
 
         void AddComment(CommentViewModel comment);
-        IEnumerable<Comment> GetCommentsByPostId(int postId);
+        IEnumerable<Comment> GetCommentsByPostId(int postId, int? count = null, int? cursor = null);
+        int GetCommentsCountByPostId(int postId);
 
         DirectChat AddDirectChat(string userId, string interlocutorId);
         IEnumerable<Chat> GetChatsListByUserId(string userId);

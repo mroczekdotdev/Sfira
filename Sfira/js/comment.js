@@ -5,21 +5,22 @@
     var commentsFeed = post.find(".CommentsFeed");
     var commentCreate = post.find(".CommentCreate");
     var attachmentPreview = post.find(".attachment");
+    var animationSpeed = "fast";
 
     if ($.trim(commentsFeed.html()) == "") {
       $.ajax({
         type: "GET",
         url: "/" + postId + "/comments",
         success: function (result) {
-          commentCreate.slideDown();
-          commentsFeed.replaceWith(result).hide().slideDown();
+          commentCreate.slideDown(animationSpeed);
+          commentsFeed.html(result).hide().slideDown(animationSpeed);
           attachmentPreview.toggleClass("bottom");
         }
       });
     }
     else {
-      commentCreate.slideToggle();
-      commentsFeed.slideToggle();
+      commentCreate.slideToggle(animationSpeed);
+      commentsFeed.slideToggle(animationSpeed);
       attachmentPreview.toggleClass("bottom");
     }
   });
@@ -45,11 +46,11 @@
 
         $.ajax({
           type: "GET",
-          url: "/" + postId + "/comments",
-          success: function (result) {
+          url: "/" + postId + "/comments/true",
+          success: function (data, textStatus, jqXHR) {
             body.val("");
-            comments.replaceWith(result);
-            var commentsCount = post.find(".Comment").length;
+            comments.html(data);
+            var commentsCount = jqXHR.getResponseHeader("Comments-Count");
 
             var icon;
             if (isCurrentUserAuthor) {

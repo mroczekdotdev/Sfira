@@ -1,0 +1,23 @@
+﻿@model CommentsFeedLoaderViewModel
+
+@if (Model.Comments.Any())
+{
+    @(await Component.InvokeAsync<CommentsFeedViewComponent>(Model.Comments))
+
+    if (Model.HasLoader)
+    {
+        <section class="Loader" data-link="@Model.LoaderLink" data-count="@Model.LoaderCount" data-cursor="@Model.LoaderCursor">
+            <div class="loaderButton">
+                <div class="content">
+                    Load more comments
+                </div>
+            </div>
+        </section>
+    }
+}
+else
+{
+    <article class="Comment">
+        <span>Post doesn't have any comments</span>
+    </article>
+}

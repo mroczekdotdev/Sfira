@@ -127,9 +127,15 @@ namespace MroczekDotDev.Sfira
                 );
 
                 routes.MapRoute(
+                    "Post.Comments",
+                    "{postId:int}/Comments/{getCount:bool?}",
+                    new { controller = "Comment", action = "Comments" }
+                );
+
+                routes.MapRoute(
                     "Post.CommentsFeed",
-                    "{postId:int}/Comments",
-                    new { controller = "Comment", action = "Feed" }
+                    "{postId:int}/CommentsFeed/{count:int?}/{cursor:int?}",
+                    new { controller = "Comment", action = "CommentsFeed" }
                 );
 
                 routes.MapRoute(

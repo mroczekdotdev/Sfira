@@ -266,7 +266,8 @@ namespace MroczekDotDev.Sfira.Data
                 .ToArray();
         }
 
-        public IEnumerable<PostViewModel> LoadCurrentUserRelations(IEnumerable<PostViewModel> posts, string currentUserId)
+        public IEnumerable<PostViewModel> LoadCurrentUserRelations(
+            IEnumerable<PostViewModel> posts, string currentUserId)
         {
             Dictionary<int, RelationType> currentUserRelations = context.UserPosts
                 .Where(up => up.UserId == currentUserId)
@@ -276,7 +277,8 @@ namespace MroczekDotDev.Sfira.Data
             {
                 if (!(p.IsCurrentUserAuthor = p.Author.Id == currentUserId))
                 {
-                    p.CurrentUserRelation = currentUserRelations.TryGetValue(p.Id, out RelationType value) ? value : RelationType.None;
+                    p.CurrentUserRelation =
+                        currentUserRelations.TryGetValue(p.Id, out RelationType value) ? value : RelationType.None;
                 }
             }
 
@@ -402,14 +404,41 @@ namespace MroczekDotDev.Sfira.Data
             context.SaveChanges();
         }
 
-        public IEnumerable<Comment> GetCommentsByPostId(int postId)
+        public IEnumerable<Comment> GetCommentsByPostId(int postId, int? count = null, int? cursor = null)
         {
-            return context.Comments
+            IQueryable<Comment> query = context.Comments
                 .Where(c => c.Parent.Id == postId)
-                .OrderByDescending(c => c.PublicationTime)
+                .OrderByDescending(p => p.PublicationTime)
+                .ThenByDescending(p => p.Id);
+
+            if (cursor != null)
+            {
+                DateTime cursorTime = context.Comments
+                    .Where(c => c.Id == cursor)
+                    .SingleOrDefault()
+                    .PublicationTime;
+
+                query = query.Where(
+                    c => c.PublicationTime < cursorTime ||
+                    (c.PublicationTime == cursorTime && c.Id < cursor));
+            }
+
+            if (count != null)
+            {
+                query = query.Take((int)count);
+            }
+
+            return query
                 .Include(c => c.Author)
                 .Include(c => c.Parent)
                 .ToArray();
+        }
+
+        public int GetCommentsCountByPostId(int postId)
+        {
+            return context.Posts
+                .SingleOrDefault(p => p.Id == postId)
+                .CommentsCount;
         }
 
         public DirectChat AddDirectChat(string userId, string interlocutorId)

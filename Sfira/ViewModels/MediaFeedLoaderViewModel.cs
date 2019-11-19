@@ -2,13 +2,8 @@
 
 namespace MroczekDotDev.Sfira.ViewModels
 {
-    public class MediaFeedLoaderViewModel
+    public class MediaFeedLoaderViewModel : FeedLoaderViewModel
     {
         public IEnumerable<AttachmentViewModel> Media { get; set; }
-
-        public bool HasLoader { get; set; }
-        public string LoaderLink { get; set; }
-        public int LoaderCount { get; set; }
-        public int LoaderCursor { get; set; }
     }
 }
