@@ -5,22 +5,23 @@
 
 @if (Model != null)
 {
-    <section class="profile" data-username="@Model.UserName">
-        <header class="profileHeader">
+    <section class="Profile" data-username="@Model.UserName">
+        <header class="header">
             <div class="cover" sfira-user="@Model" sfira-media="cover">
-                <div class="profileTitle">
+            </div>
+            <div class="userWrapper">
+                <div class="user">
                     <div class="name">@Model.Name</div>
                     <div class="username">@Model.UserName</div>
                 </div>
             </div>
             <div class="avatar" sfira-user="@Model" sfira-media="avatar"></div>
-            <section class="profileActions">
-
+            <section class="actions">
                 @if (User.Identity.IsAuthenticated)
                 {
                     @if (!Model.IsCurrentUser)
                     {
-                        <section class="primaryProfileActions">
+                        <section class="primaryActions">
                             @if (Model.IsFollowedByCurrentUser)
                             {
                                 <button class="unfollow">Unfollow</button>
@@ -30,8 +31,8 @@
                                 <button class="follow">Follow</button>
                             }
                         </section>
-                        <section class="moreProfileActions" style="display: none;">
-                            <button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = Model.UserName })">
+                        <section class="moreActions" style="display: none;">
+                            <button class="message href" href="@Url.Action(nameof(ChatController.DirectChat), ChatController.Name, new { userName = Model.UserName })">
                                 Message
                             </button><button class="block disabled">
                                 Block
@@ -42,17 +43,19 @@
                     }
                     else
                     {
-                        <section class="primaryProfileActions">
+                        <section class="primaryActions">
                             <a class="editProfile button" asp-area="@nameof(MroczekDotDev.Sfira.Areas.Account)" asp-page="/Profile">Edit Profile</a>
                         </section>
                     }
                 }
             </section>
-            <nav class="profileMenu">
-                <a class="menuItem showPosts active" href="javascript:void(0)">Posts</a>
-                <a class="menuItem showMedia" href="javascript:void(0)">Media</a>
-                <a class="menuItem showFollowers" href="javascript:void(0)">Followers (<span id="followersCount">@Model.FollowersCount</span>)</a>
-            </nav>
+            <div class="feedsMenuWrapper">
+                <nav class="feedsMenu">
+                    <a class="menuItem showPosts active" href="javascript:void(0)">Posts</a>
+                    <a class="menuItem showMedia" href="javascript:void(0)">Media</a>
+                    <a class="menuItem showFollowers" href="javascript:void(0)">Followers (<span id="followersCount">@Model.FollowersCount</span>)</a>
+                </nav>
+            </div>
         </header>
     </section>
 
@@ -122,9 +125,15 @@
 else
 {
     <section class="Info">
-        <header>@ViewBag.Title user doesn't exist</header>
+        <header>User @ViewBag.Title doesn't exist</header>
     </section>
-}
 
-@section SecondaryAside{
+    @section PrimaryAside {
+        <section class="aside">
+            <header>
+                Popular users
+            </header>
+            @(await Component.InvokeAsync<PopularUsersViewComponent>())
+        </section>
+    }
 }

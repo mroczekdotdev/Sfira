@@ -5,9 +5,9 @@
     {
         foreach (var user in Model)
         {
-            <article class="single-user">
+            <article class="follower href" href="@Url.Action(nameof(UserController.Index), UserController.Name, new { userName = user.UserName })">
                 <div class="avatar" sfira-user="@user" sfira-media="avatar"></div>
-                <a asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@user.UserName">
+                <a class="user">
                     <span class="name">@user.Name</span><span class="username">@user.UserName</span>
                 </a>
             </article>

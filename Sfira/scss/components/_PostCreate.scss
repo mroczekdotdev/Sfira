@@ -5,7 +5,7 @@
   > .postForm {
     > .postContent {
       background-color: color-variant("superlight", $color-primary);
-      border: $border-size-base solid $color-primary;
+      border: $border-width-base solid $color-primary;
       border-radius: $radius-base;
 
       > textarea {
@@ -26,7 +26,7 @@
         padding-bottom: 100%;
 
         .cover {
-          border-width: $border-size-base 0 0 0;
+          border-width: $border-width-base 0 0 0;
           border-style: solid;
           border-color: $color-primary;
           border-radius: 0 0 $radius-base $radius-base;

@@ -1,4 +1,4 @@
-![Sfira - logo](.readme/sfira-logo-medium.png?raw=true "logo")
+![Sfira-logo](.readme/sfira-logo-medium.png?raw=true "logo")
 
 ## Description
 
@@ -32,14 +32,38 @@
 
 - **Docker** is a platform for developers and sysadmins to develop, deploy, and run applications with containers.
 
+## Showcase
+
+### Demonstration
+
+Go to Sfira online demo:
+
+| https://mroczek.dev/sfira/explore |
+| --------------------------------- |
+
+
+Register as a new user or log in with these credentials:
+
+`Username: user1`\
+`Password: user1`
+
+### Screenshots
+
+![Sfira-screenshot_01](.readme/sfira-screenshot-01.jpg?raw=true "screenshot")
+![Sfira-screenshot_02](.readme/sfira-screenshot-02.jpg?raw=true "screenshot")
+![Sfira-screenshot_03](.readme/sfira-screenshot-03.jpg?raw=true "screenshot")
+![Sfira-screenshot_04](.readme/sfira-screenshot-04.jpg?raw=true "screenshot")
+
 ## Installation
 
 ### Setup
 
-Make sure that **Docker** is installed:
+Make sure that **Docker** and **Docker Compose** are installed:
 
 ```console
 docker --version
+docker-compose --version
+
 ```
 
 Clone the repository into a new directory:
@@ -54,7 +78,7 @@ or download the repository, then extract the files:
 | --------------------------------------------------------- |
 
 
-### Configuration
+### Configure
 
 From the root of the repository open `.env` file in a text editor.
 
@@ -78,4 +102,4 @@ The application should be reachable at:
 | -------------------- |
 
 
-The port will differ if it was changed in the [Configuration](#configuration) step.
+⚠ **IMPORTANT NOTICE!** The port will differ if `Application_Port` was changed in the [Configuration](#configuration) step.

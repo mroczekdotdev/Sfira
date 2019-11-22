@@ -9,12 +9,12 @@
       width: 33.33%; //fallback
       width: calc(100% / 3);
       height: 100%;
-      border: $border-size-sm solid $color-gray;
+      border: $border-width-sm solid $color-gray;
       border-radius: $radius-sm;
     }
 
     > .cover {
-      border: $border-size-sm solid $color-gray;
+      border: $border-width-sm solid $color-gray;
       border-radius: $radius-sm;
     }
   }

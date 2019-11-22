@@ -15,34 +15,43 @@
     }
 
     > .body {
+      overflow-wrap: break-word;
       color: $color-white;
       background-color: $color-primary;
     }
   }
 
   &:nth-of-type(n+2) {
-    margin-top: $margin-sm;
+    margin-top: $margin-base;
   }
 
   > .header {
     display: flex;
+    margin-bottom: $margin-xs;
     flex-flow: row nowrap;
     justify-content: space-between;
-    align-items: center;
+    font-size: $font-size-sm;
 
     > .user {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
       > .name {
-        display: inline-block;
-        margin-right: $margin-sm;
       }
 
       > .username {
-        display: inline-block;
+        margin-left: $margin-sm;
         color: color-variant("light", $color-primary);
+
+        @media #{$screen-xs} {
+          display: none;
+        }
       }
     }
 
     > .timestamp {
+      white-space: nowrap;
       color: color-variant("light", $color-primary);
     }
   }

@@ -7,6 +7,14 @@
 
 <html>
 <head>
+    @*FOUC fix - part 1*@
+    <style>
+        html {
+            visibility: hidden;
+            opacity: 0;
+        }
+    </style>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=4, initial-scale=1">
     <link rel="stylesheet" href="~/site.css" asp-append-version="true">
@@ -22,27 +30,29 @@
 <body>
     <div class="Site">
         <header class="siteHeader">
-            <a class="logo" asp-controller="@HomeController.Name" asp-action="@nameof(HomeController.Index)"><img src="~/media/site/sfira-logo-primary.png" alt=""></a>
+            <a class="logo" asp-controller="@HomeController.Name" asp-action="@nameof(HomeController.Index)">
+                <img id="PrimaryLogo" src="~/media/site/sfira-logo-primary.png" alt="">
+                <img id="MiniLogo" src="~/media/site/sfira-logo-mini.png" alt="">
+            </a>
             <nav class="siteMenu">
-                <div class="item @if (controller == "Home") {<text>active</text>} ">
-                    <a asp-controller="@HomeController.Name" asp-action="@nameof(HomeController.Index)"><i class="fas fa-home"></i> Home</a>
-                </div>
-                <div class="item @if (controller == "Explore") {<text>active</text>} ">
-                    <a asp-controller="@ExploreController.Name" asp-action="@nameof(ExploreController.Index)">
-                        <i class="fas fa-globe-americas"></i> Explore
-                    </a>
-                </div>
-                <div class="item @if (controller == "Messages") {<text>active</text>} ">
-                    <a asp-controller="@MessagesController.Name" asp-action="@nameof(MessagesController.Index)">
-                        <i class="fas fa-envelope-square"></i> Messages
-                    </a>
-                </div>
+                <a class="item @if (controller == "Home")
+                {<text>active</text>} " asp-controller="@HomeController.Name" asp-action="@nameof(HomeController.Index)">
+                    <i class="fas fa-home"></i><span class="label"> Home</span>
+                </a>
+                <a class="item @if (controller == "Explore")
+                {<text>active</text>} " asp-controller="@ExploreController.Name" asp-action="@nameof(ExploreController.Index)">
+                    <i class="fas fa-globe-americas"></i><span class="label"> Explore</span>
+                </a>
+                <a class="item @if (controller == "Messages")
+                {<text>active</text>} " asp-controller="@MessagesController.Name" asp-action="@nameof(MessagesController.Index)">
+                    <i class="fas fa-envelope-square"></i><span class="label"> Messages</span>
+                </a>
             </nav>
             @*NotImplemented*@
             @*<form class="SearchForm">
-                <input type="search" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>*@
+                    <input type="search" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </form>*@
             <section class="user">
                 @{await Html.RenderPartialAsync("_UserMenuPartial"); }
             </section>
@@ -78,19 +88,7 @@
     @{await Html.RenderPartialAsync("_ImageModal"); }
 
     @RenderSection("Scripts", required: false)
-    <noscript>
-        <style>
-            .Site {
-                display: none;
-            }
-        </style>
-        <div class="javascript-disabled">
-            <h1>JavaScript required</h1>
-            <p>
-                For full functionality of this site it is necessary to enable JavaScript.
-                Here are the <a href="https://www.enable-javascript.com/">instructions how to enable JavaScript in your web browser</a>.
-            </p>
-        </div>
-    </noscript>
+
+    @{await Html.RenderPartialAsync("_NoScript"); }
 </body>
 </html>

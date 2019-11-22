@@ -1,14 +1,14 @@
 ﻿$(document).ready(function () {
-  $(document).on("click", ".profileActions .more", function () {
+  $(document).on("click", ".Profile .actions .more", function () {
     var $this = $(this);
     $this.html($this.html() === "\u2022\u2022\u2022" ? '<i class="fas fa-chevron-right fa-fw"></i>' : "\u2022\u2022\u2022");
-    $(".moreProfileActions").toggle();
-    $(".primaryProfileActions").toggle();
+    $(".moreActions").toggle();
+    $(".primaryActions").toggle();
   });
 
   $(document).on("click", "button.follow", function () {
     var $this = $(this);
-    var userId = $this.parents(".profile").data("username");
+    var userId = $this.parents(".Profile").data("username");
 
     $.ajax({
       type: "GET",
@@ -22,7 +22,7 @@
 
   $(document).on("click", "button.unfollow", function () {
     var $this = $(this);
-    var userId = $this.parents(".profile").data("username");
+    var userId = $this.parents(".Profile").data("username");
 
     $.ajax({
       type: "GET",

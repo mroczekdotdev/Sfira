@@ -1,3 +1,12 @@
 ﻿.Chat {
   padding-top: $padding-base;
+
+  > .subject {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > .name {
+      white-space: nowrap;
+    }
+  }
 }

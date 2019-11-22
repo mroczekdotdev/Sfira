@@ -24,6 +24,7 @@ namespace MroczekDotDev.Sfira.Data.Extensions
 
             void SeedDummyData()
             {
+                context.Database.ExecuteSqlCommand("TRUNCATE TABLE \"AspNetUsers\" CASCADE");
                 string dummyDataDirectory = "Resources" + ds + "DummyData" + ds;
 
                 if (!context.Users.Any())

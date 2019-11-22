@@ -12,11 +12,11 @@
   });
 
   function loadFeed(caller, feedName) {
-    var profile = caller.parents(".profile");
+    var profile = caller.parents(".Profile");
     var userName = profile.data("username");
     var allFeeds = profile.siblings(".Feed")
     var feedToLoad = profile.siblings("." + feedName + "Feed");
-    var activeMenuItem = profile.find(".profileMenu > .menuItem")
+    var activeMenuItem = profile.find(".feedsMenu > .menuItem")
 
     if ($.trim(feedToLoad.html()) == "") {
       $.ajax({

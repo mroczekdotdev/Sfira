@@ -1,6 +1,6 @@
 ﻿.CommentCreate {
   padding: $padding-base;
-  border-top: $border-size-sm solid $color-primary;
+  border-top: $border-width-sm solid $color-primary;
   background-color: $color-primary;
 
   > .form {
@@ -36,7 +36,7 @@
       color: $color-white;
       margin-left: auto;
       background-color: $color-primary;
-      border: $border-size-base solid $color-white;
+      border: $border-width-base solid $color-white;
     }
   }
 }

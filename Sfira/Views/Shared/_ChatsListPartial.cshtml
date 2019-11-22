@@ -5,32 +5,32 @@
     {
         @if (chat is DirectChatViewModel directChat)
         {
-            <section class="chat href" href="@Url.Action(nameof(ChatController.DirectChat), "Chat", new { userName = directChat.Interlocutor.UserName })">
+            <article class="chat href" href="@Url.Action(nameof(ChatController.DirectChat), ChatController.Name, new { userName = directChat.Interlocutor.UserName })">
                 <section class="icon">
                     <div class="avatar" sfira-user="@directChat.Interlocutor" sfira-media="avatar"></div>
                 </section>
-                <div class="flexItem">
-                    <section class="header">
-                        <a asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@directChat.Interlocutor.UserName">
-                            <span class="name">@directChat.Interlocutor.Name</span><span class="username">@directChat.Interlocutor.UserName</span>
-                        </a>
+                <div class="wrapper">
+                    <a class="user">
+                        <span class="name">@directChat.Interlocutor.Name</span>
+                        <span class="username">@directChat.Interlocutor.UserName</span>
+                    </a>
+                    <section class="lastMessage">
+                        <span class="body">
+                            <b>
+                                @if (chat.LastMessage.IsCurrentUserAuthor)
+                                {
+                                    @:You:
+                                }
+                                else
+                                {
+                                    @chat.LastMessage.Author.UserName@::
+                                }
+                            </b>@chat.LastMessage.Body
+                        </span>
                         <span class="timestamp">@directChat.LastMessage.PublicationTime.Relative()</span>
                     </section>
-
-                    <section class="body">
-                        <b>
-                            @if (chat.LastMessage.IsCurrentUserAuthor)
-                            {
-                                @:You:
-                            }
-                            else
-                            {
-                                @chat.LastMessage.Author.UserName@::
-                            }
-                        </b>@chat.LastMessage.Body
-                    </section>
                 </div>
-            </section>
+            </article>
         }
     }
 </section>

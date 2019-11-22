@@ -15,23 +15,32 @@
       display: inline-block;
       width: 2rem;
       height: 2rem;
+      flex: 0 0 auto;
       border-radius: 20%;
     }
 
     > .user {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
       > .name {
-        display: inline-block;
-        margin-right: $padding-base;
         margin-left: $padding-base;
       }
 
       > .username {
-        display: inline-block;
+        margin-left: $padding-base;
         color: color-variant("light", $color-primary);
+
+        @media #{$screen-xs} {
+          display: none;
+        }
       }
     }
 
     > .timestamp {
+      margin-left: $margin-sm;
+      white-space: nowrap;
       flex-grow: 1;
       text-align: right;
     }

@@ -13,26 +13,23 @@
     else
     {
         <section class="Info">
-            <header>@ViewBag.Title tag doesn't have any posts</header>
+            <header>Tag @ViewBag.Title doesn't have any posts</header>
         </section>
     }
 </section>
 
 
 @section PrimaryAside{
-}
-
-@section SecondaryAside{
     <section class="aside">
         <header>
             Trending tags
         </header>
-            @(await Component.InvokeAsync<TrendingTagsViewComponent>())
+        @(await Component.InvokeAsync<TrendingTagsViewComponent>())
     </section>
     <section class="aside">
         <header>
             Popular users
         </header>
-            @(await Component.InvokeAsync<PopularUsersViewComponent>())
+        @(await Component.InvokeAsync<PopularUsersViewComponent>())
     </section>
 }

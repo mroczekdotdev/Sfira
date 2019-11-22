@@ -31,3 +31,9 @@
 @import "components/_PostsFeed.scss";
 @import "components/_SearchForm.scss";
 @import "components/_UserMenu.scss";
+
+//FOUC fix - part 2
+html {
+  visibility: visible;
+  opacity: 1;
+}

@@ -10,27 +10,35 @@
     justify-content: space-between;
     align-items: center;
     margin-left: 5rem + $padding-sm;
-    padding-bottom: $padding-sm + $border-size-base;
+    padding-bottom: $padding-sm + $border-width-base;
 
     > .user {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
       > .name {
-        display: inline-block;
-        margin-right: $margin-sm;
       }
 
       > .username {
-        display: inline-block;
+        margin-left: $margin-sm;
         color: color-variant("light", $color-primary);
+
+        @media #{$screen-xs} {
+          display: none;
+        }
       }
     }
 
     > .timestamp {
+      margin-left: $margin-sm;
+      white-space: nowrap;
       color: color-variant("light", $color-primary);
     }
   }
 
   > .content {
-    border: $border-size-base solid $color-primary;
+    border: $border-width-base solid $color-primary;
     border-radius: $radius-base;
     background-color: color-variant("superlight", $color-primary);
 
@@ -43,7 +51,7 @@
         height: 4rem;
         position: absolute;
         left: $padding-base;
-        bottom: $padding-base;
+        top: -2rem;
       }
 
       > .postActions {
@@ -53,12 +61,13 @@
         justify-content: space-between;
         font-weight: $font-weight-bold;
         font-size: $font-size-lg;
-        padding: ($padding-base)-($border-size-base) $padding-base $padding-base;
-        margin-left: 5rem - $border-size-base;
+        padding: ($padding-base)-($border-width-base) $padding-base $padding-base;
+        margin-left: 5rem - $border-width-base;
         color: $color-white;
 
         > .major {
           > .action {
+            display: inline-block;
             padding-right: $padding-base;
             color: $color-white;
             cursor: pointer;
@@ -93,7 +102,7 @@
       }
 
       > .cover {
-        border-top: $border-size-base solid $color-primary;
+        border-top: $border-width-base solid $color-primary;
       }
     }
   }

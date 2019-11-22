@@ -5,17 +5,20 @@
     justify-content: flex-start;
     padding: $padding-sm 0;
 
+    &:first-of-type {
+      border-top: $border-width-base solid $color-primary;
+    }
+
     &:last-of-type {
-      border-bottom: $border-size-base solid $color-primary;
+      border-bottom: $border-width-base solid $color-primary;
     }
 
     &:nth-of-type(n+2) {
-      border-top: $border-size-sm solid $color-primary;
+      border-top: $border-width-sm solid $color-primary;
     }
 
     > .icon {
       flex: 0 0 auto;
-      margin-right: $margin-sm;
 
       > .avatar {
         width: 3rem;
@@ -23,37 +26,44 @@
       }
     }
 
-    > .flexItem {
+    > .wrapper {
+      margin-left: $margin-sm;
       flex: 1 1 auto;
-      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
-      > .header {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: center;
-
-        .name {
-          display: inline-block;
-          margin-right: $margin-sm;
+      > .user {
+        > .name {
         }
 
-        .username {
-          display: inline-block;
+        > .username {
           color: color-variant("light", $color-primary);
-        }
 
-        > .timestamp {
-          color: color-variant("light", $color-primary);
-          font-size: $font-size-sm;
+          @media #{$screen-xs} {
+            display: none;
+          }
         }
       }
 
-      > .body {
+      > .lastMessage {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
         font-size: $font-size-sm;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+
+        > .body {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        > .timestamp {
+          flex-basis: 1 1 auto;
+          margin-left: $margin-sm;
+          white-space: nowrap;
+          color: color-variant("light", $color-primary);
+        }
       }
     }
   }

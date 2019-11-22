@@ -3,7 +3,8 @@
 <article class="Message @if (Model.IsCurrentUserAuthor) {<text>-user</text>}">
     <header class="header">
         <a class="user" asp-controller="@UserController.Name" asp-action="@nameof(UserController.Index)" asp-route-userName="@Model.Author.UserName">
-            <span class="name">@Model.Author.Name</span><span class="username">@Model.Author.UserName</span>
+            <span class="name">@Model.Author.Name</span>
+            <span class="username">@Model.Author.UserName</span>
         </a>
         <span class="timestamp">@Model.PublicationTime.Relative()</span>
     </header>

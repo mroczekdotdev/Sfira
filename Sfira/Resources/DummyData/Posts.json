@@ -633,7 +633,7 @@
     "Id": 64,
     "AuthorId": "DummyData-MarcinMroczek",
     "PublicationTime": "2019-11-11 00:00",
-    "Body": "Hello and welcome to Sfira.\r\nRegister new account or log in with these credentials:\r\nUsername: user1\r\nPassword: user1",
+    "Body": "Hello and welcome to Sfira.\r\nRegister as a new user or log in with these credentials:\r\nUsername: user1\r\nPassword: user1",
     "Tags": "Sfira",
     "LikesCount": 0,
     "FavoritesCount": 0,

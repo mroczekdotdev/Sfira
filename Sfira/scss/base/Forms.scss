@@ -1,31 +1,33 @@
-form,
-label {
-  margin: 0;
-  padding: 0;
-}
-
 form {
+  label {
+    margin: 0;
+    padding: 0;
+  font-size: $font-size-sm;
+
+  }
+
+  .formGroup {
+    &:nth-child(n+1) {
+      margin-top: $padding-sm;
+    }
+  }
+
+  > .checkbox {
+    display: flex;
+    margin-top: $margin-base;
+    align-items: center;
+
+    > input {
+      margin-right: $margin-sm;
+    }
+  }
+
   > button {
     margin-top: $margin-base;
   }
-}
 
-.checkbox {
-  display: flex;
-  align-items: center;
-
-  > input {
-    margin-right: $margin-sm;
-  }
-}
-
-label {
-  font-size: $font-size-sm;
-}
-
-.formGroup {
-  &:nth-child(n+1) {
-    margin-top: $padding-sm;
+  > .formInfo {
+    margin-top: $margin-base;
   }
 }
 
@@ -51,7 +53,7 @@ label {
 input:not([type=checkbox]), textarea {
   width: 100%;
   font-size: $font-size-sm;
-  border: $border-size-sm solid $color-gray;
+  border: $border-width-sm solid $color-gray;
   border-radius: $radius-sm;
   padding: $padding-base;
 }

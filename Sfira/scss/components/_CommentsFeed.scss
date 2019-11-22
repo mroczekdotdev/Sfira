@@ -2,12 +2,12 @@
   background-color: $color-white;
 
   > .Comment {
-    border-top: $border-size-sm solid $color-primary;
+    border-top: $border-width-sm solid $color-primary;
   }
 
   > .Loader {
     padding: $margin-base;
-    border-top: $border-size-sm solid $color-primary;
+    border-top: $border-width-sm solid $color-primary;
 
     > .loaderButton {
       padding: $padding-base;

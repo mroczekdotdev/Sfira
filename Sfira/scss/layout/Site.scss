@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: space-between;
     padding: $padding-lg 0;
-    border-bottom: $border-size-base solid $color-primary;
+    border-bottom: $border-width-base solid $color-primary;
     background-color: $color-white;
     z-index: 2;
 
@@ -26,6 +26,21 @@
 
       > img {
         height: 36px;
+      }
+
+      #PrimaryLogo {
+        @media #{$screen-xs} {
+          display: none;
+          height: 36px;
+        }
+      }
+
+      #MiniLogo {
+        display: none;
+
+        @media #{$screen-xs} {
+          display: inline-block;
+        }
       }
     }
 
@@ -39,9 +54,24 @@
       > .item {
         padding: 0 $padding-sm;
 
+        @media #{$screen-xs} {
+          font-size: $font-size-lg;
+        }
+
         &.active {
           font-size: $font-size-lg;
           font-weight: $font-weight-bold;
+
+          @media #{$screen-xs} {
+            font-size: $font-size-xl;
+            line-height: 36px;
+          }
+        }
+
+        > .label {
+          @media #{$screen-xs} {
+            display: none;
+          }
         }
       }
     }
@@ -107,7 +137,7 @@
       }
 
       > .siteFooter {
-        padding: $padding-base;
+        margin: $margin-sm $margin-sm 0 $margin-sm;
         font-size: $font-size-sm;
         color: $color-gray;
         background-color: $color-white;

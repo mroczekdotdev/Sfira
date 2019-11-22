@@ -8,6 +8,7 @@ $screen-lg: "only screen and (max-width: 1799px)";
 
 
 $margin-base: 1rem;
+$margin-xs: 0.25rem;
 $margin-sm: 0.5rem;
 $margin-lg: 2rem;
 $margin-xl: 4rem;
@@ -21,9 +22,9 @@ $radius-base: 0.4rem;
 $radius-sm: 0.2rem;
 $radius-lg: 0.6rem;
 
-$border-size-base: 0.16rem;
-$border-size-sm: 0.08rem;
-$border-size-lg: 0.32rem;
+$border-width-base: 0.16rem;
+$border-width-sm: 0.08rem;
+$border-width-lg: 0.32rem;
 
 
 // Colors
@@ -68,6 +69,7 @@ $font-weight-bold: 700;
 
 $font-weight-base: $font-weight-normal;
 $line-height-base: 1.5;
+$line-height-sm: 1.2;
 
 $h1-font-size: $font-size-base * 2;
 $h2-font-size: $font-size-base * 1.8;
