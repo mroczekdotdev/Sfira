@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MroczekDotDev.Sfira.Data;
 using MroczekDotDev.Sfira.Extensions.DependencyInjection;
 using MroczekDotDev.Sfira.Models;
@@ -15,33 +15,33 @@ namespace MroczekDotDev.Sfira
 {
     public class Startup
     {
-        private readonly IHostingEnvironment environment;
-        private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment env;
+        private readonly IConfiguration cfg;
 
-        public Startup(IHostingEnvironment environment, IConfiguration configuration)
+        public Startup(IWebHostEnvironment env, IConfiguration cfg)
         {
-            this.environment = environment;
-            this.configuration = configuration;
+            this.env = env;
+            this.cfg = cfg;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PostgreSqlDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("PostgreSQL")));
+                options.UseNpgsql(cfg.GetConnectionString("PostgreSQL")));
 
-            services.SeedDatabase(configuration.GetSection("Seeding"));
+            services.SeedDatabase(cfg.GetSection("Seeding"));
 
             services.AddRepository();
 
-            services.Configure<FeedOptions>(configuration.GetSection("Feed"));
+            services.Configure<FeedOptions>(cfg.GetSection("Feed"));
 
-            services.AddFileUploader(configuration.GetSection("FileUploader"));
+            services.AddFileUploader(cfg.GetSection("FileUploader"));
 
-            services.AddEmailSender(configuration.GetSection("EmailSender"));
+            services.AddEmailSender(cfg.GetSection("EmailSender"));
 
-            services.AddCachedStorage(configuration.GetSection("CachedStorage"));
+            services.AddCachedStorage(cfg.GetSection("CachedStorage"));
 
-            services.AddJobScheduler(configuration.GetSection("JobScheduler"));
+            services.AddJobScheduler(cfg.GetSection("JobScheduler"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -57,11 +57,10 @@ namespace MroczekDotDev.Sfira
 
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            services.AddControllersWithViews();
+            services.AddRazorPages()
                 .AddRazorPagesOptions(options =>
                 {
-                    options.AllowAreas = true;
                     options.Conventions.AuthorizeAreaPage("Account", "/Index");
                     options.Conventions.AuthorizeAreaPage("Account", "/ChangePassword");
                     options.Conventions.AuthorizeAreaPage("Account", "/CloseAccount");
@@ -80,80 +79,85 @@ namespace MroczekDotDev.Sfira
 
         public void Configure(IApplicationBuilder app)
         {
-            if (environment.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            if (environment.IsProduction() || environment.IsStaging())
+            if (env.IsProduction() || env.IsStaging())
             {
                 app.UseExceptionHandler("/error");
             }
 
-            app.UseStatusCodePages();
             app.UseForwardedHeaders();
             app.UseStaticFiles();
-            app.UseAuthentication();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    "Home.PostsFeed",
-                    "PostsFeed/{count:int?}/{cursor:int?}",
+                endpoints.MapRazorPages();
+
+                endpoints.MapControllerRoute(
+                    name: "Home.PostsFeed",
+                    pattern: "PostsFeed/{count:int?}/{cursor:int?}",
                     new { controller = "Home", action = "PostsFeed" }
                 );
 
-                routes.MapRoute(
-                    "Explore",
-                    "Explore/{action}/{count:int?}/{cursor:int?}",
+                endpoints.MapControllerRoute(
+                    name: "Explore",
+                    pattern: "Explore/{action}/{count:int?}/{cursor:int?}",
                     new { controller = "Explore", action = "Index" }
                 );
 
-                routes.MapRoute(
-                    "Tag",
-                    "Tag/{tagName}/{action}/{count:int?}/{cursor:int?}",
+                endpoints.MapControllerRoute(
+                    name: "Tag",
+                    pattern: "Tag/{tagName}/{action}/{count:int?}/{cursor:int?}",
                     new { controller = "Tag", action = "Index" }
                 );
 
-                routes.MapRoute(
-                    "Chat",
-                    "Chat/{chatId:int}/{action}",
+                endpoints.MapControllerRoute(
+                    name: "Chat",
+                    pattern: "Chat/{chatId:int}/{action}",
                     new { controller = "Chat" }
                 );
 
-                routes.MapRoute(
-                   "User.DirectChat",
-                   "{userName}/Chat",
+                endpoints.MapControllerRoute(
+                   name: "User.DirectChat",
+                   pattern: "{userName}/Chat",
                    new { controller = "Chat", action = "DirectChat" }
                 );
 
-                routes.MapRoute(
-                    "Post.Comments",
-                    "{postId:int}/Comments/{getCount:bool?}",
+                endpoints.MapControllerRoute(
+                    name: "Post.Comments",
+                    pattern: "{postId:int}/Comments/{getCount:bool?}",
                     new { controller = "Comment", action = "Comments" }
                 );
 
-                routes.MapRoute(
-                    "Post.CommentsFeed",
-                    "{postId:int}/CommentsFeed/{count:int?}/{cursor:int?}",
+                endpoints.MapControllerRoute(
+                    name: "Post.CommentsFeed",
+                    pattern: "{postId:int}/CommentsFeed/{count:int?}/{cursor:int?}",
                     new { controller = "Comment", action = "CommentsFeed" }
                 );
 
-                routes.MapRoute(
-                    "Post.Mark",
-                    "{postId:int}/{interaction}",
+                endpoints.MapControllerRoute(
+                    name: "Post.Mark",
+                    pattern: "{postId:int}/{interaction}",
                     new { controller = "Post", action = "Mark" }
                 );
 
-                routes.MapRoute(
-                    "Default",
-                    "{controller}/{action}/{id?}",
+                endpoints.MapControllerRoute(
+                    name: "Default",
+                    pattern: "{controller}/{action}/{id?}",
                     new { action = "Index" },
                     new { controller = "(Comment|Home|Messages|Post)" }
                 );
 
-                routes.MapRoute(
-                    "User",
-                    "{userName}/{action}/{count:int?}/{cursor:int?}",
+                endpoints.MapControllerRoute(
+                    name: "User",
+                    pattern: "{userName}/{action}/{count:int?}/{cursor:int?}",
                     new { controller = "User", action = "Index" }
                 );
             });

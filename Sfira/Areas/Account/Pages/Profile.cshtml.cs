@@ -15,18 +15,18 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
 {
     public class ProfileModel : PageModel
     {
-        private readonly IHostingEnvironment environment;
+        private readonly IWebHostEnvironment env;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IFileUploader fileUploader;
 
         public ProfileModel(
-            IHostingEnvironment environment,
+            IWebHostEnvironment env,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IFileUploader fileUploader)
         {
-            this.environment = environment;
+            this.env = env;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.fileUploader = fileUploader;
@@ -131,7 +131,7 @@ namespace MroczekDotDev.Sfira.Areas.Account.Pages
             if (HttpContext.Request.Form.Files.Count > 0)
             {
                 string userMediaPath = Path.Combine(new[] {
-                    environment.WebRootPath, "media", "user", user.Id + Path.DirectorySeparatorChar });
+                    env.WebRootPath, "media", "user", user.Id + Path.DirectorySeparatorChar });
 
                 var files = new List<UploadableFile>();
 

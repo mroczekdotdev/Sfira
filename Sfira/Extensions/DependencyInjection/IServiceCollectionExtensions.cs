@@ -18,7 +18,7 @@ namespace MroczekDotDev.Sfira.Extensions.DependencyInjection
     {
         public static IServiceCollection AddRepository(this IServiceCollection services)
         {
-            services.AddTransient<IRepository, EfRepository>();
+            services.AddScoped<IRepository, PostgreSqlRepository>();
             return services;
         }
 

@@ -27,7 +27,7 @@ namespace MroczekDotDev.Sfira.Controllers
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-            IEnumerable<ChatViewModel> chats = repository.GetChatsListByUserId(currentUser.Id).ToViewModels();
+            IEnumerable<ChatViewModel> chats = repository.GetChatsListByUserId(currentUser?.Id).ToViewModels();
 
             foreach (ChatViewModel chat in chats)
             {

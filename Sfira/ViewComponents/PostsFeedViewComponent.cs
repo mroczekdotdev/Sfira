@@ -40,7 +40,7 @@ namespace MroczekDotDev.Sfira.ViewComponents
                 if (User.Identity.IsAuthenticated)
                 {
                     ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                    posts = repository.LoadCurrentUserRelations(posts, currentUser.Id);
+                    posts = repository.LoadCurrentUserRelations(posts, currentUser?.Id);
                 }
 
                 if (posts.Count() < postsFeedCount)

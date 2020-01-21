@@ -19,7 +19,6 @@ namespace MroczekDotDev.Sfira.Services.Scheduling
         public Task ExecuteAsync(CancellationToken cancellationToken)
         {
             cache.Reload(options.PeriodInMinutes, options.SamplesPerMinute);
-
             return Task.CompletedTask;
         }
     }

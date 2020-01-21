@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sfira", "Sfira\Sfira.csproj", "{19038A25-214B-4102-B971-ABA742B7F012}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sfira.UnitTests", "Sfira.Tests\Sfira.UnitTests.csproj", "{EE2B2686-6411-411E-9158-52B07158B857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sfira.UnitTests", "Sfira.UnitTests\Sfira.UnitTests.csproj", "{EE2B2686-6411-411E-9158-52B07158B857}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

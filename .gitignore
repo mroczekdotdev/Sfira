@@ -5,6 +5,7 @@
 
 # MroczekDotDev
 **/.ignore/
+[Oo]ut/
 Sfira/Migrations/
 Sfira/wwwroot/media/user/
 

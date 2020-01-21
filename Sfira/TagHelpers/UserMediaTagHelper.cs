@@ -14,11 +14,11 @@ namespace MroczekDotDev.Sfira.TagHelpers
         [HtmlAttributeName("sfira-media")]
         public string Media { get; set; }
 
-        private readonly IHostingEnvironment environment;
+        private readonly IWebHostEnvironment env;
 
-        public UserMediaTagHelper(IHostingEnvironment environment)
+        public UserMediaTagHelper(IWebHostEnvironment env)
         {
-            this.environment = environment;
+            this.env = env;
         }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -28,9 +28,9 @@ namespace MroczekDotDev.Sfira.TagHelpers
             switch (Media)
             {
                 case "avatar":
-                    if (User.AvatarImage != null
+                    if (User?.AvatarImage != null
                         && File.Exists(Path.Combine(new[] {
-                            environment.WebRootPath, "media", "user", User.Id, User.AvatarImage })))
+                            env.WebRootPath, "media", "user", User.Id, User.AvatarImage })))
                     {
                         filePath = "/media/user/" + User.Id + "/" + User.AvatarImage;
                         break;
@@ -40,9 +40,9 @@ namespace MroczekDotDev.Sfira.TagHelpers
                         goto default;
                     }
                 case "cover":
-                    if (User.CoverImage != null
+                    if (User?.CoverImage != null
                         && File.Exists(Path.Combine(new[] {
-                            environment.WebRootPath, "media", "user", User.Id, User.CoverImage })))
+                            env.WebRootPath, "media", "user", User.Id, User.CoverImage })))
                     {
                         filePath = "/media/user/" + User.Id + "/" + User.CoverImage;
                         break;

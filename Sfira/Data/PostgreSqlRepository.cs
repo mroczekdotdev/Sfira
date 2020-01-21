@@ -9,11 +9,11 @@ using System.Text.RegularExpressions;
 
 namespace MroczekDotDev.Sfira.Data
 {
-    public class EfRepository : IRepository
+    public class PostgreSqlRepository : IRepository
     {
         private readonly PostgreSqlDbContext context;
 
-        public EfRepository(PostgreSqlDbContext context)
+        public PostgreSqlRepository(PostgreSqlDbContext context)
         {
             this.context = context;
         }
@@ -474,12 +474,12 @@ namespace MroczekDotDev.Sfira.Data
         {
             IEnumerable<Chat> chats = context.UserChats
                 .Where(uc => uc.UserId == userId)
+                .Include(c => c.Chat.UserChats)
+                    .ThenInclude(uc => uc.User)
+                .Include(c => c.Chat.LastMessage)
+                    .ThenInclude(m => m.Author)
                 .Select(uc => uc.Chat)
                 .OrderByDescending(c => c.LastMessage.PublicationTime)
-                .Include(c => c.UserChats)
-                    .ThenInclude(uc => uc.User)
-                .Include(c => c.LastMessage)
-                   .ThenInclude(m => m.Author)
                 .ToArray();
 
             foreach (var chat in chats)

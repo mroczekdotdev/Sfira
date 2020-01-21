@@ -41,7 +41,7 @@ namespace MroczekDotDev.Sfira.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
-                IEnumerable<PostViewModel> posts = repository.GetPostsByFollowerId(currentUser.Id, postsFeedCount).ToViewModels();
+                IEnumerable<PostViewModel> posts = repository.GetPostsByFollowerId(currentUser?.Id, postsFeedCount).ToViewModels();
 
                 if (posts.Any())
                 {
@@ -66,7 +66,7 @@ namespace MroczekDotDev.Sfira.Controllers
         {
             ApplicationUser currentUser = await userManager.FindByNameAsync(User.Identity.Name);
 
-            IEnumerable<PostViewModel> posts = repository.GetPostsByFollowerId(currentUser.Id, count, cursor).ToViewModels();
+            IEnumerable<PostViewModel> posts = repository.GetPostsByFollowerId(currentUser?.Id, count, cursor).ToViewModels();
 
             return ViewComponent(typeof(PostsFeedViewComponent), posts);
         }

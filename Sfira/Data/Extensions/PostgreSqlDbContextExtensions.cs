@@ -24,7 +24,6 @@ namespace MroczekDotDev.Sfira.Data.Extensions
 
             void SeedDummyData()
             {
-                context.Database.ExecuteSqlCommand("TRUNCATE TABLE \"AspNetUsers\" CASCADE");
                 string dummyDataDirectory = "Resources" + ds + "DummyData" + ds;
 
                 if (!context.Users.Any())
@@ -40,7 +39,7 @@ namespace MroczekDotDev.Sfira.Data.Extensions
                     var Posts = JsonConvert.DeserializeObject<List<Post>>(File.ReadAllText(
                         dummyDataDirectory + "Posts.json"));
                     context.AddRange(Posts);
-                    context.Database.ExecuteSqlCommand("ALTER SEQUENCE \"Posts_Id_seq\" RESTART WITH 65");
+                    context.Database.ExecuteSqlRaw("ALTER SEQUENCE \"Posts_Id_seq\" RESTART WITH 65");
 
                     var ImageAttachments = JsonConvert.DeserializeObject<List<ImageAttachment>>(
                         File.ReadAllText(dummyDataDirectory + "ImageAttachments.json"));
@@ -53,12 +52,12 @@ namespace MroczekDotDev.Sfira.Data.Extensions
                     var Comments = JsonConvert.DeserializeObject<List<Comment>>(
                         File.ReadAllText(dummyDataDirectory + "Comments.json"));
                     context.AddRange(Comments);
-                    context.Database.ExecuteSqlCommand("ALTER SEQUENCE \"Comments_Id_seq\" RESTART WITH 37");
+                    context.Database.ExecuteSqlRaw("ALTER SEQUENCE \"Comments_Id_seq\" RESTART WITH 37");
 
                     var DirectChats = JsonConvert.DeserializeObject<List<DirectChat>>(
                         File.ReadAllText(dummyDataDirectory + "DirectChats.json"));
                     context.AddRange(DirectChats);
-                    context.Database.ExecuteSqlCommand("ALTER SEQUENCE \"Chats_Id_seq\" RESTART WITH 2");
+                    context.Database.ExecuteSqlRaw("ALTER SEQUENCE \"Chats_Id_seq\" RESTART WITH 2");
 
                     var UserChats = JsonConvert.DeserializeObject<List<UserChat>>(
                         File.ReadAllText(dummyDataDirectory + "UserChats.json"));
@@ -67,7 +66,7 @@ namespace MroczekDotDev.Sfira.Data.Extensions
                     var Messages = JsonConvert.DeserializeObject<List<Message>>(
                         File.ReadAllText(dummyDataDirectory + "Messages.json"));
                     context.AddRange(Messages);
-                    context.Database.ExecuteSqlCommand("ALTER SEQUENCE \"Messages_Id_seq\" RESTART WITH 2");
+                    context.Database.ExecuteSqlRaw("ALTER SEQUENCE \"Messages_Id_seq\" RESTART WITH 2");
 
                     context.SaveChanges();
                     DirectChats[0].LastMessage = Messages[0];

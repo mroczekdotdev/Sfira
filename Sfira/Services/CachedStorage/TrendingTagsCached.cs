@@ -9,8 +9,6 @@ namespace MroczekDotDev.Sfira.Services.CachedStorage
     public class TrendingTagsCached : Cached<string>
     {
         private readonly PostgreSqlDbContext context;
-        private TimeSpan period;
-        private int sampleSize;
 
         public TrendingTagsCached(PostgreSqlDbContext context, IOptionsMonitor<CachedOptions> optionsAccessor) :
             base(optionsAccessor)
@@ -22,35 +20,37 @@ namespace MroczekDotDev.Sfira.Services.CachedStorage
 
         public override void Reload(int periodInMinutes, int samplesPerMinute)
         {
-            period = TimeSpan.FromMinutes(periodInMinutes);
-            sampleSize = periodInMinutes * samplesPerMinute;
+            DateTime timeBoundary = DateTime.UtcNow - TimeSpan.FromMinutes(periodInMinutes);
+            int sampleSize = periodInMinutes * samplesPerMinute;
 
             var query = context.Posts
-                .Where(p => p.PublicationTime > DateTime.UtcNow - period);
+                .Where(p => p.PublicationTime > timeBoundary);
 
             if (query.Count() < sampleSize)
             {
                 query = context.Posts;
             }
 
-            var groupingQuery = query
+            var grouping = query
                 .OrderByDescending(p => p.Id)
                 .Take(sampleSize)
                 .Select(p => p.Tags)
+                .AsEnumerable()
                 .SelectMany(pt => pt.Split())
-                .Where(t => t != string.Empty)
+                .Where(t => !string.IsNullOrEmpty(t))
                 .GroupBy(t => t.ToLower());
 
-            if (groupingQuery.Count() < maxCount)
+            if (grouping.Count() < maxCount)
             {
-                groupingQuery = query
+                grouping = query
                     .Select(p => p.Tags)
+                    .AsEnumerable()
                     .SelectMany(pt => pt.Split())
                     .Where(t => t != string.Empty)
                     .GroupBy(t => t.ToLower());
             }
 
-            Items = groupingQuery
+            Items = grouping
                 .OrderByDescending(g => g.Count())
                 .Select(g => g.Key)
                 .Take(maxCount)

@@ -15,7 +15,7 @@ namespace MroczekDotDev.Sfira.Controllers
 {
     public class PostController : Controller
     {
-        private readonly IHostingEnvironment environment;
+        private readonly IWebHostEnvironment env;
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFileUploader fileUploader;
@@ -24,12 +24,12 @@ namespace MroczekDotDev.Sfira.Controllers
             .Substring(0, nameof(PostController).LastIndexOf(nameof(Controller)));
 
         public PostController(
-            IHostingEnvironment environment,
+            IWebHostEnvironment env,
             IRepository repository,
             UserManager<ApplicationUser> userManager,
             IFileUploader fileUploader)
         {
-            this.environment = environment;
+            this.env = env;
             this.repository = repository;
             this.userManager = userManager;
             this.fileUploader = fileUploader;
@@ -38,7 +38,7 @@ namespace MroczekDotDev.Sfira.Controllers
         [Authorize]
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> Create(PostViewModel post, IFormFile formFile)
+        public async Task<IActionResult> Create([FromForm] PostViewModel post, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
@@ -48,7 +48,7 @@ namespace MroczekDotDev.Sfira.Controllers
                 if (formFile != null && formFile.Length > 0)
                 {
                     string userMediaPath = Path.Combine(new[] {
-                        environment.WebRootPath, "media", "user", currentUser.Id + Path.DirectorySeparatorChar });
+                        env.WebRootPath, "media", "user", currentUser.Id + Path.DirectorySeparatorChar });
 
                     UploadableImageFile file = fileUploader.NewUploadableImageFile();
                     file.FormFile = formFile;
