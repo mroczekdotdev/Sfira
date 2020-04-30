@@ -17,7 +17,7 @@
     "mini-css-extract-plugin": "0.8.0"
   },
   "dependencies": {
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "jquery-validation": "1.19.1",
     "jquery-validation-unobtrusive": "3.2.11",
     "@fortawesome/fontawesome-free": "5.10.2"
