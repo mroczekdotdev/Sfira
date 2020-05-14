@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
 
 WORKDIR /app
-COPY . ./
+COPY . .
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
@@ -12,6 +12,6 @@ RUN apk update && \
     apk add libgdiplus -u --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/
 
 WORKDIR /app
-COPY --from=build /app/Sfira/out .
+COPY --from=build /app/out .
 
 ENTRYPOINT ["dotnet", "Sfira.dll"]
